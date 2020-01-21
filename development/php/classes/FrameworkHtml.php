@@ -1,13 +1,16 @@
 <?php
 
-class FrameworkHtml {
+class FrameworkHtml
+{
 
     public $mainUrl = '';
+    public $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
     public $frameworkTranslation = '';
     public $objFrameworkUrl = '';
     public $objFrameworkTranslation = '';
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->objFrameworkUrl = new FrameworkUrl();
         $this->objFrameworkTranslation = new FrameworkTranslation();
 
@@ -15,22 +18,26 @@ class FrameworkHtml {
         $this->mainUrl = $this->buildMainUrl();
     }
 
-    public function buildMainUrl() {
+    public function buildMainUrl()
+    {
         $url = $this->objFrameworkUrl->getUrlMain();
         $trimmed = str_replace('admin/', '', $url);
 
         return $trimmed;
     }
 
-    public function buildTagJavascript($src) {
+    public function buildTagJavascript($src)
+    {
         return '<script src="' . $src . '.js"></script>';
     }
 
-    public function buildTagCSS($src) {
+    public function buildTagCSS($src)
+    {
         return '<link href="' . $src . '.css" rel="stylesheet">';
     }
 
-    public function buildHeader($isAdmin) {
+    public function buildHeader($isAdmin)
+    {
         $string = '';
 
         $string .= '<!DOCTYPE html>';
@@ -49,7 +56,8 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildAdmin($isAdmin) {
+    public function buildAdmin($isAdmin)
+    {
         $string = '';
 
         if ($isAdmin) {
@@ -61,16 +69,20 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildHeaderCSS() {
+    public function buildHeaderCSS()
+    {
         $string = '';
 
-        $string .= $this->buildTagCSS($this->mainUrl . 'css/plugin');
-        $string .= $this->buildTagCSS($this->mainUrl . 'css/style');
+        $string .= $this->buildTagCSS($this->urlFrontEnd . '/css/plugin');
+        $string .= $this->buildTagCSS($this->urlFrontEnd . '/css/style');
+        // $string .= $this->buildTagCSS($this->mainUrl . 'css/plugin');
+        // $string .= $this->buildTagCSS($this->mainUrl . 'css/style');
 
         return $string;
     }
 
-    public function buildHeaderFacebook() {
+    public function buildHeaderFacebook()
+    {
         $string = '';
 
         $string .= '<meta property="og:image" content = "' . $this->mainUrl . 'img/logo/600-315.png"/>';
@@ -87,7 +99,8 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildHeaderSEO() {
+    public function buildHeaderSEO()
+    {
         $string = '';
 
         $string .= '<meta name="application-name" content="' . $this->frameworkTranslation['meta_tag']['author'] . '" />';
@@ -99,7 +112,8 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildHeaderMeta() {
+    public function buildHeaderMeta()
+    {
         $string = '';
 
         $string .= '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
@@ -111,7 +125,8 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildHeaderAppearance() {
+    public function buildHeaderAppearance()
+    {
         $string = '';
 
         $string .= '<meta name="theme-color" content="#000000" />';
@@ -120,7 +135,8 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildHeaderImage() {
+    public function buildHeaderImage()
+    {
         $string = '';
 
         $string .= '<link rel="shortcut icon" href="' . $this->mainUrl . 'img/logo/16-16.png" />';
@@ -133,20 +149,22 @@ class FrameworkHtml {
         return $string;
     }
 
-    public function buildFooter() {
+    public function buildFooter()
+    {
         $string = '';
 
         $string .= '<script>';
         $string .= '    var globalFrameworkLanguage = "' . $this->objFrameworkTranslation->getLanguage() . '";';
         $string .= '    var globalFrameworkUrl = "' . $this->objFrameworkUrl->getUrlMain() . '";';
         $string .= '</script>';
-        $string .= $this->buildTagJavascript($this->mainUrl . 'js/plugin');
-        $string .= $this->buildTagJavascript($this->mainUrl . 'js/script');
+        $string .= $this->buildTagJavascript($this->urlFrontEnd . '/js/plugin');
+        $string .= $this->buildTagJavascript($this->urlFrontEnd . '/js/script');
+        // $string .= $this->buildTagJavascript($this->mainUrl . 'js/plugin');
+        // $string .= $this->buildTagJavascript($this->mainUrl . 'js/script');
 
         $string .= '    </body>';
         $string .= '</html>';
 
         return $string;
     }
-
 }

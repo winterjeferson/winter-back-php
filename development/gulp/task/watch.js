@@ -12,10 +12,10 @@ var template = require('./template.js');
 
 gulp.task('default', function () {
 
-    gulp.watch(css.cssAdminConcat, gulp.series('build_css_admin'))
-            .on('change', function (evt) {
-                console.log(evt);
-            });
+    // gulp.watch(css.cssAdminConcat, gulp.series('build_css_admin'))
+    //         .on('change', function (evt) {
+    //             console.log(evt);
+    //         });
 
     gulp.watch(css.cssDefaultConcat, gulp.series('build_css_default'))
             .on('change', function (evt) {
@@ -39,10 +39,10 @@ gulp.task('default', function () {
                 console.log(evt);
             });
 
-    gulp.watch(js.fileJsAdmin, gulp.series('build_js_admin', 'js_babel'))
-            .on('change', function (evt) {
-                console.log(evt);
-            });
+    // gulp.watch(js.fileJsAdmin, gulp.series('build_js_admin', 'js_babel'))
+    //         .on('change', function (evt) {
+    //             console.log(evt);
+    //         });
 
 
 

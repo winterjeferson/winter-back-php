@@ -1,23 +1,5 @@
 {% set arrMenu = [
-'blog',
-'button',
-'card',
-'carousel', 
-'form',
-'gallery', 
-'icon',
-'loading',
-'menu',
-'modal',
-'notification',
-'palette',
-'progress',
-'responsive', 
-'scroll', 
-'table',
-'tag',
-'text',
-'tooltip'
+'blog'
 ] %}
 
 <div class="row">
