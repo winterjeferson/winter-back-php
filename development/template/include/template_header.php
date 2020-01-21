@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-es-12 col-sm-2 text-left mobile-hide">
+        <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $frameworkTranslation['template']['home']; ?>">
+            <span class="fa fa-home" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="col-es-12 col-sm-10 text-right">
+        <form class="form form-grey">
+            <nav class="menu menu-horizontal">
+                <ul>
+                    <li>
+                        <span class="about mobile-hide">v: 12.0.0</span>
+                    </li>
+                    <li>
+                        <select id="page_language_select" aria-label="<?php echo $frameworkTranslation['template']['language']; ?>">        
+                            <option value=""><?php echo $frameworkTranslation['template']['language']; ?></option>
+                            <option value="en">English</option>
+                            <option value="pt">Português</option>
+                        </select>   
+                    </li>
+                    <li>
+                        <a href="https://github.com/winterjeferson/winterstrap" target="_blank" rel="noopener" class="bt bt-re bt-green">
+                            Download (Github)
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </form>
+    </div>
+</div>
