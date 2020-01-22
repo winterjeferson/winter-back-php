@@ -34,10 +34,10 @@ gulp.task('default', function () {
                 console.log(evt);
             });
 
-    gulp.watch(js.fileJsPlugin, gulp.series('build_js_plugin', 'js_babel'))
-            .on('change', function (evt) {
-                console.log(evt);
-            });
+    // gulp.watch(js.fileJsPlugin, gulp.series('build_js_plugin', 'js_babel'))
+    //         .on('change', function (evt) {
+    //             console.log(evt);
+    //         });
 
     // gulp.watch(js.fileJsAdmin, gulp.series('build_js_admin', 'js_babel'))
     //         .on('change', function (evt) {
