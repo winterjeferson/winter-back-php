@@ -13,7 +13,7 @@ class FrameworkLogin {
         if ($objFrameworkSession->verifyIsSet('id')) {
             $idUser = $objFrameworkSession->getSessionValue('id');
         } else {
-            header('Location: login.php');
+            // header('Location: admin_login.php');
         }
     }
 

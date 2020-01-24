@@ -3,11 +3,11 @@ class FrameworkAdminManagement {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        objFrameworkLayout.$window.on('load', function () {
+        $('window').on('load', function () {
             $.when(objFrameworkTranslation.loadFile()).then(function () {
                 self.applyClass();
 
-                if (objFrameworkLayout.verifyHasFodler('admin')) {
+                if (objFrameworkGeneric.verifyHasFodler('admin')) {
                     self.applyClass();
                 }
             });

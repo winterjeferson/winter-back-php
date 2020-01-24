@@ -48,7 +48,7 @@ class FrameworkAdmin {
     buildMenuDifeneActive() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
-        let page = objFrameworkLayout.getUrlParameter('p');
+        let page = objFrameworkGeneric.getUrlParameter('p');
 
         this.pageCurrent = page;
         this.$menuMain.find('.bt').parent().removeClass(classActive);

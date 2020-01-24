@@ -1,4 +1,5 @@
 {% set arrMenu = [
+'panel',
 'blog'
 ] %}
 
@@ -9,11 +10,6 @@
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
-                <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin/" class="bt bt-sm bt-fu bt-blue" target="_blank">
-                        Admin
-                    </a>
-                </li>
                 {% for menu in arrMenu %}
                 <li>
                     <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>{{menu}}/" data-id="{{menu}}" class="bt bt-sm bt-fu bt-blue">

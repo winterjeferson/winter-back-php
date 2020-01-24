@@ -12,6 +12,7 @@ var fileJsDefaultFinal = 'admin.js';
 // var fileJsPluginFinal = 'plugin.js';
 
 var fileJs = [
+    configuration.branches + 'js/plugin/**/*.*',
     configuration.branches + 'js/build/**/*.*',
     configuration.branches + 'js/main.js'
 ];

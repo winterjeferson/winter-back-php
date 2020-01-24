@@ -33,13 +33,12 @@ class FrameworkTranslation
 
     public function translateContent()
     {
+        $objFrameworkUrl = new FrameworkUrl();
         $file = '';
+
         if (file_exists('json/' . $this->language . '.json')) {
             $file = file_get_contents('json/' . $this->language . '.json');
-        } else {
-            $file = file_get_contents('../json/' . $this->language . '.json');
         }
-
 
         $json = json_decode($file, true);
 

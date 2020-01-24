@@ -58,65 +58,25 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </header>
 <main class="row" id="main_wrapper">
-    <section id="main_menu" class="col-es-12 col-bi-2">
-        
-
-<div class="row">
-    <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $frameworkTranslation['default']['menu']; ?>">
-            <span class="fa fa-bars" aria-hidden="true"></span>
-        </button>
-        <nav class="menu menu-vertical text-center menu-drop-down">
-            <ul>
-                
-                <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>panel/" data-id="panel" class="bt bt-sm bt-fu bt-blue">
-                        panel
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        blog
-                    </a>
-                </li>
-                
-            </ul>
-        </nav>
-    </div>
-</div>
-    </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
-        <h1 class="page-title">
-            <?php echo $frameworkTranslation['template']['blog']; ?>
-        </h1>
-        <div class="row">
-            <div class="col-es-12">
-                <div class="padding-re">
-                    <nav class="menu menu-vertical">
-                        <ul>
-                            <?php
-                            $objFrameworkTranslation = new FrameworkTranslation();
-                            $objFrameworkBlog = new FrameworkBlog();
-                            $query = $objFrameworkBlog->getPostList();
-                            $string = '';
-
-                            foreach ($query as $key => $value) {
-                                $string .= '<li>';
-                                $string .= '    <a href="' . $objFrameworkTranslation->getLanguage() . '/post/' . $value['id'] . '/' . $value['url'] . '" class="link link-blue">';
-                                $string .= $value['title'];
-                                $string .= '    </a>';
-                                $string .= '</li>';
-                            }
-
-                            echo $string;
-                            ?>
-                        </ul>
-                    </nav>
+    <div id="page_login">
+        <div class="login-wrapper col-middle">
+            <form class="row form form-grey">
+                <div class="col-es-12 form-field">
+                    <label for="page_login_user">E-mail</label>
+                    <input class="input input-email" type="text" value="email@email.com" id="page_login_user" maxlength="40" placeholder="E-mail">
                 </div>
-            </div>
+                <div class="col-es-12 form-field">
+                    <label for="page_login_password"><?php echo $frameworkTranslation['default']['password']; ?></label>
+                    <input class="input input-password" type="password" value="123456" maxlength="20" id="page_login_password" placeholder="<?php echo $frameworkTranslation['default']['password']; ?>">
+                </div>
+                <div class="col-es-12 form-field text-right">
+                    <button type="button" class="bt bt-re bt-blue" id="page_login_bt">
+                        Login
+                    </button>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
 </main>
 <footer id="footer">
     <div class="row">

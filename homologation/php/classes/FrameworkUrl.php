@@ -1,8 +1,10 @@
 <?php
 
-class FrameworkUrl {
+class FrameworkUrl
+{
 
-    function getUrlMain() {
+    function getUrlMain()
+    {
         $objFrameworkLayout = new FrameworkLayout();
         $isLocalHost = $objFrameworkLayout->verifyLocalhost();
 
@@ -17,28 +19,32 @@ class FrameworkUrl {
         }
     }
 
-    function getUrlPage() {
+    function getUrlPage()
+    {
         $objFrameworkTranslation = new FrameworkTranslation();
         $mainUrl = $this->getUrlMain();
+        // $folderVerify = $folder === '' ? '' : $folder . '/';
 
         return $mainUrl . $objFrameworkTranslation->getLanguage() . '/';
     }
 
-    function getUrlParameters() {
+    function getUrlParameters()
+    {
         $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
-        $explode = $pieces = explode('/', $queryString);
+        $explode = explode('/', $queryString);
 
         $language = isset($explode[0]) ? $explode[0] : '';
         $page = isset($explode[1]) ? $explode[1] : '';
         $id = isset($explode[2]) ? $explode[2] : '';
-        $pagination = isset($explode[3]) ? $explode[3] : '';
+        $friendlyUrl = isset($explode[3]) ? $explode[3] : '';
+        $pagination = isset($explode[4]) ? $explode[4] : '';
 
         return [
             'language' => $language,
             'page' => $page,
             'id' => $id,
+            'url' => $friendlyUrl,
             'pagination' => $pagination,
         ];
     }
-
 }

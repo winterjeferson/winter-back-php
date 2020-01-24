@@ -58,6 +58,10 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </header>
 <main class="row" id="main_wrapper">
+    <?php
+    $objFrameworkLogin = new FrameworkLogin();
+    echo $objFrameworkLogin->verifyLogin();
+    ?>
     <section id="main_menu" class="col-es-12 col-bi-2">
         
 
@@ -87,67 +91,27 @@ $objFrameworkUrl = new FrameworkUrl();
 </div>
     </section>
     <section id="main_content" class="col-es-12 col-bi-10">
-        <div id="page_home" class="row">
+        <div class="row" id="admin">
             <div class="col-es-12">
-                <div class="carousel" data-current-slide="0">
-                    <div class="row carousel-slide">
-                        <div class="col-es-12">
-                            <ul class="carousel-list">
-                                
-                                
-                                <li>
-                                    <div class="slide bg-cyan">
-                                        <div class="col-middle slide-content">
-                                            MySQL Query Class
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-purple">
-                                        <div class="col-middle slide-content">
-                                            Admin Panel
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-orange">
-                                        <div class="col-middle slide-content">
-                                            Multilanguage routes
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-red">
-                                        <div class="col-middle slide-content">
-                                            Friendly URLs
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="menu-horizontal carousel-disabled">
-                        <ul class="navigation-arrow">
+                <div class="container padding-bi">
+                    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down" data-id="menu_main">
+                        <ul>
                             <li>
-                                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
-                                </button>
+                                <button type="button" class="menu-tab-bt bt-re bt" data-id="bt_blog">Blog</button>
                             </li>
                             <li>
-                                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
-                                </button>
+                                <button type="button" class="menu-tab-bt bt-re bt" data-id="bt_logout">Logout</button>
                             </li>
                         </ul>
-                    </div>
-                    <div class="menu-horizontal text-center carousel-controller-over">
-                        <ul class="carousel-controller carousel-controller-white">
-                        </ul>
-                    </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-es-12">
+                <div class="padding-bi">
+                    <?php
+                    $consult = $objFrameworkLayout->buildPage('blog');
+                    include $consult;
+                    ?>
                 </div>
             </div>
         </div>
