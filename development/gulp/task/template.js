@@ -8,7 +8,7 @@ var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/p
 
 
 
-var folderTemplate = configuration.branches + 'template/';
+var folderTemplate = configuration.development + 'template/';
 var fileTemplate = folderTemplate + '*.php';
 var fileTemplateAdmin = folderTemplate + 'admin/*.php';
 var fileTemplateWatch = [
@@ -25,8 +25,8 @@ function clean(path) {
 
 gulp.task('template_clean', function () {
     var files = [
-        configuration.branchesPublic + '*.php',
-        configuration.branchesPublic + 'admin/' + '*.php',
+        configuration.homologation + '*.php',
+        configuration.homologation + 'admin/' + '*.php',
     ];
     return clean(files);
 });
@@ -39,7 +39,7 @@ gulp.task('template_include', function () {
                 path: [folderTemplate]
             }))
             .pipe(rename({extname: '.php'}))
-            .pipe(gulp.dest(configuration.branchesPublic));
+            .pipe(gulp.dest(configuration.homologation));
 });
 
 gulp.task('template_include_admin', function () {
@@ -50,12 +50,12 @@ gulp.task('template_include_admin', function () {
                 path: [folderTemplate]
             }))
             .pipe(rename({extname: '.php'}))
-            .pipe(gulp.dest(configuration.branchesPublic + 'admin/'));
+            .pipe(gulp.dest(configuration.homologation + 'admin/'));
 });
 
 gulp.task('template_minify', function () {
     return gulp
-            .src(configuration.branchesPublic + '*.php')
+            .src(configuration.homologation + '*.php')
             .pipe(htmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest(configuration.trunk));
 });

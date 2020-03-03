@@ -25,19 +25,19 @@ echo $objFrameworkHtml->buildHeader();
 $objFrameworkUrl = new FrameworkUrl();
 ?>
 
-<header id="header">
+<header id="header" class="grid-header">
     <div class="row">
-        <div class="col-es-12 col-sm-2 text-left mobile-hide">
+        <div class="col-es-2 text-left">
             <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $frameworkTranslation['template']['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
-        <div class="col-es-12 col-sm-10 text-right">
+        <div class="col-es-10 text-right">
             <form class="form form-grey">
                 <nav class="menu menu-horizontal">
                     <ul>
                         <li>
-                            <span class="about mobile-hide">v: 12.0.0</span>
+                            <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
                             <select id="page_language_select" aria-label="<?php echo $frameworkTranslation['template']['language']; ?>">
@@ -47,7 +47,7 @@ $objFrameworkUrl = new FrameworkUrl();
                             </select>
                         </li>
                         <li>
-                            <a href="https://github.com/winterjeferson/winterstrap" target="_blank" rel="noopener" class="bt bt-re bt-green">
+                            <a href="https://github.com/winterjeferson/winter-back-php" target="_blank" rel="noopener" class="bt bt-re bt-green">
                                 Download (Github)
                             </a>
                         </li>
@@ -78,7 +78,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </main>
-<footer id="footer">
+<footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>

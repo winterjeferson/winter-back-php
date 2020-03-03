@@ -12,17 +12,8 @@ var template = require('./template.js');
 
 gulp.task('default', function () {
 
-    // gulp.watch(css.cssAdminConcat, gulp.series('build_css_admin'))
-    //         .on('change', function (evt) {
-    //             console.log(evt);
-    //         });
 
-    gulp.watch(css.cssDefaultConcat, gulp.series('build_css_default'))
-            .on('change', function (evt) {
-                console.log(evt);
-            });
-
-    gulp.watch(css.cssPluginConcat, gulp.series('build_css_plugin'))
+    gulp.watch(css.cssAdminConcat, gulp.series('build_css_admin'))
             .on('change', function (evt) {
                 console.log(evt);
             });

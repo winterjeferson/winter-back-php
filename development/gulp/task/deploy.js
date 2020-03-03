@@ -13,7 +13,7 @@ gulp.task('deploy', gulp.series(
         'js_remove_code',
         'js_minify',
         'json_minify',
-        'project_move_trunk',
+        'project_move_production',
         'image_imagemin',
         'template_minify',
         'beep'

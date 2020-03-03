@@ -1,6 +1,6 @@
 {% set arrMenu = [
-'admin',
-'blog'
+'admin-blog',
+'admin-logout'
 ] %}
 
 <div class="row">

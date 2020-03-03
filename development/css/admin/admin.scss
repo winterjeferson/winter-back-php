@@ -1,15 +1,22 @@
+$re : 4px;
+$bi : $re * 2;
+$grey : grey;
+
+
+
+
 #page_login{
-    background-color: $color-grey-lighten-3;
+    background-color: $grey;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .login-wrapper{
-        background-color: $color-white;
-        border: 1px solid $color-grey-lighten-2;
+        background-color: white;
+        border: 1px solid $grey;
         border-radius: $re;
-        padding: $eb;
+        padding: $bi;
         max-width: 500px;
         height: auto;
         margin: auto;

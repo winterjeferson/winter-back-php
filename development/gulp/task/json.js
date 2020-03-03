@@ -12,7 +12,7 @@ var arrLanguage = ['pt', 'en'];
 var arrLanguageLength = arrLanguage.length;
 
 for (var i = 0; i < arrLanguageLength; i++) {
-    fileJson.push(configuration.branches + 'json/' + arrLanguage[i] + '/*.json');
+    fileJson.push(configuration.development + 'json/' + arrLanguage[i] + '/*.json');
 }
 
 gulp.task('json_include', function (callBack) {
@@ -20,12 +20,12 @@ gulp.task('json_include', function (callBack) {
 
     function buildJsonInclude(i) {
         return gulp
-                .src(configuration.branches + 'json/' + arrLanguage[i] + '/_' + arrLanguage[i] + '.json')
+                .src(configuration.development + 'json/' + arrLanguage[i] + '/_' + arrLanguage[i] + '.json')
                 .pipe(nunjucksRender({
-                    path: [configuration.branches + 'json/' + arrLanguage[i] + '/']
+                    path: [configuration.development + 'json/' + arrLanguage[i] + '/']
                 }))
                 .pipe(rename(arrLanguage[i] + '.json'))
-                .pipe(gulp.dest(configuration.branchesPublic + 'json/'))
+                .pipe(gulp.dest(configuration.homologation + 'json/'))
     }
 
     for (var i = 0; i < arrLanguageLength; i++) {
@@ -44,12 +44,12 @@ gulp.task('json_minify', function (callBack) {
 
     function buildJsonMinify(i) {
         return gulp
-                .src(configuration.branchesPublic + 'json/' + arrLanguage[i] + '.json')
+                .src(configuration.homologation + 'json/' + arrLanguage[i] + '.json')
                 .pipe(htmlmin({
                     collapseWhitespace: true,
                     quoteCharacter: "'"
                 }))
-                .pipe(gulp.dest(configuration.trunk + "json/"));
+                .pipe(gulp.dest(configuration.production + "json/"));
     }
 
     for (var i = 0; i < arrLanguageLength; i++) {

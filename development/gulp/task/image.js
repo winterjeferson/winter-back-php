@@ -9,17 +9,17 @@ var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/p
 
 
 var fileImg = [
-    configuration.branches + 'img/*',
-    configuration.branches + 'img/**',
-    configuration.branches + 'img/**/*',
-    configuration.branches + 'img/**/*.*'
+    configuration.development + 'img/*',
+    configuration.development + 'img/**',
+    configuration.development + 'img/**/*',
+    configuration.development + 'img/**/*.*'
 ];
 
 var fileImgPublic = [
-    configuration.branchesPublic + 'img/*',
-    configuration.branchesPublic + 'img/**',
-    configuration.branchesPublic + 'img/**/*',
-    configuration.branchesPublic + 'img/**/*.*'
+    configuration.homologation + 'img/*',
+    configuration.homologation + 'img/**',
+    configuration.homologation + 'img/**/*',
+    configuration.homologation + 'img/**/*.*'
 ];
 
 
@@ -28,23 +28,23 @@ function clean(path) {
 }
 
 gulp.task('image_clean', function () {
-    var files = [configuration.branchesPublic + 'img/**'];
+    var files = [configuration.homologation + 'img/**'];
     return clean(files);
 });
 
 gulp.task('image_move', function (done) {
     return gulp
-            .src(configuration.branches + 'img/**/*.*')
-            .pipe(gulp.dest(configuration.branchesPublic + "img/"));
+            .src(configuration.development + 'img/**/*.*')
+            .pipe(gulp.dest(configuration.homologation + "img/"));
     done();
 });
 
 gulp.task('image_imagemin', function () {
     return gulp
             .src(fileImgPublic)
-            .pipe(newer(configuration.trunk + "img/"))
+            .pipe(newer(configuration.production + "img/"))
             .pipe(imagemin())
-            .pipe(gulp.dest(configuration.trunk + "img/"));
+            .pipe(gulp.dest(configuration.production + "img/"));
 });
 
 gulp.task('build_image', gulp.series(

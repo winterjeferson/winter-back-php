@@ -155,8 +155,8 @@ class FrameworkHtml
         $string .= '    var globalFrameworkLanguage = "' . $this->objFrameworkTranslation->getLanguage() . '";';
         $string .= '    var globalFrameworkUrl = "' . $this->objFrameworkUrl->getUrlMain() . '";';
         $string .= '</script>';
-        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/plugin');
-        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/script');
+        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
+        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');
 
         $string .= '    </body>';
         $string .= '</html>';

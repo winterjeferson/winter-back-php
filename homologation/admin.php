@@ -21,23 +21,30 @@ echo $objFrameworkHtml->buildHeader();
         </div>
     </div>
 </div>
+
 <?php
+$objFrameworkLogin = new FrameworkLogin();
+echo $objFrameworkLogin->verifyLogin();
+?>
+
+<main class="grid">
+    <?php
 $objFrameworkUrl = new FrameworkUrl();
 ?>
 
-<header id="header">
+<header id="header" class="grid-header">
     <div class="row">
-        <div class="col-es-12 col-sm-2 text-left mobile-hide">
+        <div class="col-es-2 text-left">
             <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $frameworkTranslation['template']['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
-        <div class="col-es-12 col-sm-10 text-right">
+        <div class="col-es-10 text-right">
             <form class="form form-grey">
                 <nav class="menu menu-horizontal">
                     <ul>
                         <li>
-                            <span class="about mobile-hide">v: 12.0.0</span>
+                            <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
                             <select id="page_language_select" aria-label="<?php echo $frameworkTranslation['template']['language']; ?>">
@@ -47,7 +54,7 @@ $objFrameworkUrl = new FrameworkUrl();
                             </select>
                         </li>
                         <li>
-                            <a href="https://github.com/winterjeferson/winterstrap" target="_blank" rel="noopener" class="bt bt-re bt-green">
+                            <a href="https://github.com/winterjeferson/winter-back-php" target="_blank" rel="noopener" class="bt bt-re bt-green">
                                 Download (Github)
                             </a>
                         </li>
@@ -57,12 +64,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </header>
-<main class="row" id="main_wrapper">
-    <?php
-    $objFrameworkLogin = new FrameworkLogin();
-    echo $objFrameworkLogin->verifyLogin();
-    ?>
-    <section id="main_menu" class="col-es-12 col-bi-2">
+    <section id="main_menu" class="grid-menu">
         
 
 <div class="row">
@@ -74,14 +76,14 @@ $objFrameworkUrl = new FrameworkUrl();
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>panel/" data-id="panel" class="bt bt-sm bt-fu bt-blue">
-                        panel
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="bt bt-sm bt-fu bt-blue">
+                        admin-blog
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        blog
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="bt bt-sm bt-fu bt-blue">
+                        admin-logout
                     </a>
                 </li>
                 
@@ -90,34 +92,14 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </div>
     </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
-        <div class="row" id="admin">
+    <section id="main_content" class="grid-content">
+        <div id="page_home" class="row">
             <div class="col-es-12">
-                <div class="container padding-bi">
-                    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down" data-id="menu_main">
-                        <ul>
-                            <li>
-                                <button type="button" class="menu-tab-bt bt-re bt" data-id="bt_blog">Blog</button>
-                            </li>
-                            <li>
-                                <button type="button" class="menu-tab-bt bt-re bt" data-id="bt_logout">Logout</button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-es-12">
-                <div class="padding-bi">
-                    <?php
-                    $consult = $objFrameworkLayout->buildPage('blog');
-                    include $consult;
-                    ?>
-                </div>
+                <h1 class="page-title">wellcome to admin<h1>
             </div>
         </div>
     </section>
-</main>
-<footer id="footer">
+    <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>
@@ -127,6 +109,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </footer>
+</main>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

@@ -21,23 +21,24 @@ echo $objFrameworkHtml->buildHeader();
         </div>
     </div>
 </div>
-<?php
+<main class="grid">
+    <?php
 $objFrameworkUrl = new FrameworkUrl();
 ?>
 
-<header id="header">
+<header id="header" class="grid-header">
     <div class="row">
-        <div class="col-es-12 col-sm-2 text-left mobile-hide">
+        <div class="col-es-2 text-left">
             <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $frameworkTranslation['template']['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
-        <div class="col-es-12 col-sm-10 text-right">
+        <div class="col-es-10 text-right">
             <form class="form form-grey">
                 <nav class="menu menu-horizontal">
                     <ul>
                         <li>
-                            <span class="about mobile-hide">v: 12.0.0</span>
+                            <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
                             <select id="page_language_select" aria-label="<?php echo $frameworkTranslation['template']['language']; ?>">
@@ -47,7 +48,7 @@ $objFrameworkUrl = new FrameworkUrl();
                             </select>
                         </li>
                         <li>
-                            <a href="https://github.com/winterjeferson/winterstrap" target="_blank" rel="noopener" class="bt bt-re bt-green">
+                            <a href="https://github.com/winterjeferson/winter-back-php" target="_blank" rel="noopener" class="bt bt-re bt-green">
                                 Download (Github)
                             </a>
                         </li>
@@ -57,8 +58,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </header>
-<main class="row" id="main_wrapper">
-    <section id="main_menu" class="col-es-12 col-bi-2">
+    <section id="main_menu" class="grid-menu">
         
 
 <div class="row">
@@ -70,8 +70,8 @@ $objFrameworkUrl = new FrameworkUrl();
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>panel/" data-id="panel" class="bt bt-sm bt-fu bt-blue">
-                        panel
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        admin
                     </a>
                 </li>
                 
@@ -86,74 +86,73 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </div>
     </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
+    <section id="main_content" class="grid-content">
         <div id="page_home" class="row">
             <div class="col-es-12">
                 <div class="carousel" data-current-slide="0">
-                    <div class="row carousel-slide">
-                        <div class="col-es-12">
-                            <ul class="carousel-list">
-                                
-                                
-                                <li>
-                                    <div class="slide bg-cyan">
-                                        <div class="col-middle slide-content">
-                                            MySQL Query Class
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-purple">
-                                        <div class="col-middle slide-content">
-                                            Admin Panel
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-orange">
-                                        <div class="col-middle slide-content">
-                                            Multilanguage routes
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="slide bg-red">
-                                        <div class="col-middle slide-content">
-                                            Friendly URLs
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                            </ul>
+    <div class="row carousel-slide">
+        <div class="col-es-12">
+            <ul class="carousel-list">
+                
+                
+                <li>
+                    <div class="slide bg-cyan">
+                        <div class="col-middle slide-content">
+                            MySQL Query Class
                         </div>
                     </div>
-                    <div class="menu-horizontal carousel-disabled">
-                        <ul class="navigation-arrow">
-                            <li>
-                                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
-                                </button>
-                            </li>
-                        </ul>
+                </li>
+                
+                <li>
+                    <div class="slide bg-purple">
+                        <div class="col-middle slide-content">
+                            Admin Panel
+                        </div>
                     </div>
-                    <div class="menu-horizontal text-center carousel-controller-over">
-                        <ul class="carousel-controller carousel-controller-white">
-                        </ul>
+                </li>
+                
+                <li>
+                    <div class="slide bg-orange">
+                        <div class="col-middle slide-content">
+                            Multilanguage routes
+                        </div>
                     </div>
-                </div>
+                </li>
+                
+                <li>
+                    <div class="slide bg-red">
+                        <div class="col-middle slide-content">
+                            Friendly URLs
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="menu-horizontal carousel-disabled">
+        <ul class="navigation-arrow">
+            <li>
+                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
+                    <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
+                    <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-horizontal text-center carousel-controller-over">
+        <ul class="carousel-controller carousel-controller-white">
+        </ul>
+    </div>
+</div>
             </div>
         </div>
     </section>
-</main>
-<footer id="footer">
+    <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>
@@ -163,6 +162,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </footer>
+</main>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

@@ -13,10 +13,12 @@ $objFrameworkRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
     ['post', 'post.php'],
-    ['panel', 'admin.php'],
-    ['panel-blog', 'admin_blog.php'],
-    ['panel-login', 'admin_login.php'],
+    ['admin', 'admin.php'],
+    ['admin-blog', 'admin_blog.php'],
+    ['admin-login', 'admin_blog.php'],
+    ['admin-logout', 'home.php'],
 ]);
 
 $route = $objFrameworkRoute->getRoute();
 include $route;
+?>

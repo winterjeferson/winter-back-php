@@ -7,17 +7,17 @@ var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/p
 
 
 var filePHP = [
-    configuration.branches + 'php/*',
-    configuration.branches + 'php/**',
-    configuration.branches + 'php/**/*',
-    configuration.branches + 'php/**/*.*'
+    configuration.development + 'php/*',
+    configuration.development + 'php/**',
+    configuration.development + 'php/**/*',
+    configuration.development + 'php/**/*.*'
 ];
 
 var filePHPPublic = [
-    configuration.branchesPublic + 'php/*',
-    configuration.branchesPublic + 'php/**',
-    configuration.branchesPublic + 'php/**/*',
-    configuration.branchesPublic + 'php/**/*.*'
+    configuration.homologation + 'php/*',
+    configuration.homologation + 'php/**',
+    configuration.homologation + 'php/**/*',
+    configuration.homologation + 'php/**/*.*'
 ];
 
 
@@ -26,15 +26,15 @@ function clean(path) {
 }
 
 gulp.task('php_clean', function () {
-    var files = [configuration.branchesPublic + 'php/**'];
+    var files = [configuration.homologation + 'php/**'];
     return clean(files);
 });
 
 
 gulp.task('php_move', function (done) {
     return gulp
-            .src(configuration.branches + 'php/**/*.*')
-            .pipe(gulp.dest(configuration.branchesPublic + "php/"));
+            .src(configuration.development + 'php/**/*.*')
+            .pipe(gulp.dest(configuration.homologation + "php/"));
     done();
 });
 

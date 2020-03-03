@@ -1,4 +1,4 @@
-<footer id="footer">
+<footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>

@@ -8,24 +8,12 @@ var project = require('./project.js');
 var util = require('./util.js');
 
 
-var fileCssSass = [
-    configuration.branches + 'css/plugin/sass_variable.scss',
-    configuration.branches + 'css/plugin/sass_color.scss',
-    configuration.branches + 'css/plugin/sass.scss',
+var fileCssAdmin = [
+    configuration.development + 'css/admin/*.scss'
 ];
 
-var fileCssDefault = [
-    configuration.branches + 'css/build/*.scss'
-];
-
-var fileCssPlugin = [
-    configuration.branches + 'css/library/*.scss'
-];
-
-var cssDefaultConcat = fileCssSass.concat(fileCssDefault);
-var cssPluginConcat = fileCssSass.concat(fileCssPlugin);
-var fileDefault = 'style';
-var filePlugin = 'plugin';
+var cssAdminConcat = fileCssAdmin;
+var fileAdmin = 'admin';
 
 
 
@@ -36,63 +24,37 @@ var filePlugin = 'plugin';
 
 
 
-gulp.task('css_default_concat', function () {
+gulp.task('css_admin_concat', function () {
     return gulp
-        .src(cssDefaultConcat)
-        .pipe(concat(fileDefault + '.scss'))
-        .pipe(gulp.dest(configuration.branches + 'css/'));
+        .src(cssAdminConcat)
+        .pipe(concat(fileAdmin + '.scss'))
+        .pipe(gulp.dest(configuration.development + 'css/'));
 });
 
-gulp.task('css_default_sass', function () {
+gulp.task('css_admin_sass', function () {
     return gulp
-        .src(configuration.branches + 'css/' + fileDefault + '.scss')
+        .src(configuration.development + 'css/' + fileAdmin + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
-        .pipe(gulp.dest(configuration.branchesPublic + 'css/'));
+        .pipe(gulp.dest(configuration.homologation + 'css/'));
 });
 
-gulp.task('build_css_default', gulp.series(
-    'css_default_concat',
-    'css_default_sass',
-    'beep'
-));
-
-
-
-
-
-
-gulp.task('css_plugin_concat', function () {
-    return gulp
-        .src(cssPluginConcat)
-        .pipe(concat(filePlugin + '.scss'))
-        .pipe(gulp.dest(configuration.branches + 'css/'));
-});
-
-gulp.task('css_plugin_sass', function () {
-    return gulp
-        .src(configuration.branches + 'css/' + filePlugin + '.scss')
-        .pipe(sass.sync().on('error', sass.logError))
-        .pipe(gulp.dest(configuration.branchesPublic + 'css/'));
-});
-
-gulp.task('build_css_plugin', gulp.series(
-    'css_plugin_concat',
-    'css_plugin_sass',
+gulp.task('build_css_admin', gulp.series(
+    'css_admin_concat',
+    'css_admin_sass',
     'beep'
 ));
 
 
 gulp.task('css_minify', function () {
     return gulp
-        .src(configuration.branchesPublic + 'css/*.*')
+        .src(configuration.homologationPublic + 'css/*.*')
         .pipe(csso())
-        .pipe(gulp.dest(configuration.trunk + 'css/'));
+        .pipe(gulp.dest(configuration.production + 'css/'));
 });
 
 
 
 
 module.exports = {
-    cssDefaultConcat: cssDefaultConcat,
-    cssPluginConcat: cssPluginConcat
+    cssAdminConcat: cssAdminConcat
 };

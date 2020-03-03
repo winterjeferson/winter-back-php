@@ -1,58 +1,18 @@
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
-{% include "include/template_header.php" %}
-<main class="row" id="main_wrapper">
-    <section id="main_menu" class="col-es-12 col-bi-2">
+<main class="grid">
+    {% include "include/template_header.php" %}
+    <section id="main_menu" class="grid-menu">
         {% include "include/template_menu.php" %}
     </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
+    <section id="main_content" class="grid-content">
         <div id="page_home" class="row">
             <div class="col-es-12">
-                <div class="carousel" data-current-slide="0">
-                    <div class="row carousel-slide">
-                        <div class="col-es-12">
-                            <ul class="carousel-list">
-                                {% set arrSlide = [
-                                    ['MySQL Query Class' , 'cyan'],
-                                    ['Admin Panel' , 'purple'],
-                                    ['Multilanguage routes' , 'orange'],
-                                    ['Friendly URLs' , 'red']
-                                ] %}
-                                {% for slide in arrSlide %}
-                                <li>
-                                    <div class="slide bg-{{slide[1]}}">
-                                        <div class="col-middle slide-content">
-                                            {{slide[0]}}
-                                        </div>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="menu-horizontal carousel-disabled">
-                        <ul class="navigation-arrow">
-                            <li>
-                                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
-                                    <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="menu-horizontal text-center carousel-controller-over">
-                        <ul class="carousel-controller carousel-controller-white">
-                        </ul>
-                    </div>
-                </div>
+                {% include "include/template_carousel.php" %}
             </div>
         </div>
     </section>
+    {% include "include/template_footer.php" %}
 </main>
-{% include "include/template_footer.php" %}
 {% include "include/analytics.php" %}
 {% include "include/footer.php" %}
