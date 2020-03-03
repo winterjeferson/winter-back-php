@@ -1,4 +1,8 @@
 <?php
+$objFrameworkLogin = new FrameworkLogin();
+$objFrameworkLogin->verifyLogin();
+?>
+<?php
 $parentFolder = '';
 
 include $parentFolder . 'php/autoload.php';
@@ -21,11 +25,6 @@ echo $objFrameworkHtml->buildHeader();
         </div>
     </div>
 </div>
-
-<?php
-$objFrameworkLogin = new FrameworkLogin();
-echo $objFrameworkLogin->verifyLogin();
-?>
 
 <main class="grid">
     <?php
@@ -93,9 +92,9 @@ $objFrameworkUrl = new FrameworkUrl();
 </div>
     </section>
     <section id="main_content" class="grid-content">
-        <div id="page_home" class="row">
+        <div id="page_admin" class="row">
             <div class="col-es-12">
-                <h1 class="page-title">wellcome to admin<h1>
+                <h1 class="page-title">wellcome to admin</h1>
             </div>
         </div>
     </section>
@@ -110,6 +109,8 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </footer>
 </main>
+<link href="css/admin.css" rel="stylesheet">
+<script src="js/admin.js"></script>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

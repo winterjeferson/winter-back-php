@@ -1,23 +1,26 @@
 <?php
 
-class FrameworkLogin {
+class FrameworkLogin
+{
 
-    public function __construct() {
-        
+    public function __construct()
+    {
     }
 
-    function verifyLogin() {
+    function verifyLogin()
+    {
         $objFrameworkSession = new FrameworkSession();
-        $idUser = '';
+        // $idUser = '';
 
-        if ($objFrameworkSession->verifyIsSet('id')) {
-            $idUser = $objFrameworkSession->getSessionValue('id');
-        } else {
-            // header('Location: admin_login.php');
+        if (!$objFrameworkSession->verifyIsSet('id')) {
+            //     $idUser = $objFrameworkSession->getSessionValue('id');
+            // } else {
+            $this->redirect('admin-login');
         }
     }
 
-    function doLogin() {
+    function doLogin()
+    {
         $objFrameworkSession = new FrameworkSession();
 
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -26,10 +29,10 @@ class FrameworkLogin {
         $objFrameworkQuery = new FrameworkQuery();
         $objFrameworkQuery->populateArray([
             'column' => [
-                    ['table' => 'login', 'column' => 'id'],
-                    ['table' => 'login', 'column' => 'email'],
-                    ['table' => 'login', 'column' => 'password'],
-                    ['table' => 'login', 'column' => 'active'],
+                ['table' => 'login', 'column' => 'id'],
+                ['table' => 'login', 'column' => 'email'],
+                ['table' => 'login', 'column' => 'password'],
+                ['table' => 'login', 'column' => 'active'],
             ],
             'where' => [['table' => 'login', 'column' => 'email', 'value' => $email]],
             'table' => [['table' => 'login']],
@@ -58,7 +61,8 @@ class FrameworkLogin {
         }
     }
 
-    function doLoginSetLastActivity($id) {
+    function doLoginSetLastActivity($id)
+    {
         $objFrameworkLayout = new FrameworkLayout();
         $lastActivity = $objFrameworkLayout->getTimezone();
 
@@ -74,11 +78,16 @@ class FrameworkLogin {
         return $query;
     }
 
-    function doLogout() {
+    function doLogout()
+    {
         $objFrameworkSession = new FrameworkSession();
-
         $objFrameworkSession->clearSession();
-        return '1';
+        $this->redirect();
     }
 
+    function redirect($target = '')
+    {
+        $objFrameworkUrl = new FrameworkUrl();
+        header('Location: ' . $objFrameworkUrl->getUrlPage() . $target);
+    }
 }

@@ -7,7 +7,7 @@ class FrameworkAdmin {
     applyClass() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         this.updateVariable();
-        this.buildMenu();
+        // this.buildMenu();
         this.buildMenuDifeneActive();
         this.builTableTdWrapper();
     }
@@ -15,7 +15,7 @@ class FrameworkAdmin {
     updateVariable() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$page = $('#admin');
-        this.$menuMain = this.$page.find('[data-id="menu_main"]');
+        this.$menuMain = $('#main_menu');
         this.$btPage = this.$page.find('[data-id="bt_page"]');
         this.$btBlog = this.$page.find('[data-id="bt_blog"]');
         this.$btLogout = this.$page.find('[data-id="bt_logout"]');
@@ -23,25 +23,29 @@ class FrameworkAdmin {
 
     buildMenu() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
+        // let self = this;
 
-        this.$menuMain.find('.bt').on('click', function () {
-            let dataId = $(this).attr('data-id');
+        
+        // this.$menuMain.find('.bt').on('click', function () {
+        //     console.log(top.location);
+        //     return;
+        //     let dataId = $(this).attr('data-id');
+        //     // console.log('aaaaaaa');
 
-            self.buildMenuChangePage(dataId.substring(3));
-        });
+        //     self.buildMenuChangePage(dataId);
+        // });
 
-        this.$btLogout.on('click', function () {
-            self.buildLogout();
-        });
+        // this.$btLogout.on('click', function () {
+        //     self.buildLogout();
+        // });
     }
 
     buildMenuChangePage(page) {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         this.buildMenuDifeneActive(page);
 
-        if (page !== 'logout') {
-            window.location.href = 'admin/index.php?p=' + page;
+        if (page !== 'admin-logout') {
+            window.location.href = page + '/';
         }
     }
 
@@ -60,11 +64,11 @@ class FrameworkAdmin {
         $.ajax({
             url: '../php/controller.php',
             data:
-                    '&c=FrameworkLogin' +
-                    '&m=doLogout',
+                '&c=FrameworkLogin' +
+                '&m=doLogout',
             success: function (data) {
                 switch (data) {
-                    case'1':
+                    case '1':
                         window.location = 'admin/index.php';
                         break;
                 }

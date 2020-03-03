@@ -1,4 +1,8 @@
 <?php
+$objFrameworkLogin = new FrameworkLogin();
+$objFrameworkLogin->verifyLogin();
+?>
+<?php
 $parentFolder = '';
 
 include $parentFolder . 'php/autoload.php';
@@ -21,7 +25,13 @@ echo $objFrameworkHtml->buildHeader();
         </div>
     </div>
 </div>
+
 <?php
+$objFrameworkAdminBlog = new FrameworkAdminBlog();
+?>
+
+<main class="grid">
+    <?php
 $objFrameworkUrl = new FrameworkUrl();
 ?>
 
@@ -57,120 +67,147 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </header>
-<main class="row" id="main_wrapper">
-    <?php
-    $objFrameworkAdminBlog = new FrameworkAdminBlog();
-    ?>
-    <div class="container">
-        <section class="row">
-            <div class="col-es-12">
-                <h2 class="page-title">
-                    Cadastrar Blog
-                </h2>
-            </div>
-            <form class="row form form-grey" data-id="form_register">
-                <div class="col-es-6 form-field">
-                    <label>Title</label>
-                    <input type="text" data-id="field_title" aria-label="Title">
-                </div>
-                <div class="col-es-6 form-field">
-                    <label>Friendly URL</label>
-                    <input type="text" data-id="field_url" aria-label="Friendly URL">
-                </div>
-                <div class="col-es-12 form-field">
-                    <label>Content</label>
-                    <textarea data-id="field_content" aria-label="Content"></textarea>
-                </div>
-                <div class="col-es-12 form-field">
-                    <label>Tags</label>
-                    <input type="text" data-id="field_tag" aria-label="Tags" placeholder="separar por /">
-                </div>
-                <div class="col-es-12 form-field">
-                    <nav class="menu menu-horizontal text-right">
-                        <ul>
-                            <li>
-                                <button type="button" class="bt bt-re bt-green" data-id="bt_register">
-                                    Cadastrar
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </form>
-        </section>
+    <section id="main_menu" class="grid-menu">
+        
+
+<div class="row">
+    <div class="col-es-12">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $frameworkTranslation['default']['menu']; ?>">
+            <span class="fa fa-bars" aria-hidden="true"></span>
+        </button>
+        <nav class="menu menu-vertical text-center menu-drop-down">
+            <ul>
+                
+                <li>
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="bt bt-sm bt-fu bt-blue">
+                        admin-blog
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="bt bt-sm bt-fu bt-blue">
+                        admin-logout
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
     </div>
-    <section class="row">
-        <div class="col-es-12">
-            <h2 class="page-title">
-                Conteúdo Ativo
-            </h2>
-        </div>
-        <div class="col-es-12">
-            <div class="row">
-                <div class="col-es-12">
-                    <h2 class="page-title">
-                        
-                    </h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-es-12">
-                    <table class="table table-grey" data-id="table_active">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>URL</th>
-                                <th>Tags</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php echo $objFrameworkAdminBlog->buildReport('active'); ?>
-                        </tbody>
-                    </table>
-                </div>
+</div>
+    </section>
+    <section id="main_content" class="grid-content">
+        <div id="page_admin_blog" class="row">
+            <div class="col-es-12">
+                <section class="row">
+                    <div class="col-es-12">
+                        <h2 class="page-title">
+                            Cadastrar Blog
+                        </h2>
+                    </div>
+                    <form class="row form form-grey" data-id="form_register">
+                        <div class="col-es-6 form-field">
+                            <label>Title</label>
+                            <input type="text" data-id="field_title" aria-label="Title">
+                        </div>
+                        <div class="col-es-6 form-field">
+                            <label>Friendly URL</label>
+                            <input type="text" data-id="field_url" aria-label="Friendly URL">
+                        </div>
+                        <div class="col-es-12 form-field">
+                            <label>Content</label>
+                            <textarea data-id="field_content" aria-label="Content"></textarea>
+                        </div>
+                        <div class="col-es-12 form-field">
+                            <label>Tags</label>
+                            <input type="text" data-id="field_tag" aria-label="Tags" placeholder="separar por /">
+                        </div>
+                        <div class="col-es-12 form-field">
+                            <nav class="menu menu-horizontal text-right">
+                                <ul>
+                                    <li>
+                                        <button type="button" class="bt bt-re bt-green" data-id="bt_register">
+                                            Cadastrar
+                                        </button>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </form>
+                </section>
+                <section class="row">
+                    <div class="col-es-12">
+                        <h2 class="page-title">
+                            Conteúdo Ativo
+                        </h2>
+                    </div>
+                    <div class="col-es-12">
+                        <div class="row">
+                            <div class="col-es-12">
+                                <h2 class="page-title">
+                                    
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-es-12">
+                                <table class="table table-grey" data-id="table_active">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                            <th>URL</th>
+                                            <th>Tags</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php echo $objFrameworkAdminBlog->buildReport('active'); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-es-12">
+                        <h2 class="page-title">
+                            Conteúdo Inativo
+                        </h2>
+                    </div>
+                    <div class="col-es-12">
+                        <div class="row">
+                            <div class="col-es-12">
+                                <h2 class="page-title">
+                                    
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-es-12">
+                                <table class="table table-grey" data-id="table_inactive">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                            <th>URL</th>
+                                            <th>Tags</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php echo $objFrameworkAdminBlog->buildReport('inactive'); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </section>
-    <section class="row">
-        <div class="col-es-12">
-            <h2 class="page-title">
-                Conteúdo Inativo
-            </h2>
-        </div>
-        <div class="col-es-12">
-            <div class="row">
-                <div class="col-es-12">
-                    <h2 class="page-title">
-                        
-                    </h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-es-12">
-                    <table class="table table-grey" data-id="table_inactive">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>URL</th>
-                                <th>Tags</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php echo $objFrameworkAdminBlog->buildReport('inactive'); ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-<footer id="footer" class="grid-footer">
+    <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>
@@ -180,6 +217,9 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </footer>
+</main>
+<link href="css/admin.css" rel="stylesheet">
+<script src="js/admin.js"></script>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

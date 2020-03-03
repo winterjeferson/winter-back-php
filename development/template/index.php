@@ -15,8 +15,8 @@ $objFrameworkRoute->addRoute([
     ['post', 'post.php'],
     ['admin', 'admin.php'],
     ['admin-blog', 'admin_blog.php'],
-    ['admin-login', 'admin_blog.php'],
-    ['admin-logout', 'home.php'],
+    ['admin-login', 'admin_login.php'],
+    ['admin-logout', 'admin_logout.php'],
 ]);
 
 $route = $objFrameworkRoute->getRoute();

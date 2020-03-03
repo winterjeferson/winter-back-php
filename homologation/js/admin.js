@@ -110,8 +110,8 @@ function () {
       objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.updateVariable();
-      this.buildMenu();
+      this.updateVariable(); // this.buildMenu();
+
       this.buildMenuDifeneActive();
       this.builTableTdWrapper();
     }
@@ -123,7 +123,7 @@ function () {
       /*endRemoveIf(production)*/
 
       this.$page = $('#admin');
-      this.$menuMain = this.$page.find('[data-id="menu_main"]');
+      this.$menuMain = $('#main_menu');
       this.$btPage = this.$page.find('[data-id="bt_page"]');
       this.$btBlog = this.$page.find('[data-id="bt_blog"]');
       this.$btLogout = this.$page.find('[data-id="bt_logout"]');
@@ -134,15 +134,17 @@ function () {
       /*removeIf(production)*/
       objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
       /*endRemoveIf(production)*/
-
-      var self = this;
-      this.$menuMain.find('.bt').on('click', function () {
-        var dataId = $(this).attr('data-id');
-        self.buildMenuChangePage(dataId.substring(3));
-      });
-      this.$btLogout.on('click', function () {
-        self.buildLogout();
-      });
+      // let self = this;
+      // this.$menuMain.find('.bt').on('click', function () {
+      //     console.log(top.location);
+      //     return;
+      //     let dataId = $(this).attr('data-id');
+      //     // console.log('aaaaaaa');
+      //     self.buildMenuChangePage(dataId);
+      // });
+      // this.$btLogout.on('click', function () {
+      //     self.buildLogout();
+      // });
     }
   }, {
     key: "buildMenuChangePage",
@@ -153,8 +155,8 @@ function () {
 
       this.buildMenuDifeneActive(page);
 
-      if (page !== 'logout') {
-        window.location.href = 'admin/index.php?p=' + page;
+      if (page !== 'admin-logout') {
+        window.location.href = page + '/';
       }
     }
   }, {
@@ -812,16 +814,15 @@ function () {
       objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      var self = this;
-      $('window').on('load', function () {
-        $.when(objFrameworkTranslation.loadFile()).then(function () {
-          self.applyClass();
+      var self = this; // console.log('verifyLoad');
+      // $('window').on('load', function () {
+      // $.when(objFrameworkTranslation.loadFile()).then(function () {
+      //     self.applyClass();
+      // if (objFrameworkGeneric.verifyHasFodler('admin')) {
 
-          if (objFrameworkGeneric.verifyHasFodler('admin')) {
-            self.applyClass();
-          }
-        });
-      });
+      self.applyClass(); // }
+      // });
+      // });
     }
   }, {
     key: "applyClass",
@@ -829,6 +830,7 @@ function () {
       /*removeIf(production)*/
       objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
       /*endRemoveIf(production)*/
+      // console.log('applyClass');
 
       objFrameworkLogin.buildMenu();
       objFrameworkAdmin.applyClass();
@@ -4861,13 +4863,11 @@ var objFrameworkDebug = new FrameworkDebug();
 /*endRemoveIf(production)*/
 
 var objFrameworkGeneric = new FrameworkGeneric();
-var objFrameworkAdminManagement = new FrameworkAdminManagement();
+var objFrameworkAdminManagement = new FrameworkAdminManagement(); // if (objFrameworkGeneric.verifyHasFodler('admin')) {
 
-if (objFrameworkGeneric.verifyHasFodler('admin')) {
-  var objFrameworkAdmin = new FrameworkAdmin();
-  var objFrameworkAdminBlog = new FrameworkAdminBlog();
-  var objFrameworkAdminPage = new FrameworkAdminPage();
-  var objFrameworkLogin = new FrameworkLogin();
-}
+var objFrameworkLogin = new FrameworkLogin();
+var objFrameworkAdmin = new FrameworkAdmin();
+var objFrameworkAdminBlog = new FrameworkAdminBlog();
+var objFrameworkAdminPage = new FrameworkAdminPage(); // }
 
 objFrameworkAdminManagement.verifyLoad();
