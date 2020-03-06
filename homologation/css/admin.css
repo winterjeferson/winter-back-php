@@ -1,3 +1,6 @@
+#page_admin_blog .table .menu {
+  white-space: nowrap; }
+
 #page_login {
   background-color: grey;
   height: 100%;

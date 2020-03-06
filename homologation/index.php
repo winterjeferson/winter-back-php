@@ -12,7 +12,7 @@ $frameworkTranslation = $objFrameworkTranslation->translateContent();
 $objFrameworkRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
-    ['post', 'post.php'],
+    ['blog-post', 'blog_post.php'],
     ['admin', 'admin.php'],
     ['admin-blog', 'admin_blog.php'],
     ['admin-login', 'admin_login.php'],
@@ -21,4 +21,3 @@ $objFrameworkRoute->addRoute([
 
 $route = $objFrameworkRoute->getRoute();
 include $route;
-?>

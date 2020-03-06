@@ -2,6 +2,7 @@
 var objFrameworkDebug = new FrameworkDebug();
 /*endRemoveIf(production)*/
 var objFrameworkGeneric = new FrameworkGeneric();
+var objFrameworkUrl = new FrameworkUrl();
 var objFrameworkAdminManagement = new FrameworkAdminManagement();
 
 // if (objFrameworkGeneric.verifyHasFodler('admin')) {

@@ -1,11 +1,13 @@
+{% include "include/verify_login.php" %}
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
-{% include "include/template_header.php" %}
-<main class="row" id="main_wrapper">
-    <section id="main_menu" class="col-es-12 col-bi-2">
+
+<main class="grid">
+    {% include "include/template_header.php" %}
+    <section id="main_menu" class="grid-menu">
         {% include "include/template_menu.php" %}
     </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
+    <section id="main_content" class="grid-content">
         <?php
         $objFrameworkBlog = new FrameworkBlog();
         $objFrameworkTemplate = new FrameworkTemplate();
@@ -37,7 +39,7 @@
             </div>
         </article>
     </section>
+    {% include "include/template_footer.php" %}
 </main>
-{% include "include/template_footer.php" %}
 {% include "include/analytics.php" %}
 {% include "include/footer.php" %}

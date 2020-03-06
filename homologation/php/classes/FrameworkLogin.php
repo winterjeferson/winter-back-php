@@ -51,7 +51,7 @@ class FrameworkLogin
         }
 
         if ($row['password'] === $password) {
-            $this->doLogout();
+            $this->clear();
             $objFrameworkSession->setSession('id', $row['id']);
             $objFrameworkSession->setSession('email', $row['email']);
             $this->doLoginSetLastActivity($row['id']);
@@ -78,10 +78,15 @@ class FrameworkLogin
         return $query;
     }
 
-    function doLogout()
+    function clear()
     {
         $objFrameworkSession = new FrameworkSession();
         $objFrameworkSession->clearSession();
+    }
+
+    function doLogout()
+    {
+        $this->clear();
         $this->redirect();
     }
 

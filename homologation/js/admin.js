@@ -167,10 +167,13 @@ function () {
       /*endRemoveIf(production)*/
 
       var classActive = 'menu-tab-active';
-      var page = objFrameworkGeneric.getUrlParameter('p');
-      this.pageCurrent = page;
-      this.$menuMain.find('.bt').parent().removeClass(classActive);
-      this.$menuMain.find('[data-id="bt_' + page + '"]').parent().addClass(classActive);
+      var target = '';
+
+      if (window.location.href.indexOf('admin-blog') > -1) {
+        target = $('#page_admin_blog').find('.menu-tab').find('[data-id="admin-blog"]');
+      }
+
+      $(target).parent().addClass(classActive);
     }
   }, {
     key: "buildLogout",
@@ -180,7 +183,7 @@ function () {
       /*endRemoveIf(production)*/
 
       $.ajax({
-        url: '../php/controller.php',
+        url: objFrameworkUrl.getController(),
         data: '&c=FrameworkLogin' + '&m=doLogout',
         success: function success(data) {
           switch (data) {
@@ -216,9 +219,6 @@ function () {
     /*removeIf(production)*/
     objFrameworkDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
-
-    this.isEdit = false;
-    this.editId = 0;
   }
 
   _createClass(FrameworkAdminBlog, [{
@@ -240,15 +240,18 @@ function () {
       objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.$table = objFrameworkAdmin.$page.find('.table');
-      this.$tableActive = objFrameworkAdmin.$page.find('[data-id="table_active"]');
-      this.$tableInactive = objFrameworkAdmin.$page.find('[data-id="table_inactive"]');
-      this.$btRegister = objFrameworkAdmin.$page.find('[data-id="bt_register"]');
-      this.$formRegister = objFrameworkAdmin.$page.find('[data-id="form_register"]');
-      this.$formFieldTitle = objFrameworkAdmin.$page.find('[data-id="field_title"]');
-      this.$formFieldUrl = objFrameworkAdmin.$page.find('[data-id="field_url"]');
-      this.$formFieldContent = objFrameworkAdmin.$page.find('[data-id="field_content"]');
-      this.$formFieldTag = objFrameworkAdmin.$page.find('[data-id="field_tag"]');
+      this.isEdit = false;
+      this.editId = 0;
+      this.$page = $('#page_admin_blog');
+      this.$table = $(this.$page).find('.table');
+      this.$tableActive = $(this.$page).find('[data-id="table_active"]');
+      this.$tableInactive = $(this.$page).find('[data-id="table_inactive"]');
+      this.$btRegister = $(this.$page).find('[data-id="bt_register"]');
+      this.$formRegister = $(this.$page).find('[data-id="form_register"]');
+      this.$formFieldTitle = $(this.$page).find('[data-id="field_title"]');
+      this.$formFieldUrl = $(this.$page).find('[data-id="field_url"]');
+      this.$formFieldContent = $(this.$page).find('[data-id="field_content"]');
+      this.$formFieldTag = $(this.$page).find('[data-id="field_tag"]');
     }
   }, {
     key: "buildMenu",
@@ -276,8 +279,8 @@ function () {
       var self = this;
       this.$table.find('.bt').unbind();
       this.$tableActive.find('[data-action="inactivate"]').on('click', function () {
-        objFrameworkModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objFrameworkModal.buildContentConfirmationAction('objFrameworkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
+        objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+        objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
       });
       this.$tableInactive.find('[data-action="activate"]').on('click', function () {
         self.modify($(this).attr('data-id'), 'activate');
@@ -287,8 +290,8 @@ function () {
         self.editLoadData(self.editId);
       });
       this.$table.find('[data-action="delete"]').on('click', function () {
-        objFrameworkModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objFrameworkModal.buildContentConfirmationAction('objFrameworkAdminBlog.delete(' + $(this).attr('data-id') + ')');
+        objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+        objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.delete(' + $(this).attr('data-id') + ')');
       });
     }
   }, {
@@ -302,7 +305,7 @@ function () {
 
       if (this.validateForm()) {
         $.ajax({
-          url: '../php/controller.php',
+          url: objFrameworkUrl.getController(),
           data: '&c=FrameworkAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val() + '&id=' + self.editId,
           type: 'POST',
           success: function success(data) {
@@ -320,17 +323,41 @@ function () {
 
       var self = this;
       $.ajax({
-        url: '../php/controller.php',
+        url: objFrameworkUrl.getController(),
         data: '&c=FrameworkAdminBlog' + '&m=editLoadData' + '&id=' + id,
         type: 'POST',
         success: function success(data) {
-          var obj = $.parseJSON(data);
-          objTheme.doSlide(self.$formRegister);
+          var obj = $.parseJSON(data); // objTheme.doSlide(self.$formRegister);
+          // var target = self.$formRegister;
+          // self.scrollTo(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop, 2000, true);
+
           self.isEdit = true;
           self.editFillField(obj);
         }
       });
-    }
+    } // scrollTo(elem, style, unit, from, to, time, prop) {
+    //     if (!elem) {
+    //         return;
+    //     }
+    //     var start = new Date().getTime(),
+    //         timer = setInterval(function () {
+    //             var step = Math.min(1, (new Date().getTime() - start) / time);
+    //             if (prop) {
+    //                 elem[style] = (from + step * (to - from)) + unit;
+    //             } else {
+    //                 elem.style[style] = (from + step * (to - from)) + unit;
+    //             }
+    //             if (step === 1) {
+    //                 clearInterval(timer);
+    //             }
+    //         }, 25);
+    //     if (prop) {
+    //         elem[style] = from + unit;
+    //     } else {
+    //         elem.style[style] = from + unit;
+    //     }
+    // }
+
   }, {
     key: "editFillField",
     value: function editFillField(json) {
@@ -353,7 +380,7 @@ function () {
 
       var self = this;
       $.ajax({
-        url: '../php/controller.php',
+        url: objFrameworkUrl.getController(),
         data: '&c=FrameworkAdminBlog' + '&m=doModify' + '&s=' + status + '&id=' + Number(id),
         type: 'POST',
         success: function success(data) {
@@ -370,7 +397,7 @@ function () {
 
       var self = this;
       $.ajax({
-        url: '../php/controller.php',
+        url: objFrameworkUrl.getController(),
         data: '&c=FrameworkAdminBlog' + '&m=doDelete' + '&id=' + Number(id),
         type: 'POST',
         success: function success(data) {
@@ -399,7 +426,7 @@ function () {
 
       if (this.validateForm()) {
         $.ajax({
-          url: '../php/controller.php',
+          url: objFrameworkUrl.getController(),
           data: '&c=FrameworkAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val(),
           type: 'POST',
           success: function success(data) {
@@ -688,15 +715,32 @@ function () {
     /*removeIf(production)*/
     objFrameworkDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
-
-    this.isSignUp = false;
-    this.$page = $('#page_login');
-    this.$buttonLogin = $('#page_login_bt');
-    this.$fielEmail = $('#page_login_user');
-    this.$fieldPassword = $('#page_login_password');
   }
 
   _createClass(FrameworkLogin, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.update();
+      this.buildMenu();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      /*removeIf(production)*/
+      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.isSignUp = false;
+      this.$page = $('#page_login');
+      this.$buttonLogin = $('#page_login_bt');
+      this.$fielEmail = $('#page_login_user');
+      this.$fieldPassword = $('#page_login_password');
+    }
+  }, {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
@@ -742,7 +786,7 @@ function () {
 
       this.$buttonLogin.prop('disabled', true);
       $.ajax({
-        url: '../php/controller.php',
+        url: objFrameworkUrl.getController(),
         data: '&c=FrameworkLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.val() + '&password=' + this.$fieldPassword.val(),
         type: 'POST',
         success: function success(data) {
@@ -789,11 +833,11 @@ function () {
         case '1':
         case '2':
         case '3':
-          window.location = 'admin/index.php?p=page';
+          objFrameworkUrl.build('admin');
           break;
       }
 
-      objFrameworkNotification.addNotification(response, 'red', this.$page.find('.form-field:last'));
+      objWFNotification.addNotification(response, 'red', this.$page.find('.form-field:last'));
     }
   }]);
 
@@ -815,14 +859,18 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this; // console.log('verifyLoad');
-      // $('window').on('load', function () {
-      // $.when(objFrameworkTranslation.loadFile()).then(function () {
-      //     self.applyClass();
-      // if (objFrameworkGeneric.verifyHasFodler('admin')) {
 
-      self.applyClass(); // }
+      window.onload = function () {
+        //     console.log('loaded');
+        //     self.applyClass();
+        // }
+        // $.when(objFrameworkTranslation.loadFile()).then(function () {
+        self.applyClass(); // if (objFrameworkGeneric.verifyHasFodler('admin')) {
+        // console.log('aaaaa');
+      }; // });
       // });
-      // });
+      // window.addEventListener('load', this.applyClass());
+
     }
   }, {
     key: "applyClass",
@@ -832,7 +880,7 @@ function () {
       /*endRemoveIf(production)*/
       // console.log('applyClass');
 
-      objFrameworkLogin.buildMenu();
+      objFrameworkLogin.build();
       objFrameworkAdmin.applyClass();
       objFrameworkAdminBlog.applyClass();
       objFrameworkAdminPage.applyClass();
@@ -840,6 +888,58 @@ function () {
   }]);
 
   return FrameworkAdminManagement;
+}();
+
+var FrameworkUrl =
+/*#__PURE__*/
+function () {
+  function FrameworkUrl() {
+    _classCallCheck(this, FrameworkUrl);
+
+    /*removeIf(production)*/
+    objFrameworkDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(FrameworkUrl, [{
+    key: "buildSEO",
+    value: function buildSEO(url) {
+      /*removeIf(production)*/
+      objDebug.debugMethod(this, objDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      return url.toString() // Convert to string
+      .normalize('NFD') // Change diacritics
+      .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters
+      .replace(/\s+/g, '-') // Change whitespace to dashes
+      .toLowerCase() // Change to lowercase
+      .replace(/&/g, '-and-') // Replace ampersand
+      .replace(/[^a-z0-9\-]/g, '') // Remove anything that is not a letter, number or dash
+      .replace(/-+/g, '-') // Remove duplicate dashes
+      .replace(/^-*/, '') // Remove starting dashes
+      .replace(/-*$/, ''); // Remove trailing dashes
+    }
+  }, {
+    key: "build",
+    value: function build(target) {
+      /*removeIf(production)*/
+      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      return window.location = globalFrameworkUrl + globalFrameworkLanguage + '/' + target + '/';
+    }
+  }, {
+    key: "getController",
+    value: function getController() {
+      /*removeIf(production)*/
+      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      return globalFrameworkUrl + 'php/controller.php';
+    }
+  }]);
+
+  return FrameworkUrl;
 }();
 /*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/license */
 
@@ -4863,6 +4963,7 @@ var objFrameworkDebug = new FrameworkDebug();
 /*endRemoveIf(production)*/
 
 var objFrameworkGeneric = new FrameworkGeneric();
+var objFrameworkUrl = new FrameworkUrl();
 var objFrameworkAdminManagement = new FrameworkAdminManagement(); // if (objFrameworkGeneric.verifyHasFodler('admin')) {
 
 var objFrameworkLogin = new FrameworkLogin();

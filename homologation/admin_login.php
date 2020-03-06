@@ -92,8 +92,6 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </footer>
 </main>
-<link href="css/admin.css" rel="stylesheet">
-<script src="js/admin.js"></script>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

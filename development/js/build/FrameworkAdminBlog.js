@@ -1,8 +1,6 @@
 class FrameworkAdminBlog {
     constructor() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-        this.isEdit = false;
-        this.editId = 0;
     }
 
     applyClass() {
@@ -15,15 +13,18 @@ class FrameworkAdminBlog {
 
     updateVariable() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$table = objFrameworkAdmin.$page.find('.table');
-        this.$tableActive = objFrameworkAdmin.$page.find('[data-id="table_active"]');
-        this.$tableInactive = objFrameworkAdmin.$page.find('[data-id="table_inactive"]');
-        this.$btRegister = objFrameworkAdmin.$page.find('[data-id="bt_register"]');
-        this.$formRegister = objFrameworkAdmin.$page.find('[data-id="form_register"]');
-        this.$formFieldTitle = objFrameworkAdmin.$page.find('[data-id="field_title"]');
-        this.$formFieldUrl = objFrameworkAdmin.$page.find('[data-id="field_url"]');
-        this.$formFieldContent = objFrameworkAdmin.$page.find('[data-id="field_content"]');
-        this.$formFieldTag = objFrameworkAdmin.$page.find('[data-id="field_tag"]');
+        this.isEdit = false;
+        this.editId = 0;
+        this.$page = $('#page_admin_blog');
+        this.$table = $(this.$page).find('.table');
+        this.$tableActive = $(this.$page).find('[data-id="table_active"]');
+        this.$tableInactive = $(this.$page).find('[data-id="table_inactive"]');
+        this.$btRegister = $(this.$page).find('[data-id="bt_register"]');
+        this.$formRegister = $(this.$page).find('[data-id="form_register"]');
+        this.$formFieldTitle = $(this.$page).find('[data-id="field_title"]');
+        this.$formFieldUrl = $(this.$page).find('[data-id="field_url"]');
+        this.$formFieldContent = $(this.$page).find('[data-id="field_content"]');
+        this.$formFieldTag = $(this.$page).find('[data-id="field_tag"]');
     }
 
     buildMenu() {
@@ -46,8 +47,8 @@ class FrameworkAdminBlog {
         this.$table.find('.bt').unbind();
 
         this.$tableActive.find('[data-action="inactivate"]').on('click', function () {
-            objFrameworkModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objFrameworkModal.buildContentConfirmationAction('objFrameworkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
+            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+            objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
         });
 
         this.$tableInactive.find('[data-action="activate"]').on('click', function () {
@@ -60,8 +61,8 @@ class FrameworkAdminBlog {
         });
 
         this.$table.find('[data-action="delete"]').on('click', function () {
-            objFrameworkModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objFrameworkModal.buildContentConfirmationAction('objFrameworkAdminBlog.delete(' + $(this).attr('data-id') + ')');
+            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+            objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.delete(' + $(this).attr('data-id') + ')');
         });
     }
 
@@ -71,15 +72,15 @@ class FrameworkAdminBlog {
 
         if (this.validateForm()) {
             $.ajax({
-                url: '../php/controller.php',
+                url: objFrameworkUrl.getController(),
                 data:
-                        '&c=FrameworkAdminBlog' +
-                        '&m=doUpdate' +
-                        '&title=' + this.$formFieldTitle.val() +
-                        '&url=' + this.$formFieldUrl.val() +
-                        '&content=' + this.$formFieldContent.val() +
-                        '&tag=' + this.$formFieldTag.val() +
-                        '&id=' + self.editId,
+                    '&c=FrameworkAdminBlog' +
+                    '&m=doUpdate' +
+                    '&title=' + this.$formFieldTitle.val() +
+                    '&url=' + this.$formFieldUrl.val() +
+                    '&content=' + this.$formFieldContent.val() +
+                    '&tag=' + this.$formFieldTag.val() +
+                    '&id=' + self.editId,
                 type: 'POST',
                 success: function (data) {
                     self.showResponse(data);
@@ -93,21 +94,46 @@ class FrameworkAdminBlog {
         let self = this;
 
         $.ajax({
-            url: '../php/controller.php',
+            url: objFrameworkUrl.getController(),
             data:
-                    '&c=FrameworkAdminBlog' +
-                    '&m=editLoadData' +
-                    '&id=' + id,
+                '&c=FrameworkAdminBlog' +
+                '&m=editLoadData' +
+                '&id=' + id,
             type: 'POST',
             success: function (data) {
                 let obj = $.parseJSON(data);
 
-                objTheme.doSlide(self.$formRegister);
+                // objTheme.doSlide(self.$formRegister);
+                // var target = self.$formRegister;
+                // self.scrollTo(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop, 2000, true);
                 self.isEdit = true;
                 self.editFillField(obj);
             }
         });
     }
+
+    // scrollTo(elem, style, unit, from, to, time, prop) {
+    //     if (!elem) {
+    //         return;
+    //     }
+    //     var start = new Date().getTime(),
+    //         timer = setInterval(function () {
+    //             var step = Math.min(1, (new Date().getTime() - start) / time);
+    //             if (prop) {
+    //                 elem[style] = (from + step * (to - from)) + unit;
+    //             } else {
+    //                 elem.style[style] = (from + step * (to - from)) + unit;
+    //             }
+    //             if (step === 1) {
+    //                 clearInterval(timer);
+    //             }
+    //         }, 25);
+    //     if (prop) {
+    //         elem[style] = from + unit;
+    //     } else {
+    //         elem.style[style] = from + unit;
+    //     }
+    // }
 
     editFillField(json) {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
@@ -124,12 +150,12 @@ class FrameworkAdminBlog {
         let self = this;
 
         $.ajax({
-            url: '../php/controller.php',
+            url: objFrameworkUrl.getController(),
             data:
-                    '&c=FrameworkAdminBlog' +
-                    '&m=doModify' +
-                    '&s=' + status +
-                    '&id=' + Number(id),
+                '&c=FrameworkAdminBlog' +
+                '&m=doModify' +
+                '&s=' + status +
+                '&id=' + Number(id),
             type: 'POST',
             success: function (data) {
 
@@ -143,11 +169,11 @@ class FrameworkAdminBlog {
         let self = this;
 
         $.ajax({
-            url: '../php/controller.php',
+            url: objFrameworkUrl.getController(),
             data:
-                    '&c=FrameworkAdminBlog' +
-                    '&m=doDelete' +
-                    '&id=' + Number(id),
+                '&c=FrameworkAdminBlog' +
+                '&m=doDelete' +
+                '&id=' + Number(id),
             type: 'POST',
             success: function (data) {
                 self.showResponse(data);
@@ -168,14 +194,14 @@ class FrameworkAdminBlog {
 
         if (this.validateForm()) {
             $.ajax({
-                url: '../php/controller.php',
+                url: objFrameworkUrl.getController(),
                 data:
-                        '&c=FrameworkAdminBlog' +
-                        '&m=doRegister' +
-                        '&title=' + this.$formFieldTitle.val() +
-                        '&url=' + this.$formFieldUrl.val() +
-                        '&content=' + this.$formFieldContent.val() +
-                        '&tag=' + this.$formFieldTag.val(),
+                    '&c=FrameworkAdminBlog' +
+                    '&m=doRegister' +
+                    '&title=' + this.$formFieldTitle.val() +
+                    '&url=' + this.$formFieldUrl.val() +
+                    '&content=' + this.$formFieldContent.val() +
+                    '&tag=' + this.$formFieldTag.val(),
                 type: 'POST',
                 success: function (data) {
                     self.showResponse(data);

@@ -79,14 +79,14 @@ $objFrameworkUrl = new FrameworkUrl();
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="bt bt-sm bt-fu bt-blue">
-                        admin-blog
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        admin
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="bt bt-sm bt-fu bt-blue">
-                        admin-logout
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                        blog
                     </a>
                 </li>
                 
@@ -97,6 +97,29 @@ $objFrameworkUrl = new FrameworkUrl();
     </section>
     <section id="main_content" class="grid-content">
         <div id="page_admin_blog" class="row">
+            <div class="col-es-12">
+                
+
+<div class="padding-re">
+    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down">
+        <ul>
+            
+            <li>
+                <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="menu-tab-bt bt-re bt">
+                    admin-blog
+                </a>
+            </li>
+            
+            <li>
+                <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="menu-tab-bt bt-re bt">
+                    admin-logout
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+            </div>
             <div class="col-es-12">
                 <section class="row">
                     <div class="col-es-12">
@@ -218,8 +241,6 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </footer>
 </main>
-<link href="css/admin.css" rel="stylesheet">
-<script src="js/admin.js"></script>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

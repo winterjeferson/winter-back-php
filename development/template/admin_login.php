@@ -27,7 +27,5 @@
     </section>
     {% include "include/template_footer.php" %}
 </main>
-<link href="css/admin.css" rel="stylesheet">
-<script src="js/admin.js"></script>
 {% include "include/analytics.php" %}
 {% include "include/footer.php" %}

@@ -25,7 +25,7 @@ class FrameworkAdmin {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         // let self = this;
 
-        
+
         // this.$menuMain.find('.bt').on('click', function () {
         //     console.log(top.location);
         //     return;
@@ -52,17 +52,19 @@ class FrameworkAdmin {
     buildMenuDifeneActive() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
-        let page = objFrameworkGeneric.getUrlParameter('p');
+        let target = '';
 
-        this.pageCurrent = page;
-        this.$menuMain.find('.bt').parent().removeClass(classActive);
-        this.$menuMain.find('[data-id="bt_' + page + '"]').parent().addClass(classActive);
+        if (window.location.href.indexOf('admin-blog') > -1) {
+            target = $('#page_admin_blog').find('.menu-tab').find('[data-id="admin-blog"]');
+        }
+
+        $(target).parent().addClass(classActive);
     }
 
     buildLogout() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         $.ajax({
-            url: '../php/controller.php',
+            url: objFrameworkUrl.getController(),
             data:
                 '&c=FrameworkLogin' +
                 '&m=doLogout',

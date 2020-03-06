@@ -1,4 +1,8 @@
 <?php
+$objFrameworkLogin = new FrameworkLogin();
+$objFrameworkLogin->verifyLogin();
+?>
+<?php
 $parentFolder = '';
 
 include $parentFolder . 'php/autoload.php';
@@ -21,7 +25,9 @@ echo $objFrameworkHtml->buildHeader();
         </div>
     </div>
 </div>
-<?php
+
+<main class="grid">
+    <?php
 $objFrameworkUrl = new FrameworkUrl();
 ?>
 
@@ -57,8 +63,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </header>
-<main class="row" id="main_wrapper">
-    <section id="main_menu" class="col-es-12 col-bi-2">
+    <section id="main_menu" class="grid-menu">
         
 
 <div class="row">
@@ -86,7 +91,7 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </div>
     </section>
-    <section id="main_content" class="col-es-12 col-bi-10">
+    <section id="main_content" class="grid-content">
         <?php
         $objFrameworkBlog = new FrameworkBlog();
         $objFrameworkTemplate = new FrameworkTemplate();
@@ -118,8 +123,7 @@ $objFrameworkUrl = new FrameworkUrl();
             </div>
         </article>
     </section>
-</main>
-<footer id="footer" class="grid-footer">
+    <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about">By:</span>
@@ -129,6 +133,7 @@ $objFrameworkUrl = new FrameworkUrl();
         </div>
     </div>
 </footer>
+</main>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
 echo $objFrameworkHtml->buildFooter();

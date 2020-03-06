@@ -49,25 +49,27 @@ class FrameworkHtml
         $string .= $this->buildHeaderSEO();
         $string .= $this->buildHeaderFacebook();
         $string .= $this->buildHeaderCSS();
-        // $string .= $this->buildAdmin($isAdmin);
         $string .= '        </head>';
         $string .= '        <body class="overflow-hidden">';
 
         return $string;
     }
 
-    // public function buildAdmin($isAdmin)
-    // {
-    //     $string = '';
+    public function buildAdmin()
+    {
+        $string = '';
+        $objFrameworkUrl = new FrameworkUrl();
+        $page = $objFrameworkUrl->getUrlParameters()['page'];
+        $isAdmin = strpos($page, 'admin') !== false ? true : false;
 
-    //     if ($isAdmin) {
-    //         $string .= $this->buildTagCSS($this->mainUrl . 'css/admin');
-    //         $string .= $this->buildTagJavascript($this->mainUrl . 'js/admin');
-    //         $string .= '<meta name="robots" content="noindex">';
-    //     }
+        if ($isAdmin) {
+            $string .= $this->buildTagCSS($this->mainUrl . 'css/admin');
+            $string .= $this->buildTagJavascript($this->mainUrl . 'js/admin');
+            $string .= '<meta name="robots" content="noindex">';
+        }
 
-    //     return $string;
-    // }
+        return $string;
+    }
 
     public function buildHeaderCSS()
     {
@@ -157,6 +159,7 @@ class FrameworkHtml
         $string .= '</script>';
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');
+        $string .= $this->buildAdmin();
 
         $string .= '    </body>';
         $string .= '</html>';

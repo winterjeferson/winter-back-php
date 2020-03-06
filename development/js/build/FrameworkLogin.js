@@ -1,6 +1,17 @@
 class FrameworkLogin {
     constructor() {
         /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+
+    }
+
+    build() {
+        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.update();
+        this.buildMenu();
+    }
+
+    update() {
+        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isSignUp = false;
 
         this.$page = $('#page_login');
@@ -44,12 +55,12 @@ class FrameworkLogin {
         this.$buttonLogin.prop('disabled', true);
 
         $.ajax({
-            url: '../php/controller.php',
+            url: objFrameworkUrl.getController(),
             data:
-                    '&c=FrameworkLogin' +
-                    '&m=doLogin' +
-                    '&email=' + this.$fielEmail.val() +
-                    '&password=' + this.$fieldPassword.val(),
+                '&c=FrameworkLogin' +
+                '&m=doLogin' +
+                '&email=' + this.$fielEmail.val() +
+                '&password=' + this.$fieldPassword.val(),
             type: 'POST',
             success: function (data) {
                 self.$buttonLogin.prop('disabled', false);
@@ -86,10 +97,10 @@ class FrameworkLogin {
             case '1':
             case '2':
             case '3':
-                window.location = 'admin/index.php?p=page';
+                objFrameworkUrl.build('admin');
                 break;
         }
 
-        objFrameworkNotification.addNotification(response, 'red', this.$page.find('.form-field:last'));
+        objWFNotification.addNotification(response, 'red', this.$page.find('.form-field:last'));
     }
 }

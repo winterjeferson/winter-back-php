@@ -1,37 +1,39 @@
-$re : 4px;
-$bi : $re * 2;
-$grey : grey;
+$re: 4px;
+$bi: $re * 2;
+$grey: grey;
 
-
-
-
-#page_login{
-    background-color: $grey;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .login-wrapper{
-        background-color: white;
-        border: 1px solid $grey;
-        border-radius: $re;
-        padding: $bi;
-        max-width: 500px;
-        height: auto;
-        margin: auto;
+#page_admin_blog {
+  .table {
+    .menu {
+        white-space: nowrap;
     }
+  }
 }
 
-#admin{
+#page_login {
+  background-color: $grey;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .table{
+  .login-wrapper {
+    background-color: white;
+    border: 1px solid $grey;
+    border-radius: $re;
+    padding: $bi;
+    max-width: 500px;
+    height: auto;
+    margin: auto;
+  }
+}
 
-        .menu {
-
-            ul{
-                width: max-content;
-            }
-        }
+#admin {
+  .table {
+    .menu {
+      ul {
+        width: max-content;
+      }
     }
+  }
 }

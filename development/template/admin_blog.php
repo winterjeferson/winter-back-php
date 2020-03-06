@@ -9,10 +9,13 @@ $objFrameworkAdminBlog = new FrameworkAdminBlog();
 <main class="grid">
     {% include "include/template_header.php" %}
     <section id="main_menu" class="grid-menu">
-        {% include "include/template_menu_admin.php" %}
+        {% include "include/template_menu.php" %}
     </section>
     <section id="main_content" class="grid-content">
         <div id="page_admin_blog" class="row">
+            <div class="col-es-12">
+                {% include "include/template_menu_admin.php" %}
+            </div>
             <div class="col-es-12">
                 <section class="row">
                     <div class="col-es-12">
@@ -125,7 +128,5 @@ $objFrameworkAdminBlog = new FrameworkAdminBlog();
     </section>
     {% include "include/template_footer.php" %}
 </main>
-<link href="css/admin.css" rel="stylesheet">
-<script src="js/admin.js"></script>
 {% include "include/analytics.php" %}
 {% include "include/footer.php" %}
