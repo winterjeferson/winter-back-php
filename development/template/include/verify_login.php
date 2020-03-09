@@ -1,4 +1,4 @@
 <?php
-$objFrameworkLogin = new FrameworkLogin();
-$objFrameworkLogin->verifyLogin();
+$objWBPLogin = new WBPLogin();
+$objWBPLogin->verifyLogin();
 ?>

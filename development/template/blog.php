@@ -10,19 +10,19 @@
             <div class="col-es-12">
                 <div class="container">
                     <h1 class="page-title">
-                        <?php echo $frameworkTranslation['template']['blog']; ?>
+                        <?php echo $WBPTranslation['template']['blog']; ?>
                     </h1>
                     <nav class="menu menu-vertical">
                         <ul>
                             <?php
-                            $objFrameworkTranslation = new FrameworkTranslation();
-                            $objFrameworkBlog = new FrameworkBlog();
-                            $query = $objFrameworkBlog->getPostList();
+                            $objWBPTranslation = new WBPTranslation();
+                            $objWBPBlog = new WBPBlog();
+                            $query = $objWBPBlog->getPostList();
                             $string = '';
 
                             foreach ($query as $key => $value) {
                                 $string .= '<li>';
-                                $string .= '    <a href="' . $objFrameworkTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url'] . '/" class="link link-blue">';
+                                $string .= '    <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url'] . '/" class="link link-blue">';
                                 $string .= $value['title'];
                                 $string .= '    </a>';
                                 $string .= '</li>';

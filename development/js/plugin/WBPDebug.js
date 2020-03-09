@@ -1,15 +1,15 @@
 /*removeIf(production)*/
 class WBPDebug {
     constructor() {
-        this.isFrameworkLayout = true;
-        this.isFrameworkManagement = true;
+        this.isWBPLayout = true;
+        this.isWBPManagement = true;
 
-        this.isFrameworkAdmin = true;
-        this.isFrameworkAdminBlog = true;
-        this.isFrameworkAdminPage = true;
-        this.isFrameworkLogin = true;
+        this.isWBPAdmin = true;
+        this.isWBPAdminBlog = true;
+        this.isWBPAdminPage = true;
+        this.isWBPLogin = true;
 
-        this.isFrameworkGeneric = true;
+        this.isWBPGeneric = true;
     }
 
     debugMethod(obj, method, parameter = '') {

@@ -3,12 +3,12 @@ $parentFolder = '';
 
 include $parentFolder . 'php/autoload.php';
 
-$objFrameworkTranslation = new FrameworkTranslation();
-$objFrameworkLayout = new FrameworkLayout();
-$objFrameworkHtml = new FrameworkHtml();
+$objWBPTranslation = new WBPTranslation();
+$objWBPLayout = new WBPLayout();
+$objWBPHtml = new WBPHtml();
 
-$frameworkTranslation = $objFrameworkTranslation->translateContent();
-echo $objFrameworkHtml->buildHeader();
+$WBPTranslation = $objWBPTranslation->translateContent();
+echo $objWBPHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
     <div class="col-middle">
@@ -23,13 +23,13 @@ echo $objFrameworkHtml->buildHeader();
 </div>
 <main class="grid">
     <?php
-$objFrameworkUrl = new FrameworkUrl();
+$objWBPUrl = new WBPUrl();
 ?>
 
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $frameworkTranslation['template']['home']; ?>">
+            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['template']['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -41,8 +41,8 @@ $objFrameworkUrl = new FrameworkUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $frameworkTranslation['template']['language']; ?>">
-                                <option value=""><?php echo $frameworkTranslation['template']['language']; ?></option>
+                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['template']['language']; ?>">
+                                <option value=""><?php echo $WBPTranslation['template']['language']; ?></option>
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -63,20 +63,20 @@ $objFrameworkUrl = new FrameworkUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $frameworkTranslation['default']['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBPTranslation['default']['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                    <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
                         admin
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                    <a href="<?php echo $objWBPUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
                         blog
                     </a>
                 </li>
@@ -91,19 +91,19 @@ $objFrameworkUrl = new FrameworkUrl();
             <div class="col-es-12">
                 <div class="container">
                     <h1 class="page-title">
-                        <?php echo $frameworkTranslation['template']['blog']; ?>
+                        <?php echo $WBPTranslation['template']['blog']; ?>
                     </h1>
                     <nav class="menu menu-vertical">
                         <ul>
                             <?php
-                            $objFrameworkTranslation = new FrameworkTranslation();
-                            $objFrameworkBlog = new FrameworkBlog();
-                            $query = $objFrameworkBlog->getPostList();
+                            $objWBPTranslation = new WBPTranslation();
+                            $objWBPBlog = new WBPBlog();
+                            $query = $objWBPBlog->getPostList();
                             $string = '';
 
                             foreach ($query as $key => $value) {
                                 $string .= '<li>';
-                                $string .= '    <a href="' . $objFrameworkTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url'] . '/" class="link link-blue">';
+                                $string .= '    <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url'] . '/" class="link link-blue">';
                                 $string .= $value['title'];
                                 $string .= '    </a>';
                                 $string .= '</li>';
@@ -130,5 +130,5 @@ $objFrameworkUrl = new FrameworkUrl();
 </main>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
-echo $objFrameworkHtml->buildFooter();
+echo $objWBPHtml->buildFooter();
 ?>

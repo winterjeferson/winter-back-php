@@ -15,13 +15,13 @@ function () {
   function WBPDebug() {
     _classCallCheck(this, WBPDebug);
 
-    this.isFrameworkLayout = true;
-    this.isFrameworkManagement = true;
-    this.isFrameworkAdmin = true;
-    this.isFrameworkAdminBlog = true;
-    this.isFrameworkAdminPage = true;
-    this.isFrameworkLogin = true;
-    this.isFrameworkGeneric = true;
+    this.isWBPLayout = true;
+    this.isWBPManagement = true;
+    this.isWBPAdmin = true;
+    this.isWBPAdminBlog = true;
+    this.isWBPAdminPage = true;
+    this.isWBPLogin = true;
+    this.isWBPGeneric = true;
   }
 
   _createClass(WBPDebug, [{
@@ -79,11 +79,11 @@ function () {
 /*endRemoveIf(production)*/
 
 
-var FrameworkAdmin =
+var WBPAdmin =
 /*#__PURE__*/
 function () {
-  function FrameworkAdmin() {
-    _classCallCheck(this, FrameworkAdmin);
+  function WBPAdmin() {
+    _classCallCheck(this, WBPAdmin);
 
     /*removeIf(production)*/
     objWBPDebug.debugMethod(this, 'constructor');
@@ -92,9 +92,9 @@ function () {
     this.pageCurrent = '';
   }
 
-  _createClass(FrameworkAdmin, [{
-    key: "applyClass",
-    value: function applyClass() {
+  _createClass(WBPAdmin, [{
+    key: "build",
+    value: function build() {
       /*removeIf(production)*/
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
@@ -172,8 +172,8 @@ function () {
       /*endRemoveIf(production)*/
 
       $.ajax({
-        url: objFrameworkUrl.getController(),
-        data: '&c=FrameworkLogin' + '&m=doLogout',
+        url: objWBPkUrl.getController(),
+        data: '&c=WBPLogin' + '&m=doLogout',
         success: function success(data) {
           switch (data) {
             case '1':
@@ -196,23 +196,23 @@ function () {
     }
   }]);
 
-  return FrameworkAdmin;
+  return WBPAdmin;
 }();
 
-var FrameworkAdminBlog =
+var WBPAdminBlog =
 /*#__PURE__*/
 function () {
-  function FrameworkAdminBlog() {
-    _classCallCheck(this, FrameworkAdminBlog);
+  function WBPAdminBlog() {
+    _classCallCheck(this, WBPAdminBlog);
 
     /*removeIf(production)*/
     objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(FrameworkAdminBlog, [{
-    key: "applyClass",
-    value: function applyClass() {
+  _createClass(WBPAdminBlog, [{
+    key: "build",
+    value: function build() {
       /*removeIf(production)*/
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
@@ -269,7 +269,7 @@ function () {
       this.$table.find('.bt').unbind();
       this.$tableActive.find('[data-action="inactivate"]').on('click', function () {
         objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
+        objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
       });
       this.$tableInactive.find('[data-action="activate"]').on('click', function () {
         self.modify($(this).attr('data-id'), 'activate');
@@ -280,7 +280,7 @@ function () {
       });
       this.$table.find('[data-action="delete"]').on('click', function () {
         objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objWFModal.buildContentConfirmationAction('objFrameworkAdminBlog.delete(' + $(this).attr('data-id') + ')');
+        objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + $(this).attr('data-id') + ')');
       });
     }
   }, {
@@ -294,8 +294,8 @@ function () {
 
       if (this.validateForm()) {
         $.ajax({
-          url: objFrameworkUrl.getController(),
-          data: '&c=FrameworkAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val() + '&id=' + self.editId,
+          url: objWBPkUrl.getController(),
+          data: '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val() + '&id=' + self.editId,
           type: 'POST',
           success: function success(data) {
             self.showResponse(data);
@@ -312,8 +312,8 @@ function () {
 
       var self = this;
       $.ajax({
-        url: objFrameworkUrl.getController(),
-        data: '&c=FrameworkAdminBlog' + '&m=editLoadData' + '&id=' + id,
+        url: objWBPkUrl.getController(),
+        data: '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id,
         type: 'POST',
         success: function success(data) {
           var obj = $.parseJSON(data); // objTheme.doSlide(self.$formRegister);
@@ -369,8 +369,8 @@ function () {
 
       var self = this;
       $.ajax({
-        url: objFrameworkUrl.getController(),
-        data: '&c=FrameworkAdminBlog' + '&m=doModify' + '&s=' + status + '&id=' + Number(id),
+        url: objWBPkUrl.getController(),
+        data: '&c=WBPAdminBlog' + '&m=doModify' + '&s=' + status + '&id=' + Number(id),
         type: 'POST',
         success: function success(data) {
           self.showResponse(data);
@@ -386,8 +386,8 @@ function () {
 
       var self = this;
       $.ajax({
-        url: objFrameworkUrl.getController(),
-        data: '&c=FrameworkAdminBlog' + '&m=doDelete' + '&id=' + Number(id),
+        url: objWBPkUrl.getController(),
+        data: '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + Number(id),
         type: 'POST',
         success: function success(data) {
           self.showResponse(data);
@@ -402,7 +402,7 @@ function () {
       /*endRemoveIf(production)*/
 
       var arrField = [this.$formFieldTitle, this.$formFieldUrl, this.$formFieldContent, this.$formFieldTag];
-      return objFrameworkForm.validateEmpty(arrField);
+      return objWBPkForm.validateEmpty(arrField);
     }
   }, {
     key: "registerContent",
@@ -415,8 +415,8 @@ function () {
 
       if (this.validateForm()) {
         $.ajax({
-          url: objFrameworkUrl.getController(),
-          data: '&c=FrameworkAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val(),
+          url: objWBPkUrl.getController(),
+          data: '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val(),
           type: 'POST',
           success: function success(data) {
             self.showResponse(data);
@@ -445,7 +445,7 @@ function () {
           break;
       }
 
-      objFrameworkNotification.addNotification(response, color);
+      objWBPkNotification.addNotification(response, color);
     }
   }, {
     key: "watchTitle",
@@ -456,101 +456,20 @@ function () {
 
       var self = this;
       this.$formFieldTitle.on('focusout', function () {
-        var url = objFrameworkUrl.buildSEO(self.$formFieldTitle.val());
+        var url = objWBPkUrl.buildSEO(self.$formFieldTitle.val());
         self.$formFieldUrl.val(url);
       });
     }
   }]);
 
-  return FrameworkAdminBlog;
+  return WBPAdminBlog;
 }();
 
-var FrameworkAdminPage =
+var WBPLayout =
 /*#__PURE__*/
 function () {
-  function FrameworkAdminPage() {
-    _classCallCheck(this, FrameworkAdminPage);
-
-    /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(FrameworkAdminPage, [{
-    key: "applyClass",
-    value: function applyClass() {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.updateVariable();
-    }
-  }, {
-    key: "updateVariable",
-    value: function updateVariable() {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-      /*endRemoveIf(production)*/
-    }
-  }]);
-
-  return FrameworkAdminPage;
-}();
-
-var FrameworkGeneric =
-/*#__PURE__*/
-function () {
-  function FrameworkGeneric() {
-    _classCallCheck(this, FrameworkGeneric);
-
-    /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(FrameworkGeneric, [{
-    key: "getUrlParameter",
-    value: function getUrlParameter(target) {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
-      /*endRemoveIf(production)*/
-
-      var url = top.location.search.substring(1);
-      var parameter = url.split('&');
-
-      for (var i = 0; i < parameter.length; i++) {
-        var parameterName = parameter[i].split('=');
-
-        if (parameterName[0] === target) {
-          return parameterName[1];
-        }
-      }
-    }
-  }, {
-    key: "verifyHasFodler",
-    value: function verifyHasFodler(target) {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
-      /*endRemoveIf(production)*/
-
-      var arrFolder = window.location.pathname.split('/');
-
-      if (arrFolder.indexOf(target) > -1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }]);
-
-  return FrameworkGeneric;
-}();
-
-var FrameworkLayout =
-/*#__PURE__*/
-function () {
-  function FrameworkLayout() {
-    _classCallCheck(this, FrameworkLayout);
+  function WBPLayout() {
+    _classCallCheck(this, WBPLayout);
 
     /*removeIf(production)*/
     objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
@@ -566,7 +485,7 @@ function () {
     this.breakPointExtraBig = 1200;
   }
 
-  _createClass(FrameworkLayout, [{
+  _createClass(WBPLayout, [{
     key: "buildLayout",
     value: function buildLayout() {
       /*removeIf(production)*/
@@ -692,21 +611,21 @@ function () {
     }
   }]);
 
-  return FrameworkLayout;
+  return WBPLayout;
 }();
 
-var FrameworkLogin =
+var WBPLogin =
 /*#__PURE__*/
 function () {
-  function FrameworkLogin() {
-    _classCallCheck(this, FrameworkLogin);
+  function WBPLogin() {
+    _classCallCheck(this, WBPLogin);
 
     /*removeIf(production)*/
     objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(FrameworkLogin, [{
+  _createClass(WBPLogin, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
@@ -779,8 +698,8 @@ function () {
 
       $(this.$buttonLogin).prop('disabled', true);
       $.ajax({
-        url: objFrameworkUrl.getController(),
-        data: '&c=FrameworkLogin' + '&m=doLogin' + '&email=' + $(this.$fielEmail).val() + '&password=' + $(this.$fieldPassword).val(),
+        url: objWBPkUrl.getController(),
+        data: '&c=WBPLogin' + '&m=doLogin' + '&email=' + $(this.$fielEmail).val() + '&password=' + $(this.$fieldPassword).val(),
         type: 'POST',
         success: function success(data) {
           $(self.$buttonLogin).prop('disabled', false);
@@ -823,7 +742,7 @@ function () {
           break;
 
         default:
-          objFrameworkUrl.build('admin');
+          objWBPkUrl.build('admin');
           break;
       }
 
@@ -831,36 +750,28 @@ function () {
     }
   }]);
 
-  return FrameworkLogin;
+  return WBPLogin;
 }();
 
-var FrameworkAdminManagement =
+var WBPAdminManagement =
 /*#__PURE__*/
 function () {
-  function FrameworkAdminManagement() {
-    _classCallCheck(this, FrameworkAdminManagement);
+  function WBPAdminManagement() {
+    _classCallCheck(this, WBPAdminManagement);
   }
 
-  _createClass(FrameworkAdminManagement, [{
+  _createClass(WBPAdminManagement, [{
     key: "verifyLoad",
     value: function verifyLoad() {
       /*removeIf(production)*/
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      var self = this; // console.log('verifyLoad');
+      var self = this;
 
       window.onload = function () {
-        //     console.log('loaded');
-        //     self.applyClass();
-        // }
-        // $.when(objFrameworkTranslation.loadFile()).then(function () {
-        self.applyClass(); // if (objFrameworkGeneric.verifyHasFodler('admin')) {
-        // console.log('aaaaa');
-      }; // });
-      // });
-      // window.addEventListener('load', this.applyClass());
-
+        self.applyClass();
+      };
     }
   }, {
     key: "applyClass",
@@ -868,30 +779,28 @@ function () {
       /*removeIf(production)*/
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
-      // console.log('applyClass');
 
-      objFrameworkLogin.build();
-      objFrameworkAdmin.applyClass();
-      objFrameworkAdminBlog.applyClass();
-      objFrameworkAdminPage.applyClass();
+      objWBPkLogin.build();
+      objWBPkAdmin.build();
+      objWBPkAdminBlog.build();
     }
   }]);
 
-  return FrameworkAdminManagement;
+  return WBPAdminManagement;
 }();
 
-var FrameworkUrl =
+var WBPUrl =
 /*#__PURE__*/
 function () {
-  function FrameworkUrl() {
-    _classCallCheck(this, FrameworkUrl);
+  function WBPUrl() {
+    _classCallCheck(this, WBPUrl);
 
     /*removeIf(production)*/
     objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(FrameworkUrl, [{
+  _createClass(WBPUrl, [{
     key: "buildSEO",
     value: function buildSEO(url) {
       /*removeIf(production)*/
@@ -916,7 +825,7 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      return window.location = globalFrameworkUrl + globalFrameworkLanguage + '/' + target + '/';
+      return window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
   }, {
     key: "getController",
@@ -925,11 +834,11 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      return globalFrameworkUrl + 'php/controller.php';
+      return globalUrl + 'php/controller.php';
     }
   }]);
 
-  return FrameworkUrl;
+  return WBPUrl;
 }();
 /*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/license */
 
@@ -4952,13 +4861,11 @@ function () {
 var objWBPDebug = new WBPDebug();
 /*endRemoveIf(production)*/
 
-var objFrameworkGeneric = new FrameworkGeneric();
-var objFrameworkUrl = new FrameworkUrl();
-var objFrameworkAdminManagement = new FrameworkAdminManagement(); // if (objFrameworkGeneric.verifyHasFodler('admin')) {
-
-var objFrameworkLogin = new FrameworkLogin();
-var objFrameworkAdmin = new FrameworkAdmin();
-var objFrameworkAdminBlog = new FrameworkAdminBlog();
-var objFrameworkAdminPage = new FrameworkAdminPage(); // }
-
-objFrameworkAdminManagement.verifyLoad();
+var objWBPkAdmin = new WBPAdmin();
+var objWBPAdminBlog = new WBPAdminBlog();
+var objWBPkUrl = new WBPUrl();
+var objWBPkAdminManagement = new WBPAdminManagement();
+var objWBPkLogin = new WBPLogin();
+var objWBPkAdmin = new WBPAdmin();
+var objWBPkAdminBlog = new WBPAdminBlog();
+objWBPkAdminManagement.verifyLoad();

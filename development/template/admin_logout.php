@@ -2,5 +2,5 @@
 
 include 'php/autoload.php';
 
-$objFrameworkLogin = new FrameworkLogin();
-$objFrameworkLogin->doLogout();
+$objWBPLogin = new WBPLogin();
+$objWBPLogin->doLogout();

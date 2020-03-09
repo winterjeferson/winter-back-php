@@ -3,10 +3,10 @@ $parentFolder = '';
 
 include $parentFolder . 'php/autoload.php';
 
-$objFrameworkTranslation = new FrameworkTranslation();
-$objFrameworkLayout = new FrameworkLayout();
-$objFrameworkHtml = new FrameworkHtml();
+$objWBPTranslation = new WBPTranslation();
+$objWBPLayout = new WBPLayout();
+$objWBPHtml = new WBPHtml();
 
-$frameworkTranslation = $objFrameworkTranslation->translateContent();
-echo $objFrameworkHtml->buildHeader();
+$WBPTranslation = $objWBPTranslation->translateContent();
+echo $objWBPHtml->buildHeader();
 ?>

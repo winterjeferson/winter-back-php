@@ -2,14 +2,14 @@
 
 include 'php/autoload.php';
 
-$objFrameworkTranslation = new FrameworkTranslation();
-$objFrameworkLayout = new FrameworkLayout();
-$objFrameworkHtml = new FrameworkHtml();
-$objFrameworkRoute = new FrameworkRoute();
+$objWBPTranslation = new WBPTranslation();
+$objWBPLayout = new WBPLayout();
+$objWBPHtml = new WBPHtml();
+$objWBPRoute = new WBPRoute();
 
-$frameworkTranslation = $objFrameworkTranslation->translateContent();
+$WBPTranslation = $objWBPTranslation->translateContent();
 
-$objFrameworkRoute->addRoute([
+$objWBPRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
     ['blog-post', 'blog_post.php'],
@@ -19,5 +19,5 @@ $objFrameworkRoute->addRoute([
     ['admin-logout', 'admin_logout.php'],
 ]);
 
-$route = $objFrameworkRoute->getRoute();
+$route = $objWBPRoute->getRoute();
 include $route;

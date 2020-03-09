@@ -8,7 +8,7 @@
         <ul>
             {% for menu in arrMenu %}
             <li>
-                <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>{{menu}}/" data-id="{{menu}}" class="menu-tab-bt bt-re bt">
+                <a href="<?php echo $objWBPUrl->getUrlPage(); ?>{{menu}}/" data-id="{{menu}}" class="menu-tab-bt bt-re bt">
                     {{menu}}
                 </a>
             </li>

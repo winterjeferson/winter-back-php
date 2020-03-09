@@ -3,7 +3,7 @@
 {% include "include/loading_main.php" %}
 
 <?php
-$objFrameworkAdminBlog = new FrameworkAdminBlog();
+$objWBPAdminBlog = new WBPAdminBlog();
 ?>
 
 <main class="grid">
@@ -81,7 +81,7 @@ $objFrameworkAdminBlog = new FrameworkAdminBlog();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php echo $objFrameworkAdminBlog->buildReport('active'); ?>
+                                        <?php echo $objWBPAdminBlog->buildReport('active'); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -116,7 +116,7 @@ $objFrameworkAdminBlog = new FrameworkAdminBlog();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php echo $objFrameworkAdminBlog->buildReport('inactive'); ?>
+                                        <?php echo $objWBPAdminBlog->buildReport('inactive'); ?>
                                     </tbody>
                                 </table>
                             </div>

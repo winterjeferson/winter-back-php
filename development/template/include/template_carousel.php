@@ -23,12 +23,12 @@
     <div class="menu-horizontal carousel-disabled">
         <ul class="navigation-arrow">
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $WBPTranslation['default']['previous']; ?>">
                     <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $frameworkTranslation['default']['previous']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $WBPTranslation['default']['previous']; ?>">
                     <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
                 </button>
             </li>

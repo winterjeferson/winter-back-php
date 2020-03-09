@@ -1,4 +1,3 @@
-{% include "include/verify_login.php" %}
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
 
@@ -9,15 +8,15 @@
     </section>
     <section id="main_content" class="grid-content">
         <?php
-        $objFrameworkBlog = new FrameworkBlog();
-        $objFrameworkTemplate = new FrameworkTemplate();
+        $objWBPBlog = new WBPBlog();
+        $objWBPTemplate = new WBPTemplate();
         ?>
         <article class="row">
             <div class="col-es-12">
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        echo $objFrameworkBlog->getPost('title');
+                        echo $objWBPBlog->getPost('title');
                         ?>
                     </h1>
                 </div>
@@ -25,7 +24,7 @@
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo $objFrameworkBlog->getPost('content');
+                    echo $objWBPBlog->getPost('content');
                     ?>
                 </div>
             </div>
@@ -33,7 +32,7 @@
                 <div class="container">
                     tags:
                     <?php
-                    echo $objFrameworkTemplate->buildBlogTag($objFrameworkBlog->getPost('tag'));
+                    echo $objWBPTemplate->buildBlogTag($objWBPBlog->getPost('tag'));
                     ?>
                 </div>
             </div>
