@@ -53,27 +53,26 @@ class WBPLogin {
     buildLogin() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
         if (!this.validate()) {
             return;
         }
 
+        this.$buttonLogin.setAttribute('disabled', 'disabled');
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-        $(this.$buttonLogin).prop('disabled', true);
-
-        $.ajax({
-            url: objWBPkUrl.getController(),
-            data:
-                '&c=WBPLogin' +
-                '&m=doLogin' +
-                '&email=' + $(this.$fielEmail).val() +
-                '&password=' + $(this.$fieldPassword).val(),
-            type: 'POST',
-            success: function (data) {
-                $(self.$buttonLogin).prop('disabled', false);
-                self.buildLoginResponse(data);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.$buttonLogin.removeAttribute('disabled');
+                self.buildLoginResponse(ajax.responseText);
             }
-        });
+        }
+
+        ajax.send(param);
     }
 
     buildLoginResponse(data) {

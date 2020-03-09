@@ -1,7 +1,6 @@
 /*removeIf(production)*/
 class WBPDebug {
     constructor() {
-        this.isWBPLayout = true;
         this.isWBPManagement = true;
 
         this.isWBPAdmin = true;
