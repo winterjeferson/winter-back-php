@@ -23,7 +23,6 @@ class FrameworkUrl
     {
         $objFrameworkTranslation = new FrameworkTranslation();
         $mainUrl = $this->getUrlMain();
-        // $folderVerify = $folder === '' ? '' : $folder . '/';
 
         return $mainUrl . $objFrameworkTranslation->getLanguage() . '/';
     }
@@ -46,5 +45,12 @@ class FrameworkUrl
             'url' => $friendlyUrl,
             'pagination' => $pagination,
         ];
+    }
+
+    function redirect($target)
+    {
+        $lastCharacter = $target === '' ? '' : '/';
+
+        header('Location: ' . $this->getUrlPage() . $target . $lastCharacter);
     }
 }

@@ -10,21 +10,15 @@ class FrameworkLogin
     function verifyLogin()
     {
         $objFrameworkSession = new FrameworkSession();
-        // $idUser = '';
 
         if (!$objFrameworkSession->verifyIsSet('id')) {
-            //     $idUser = $objFrameworkSession->getSessionValue('id');
-            // } else {
             $this->redirect('admin-login');
         }
     }
 
     function doLogin()
     {
-        $objFrameworkSession = new FrameworkSession();
-
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $password = md5(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
 
         $objFrameworkQuery = new FrameworkQuery();
         $objFrameworkQuery->populateArray([
@@ -42,8 +36,16 @@ class FrameworkLogin
         $query = $objFrameworkQuery->select();
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($query->rowCount() === 0) {
-            return 'wrong_email';
+        return $this->doLoginValidate($row, $query);
+    }
+
+    function doLoginValidate($row, $query)
+    {
+        $objFrameworkSession = new FrameworkSession();
+        $password = md5(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
+
+        if ($query->rowCount() === 0 || $row['password'] !== $password) {
+            return 'problem';
         }
 
         if ($row['active'] === '0') {
@@ -51,13 +53,11 @@ class FrameworkLogin
         }
 
         if ($row['password'] === $password) {
-            $this->clear();
+            $this->clearSession();
             $objFrameworkSession->setSession('id', $row['id']);
             $objFrameworkSession->setSession('email', $row['email']);
             $this->doLoginSetLastActivity($row['id']);
-            return '1';
-        } else {
-            return 'wrong_password';
+            return 'ok';
         }
     }
 
@@ -78,21 +78,21 @@ class FrameworkLogin
         return $query;
     }
 
-    function clear()
+    function doLogout()
+    {
+        $this->clearSession();
+        $this->redirect();
+    }
+
+    function clearSession()
     {
         $objFrameworkSession = new FrameworkSession();
         $objFrameworkSession->clearSession();
     }
 
-    function doLogout()
-    {
-        $this->clear();
-        $this->redirect();
-    }
-
     function redirect($target = '')
     {
         $objFrameworkUrl = new FrameworkUrl();
-        header('Location: ' . $objFrameworkUrl->getUrlPage() . $target);
+        $objFrameworkUrl->redirect($target);
     }
 }

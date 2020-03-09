@@ -233,7 +233,7 @@ class FrameworkAdminBlog {
         let self = this;
 
         this.$formFieldTitle.on('focusout', function () {
-            let url = objFrameworkGeneric.buildURL(self.$formFieldTitle.val());
+            let url = objFrameworkUrl.buildSEO(self.$formFieldTitle.val());
 
             self.$formFieldUrl.val(url);
         });

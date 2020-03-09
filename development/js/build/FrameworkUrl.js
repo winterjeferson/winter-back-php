@@ -5,7 +5,7 @@ class FrameworkUrl {
     }
 
     buildSEO(url) {
-        /*removeIf(production)*/ objDebug.debugMethod(this, objDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
         return url.toString()               // Convert to string
             .normalize('NFD')               // Change diacritics
             .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters

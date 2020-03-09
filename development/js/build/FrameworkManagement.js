@@ -4,13 +4,13 @@ class FrameworkAdminManagement {
         let self = this;
         // console.log('verifyLoad');
         window.onload = function () {
-        //     console.log('loaded');
-        //     self.applyClass();
-        // }
-        // $.when(objFrameworkTranslation.loadFile()).then(function () {
+            //     console.log('loaded');
+            //     self.applyClass();
+            // }
+            // $.when(objFrameworkTranslation.loadFile()).then(function () {
             self.applyClass();
 
-        // if (objFrameworkGeneric.verifyHasFodler('admin')) {
+            // if (objFrameworkGeneric.verifyHasFodler('admin')) {
             // console.log('aaaaa');
 
         }

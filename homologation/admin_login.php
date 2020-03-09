@@ -59,6 +59,32 @@ $objFrameworkUrl = new FrameworkUrl();
     </div>
 </header>
     <section id="main_menu" class="grid-menu">
+        
+
+<div class="row">
+    <div class="col-es-12">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $frameworkTranslation['default']['menu']; ?>">
+            <span class="fa fa-bars" aria-hidden="true"></span>
+        </button>
+        <nav class="menu menu-vertical text-center menu-drop-down">
+            <ul>
+                
+                <li>
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        admin
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="<?php echo $objFrameworkUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                        blog
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
     </section>
     <section id="main_content" class="grid-content">
         <div id="page_login">
