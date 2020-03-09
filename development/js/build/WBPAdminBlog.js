@@ -185,7 +185,7 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let arrField = [this.$formFieldTitle, this.$formFieldUrl, this.$formFieldContent, this.$formFieldTag];
 
-        return objWBPkForm.validateEmpty(arrField);
+        return objWFForm.validateEmpty(arrField);
     }
 
     registerContent() {

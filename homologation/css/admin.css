@@ -1,13 +1,13 @@
 #page_admin_blog .table .menu {
   white-space: nowrap; }
 
-#page_login {
+#page_admin_login {
   background-color: grey;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center; }
-  #page_login .login-wrapper {
+  #page_admin_login .login-wrapper {
     background-color: white;
     border: 1px solid grey;
     border-radius: 4px;

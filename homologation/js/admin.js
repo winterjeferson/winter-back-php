@@ -99,8 +99,11 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.updateVariable(); // this.buildMenu();
+      if (!getUrlWord('admin')) {
+        return;
+      }
 
+      this.updateVariable();
       this.buildMenuDifeneActive();
       this.builTableTdWrapper();
     }
@@ -111,29 +114,14 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.$page = $('#admin');
-      this.$menuMain = $('#main_menu');
-      this.$btPage = this.$page.find('[data-id="bt_page"]');
-      this.$btBlog = this.$page.find('[data-id="bt_blog"]');
-      this.$btLogout = this.$page.find('[data-id="bt_logout"]');
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-      /*endRemoveIf(production)*/
-      // let self = this;
-      // this.$menuMain.find('.bt').on('click', function () {
-      //     console.log(top.location);
-      //     return;
-      //     let dataId = $(this).attr('data-id');
-      //     // console.log('aaaaaaa');
-      //     self.buildMenuChangePage(dataId);
-      // });
-      // this.$btLogout.on('click', function () {
-      //     self.buildLogout();
-      // });
+      this.$page = document.querySelector('#page_admin');
+
+      if (!document.contains(this.$page)) {
+        return;
+      }
+
+      this.$btBlog = this.$page.querySelector('[data-id="bt_blog"]');
+      this.$btLogout = this.$page.querySelector('[data-id="bt_logout"]');
     }
   }, {
     key: "buildMenuChangePage",
@@ -156,13 +144,17 @@ function () {
       /*endRemoveIf(production)*/
 
       var classActive = 'menu-tab-active';
-      var target = '';
+      var href = window.location.href;
+      var split = href.split('/');
+      var length = split.length;
+      var target = split[length - 2];
+      var selector = document.querySelector('#page_admin_menu [data-id="' + target + '"]');
 
-      if (window.location.href.indexOf('admin-blog') > -1) {
-        target = $('#page_admin_blog').find('.menu-tab').find('[data-id="admin-blog"]');
+      if (selector === null) {
+        return;
       }
 
-      $(target).parent().addClass(classActive);
+      selector.parentNode.classList.add(classActive);
     }
   }, {
     key: "buildLogout",
@@ -171,17 +163,10 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      $.ajax({
-        url: objWBPkUrl.getController(),
-        data: '&c=WBPLogin' + '&m=doLogout',
-        success: function success(data) {
-          switch (data) {
-            case '1':
-              window.location = 'admin/index.php';
-              break;
-          }
-        }
-      });
+      var ajax = new XMLHttpRequest();
+      var param = '&c=WBPLogin' + '&m=doLogout';
+      ajax.open('POST', objWBPkUrl.getController(), true);
+      ajax.send(param);
     }
   }, {
     key: "builTableTdWrapper",
@@ -190,8 +175,16 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      $('.td-wrapper').unbind().on('click', function () {
-        $(this).toggleClass('td-wrapper-auto');
+      var td = document.querySelectorAll('.td-wrapper');
+      var currentClass = 'td-wrapper-auto';
+      Array.prototype.forEach.call(td, function (item) {
+        item.onclick = function () {
+          if (item.classList.contains(currentClass)) {
+            item.classList.remove(currentClass);
+          } else {
+            item.classList.add(currentClass);
+          }
+        };
       });
     }
   }]);
@@ -402,7 +395,7 @@ function () {
       /*endRemoveIf(production)*/
 
       var arrField = [this.$formFieldTitle, this.$formFieldUrl, this.$formFieldContent, this.$formFieldTag];
-      return objWBPkForm.validateEmpty(arrField);
+      return objWFForm.validateEmpty(arrField);
     }
   }, {
     key: "registerContent",
@@ -632,10 +625,12 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      if (getUrlWord('admin-login')) {
-        this.update();
-        this.buildMenu();
+      if (!getUrlWord('admin-login')) {
+        return;
       }
+
+      this.update();
+      this.buildMenu();
     }
   }, {
     key: "update",
@@ -645,10 +640,10 @@ function () {
       /*endRemoveIf(production)*/
 
       this.isSignUp = false;
-      this.$page = document.querySelector('#page_login');
-      this.$buttonLogin = document.querySelector('#page_login_bt');
-      this.$fielEmail = document.querySelector('#page_login_user');
-      this.$fieldPassword = document.querySelector('#page_login_password');
+      this.$page = document.querySelector('#page_admin_login');
+      this.$buttonLogin = document.querySelector('#page_admin_login_bt');
+      this.$fielEmail = document.querySelector('#page_admin_login_user');
+      this.$fieldPassword = document.querySelector('#page_admin_login_password');
     }
   }, {
     key: "buildMenu",

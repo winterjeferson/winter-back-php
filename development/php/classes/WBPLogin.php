@@ -81,7 +81,7 @@ class WBPLogin
     function doLogout()
     {
         $this->clearSession();
-        $this->redirect();
+        $this->redirect('admin-login');
     }
 
     function clearSession()

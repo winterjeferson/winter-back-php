@@ -6,20 +6,22 @@ class WBPLogin {
 
     build() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (getUrlWord('admin-login')) {
-            this.update();
-            this.buildMenu();
+        if (!getUrlWord('admin-login')) {
+            return;
         }
+
+        this.update();
+        this.buildMenu();
     }
 
     update() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isSignUp = false;
 
-        this.$page = document.querySelector('#page_login');
-        this.$buttonLogin = document.querySelector('#page_login_bt');
-        this.$fielEmail = document.querySelector('#page_login_user');
-        this.$fieldPassword = document.querySelector('#page_login_password');
+        this.$page = document.querySelector('#page_admin_login');
+        this.$buttonLogin = document.querySelector('#page_admin_login_bt');
+        this.$fielEmail = document.querySelector('#page_admin_login_user');
+        this.$fieldPassword = document.querySelector('#page_admin_login_password');
     }
 
     buildMenu() {
@@ -56,16 +58,16 @@ class WBPLogin {
             return;
         }
 
-        
+
         $(this.$buttonLogin).prop('disabled', true);
-        
+
         $.ajax({
             url: objWBPkUrl.getController(),
             data:
-            '&c=WBPLogin' +
-            '&m=doLogin' +
-            '&email=' + $(this.$fielEmail).val() +
-            '&password=' + $(this.$fieldPassword).val(),
+                '&c=WBPLogin' +
+                '&m=doLogin' +
+                '&email=' + $(this.$fielEmail).val() +
+                '&password=' + $(this.$fieldPassword).val(),
             type: 'POST',
             success: function (data) {
                 $(self.$buttonLogin).prop('disabled', false);

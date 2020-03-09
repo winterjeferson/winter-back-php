@@ -101,7 +101,7 @@ class WBPAdminBlog
         $title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
         $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
         $content = filter_input(INPUT_POST, 'content', FILTER_DEFAULT);
-        $tag = filter_input(INPUT_POST, 'tag', FILTER_DEFAULT);
+        $tag = $this->validateTag(filter_input(INPUT_POST, 'tag', FILTER_DEFAULT));
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
 
         $objWBPQuery->populateArray([
@@ -130,7 +130,7 @@ class WBPAdminBlog
         $title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
         $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
         $content = filter_input(INPUT_POST, 'content', FILTER_DEFAULT);
-        $tag = filter_input(INPUT_POST, 'tag', FILTER_DEFAULT);
+        $tag = $this->validateTag(filter_input(INPUT_POST, 'tag', FILTER_DEFAULT));
 
         $objWBPQuery->populateArray([
             'table' => [['table' => $this->sqlTable]]
@@ -205,5 +205,16 @@ class WBPAdminBlog
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 
         return $objWBPQuery->returnJson($queryResult);
+    }
+
+    function validateTag($target)
+    {
+        $verifyString = substr($target, -1);
+
+        if ($verifyString === '/') {
+            return substr_replace($target, '', -1);
+        }
+
+        return $target;
     }
 }

@@ -101,7 +101,7 @@ $objWBPUrl = new WBPUrl();
                 
 
 <div class="padding-re">
-    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down">
+    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
         <ul>
             
             <li>

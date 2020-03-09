@@ -6,38 +6,25 @@ class WBPAdmin {
 
     build() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin')) {
+            return;
+        }
+
         this.updateVariable();
-        // this.buildMenu();
         this.buildMenuDifeneActive();
         this.builTableTdWrapper();
     }
 
     updateVariable() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$page = $('#admin');
-        this.$menuMain = $('#main_menu');
-        this.$btPage = this.$page.find('[data-id="bt_page"]');
-        this.$btBlog = this.$page.find('[data-id="bt_blog"]');
-        this.$btLogout = this.$page.find('[data-id="bt_logout"]');
-    }
+        this.$page = document.querySelector('#page_admin');
 
-    buildMenu() {
-        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        // let self = this;
+        if (!document.contains(this.$page)) {
+            return;
+        }
 
-
-        // this.$menuMain.find('.bt').on('click', function () {
-        //     console.log(top.location);
-        //     return;
-        //     let dataId = $(this).attr('data-id');
-        //     // console.log('aaaaaaa');
-
-        //     self.buildMenuChangePage(dataId);
-        // });
-
-        // this.$btLogout.on('click', function () {
-        //     self.buildLogout();
-        // });
+        this.$btBlog = this.$page.querySelector('[data-id="bt_blog"]');
+        this.$btLogout = this.$page.querySelector('[data-id="bt_logout"]');
     }
 
     buildMenuChangePage(page) {
@@ -52,36 +39,41 @@ class WBPAdmin {
     buildMenuDifeneActive() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
-        let target = '';
+        let href = window.location.href;
+        let split = href.split('/');
+        let length = split.length;
+        let target = split[length - 2];
+        let selector = document.querySelector('#page_admin_menu [data-id="' + target + '"]');
 
-        if (window.location.href.indexOf('admin-blog') > -1) {
-            target = $('#page_admin_blog').find('.menu-tab').find('[data-id="admin-blog"]');
+        if (selector === null) {
+            return;
         }
 
-        $(target).parent().addClass(classActive);
+        selector.parentNode.classList.add(classActive);
     }
 
     buildLogout() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        $.ajax({
-            url: objWBPkUrl.getController(),
-            data:
-                '&c=WBPLogin' +
-                '&m=doLogout',
-            success: function (data) {
-                switch (data) {
-                    case '1':
-                        window.location = 'admin/index.php';
-                        break;
-                }
-            }
-        });
+        let ajax = new XMLHttpRequest();
+        let param = '&c=WBPLogin' + '&m=doLogout';
+
+        ajax.open('POST', objWBPkUrl.getController(), true);
+        ajax.send(param);
     }
 
     builTableTdWrapper() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        $('.td-wrapper').unbind().on('click', function () {
-            $(this).toggleClass('td-wrapper-auto');
+        let td = document.querySelectorAll('.td-wrapper');
+        let currentClass = 'td-wrapper-auto';
+
+        Array.prototype.forEach.call(td, function (item) {
+            item.onclick = function () {
+                if (item.classList.contains(currentClass)) {
+                    item.classList.remove(currentClass);
+                } else {
+                    item.classList.add(currentClass);
+                }
+            }
         });
     }
 }
