@@ -1,11 +1,11 @@
 class FrameworkUrl {
     constructor() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
 
     }
 
     buildSEO(url) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         return url.toString()               // Convert to string
             .normalize('NFD')               // Change diacritics
             .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters
@@ -19,12 +19,12 @@ class FrameworkUrl {
     }
 
     build(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         return window.location = globalFrameworkUrl + globalFrameworkLanguage + '/' + target + '/';
     }
 
     getController() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         return globalFrameworkUrl + 'php/controller.php';
     }
 }

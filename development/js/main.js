@@ -1,5 +1,5 @@
 /*removeIf(production)*/
-var objFrameworkDebug = new FrameworkDebug();
+var objWBPDebug = new WBPDebug();
 /*endRemoveIf(production)*/
 var objFrameworkGeneric = new FrameworkGeneric();
 var objFrameworkUrl = new FrameworkUrl();

@@ -1,11 +1,11 @@
 class FrameworkAdmin {
     constructor() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
         this.pageCurrent = '';
     }
 
     applyClass() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.updateVariable();
         // this.buildMenu();
         this.buildMenuDifeneActive();
@@ -13,7 +13,7 @@ class FrameworkAdmin {
     }
 
     updateVariable() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$page = $('#admin');
         this.$menuMain = $('#main_menu');
         this.$btPage = this.$page.find('[data-id="bt_page"]');
@@ -22,7 +22,7 @@ class FrameworkAdmin {
     }
 
     buildMenu() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         // let self = this;
 
 
@@ -41,7 +41,7 @@ class FrameworkAdmin {
     }
 
     buildMenuChangePage(page) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.buildMenuDifeneActive(page);
 
         if (page !== 'admin-logout') {
@@ -50,7 +50,7 @@ class FrameworkAdmin {
     }
 
     buildMenuDifeneActive() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
         let target = '';
 
@@ -62,7 +62,7 @@ class FrameworkAdmin {
     }
 
     buildLogout() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         $.ajax({
             url: objFrameworkUrl.getController(),
             data:
@@ -79,7 +79,7 @@ class FrameworkAdmin {
     }
 
     builTableTdWrapper() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         $('.td-wrapper').unbind().on('click', function () {
             $(this).toggleClass('td-wrapper-auto');
         });

@@ -1,6 +1,6 @@
 class FrameworkLayout {
     constructor() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$loadingMain = $('#loading_main');
         this.$body = $('body');
         this.$window = $(window);
@@ -13,14 +13,14 @@ class FrameworkLayout {
     }
 
     buildLayout() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         $('button, a').on('click', function (event) {
             event.stopPropagation();
         });
     }
 
     switchDisplay(target, action = '') {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), [target, action]); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), [target, action]); /*endRemoveIf(production)*/
         let classDisplay = 'display-none';
 
         if (action === '') {
@@ -42,7 +42,7 @@ class FrameworkLayout {
     }
 
     buildSpinner(style) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), style); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), style); /*endRemoveIf(production)*/
         let spinner = '';
 
         spinner += '<div class="row text-center">';
@@ -55,7 +55,7 @@ class FrameworkLayout {
     }
 
     buildToggle() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         $('.bt-toggle').each(function () {
             $(this).unbind();
 
@@ -75,7 +75,7 @@ class FrameworkLayout {
     }
 
     getUrlParameter(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target); /*endRemoveIf(production)*/
         let url = top.location.search.substring(1);
         let parameter = url.split('&');
 
@@ -89,7 +89,7 @@ class FrameworkLayout {
     }
 
     verifyHasFodler(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target); /*endRemoveIf(production)*/
         let arrFolder = window.location.pathname.split('/');
 
         if (arrFolder.indexOf(target) > -1) {
@@ -100,7 +100,7 @@ class FrameworkLayout {
     }
 
     verifyUndefined(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target); /*endRemoveIf(production)*/
         if (typeof target === 'undefined' || target === null || target === '') {
             return true;
         } else {

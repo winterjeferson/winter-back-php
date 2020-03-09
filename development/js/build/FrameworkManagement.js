@@ -1,6 +1,6 @@
 class FrameworkAdminManagement {
     verifyLoad() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         // console.log('verifyLoad');
         window.onload = function () {
@@ -21,7 +21,7 @@ class FrameworkAdminManagement {
     }
 
     applyClass() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         // console.log('applyClass');
         objFrameworkLogin.build();
         objFrameworkAdmin.applyClass();

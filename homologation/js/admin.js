@@ -9,11 +9,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /*removeIf(production)*/
-var FrameworkDebug =
+var WBPDebug =
 /*#__PURE__*/
 function () {
-  function FrameworkDebug() {
-    _classCallCheck(this, FrameworkDebug);
+  function WBPDebug() {
+    _classCallCheck(this, WBPDebug);
 
     this.isFrameworkLayout = true;
     this.isFrameworkManagement = true;
@@ -21,21 +21,10 @@ function () {
     this.isFrameworkAdminBlog = true;
     this.isFrameworkAdminPage = true;
     this.isFrameworkLogin = true;
-    this.isTheme = true;
-    this.isFrameworkCarousel = true;
     this.isFrameworkGeneric = true;
-    this.isFrameworkMenuDropDown = true;
-    this.isFrameworkMenuTab = true;
-    this.isFrameworkModal = true;
-    this.isFrameworkNotification = true;
-    this.isFrameworkProgress = true;
-    this.isFrameworkTable = true;
-    this.isFrameworkTag = true;
-    this.isFrameworkTooltip = true;
-    this.isFrameworkTranslation = true;
   }
 
-  _createClass(FrameworkDebug, [{
+  _createClass(WBPDebug, [{
     key: "debugMethod",
     value: function debugMethod(obj, method) {
       var parameter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -85,7 +74,7 @@ function () {
     }
   }]);
 
-  return FrameworkDebug;
+  return WBPDebug;
 }();
 /*endRemoveIf(production)*/
 
@@ -97,7 +86,7 @@ function () {
     _classCallCheck(this, FrameworkAdmin);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, 'constructor');
+    objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
 
     this.pageCurrent = '';
@@ -107,7 +96,7 @@ function () {
     key: "applyClass",
     value: function applyClass() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.updateVariable(); // this.buildMenu();
@@ -119,7 +108,7 @@ function () {
     key: "updateVariable",
     value: function updateVariable() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$page = $('#admin');
@@ -132,7 +121,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
       // let self = this;
       // this.$menuMain.find('.bt').on('click', function () {
@@ -150,7 +139,7 @@ function () {
     key: "buildMenuChangePage",
     value: function buildMenuChangePage(page) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.buildMenuDifeneActive(page);
@@ -163,7 +152,7 @@ function () {
     key: "buildMenuDifeneActive",
     value: function buildMenuDifeneActive() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var classActive = 'menu-tab-active';
@@ -179,7 +168,7 @@ function () {
     key: "buildLogout",
     value: function buildLogout() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       $.ajax({
@@ -198,7 +187,7 @@ function () {
     key: "builTableTdWrapper",
     value: function builTableTdWrapper() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       $('.td-wrapper').unbind().on('click', function () {
@@ -217,7 +206,7 @@ function () {
     _classCallCheck(this, FrameworkAdminBlog);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, 'constructor');
+    objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
@@ -225,7 +214,7 @@ function () {
     key: "applyClass",
     value: function applyClass() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.updateVariable();
@@ -237,7 +226,7 @@ function () {
     key: "updateVariable",
     value: function updateVariable() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.isEdit = false;
@@ -257,7 +246,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -273,7 +262,7 @@ function () {
     key: "buildMenuTable",
     value: function buildMenuTable() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -298,7 +287,7 @@ function () {
     key: "editSave",
     value: function editSave() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -318,7 +307,7 @@ function () {
     key: "editLoadData",
     value: function editLoadData(id) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -362,7 +351,7 @@ function () {
     key: "editFillField",
     value: function editFillField(json) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$formFieldTitle.val(json['title']);
@@ -375,7 +364,7 @@ function () {
     key: "modify",
     value: function modify(id, status) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -392,7 +381,7 @@ function () {
     key: "delete",
     value: function _delete(id) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -409,7 +398,7 @@ function () {
     key: "validateForm",
     value: function validateForm() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var arrField = [this.$formFieldTitle, this.$formFieldUrl, this.$formFieldContent, this.$formFieldTag];
@@ -419,7 +408,7 @@ function () {
     key: "registerContent",
     value: function registerContent() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -439,7 +428,7 @@ function () {
     key: "showResponse",
     value: function showResponse(data) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var color = '';
@@ -462,7 +451,7 @@ function () {
     key: "watchTitle",
     value: function watchTitle() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -483,7 +472,7 @@ function () {
     _classCallCheck(this, FrameworkAdminPage);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, 'constructor');
+    objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
@@ -491,7 +480,7 @@ function () {
     key: "applyClass",
     value: function applyClass() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.updateVariable();
@@ -500,7 +489,7 @@ function () {
     key: "updateVariable",
     value: function updateVariable() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
     }
   }]);
@@ -515,7 +504,7 @@ function () {
     _classCallCheck(this, FrameworkGeneric);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+    objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
     /*endRemoveIf(production)*/
   }
 
@@ -523,7 +512,7 @@ function () {
     key: "getUrlParameter",
     value: function getUrlParameter(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
       /*endRemoveIf(production)*/
 
       var url = top.location.search.substring(1);
@@ -541,7 +530,7 @@ function () {
     key: "verifyHasFodler",
     value: function verifyHasFodler(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
       /*endRemoveIf(production)*/
 
       var arrFolder = window.location.pathname.split('/');
@@ -564,7 +553,7 @@ function () {
     _classCallCheck(this, FrameworkLayout);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+    objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
     /*endRemoveIf(production)*/
 
     this.$loadingMain = $('#loading_main');
@@ -581,7 +570,7 @@ function () {
     key: "buildLayout",
     value: function buildLayout() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       $('button, a').on('click', function (event) {
@@ -594,7 +583,7 @@ function () {
       var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), [target, action]);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), [target, action]);
       /*endRemoveIf(production)*/
 
       var classDisplay = 'display-none';
@@ -621,7 +610,7 @@ function () {
     key: "buildSpinner",
     value: function buildSpinner(style) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), style);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), style);
       /*endRemoveIf(production)*/
 
       var spinner = '';
@@ -636,7 +625,7 @@ function () {
     key: "buildToggle",
     value: function buildToggle() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       $('.bt-toggle').each(function () {
@@ -659,7 +648,7 @@ function () {
     key: "getUrlParameter",
     value: function getUrlParameter(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
       /*endRemoveIf(production)*/
 
       var url = top.location.search.substring(1);
@@ -677,7 +666,7 @@ function () {
     key: "verifyHasFodler",
     value: function verifyHasFodler(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
       /*endRemoveIf(production)*/
 
       var arrFolder = window.location.pathname.split('/');
@@ -692,7 +681,7 @@ function () {
     key: "verifyUndefined",
     value: function verifyUndefined(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target);
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target);
       /*endRemoveIf(production)*/
 
       if (typeof target === 'undefined' || target === null || target === '') {
@@ -713,7 +702,7 @@ function () {
     _classCallCheck(this, FrameworkLogin);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, 'constructor');
+    objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
@@ -721,7 +710,7 @@ function () {
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (getUrlWord('admin-login')) {
@@ -733,7 +722,7 @@ function () {
     key: "update",
     value: function update() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.isSignUp = false;
@@ -746,7 +735,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -758,7 +747,7 @@ function () {
     key: "validate",
     value: function validate() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (this.$fielEmail.value === '') {
@@ -779,7 +768,7 @@ function () {
     key: "buildLogin",
     value: function buildLogin() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -803,7 +792,7 @@ function () {
     key: "buildLoginResponse",
     value: function buildLoginResponse(data) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var response = '';
@@ -856,7 +845,7 @@ function () {
     key: "verifyLoad",
     value: function verifyLoad() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this; // console.log('verifyLoad');
@@ -877,7 +866,7 @@ function () {
     key: "applyClass",
     value: function applyClass() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
       // console.log('applyClass');
 
@@ -898,7 +887,7 @@ function () {
     _classCallCheck(this, FrameworkUrl);
 
     /*removeIf(production)*/
-    objFrameworkDebug.debugMethod(this, 'constructor');
+    objWBPDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
@@ -906,7 +895,7 @@ function () {
     key: "buildSEO",
     value: function buildSEO(url) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return url.toString() // Convert to string
@@ -924,7 +913,7 @@ function () {
     key: "build",
     value: function build(target) {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return window.location = globalFrameworkUrl + globalFrameworkLanguage + '/' + target + '/';
@@ -933,7 +922,7 @@ function () {
     key: "getController",
     value: function getController() {
       /*removeIf(production)*/
-      objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName());
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return globalFrameworkUrl + 'php/controller.php';
@@ -4960,7 +4949,7 @@ function () {
 });
 /*removeIf(production)*/
 
-var objFrameworkDebug = new FrameworkDebug();
+var objWBPDebug = new WBPDebug();
 /*endRemoveIf(production)*/
 
 var objFrameworkGeneric = new FrameworkGeneric();

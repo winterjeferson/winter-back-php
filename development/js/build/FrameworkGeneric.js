@@ -1,10 +1,10 @@
 class FrameworkGeneric {
     constructor() {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
     }
 
     getUrlParameter(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target); /*endRemoveIf(production)*/
         let url = top.location.search.substring(1);
         let parameter = url.split('&');
 
@@ -18,7 +18,7 @@ class FrameworkGeneric {
     }
 
     verifyHasFodler(target) {
-        /*removeIf(production)*/ objFrameworkDebug.debugMethod(this, objFrameworkDebug.getMethodName(), target); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName(), target); /*endRemoveIf(production)*/
         let arrFolder = window.location.pathname.split('/');
 
         if (arrFolder.indexOf(target) > -1) {
