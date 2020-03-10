@@ -207,6 +207,10 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
+      if (!getUrlWord('admin-blog')) {
+        return;
+      }
+
       this.updateVariable();
       this.buildMenu();
       this.buildMenuTable();
@@ -221,16 +225,12 @@ function () {
 
       this.isEdit = false;
       this.editId = 0;
-      this.$page = $('#page_admin_blog');
-      this.$table = $(this.$page).find('.table');
-      this.$tableActive = $(this.$page).find('[data-id="table_active"]');
-      this.$tableInactive = $(this.$page).find('[data-id="table_inactive"]');
-      this.$btRegister = $(this.$page).find('[data-id="bt_register"]');
-      this.$formRegister = $(this.$page).find('[data-id="form_register"]');
-      this.$formFieldTitle = $(this.$page).find('[data-id="field_title"]');
-      this.$formFieldUrl = $(this.$page).find('[data-id="field_url"]');
-      this.$formFieldContent = $(this.$page).find('[data-id="field_content"]');
-      this.$formFieldTag = $(this.$page).find('[data-id="field_tag"]');
+      this.$page = document.querySelector('#page_admin_blog');
+      this.$formRegister = this.$page.querySelector('[data-id="form_register"]');
+      this.$formFieldTitle = this.$page.querySelector('[data-id="field_title"]');
+      this.$formFieldUrl = this.$page.querySelector('[data-id="field_url"]');
+      this.$formFieldContent = this.$page.querySelector('[data-id="field_content"]');
+      this.$formFieldTag = this.$page.querySelector('[data-id="field_tag"]');
     }
   }, {
     key: "buildMenu",
@@ -240,13 +240,15 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      this.$btRegister.on('click', function () {
+      var $btRegister = this.$page.querySelector('[data-id="bt_register"]');
+
+      $btRegister.onclick = function () {
         if (self.isEdit) {
           self.editSave();
         } else {
           self.registerContent();
         }
-      });
+      };
     }
   }, {
     key: "buildMenuTable",
@@ -256,21 +258,49 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      this.$table.find('.bt').unbind();
-      this.$tableActive.find('[data-action="inactivate"]').on('click', function () {
-        objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
+      var $table = this.$page.querySelectorAll('.table');
+      var $tableActive = this.$page.querySelectorAll('[data-id="table_active"]');
+      var $tableInactive = this.$page.querySelectorAll('[data-id="table_inactive"]');
+      Array.prototype.forEach.call($tableActive, function (table) {
+        var $button = table.querySelectorAll('[data-action="inactivate"]');
+        Array.prototype.forEach.call($button, function (item) {
+          item.onclick = function () {
+            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+          };
+        });
       });
-      this.$tableInactive.find('[data-action="activate"]').on('click', function () {
-        self.modify($(this).attr('data-id'), 'activate');
+      Array.prototype.forEach.call($tableInactive, function (table) {
+        var $button = table.querySelectorAll('[data-action="activate"]');
+        Array.prototype.forEach.call($button, function (item) {
+          item.onclick = function () {
+            self.modify(item.getAttribute('data-id'), 'activate');
+          };
+        });
       });
-      this.$table.find('[data-action="edit"]').on('click', function () {
-        self.editId = $(this).attr('data-id');
-        self.editLoadData(self.editId);
+      Array.prototype.forEach.call($tableInactive, function (table) {
+        var $button = table.querySelectorAll('[data-action="activate"]');
+        Array.prototype.forEach.call($button, function (item) {
+          item.onclick = function () {
+            self.modify(item.getAttribute('data-id'), 'activate');
+          };
+        });
       });
-      this.$table.find('[data-action="delete"]').on('click', function () {
-        objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-        objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + $(this).attr('data-id') + ')');
+      Array.prototype.forEach.call($table, function (table) {
+        var $buttonEdit = table.querySelectorAll('[data-action="edit"]');
+        var $buttonDelete = table.querySelectorAll('[data-action="delete"]');
+        Array.prototype.forEach.call($buttonEdit, function (item) {
+          item.onclick = function () {
+            self.editId = item.getAttribute('data-id');
+            self.editLoadData(self.editId);
+          };
+        });
+        Array.prototype.forEach.call($buttonDelete, function (item) {
+          item.onclick = function () {
+            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+          };
+        });
       });
     }
   }, {
@@ -281,17 +311,24 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
+      var ajax = new XMLHttpRequest();
+      var url = objWBPkUrl.getController();
+      var param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value + '&id=' + self.editId;
 
-      if (this.validateForm()) {
-        $.ajax({
-          url: objWBPkUrl.getController(),
-          data: '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val() + '&id=' + self.editId,
-          type: 'POST',
-          success: function success(data) {
-            self.showResponse(data);
-          }
-        });
+      if (!this.validateForm()) {
+        return;
       }
+
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.showResponse(ajax.responseText);
+        }
+      };
+
+      ajax.send(param);
     }
   }, {
     key: "editLoadData",
@@ -301,42 +338,23 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      $.ajax({
-        url: objWBPkUrl.getController(),
-        data: '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id,
-        type: 'POST',
-        success: function success(data) {
-          var obj = $.parseJSON(data); // objTheme.doSlide(self.$formRegister);
-          // var target = self.$formRegister;
-          // self.scrollTo(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop, 2000, true);
+      var ajax = new XMLHttpRequest();
+      var url = objWBPkUrl.getController();
+      var param = '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id;
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          var obj = JSON.parse(ajax.responseText);
+          document.documentElement.scrollTop = 0;
           self.isEdit = true;
           self.editFillField(obj);
         }
-      });
-    } // scrollTo(elem, style, unit, from, to, time, prop) {
-    //     if (!elem) {
-    //         return;
-    //     }
-    //     var start = new Date().getTime(),
-    //         timer = setInterval(function () {
-    //             var step = Math.min(1, (new Date().getTime() - start) / time);
-    //             if (prop) {
-    //                 elem[style] = (from + step * (to - from)) + unit;
-    //             } else {
-    //                 elem.style[style] = (from + step * (to - from)) + unit;
-    //             }
-    //             if (step === 1) {
-    //                 clearInterval(timer);
-    //             }
-    //         }, 25);
-    //     if (prop) {
-    //         elem[style] = from + unit;
-    //     } else {
-    //         elem.style[style] = from + unit;
-    //     }
-    // }
+      };
 
+      ajax.send(param);
+    }
   }, {
     key: "editFillField",
     value: function editFillField(json) {
@@ -344,10 +362,10 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.$formFieldTitle.val(json['title']);
-      this.$formFieldUrl.val(json['url']);
-      this.$formFieldContent.val(json['content']);
-      this.$formFieldTag.val(json['tag']);
+      this.$formFieldTitle.value = json['title'];
+      this.$formFieldUrl.value = json['url'];
+      this.$formFieldContent.value = json['content'];
+      this.$formFieldTag.value = json['tag'];
       this.editId = json['id'];
     }
   }, {
@@ -358,14 +376,19 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      $.ajax({
-        url: objWBPkUrl.getController(),
-        data: '&c=WBPAdminBlog' + '&m=doModify' + '&s=' + status + '&id=' + Number(id),
-        type: 'POST',
-        success: function success(data) {
-          self.showResponse(data);
+      var ajax = new XMLHttpRequest();
+      var url = objWBPkUrl.getController();
+      var param = '&c=WBPAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.showResponse(ajax.responseText);
         }
-      });
+      };
+
+      ajax.send(param);
     }
   }, {
     key: "delete",
@@ -375,14 +398,19 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      $.ajax({
-        url: objWBPkUrl.getController(),
-        data: '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + Number(id),
-        type: 'POST',
-        success: function success(data) {
-          self.showResponse(data);
+      var ajax = new XMLHttpRequest();
+      var url = objWBPkUrl.getController();
+      var param = '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + id;
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.showResponse(ajax.responseText);
         }
-      });
+      };
+
+      ajax.send(param);
     }
   }, {
     key: "validateForm",
@@ -403,16 +431,23 @@ function () {
 
       var self = this;
 
-      if (this.validateForm()) {
-        $.ajax({
-          url: objWBPkUrl.getController(),
-          data: '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.val() + '&url=' + this.$formFieldUrl.val() + '&content=' + this.$formFieldContent.val() + '&tag=' + this.$formFieldTag.val(),
-          type: 'POST',
-          success: function success(data) {
-            self.showResponse(data);
-          }
-        });
+      if (!this.validateForm()) {
+        return;
       }
+
+      var ajax = new XMLHttpRequest();
+      var url = objWBPkUrl.getController();
+      var param = '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value;
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.showResponse(ajax.responseText);
+        }
+      };
+
+      ajax.send(param);
     }
   }, {
     key: "showResponse",
@@ -445,9 +480,9 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      this.$formFieldTitle.on('focusout', function () {
-        var url = objWBPkUrl.buildSEO(self.$formFieldTitle.val());
-        self.$formFieldUrl.val(url);
+      this.$formFieldTitle.addEventListener('focusout', function () {
+        var url = objWBPkUrl.buildSEO(self.$formFieldTitle.value);
+        self.$formFieldUrl.value = url;
       });
     }
   }]);

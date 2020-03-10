@@ -5,6 +5,10 @@ class WBPAdminBlog {
 
     build() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin-blog')) {
+            return;
+        }
+
         this.updateVariable();
         this.buildMenu();
         this.buildMenuTable();
@@ -15,170 +19,177 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isEdit = false;
         this.editId = 0;
-        this.$page = $('#page_admin_blog');
-        this.$table = $(this.$page).find('.table');
-        this.$tableActive = $(this.$page).find('[data-id="table_active"]');
-        this.$tableInactive = $(this.$page).find('[data-id="table_inactive"]');
-        this.$btRegister = $(this.$page).find('[data-id="bt_register"]');
-        this.$formRegister = $(this.$page).find('[data-id="form_register"]');
-        this.$formFieldTitle = $(this.$page).find('[data-id="field_title"]');
-        this.$formFieldUrl = $(this.$page).find('[data-id="field_url"]');
-        this.$formFieldContent = $(this.$page).find('[data-id="field_content"]');
-        this.$formFieldTag = $(this.$page).find('[data-id="field_tag"]');
+        this.$page = document.querySelector('#page_admin_blog');
+        this.$formRegister = this.$page.querySelector('[data-id="form_register"]');
+        this.$formFieldTitle = this.$page.querySelector('[data-id="field_title"]');
+        this.$formFieldUrl = this.$page.querySelector('[data-id="field_url"]');
+        this.$formFieldContent = this.$page.querySelector('[data-id="field_content"]');
+        this.$formFieldTag = this.$page.querySelector('[data-id="field_tag"]');
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let $btRegister = this.$page.querySelector('[data-id="bt_register"]');
 
-        this.$btRegister.on('click', function () {
+        $btRegister.onclick = function () {
             if (self.isEdit) {
                 self.editSave();
             } else {
                 self.registerContent();
             }
-        });
+        }
     }
 
     buildMenuTable() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let $table = this.$page.querySelectorAll('.table');
+        let $tableActive = this.$page.querySelectorAll('[data-id="table_active"]');
+        let $tableInactive = this.$page.querySelectorAll('[data-id="table_inactive"]');
 
-        this.$table.find('.bt').unbind();
+        Array.prototype.forEach.call($tableActive, function (table) {
+            let $button = table.querySelectorAll('[data-action="inactivate"]');
 
-        this.$tableActive.find('[data-action="inactivate"]').on('click', function () {
-            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + $(this).attr('data-id') + ', "inactivate")');
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+                    objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+                }
+            });
         });
 
-        this.$tableInactive.find('[data-action="activate"]').on('click', function () {
-            self.modify($(this).attr('data-id'), 'activate');
+        Array.prototype.forEach.call($tableInactive, function (table) {
+            let $button = table.querySelectorAll('[data-action="activate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    self.modify(item.getAttribute('data-id'), 'activate');
+                }
+            });
         });
 
-        this.$table.find('[data-action="edit"]').on('click', function () {
-            self.editId = $(this).attr('data-id');
-            self.editLoadData(self.editId);
+        Array.prototype.forEach.call($tableInactive, function (table) {
+            let $button = table.querySelectorAll('[data-action="activate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    self.modify(item.getAttribute('data-id'), 'activate');
+                }
+            });
         });
 
-        this.$table.find('[data-action="delete"]').on('click', function () {
-            objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + $(this).attr('data-id') + ')');
+        Array.prototype.forEach.call($table, function (table) {
+            let $buttonEdit = table.querySelectorAll('[data-action="edit"]');
+            let $buttonDelete = table.querySelectorAll('[data-action="delete"]');
+
+            Array.prototype.forEach.call($buttonEdit, function (item) {
+                item.onclick = function () {
+                    self.editId = item.getAttribute('data-id');
+                    self.editLoadData(self.editId);
+                }
+            });
+
+            Array.prototype.forEach.call($buttonDelete, function (item) {
+                item.onclick = function () {
+                    objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+                    objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+                }
+            });
         });
     }
 
     editSave() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value + '&id=' + self.editId;
 
-        if (this.validateForm()) {
-            $.ajax({
-                url: objWBPkUrl.getController(),
-                data:
-                    '&c=WBPAdminBlog' +
-                    '&m=doUpdate' +
-                    '&title=' + this.$formFieldTitle.val() +
-                    '&url=' + this.$formFieldUrl.val() +
-                    '&content=' + this.$formFieldContent.val() +
-                    '&tag=' + this.$formFieldTag.val() +
-                    '&id=' + self.editId,
-                type: 'POST',
-                success: function (data) {
-                    self.showResponse(data);
-                }
-            });
+        if (!this.validateForm()) {
+            return;
         }
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(param);
     }
 
     editLoadData(id) {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id;
 
-        $.ajax({
-            url: objWBPkUrl.getController(),
-            data:
-                '&c=WBPAdminBlog' +
-                '&m=editLoadData' +
-                '&id=' + id,
-            type: 'POST',
-            success: function (data) {
-                let obj = $.parseJSON(data);
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-                // objTheme.doSlide(self.$formRegister);
-                // var target = self.$formRegister;
-                // self.scrollTo(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop, 2000, true);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                let obj = JSON.parse(ajax.responseText);
+
+                document.documentElement.scrollTop = 0;
                 self.isEdit = true;
                 self.editFillField(obj);
             }
-        });
-    }
+        }
 
-    // scrollTo(elem, style, unit, from, to, time, prop) {
-    //     if (!elem) {
-    //         return;
-    //     }
-    //     var start = new Date().getTime(),
-    //         timer = setInterval(function () {
-    //             var step = Math.min(1, (new Date().getTime() - start) / time);
-    //             if (prop) {
-    //                 elem[style] = (from + step * (to - from)) + unit;
-    //             } else {
-    //                 elem.style[style] = (from + step * (to - from)) + unit;
-    //             }
-    //             if (step === 1) {
-    //                 clearInterval(timer);
-    //             }
-    //         }, 25);
-    //     if (prop) {
-    //         elem[style] = from + unit;
-    //     } else {
-    //         elem.style[style] = from + unit;
-    //     }
-    // }
+        ajax.send(param);
+    }
 
     editFillField(json) {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$formFieldTitle.val(json['title']);
-        this.$formFieldUrl.val(json['url']);
-        this.$formFieldContent.val(json['content']);
-        this.$formFieldTag.val(json['tag']);
-
+        this.$formFieldTitle.value = json['title'];
+        this.$formFieldUrl.value = json['url'];
+        this.$formFieldContent.value = json['content'];
+        this.$formFieldTag.value = json['tag'];
         this.editId = json['id'];
     }
 
     modify(id, status) {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
 
-        $.ajax({
-            url: objWBPkUrl.getController(),
-            data:
-                '&c=WBPAdminBlog' +
-                '&m=doModify' +
-                '&s=' + status +
-                '&id=' + Number(id),
-            type: 'POST',
-            success: function (data) {
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-                self.showResponse(data);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
             }
-        });
+        }
+
+        ajax.send(param);
     }
 
     delete(id) {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + id;
 
-        $.ajax({
-            url: objWBPkUrl.getController(),
-            data:
-                '&c=WBPAdminBlog' +
-                '&m=doDelete' +
-                '&id=' + Number(id),
-            type: 'POST',
-            success: function (data) {
-                self.showResponse(data);
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
             }
-        });
+        }
+
+        ajax.send(param);
     }
 
     validateForm() {
@@ -192,22 +203,24 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        if (this.validateForm()) {
-            $.ajax({
-                url: objWBPkUrl.getController(),
-                data:
-                    '&c=WBPAdminBlog' +
-                    '&m=doRegister' +
-                    '&title=' + this.$formFieldTitle.val() +
-                    '&url=' + this.$formFieldUrl.val() +
-                    '&content=' + this.$formFieldContent.val() +
-                    '&tag=' + this.$formFieldTag.val(),
-                type: 'POST',
-                success: function (data) {
-                    self.showResponse(data);
-                }
-            });
+        if (!this.validateForm()) {
+            return;
         }
+
+        let ajax = new XMLHttpRequest();
+        let url = objWBPkUrl.getController();
+        let param = '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(param);
     }
 
     showResponse(data) {
@@ -232,10 +245,10 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        this.$formFieldTitle.on('focusout', function () {
-            let url = objWBPkUrl.buildSEO(self.$formFieldTitle.val());
+        this.$formFieldTitle.addEventListener('focusout', function () {
+            let url = objWBPkUrl.buildSEO(self.$formFieldTitle.value);
 
-            self.$formFieldUrl.val(url);
+            self.$formFieldUrl.value = url;
         });
     }
 }

@@ -153,7 +153,7 @@ class WBPAdminBlog
     function doModify()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $status = filter_input(INPUT_POST, 's', FILTER_DEFAULT);
+        $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
         $value = $status === 'inactivate' ? 0 : 1;
 
         $objWBPQuery = new WBPQuery();
