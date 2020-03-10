@@ -9,7 +9,6 @@ var configuration = require('./configuration.js');
 
 
 var fileJsDefaultFinal = 'admin.js';
-// var fileJsPluginFinal = 'plugin.js';
 
 var fileJs = [
     configuration.development + 'js/plugin/**/*.*',
@@ -18,14 +17,8 @@ var fileJs = [
 ];
 
 var fileJsFinal = [
-    configuration.homologation + 'js/' + fileJsDefaultFinal,
-    // configuration.homologation + 'js/' + fileJsPluginFinal
+    configuration.homologation + 'js/' + fileJsDefaultFinal
 ];
-
-// var fileJsPlugin = [
-//     configuration.development + 'js/library/**/*.*',
-//     // configuration.development + 'js/plugin/**/*.*'
-// ];
 
 
 
@@ -60,18 +53,6 @@ gulp.task('build_js_default', gulp.series(
 
 
 
-// gulp.task('js_plugin_concat', function () {
-//     return gulp.src(fileJsPlugin)
-//         .pipe(concat(fileJsPluginFinal))
-//         .pipe(gulp.dest(configuration.homologation + 'js/'));
-// });
-
-// gulp.task('build_js_plugin', gulp.series(
-//     'js_plugin_concat',
-//     'beep'
-// ));
-
-
 
 gulp.task('js_minify', function () {
     return gulp.src(configuration.homologation + 'js/*.*')
@@ -83,6 +64,5 @@ gulp.task('js_minify', function () {
 
 
 module.exports = {
-    fileJs: fileJs,
-    // fileJsPlugin: fileJsPlugin
+    fileJs: fileJs
 };

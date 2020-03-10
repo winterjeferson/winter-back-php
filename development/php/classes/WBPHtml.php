@@ -41,7 +41,7 @@ class WBPHtml
         $string = '';
 
         $string .= '<!DOCTYPE html>';
-        $string .= '    <html lang="' . $this->WBPTranslation['meta_tag']['lang'] . '">';
+        $string .= '    <html lang="' . $this->WBPTranslation['meta_lang'] . '">';
         $string .= '        <head>';
         $string .= $this->buildHeaderMeta();
         $string .= $this->buildHeaderAppearance();
@@ -92,9 +92,9 @@ class WBPHtml
         $string .= '<meta property="og:locale" content="pt_BR" />';
         $string .= '<meta property="og:url" content="' . $this->mainUrl . '" />';
         $string .= '<meta property="og:type" content="website" />';
-        $string .= '<meta property="og:title" content="' . $this->WBPTranslation['meta_tag']['title'] . '" />';
-        $string .= '<meta property="og:site_name" content="' . $this->WBPTranslation['meta_tag']['title'] . '" />';
-        $string .= '<meta property="og:description" content="' . $this->WBPTranslation['meta_tag']['description'] . '" />';
+        $string .= '<meta property="og:title" content="' . $this->WBPTranslation['meta_title'] . '" />';
+        $string .= '<meta property="og:site_name" content="' . $this->WBPTranslation['meta_title'] . '" />';
+        $string .= '<meta property="og:description" content="' . $this->WBPTranslation['meta_description'] . '" />';
 
         return $string;
     }
@@ -103,11 +103,11 @@ class WBPHtml
     {
         $string = '';
 
-        $string .= '<meta name="application-name" content="' . $this->WBPTranslation['meta_tag']['author'] . '" />';
-        $string .= '<title>' . $this->WBPTranslation['meta_tag']['title'] . '</title>';
-        $string .= '<meta name="description" content="' . $this->WBPTranslation['meta_tag']['description'] . '" />';
-        $string .= '<meta name="author" content="' . $this->WBPTranslation['meta_tag']['author'] . '" />';
-        $string .= '<meta name="keywords" content="' . $this->WBPTranslation['meta_tag']['keywords'] . '" />';
+        $string .= '<meta name="application-name" content="' . $this->WBPTranslation['meta_author'] . '" />';
+        $string .= '<title>' . $this->WBPTranslation['meta_title'] . '</title>';
+        $string .= '<meta name="description" content="' . $this->WBPTranslation['meta_description'] . '" />';
+        $string .= '<meta name="author" content="' . $this->WBPTranslation['meta_author'] . '" />';
+        $string .= '<meta name="keywords" content="' . $this->WBPTranslation['meta_keywords'] . '" />';
 
         return $string;
     }
@@ -156,7 +156,7 @@ class WBPHtml
         $string .= '<script>';
         $string .= '    var globalLanguage = "' . $this->objWBPTranslation->getLanguage() . '";';
         $string .= '    var globalUrl = "' . $this->objWBPUrl->getUrlMain() . '";';
-        $string .= '    var globalTranslation = "";';
+        $string .= '    var globalTranslation = ' . json_encode($this->WBPTranslation) . ';';
         $string .= '</script>';
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');

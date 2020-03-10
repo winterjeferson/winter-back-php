@@ -2,54 +2,48 @@
 
 class WBPTranslation
 {
-
     public $language = '';
-    public $arrLanguage = array('pt', 'en');
-    public $objWBPSession;
+    public $arrLanguage = ['pt', 'en'];
 
     public function __construct()
     {
-        $this->objWBPSession = new WBPSession();
         $this->defineLanguage();
     }
 
     public function defineLanguage()
     {
-        $this->objWBPSession->startSession();
+        $objWBPSession = new WBPSession();
         $filterLanguage = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
+        $sessionLanguage =  $objWBPSession->get('language');
 
-        if (!isset($_SESSION['WBPLanguage'])) {
+        if (!isset($sessionLanguage)) {
             $this->language = substr($filterLanguage, 0, 2);
 
             if (!in_array($this->language, $this->arrLanguage)) {
                 $this->language = 'en';
             }
 
-            $this->objWBPSession->setSession('WBPLanguage', $this->language);
+            $objWBPSession->set('language', $this->language);
         } else {
-            $this->language = $this->objWBPSession->getSessionValue('WBPLanguage');
+            $this->language = $objWBPSession->get('language');
         }
     }
 
     public function translateContent()
     {
-        $objWBPUrl = new WBPUrl();
-        $file = '';
+        $objWBPSession = new WBPSession();
+        $class = 'WBPTranslation' . strtoupper($objWBPSession->get('language'));
+        $translation = new $class();
 
-        if (file_exists('json/' . $this->language . '.json')) {
-            $file = file_get_contents('json/' . $this->language . '.json');
-        }
-
-        $json = json_decode($file, true);
-
-        return $json;
+        return $translation->translation;
     }
 
     public function changeLanguage()
     {
+        $objWBPSession = new WBPSession();
         $language = filter_input(INPUT_POST, 'language', FILTER_DEFAULT);
+        $objWBPSession->set('language', $language);
 
-        $this->objWBPSession->setSession('WBPLanguage', $language);
         return 'r1';
     }
 

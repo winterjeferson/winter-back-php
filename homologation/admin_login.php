@@ -29,7 +29,7 @@ $objWBPUrl = new WBPUrl();
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['template']['home']; ?>">
+            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -41,8 +41,8 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['template']['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['template']['language']; ?></option>
+                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
+                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -63,7 +63,7 @@ $objWBPUrl = new WBPUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBPTranslation['default']['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBPTranslation['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
@@ -95,8 +95,8 @@ $objWBPUrl = new WBPUrl();
                         <input class="input input-email" type="text" value="email@email.com" id="page_admin_login_user" maxlength="40" placeholder="E-mail">
                     </div>
                     <div class="col-es-12 form-field">
-                        <label for="page_admin_login_password"><?php echo $WBPTranslation['default']['password']; ?></label>
-                        <input class="input input-password" type="password" value="123456" maxlength="20" id="page_admin_login_password" placeholder="<?php echo $WBPTranslation['default']['password']; ?>">
+                        <label for="page_admin_login_password"><?php echo $WBPTranslation['email']; ?></label>
+                        <input class="input input-password" type="password" value="123456" maxlength="20" id="page_admin_login_password" placeholder="<?php echo $WBPTranslation['password']; ?>">
                     </div>
                     <div class="col-es-12 form-field text-right">
                         <button type="button" class="bt bt-re bt-blue" id="page_admin_login_bt">
@@ -110,7 +110,7 @@ $objWBPUrl = new WBPUrl();
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about">By:</span>
+            <span class="about"><?php echo $WBPTranslation['developed_by']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

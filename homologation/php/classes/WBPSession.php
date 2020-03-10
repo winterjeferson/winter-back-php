@@ -1,48 +1,56 @@
 <?php
 
-class WBPSession {
+class WBPSession
+{
 
-    public function __construct() {
-        $this->startSession();
+    public function __construct()
+    {
+        $this->start();
     }
 
-    function clearSession() {
-        $_SESSION = array();
+    function clear()
+    {
+        $_SESSION = [];
     }
 
-    function setSession($target, $value) {
+    function set($target, $value)
+    {
         $_SESSION[$target] = $value;
     }
 
-    function setSessionArray($target, $value) {
-        if ($this->verifyIsSet($target)) {
+    function setArray($target, $value)
+    {
+        if ($this->verify($target)) {
             array_push($_SESSION[$target], $value);
         } else {
-            $_SESSION[$target] = array();
+            $_SESSION[$target] = [];
             array_push($_SESSION[$target], $value);
         }
     }
 
-    function getSessionValue($target) {
+    function get($target)
+    {
         return $_SESSION[$target];
     }
 
-    function startSession() {
+    function start()
+    {
         if (session_id() == '') {
             session_start();
         }
     }
 
-    function unsetSession() {
+    function unset()
+    {
         session_unset();
     }
 
-    function verifyIsSet($target) {
+    function verify($target)
+    {
         if (isset($_SESSION[$target])) {
             return true;
         } else {
             return false;
         }
     }
-
 }

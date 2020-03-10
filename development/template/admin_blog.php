@@ -20,32 +20,32 @@ $objWBPAdminBlog = new WBPAdminBlog();
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            Cadastrar Blog
+                            <?php echo $WBPTranslation['page_admin_blog']['title']; ?>
                         </h2>
                     </div>
                     <form class="row form form-grey" data-id="form_register">
                         <div class="col-es-6 form-field">
-                            <label>Title</label>
-                            <input type="text" data-id="field_title" aria-label="Title">
+                            <label><?php echo $WBPTranslation['title']; ?></label>
+                            <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
                         </div>
                         <div class="col-es-6 form-field">
-                            <label>Friendly URL</label>
-                            <input type="text" data-id="field_url" aria-label="Friendly URL">
+                            <label><?php echo $WBPTranslation['page_admin_blog']['url']; ?></label>
+                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog']['title']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
-                            <label>Content</label>
-                            <textarea data-id="field_content" aria-label="Content"></textarea>
+                            <label><?php echo $WBPTranslation['content']; ?></label>
+                            <textarea data-id="field_content" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
                         </div>
                         <div class="col-es-12 form-field">
-                            <label>Tags</label>
-                            <input type="text" data-id="field_tag" aria-label="Tags" placeholder="separar por /">
+                            <label><?php echo $WBPTranslation['tags']; ?></label>
+                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['tags']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog']['tags_separator']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <nav class="menu menu-horizontal text-right">
                                 <ul>
                                     <li>
                                         <button type="button" class="bt bt-re bt-green" data-id="bt_register">
-                                            Cadastrar
+                                            <?php echo $WBPTranslation['save']; ?>
                                         </button>
                                     </li>
                                 </ul>
@@ -53,76 +53,40 @@ $objWBPAdminBlog = new WBPAdminBlog();
                         </div>
                     </form>
                 </section>
+
+                {% set arr = [
+                    {id: 'active', translation: 'actives'},
+                    {id: 'inactive', translation: 'inactives'}
+                 ] %}
+
+
+                {% for i in arr %}
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            Conteúdo Ativo
+                            <?php echo $WBPTranslation['{{i.translation | safe}}']; ?>
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="row">
-                            <div class="col-es-12">
-                                <h2 class="page-title">
-                                    {{title}}
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-es-12">
-                                <table class="table table-grey" data-id="table_active">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Content</th>
-                                            <th>URL</th>
-                                            <th>Tags</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php echo $objWBPAdminBlog->buildReport('active'); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <table class="table table-grey" data-id="table_{{i.id | safe}}">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th><?php echo $WBPTranslation['title']; ?></th>
+                                    <th><?php echo $WBPTranslation['content']; ?></th>
+                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['actions']; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php echo $objWBPAdminBlog->buildReport('{{i.id | safe}}'); ?>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
-                <section class="row">
-                    <div class="col-es-12">
-                        <h2 class="page-title">
-                            Conteúdo Inativo
-                        </h2>
-                    </div>
-                    <div class="col-es-12">
-                        <div class="row">
-                            <div class="col-es-12">
-                                <h2 class="page-title">
-                                    {{title}}
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-es-12">
-                                <table class="table table-grey" data-id="table_inactive">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Content</th>
-                                            <th>URL</th>
-                                            <th>Tags</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php echo $objWBPAdminBlog->buildReport('inactive'); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                {% endfor %}
+
             </div>
         </div>
     </section>

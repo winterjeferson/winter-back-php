@@ -11,7 +11,7 @@ class WBPLogin
     {
         $objWBPSession = new WBPSession();
 
-        if (!$objWBPSession->verifyIsSet('id')) {
+        if (!$objWBPSession->verify('id')) {
             $this->redirect('admin-login');
         }
     }
@@ -41,6 +41,7 @@ class WBPLogin
 
     function doLoginValidate($row, $query)
     {
+        $objWBPTranslation = new WBPTranslation();
         $objWBPSession = new WBPSession();
         $password = md5(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
 
@@ -54,8 +55,9 @@ class WBPLogin
 
         if ($row['password'] === $password) {
             $this->clearSession();
-            $objWBPSession->setSession('id', $row['id']);
-            $objWBPSession->setSession('email', $row['email']);
+            $objWBPTranslation->defineLanguage();
+            $objWBPSession->set('id', $row['id']);
+            $objWBPSession->set('email', $row['email']);
             $this->doLoginSetLastActivity($row['id']);
             return 'ok';
         }
@@ -87,7 +89,7 @@ class WBPLogin
     function clearSession()
     {
         $objWBPSession = new WBPSession();
-        $objWBPSession->clearSession();
+        $objWBPSession->clear();
     }
 
     function redirect($target = '')

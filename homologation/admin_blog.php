@@ -38,7 +38,7 @@ $objWBPUrl = new WBPUrl();
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['template']['home']; ?>">
+            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -50,8 +50,8 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['template']['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['template']['language']; ?></option>
+                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
+                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -72,7 +72,7 @@ $objWBPUrl = new WBPUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBPTranslation['default']['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBPTranslation['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
@@ -124,32 +124,32 @@ $objWBPUrl = new WBPUrl();
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            Cadastrar Blog
+                            <?php echo $WBPTranslation['page_admin_blog']['title']; ?>
                         </h2>
                     </div>
                     <form class="row form form-grey" data-id="form_register">
                         <div class="col-es-6 form-field">
-                            <label>Title</label>
-                            <input type="text" data-id="field_title" aria-label="Title">
+                            <label><?php echo $WBPTranslation['title']; ?></label>
+                            <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
                         </div>
                         <div class="col-es-6 form-field">
-                            <label>Friendly URL</label>
-                            <input type="text" data-id="field_url" aria-label="Friendly URL">
+                            <label><?php echo $WBPTranslation['page_admin_blog']['url']; ?></label>
+                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog']['title']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
-                            <label>Content</label>
-                            <textarea data-id="field_content" aria-label="Content"></textarea>
+                            <label><?php echo $WBPTranslation['content']; ?></label>
+                            <textarea data-id="field_content" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
                         </div>
                         <div class="col-es-12 form-field">
-                            <label>Tags</label>
-                            <input type="text" data-id="field_tag" aria-label="Tags" placeholder="separar por /">
+                            <label><?php echo $WBPTranslation['tags']; ?></label>
+                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['tags']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog']['tags_separator']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <nav class="menu menu-horizontal text-right">
                                 <ul>
                                     <li>
                                         <button type="button" class="bt bt-re bt-green" data-id="bt_register">
-                                            Cadastrar
+                                            <?php echo $WBPTranslation['save']; ?>
                                         </button>
                                     </li>
                                 </ul>
@@ -157,83 +157,69 @@ $objWBPUrl = new WBPUrl();
                         </div>
                     </form>
                 </section>
+
+                
+
+
+                
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            Conteúdo Ativo
+                            <?php echo $WBPTranslation['actives']; ?>
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="row">
-                            <div class="col-es-12">
-                                <h2 class="page-title">
-                                    
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-es-12">
-                                <table class="table table-grey" data-id="table_active">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Content</th>
-                                            <th>URL</th>
-                                            <th>Tags</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php echo $objWBPAdminBlog->buildReport('active'); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <table class="table table-grey" data-id="table_active">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th><?php echo $WBPTranslation['title']; ?></th>
+                                    <th><?php echo $WBPTranslation['content']; ?></th>
+                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['actions']; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php echo $objWBPAdminBlog->buildReport('active'); ?>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
+                
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            Conteúdo Inativo
+                            <?php echo $WBPTranslation['inactives']; ?>
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="row">
-                            <div class="col-es-12">
-                                <h2 class="page-title">
-                                    
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-es-12">
-                                <table class="table table-grey" data-id="table_inactive">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Content</th>
-                                            <th>URL</th>
-                                            <th>Tags</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php echo $objWBPAdminBlog->buildReport('inactive'); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <table class="table table-grey" data-id="table_inactive">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th><?php echo $WBPTranslation['title']; ?></th>
+                                    <th><?php echo $WBPTranslation['content']; ?></th>
+                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['actions']; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php echo $objWBPAdminBlog->buildReport('inactive'); ?>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
+                
+
             </div>
         </div>
     </section>
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about">By:</span>
+            <span class="about"><?php echo $WBPTranslation['developed_by']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

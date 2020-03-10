@@ -14,8 +14,8 @@
                         <input class="input input-email" type="text" value="email@email.com" id="page_admin_login_user" maxlength="40" placeholder="E-mail">
                     </div>
                     <div class="col-es-12 form-field">
-                        <label for="page_admin_login_password"><?php echo $WBPTranslation['default']['password']; ?></label>
-                        <input class="input input-password" type="password" value="123456" maxlength="20" id="page_admin_login_password" placeholder="<?php echo $WBPTranslation['default']['password']; ?>">
+                        <label for="page_admin_login_password"><?php echo $WBPTranslation['email']; ?></label>
+                        <input class="input input-password" type="password" value="123456" maxlength="20" id="page_admin_login_password" placeholder="<?php echo $WBPTranslation['password']; ?>">
                     </div>
                     <div class="col-es-12 form-field text-right">
                         <button type="button" class="bt bt-re bt-blue" id="page_admin_login_bt">

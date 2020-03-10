@@ -20,7 +20,7 @@ var fileTemplateWatch = [
 
 
 function clean(path) {
-    return del(path, {force: true}); // returns a promise
+    return del(path, { force: true }); // returns a promise
 }
 
 gulp.task('template_clean', function () {
@@ -34,38 +34,38 @@ gulp.task('template_clean', function () {
 gulp.task('template_include', function () {
 
     return gulp
-            .src(fileTemplate)
-            .pipe(nunjucksRender({
-                path: [folderTemplate]
-            }))
-            .pipe(rename({extname: '.php'}))
-            .pipe(gulp.dest(configuration.homologation));
+        .src(fileTemplate)
+        .pipe(nunjucksRender({
+            path: [folderTemplate]
+        }))
+        .pipe(rename({ extname: '.php' }))
+        .pipe(gulp.dest(configuration.homologation));
 });
 
 gulp.task('template_include_admin', function () {
 
     return gulp
-            .src(fileTemplateAdmin)
-            .pipe(nunjucksRender({
-                path: [folderTemplate]
-            }))
-            .pipe(rename({extname: '.php'}))
-            .pipe(gulp.dest(configuration.homologation + 'admin/'));
+        .src(fileTemplateAdmin)
+        .pipe(nunjucksRender({
+            path: [folderTemplate]
+        }))
+        .pipe(rename({ extname: '.php' }))
+        .pipe(gulp.dest(configuration.homologation + 'admin/'));
 });
 
 gulp.task('template_minify', function () {
     return gulp
-            .src(configuration.homologation + '*.php')
-            .pipe(htmlmin({collapseWhitespace: true}))
-            .pipe(gulp.dest(configuration.trunk));
+        .src(configuration.homologation + '*.php')
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest(configuration.trunk));
 });
 
 gulp.task('build_template', gulp.series(
-        'template_clean',
-        'template_include',
-        'template_include_admin',
-        'beep'
-        ));
+    'template_clean',
+    'template_include',
+    'template_include_admin',
+    'beep'
+));
 
 
 

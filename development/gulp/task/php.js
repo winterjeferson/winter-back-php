@@ -22,7 +22,7 @@ var filePHPPublic = [
 
 
 function clean(path) {
-    return del(path, {force: true}); // returns a promise
+    return del(path, { force: true }); // returns a promise
 }
 
 gulp.task('php_clean', function () {
@@ -33,16 +33,16 @@ gulp.task('php_clean', function () {
 
 gulp.task('php_move', function (done) {
     return gulp
-            .src(configuration.development + 'php/**/*.*')
-            .pipe(gulp.dest(configuration.homologation + "php/"));
+        .src(configuration.development + 'php/**/*.*')
+        .pipe(gulp.dest(configuration.homologation + "php/"));
     done();
 });
 
 gulp.task('build_php', gulp.series(
-        'php_clean',
-        'php_move',
-        'beep'
-        ));
+    'php_clean',
+    'php_move',
+    'beep'
+));
 
 
 

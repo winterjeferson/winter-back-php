@@ -10,7 +10,7 @@
             <div class="col-es-12">
                 <div class="container">
                     <h1 class="page-title">
-                        <?php echo $WBPTranslation['template']['blog']; ?>
+                        <?php echo $WBPTranslation['blog']; ?>
                     </h1>
                     <nav class="menu menu-vertical">
                         <ul>

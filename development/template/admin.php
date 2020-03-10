@@ -13,7 +13,10 @@
                 {% include "include/template_menu_admin.php" %}
             </div>
             <div class="col-es-12">
-                <h1 class="page-title">wellcome to admin</h1>
+                <div class="container">
+                    <h1 class="page-title"><?php echo $WBPTranslation['page_admin']['title'] ?></h1>
+                    <p class="text-center"><?php echo $WBPTranslation['page_admin']['text'] ?></p>
+                </div>
             </div>
         </div>
     </section>

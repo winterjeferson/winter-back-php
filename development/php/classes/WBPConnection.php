@@ -13,29 +13,24 @@ final class WBPConnection
     public static function open($dataBase)
     {
         getcwd();
-        $localhost = 'online';
-        $directory = dirname(__FILE__);
-
-        if (strpos($directory, 'development') !== false || strpos($directory, 'homologation') !== false || strpos($directory, 'production') !== false) {
-            $localhost = '';
-        }
+        $isLocalhost = filter_input(INPUT_SERVER, 'HTTP_HOST') === 'localhost' ? true : false;
 
         if (!isset(self::$instance[$dataBase])) {
             self::$instance[$dataBase] = true;
             $db = array();
 
-            if ($localhost === 'online') {
-                $db['user'] = '';
-                $db['pass'] = '';
-                $db['name'] = '';
-                $db['host'] = '';
-                $db['type'] = '';
-            } else {
+            if ($isLocalhost) {
                 $db['user'] = 'root';
                 $db['pass'] = '';
                 $db['name'] = 'WBP';
                 $db['host'] = 'localhost';
                 $db['type'] = 'mysql';
+            } else {
+                $db['user'] = '';
+                $db['pass'] = '';
+                $db['name'] = '';
+                $db['host'] = '';
+                $db['type'] = '';
             }
 
             $user = isset($db['user']) ? $db['user'] : NULL;

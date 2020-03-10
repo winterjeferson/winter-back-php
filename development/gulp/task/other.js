@@ -22,7 +22,7 @@ var fileOtherPublic = [
 
 
 function clean(path) {
-    return del(path, {force: true}); // returns a promise
+    return del(path, { force: true }); // returns a promise
 }
 
 gulp.task('other_clean', function () {
@@ -31,16 +31,16 @@ gulp.task('other_clean', function () {
 
 gulp.task('other_move', function (done) {
     return gulp
-            .src(fileOther)
-            .pipe(gulp.dest(configuration.homologation));
+        .src(fileOther)
+        .pipe(gulp.dest(configuration.homologation));
     done();
 });
 
 gulp.task('build_other', gulp.series(
-        'other_clean',
-        'other_move',
-        'beep'
-        ));
+    'other_clean',
+    'other_move',
+    'beep'
+));
 
 
 
