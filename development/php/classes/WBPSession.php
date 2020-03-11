@@ -35,6 +35,13 @@ class WBPSession
         }
     }
 
+    function getArray($array, $target)
+    {
+        if ($this->verify($array, $target)) {
+            return $_SESSION[$array][$target];
+        }
+    }
+
     function start()
     {
         if (session_id() == '') {
@@ -50,6 +57,15 @@ class WBPSession
     function verify($target)
     {
         if (isset($_SESSION[$target])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function verifyArray($array, $target)
+    {
+        if (isset($_SESSION[$array][$target])) {
             return true;
         } else {
             return false;

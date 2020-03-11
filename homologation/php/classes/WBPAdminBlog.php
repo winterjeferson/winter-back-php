@@ -48,7 +48,7 @@ class WBPAdminBlog
 
     function buildReportHTML($value, $status)
     {
-        $objWBPTheme = new WBPTheme();
+        $objTheme = new Theme();
 
         $string = '';
 
@@ -75,15 +75,15 @@ class WBPAdminBlog
         $string .= '            <ul>';
 
         $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt('edit', $value['id']);
+        $string .= $objTheme->buildHTMLBt('edit', $value['id']);
         $string .= '                </li>';
 
         $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt($status, $value['id']);
+        $string .= $objTheme->buildHTMLBt($status, $value['id']);
         $string .= '                </li>';
 
         $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt('delete', $value['id']);
+        $string .= $objTheme->buildHTMLBt('delete', $value['id']);
         $string .= '                </li>';
 
         $string .= '            </ul>';

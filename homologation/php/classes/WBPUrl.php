@@ -5,8 +5,8 @@ class WBPUrl
 
     function getUrlMain()
     {
-        $objWBPLayout = new WBPLayout();
-        $isLocalHost = $objWBPLayout->verifyLocalhost();
+        $objTheme= new Theme();
+        $isLocalHost = $objTheme->verifyLocalhost();
 
         if ($isLocalHost) {
             return 'http://localhost' . dirname(filter_input(INPUT_SERVER, 'PHP_SELF')) . '/';

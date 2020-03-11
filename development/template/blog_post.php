@@ -8,7 +8,6 @@
     <section id="main_content" class="grid-content">
         <?php
         $objWBPBlog = new WBPBlog();
-        $objWBPTemplate = new WBPTemplate();
         ?>
         <article class="row">
             <div class="col-es-12">
@@ -28,10 +27,10 @@
                 </div>
             </div>
             <div class="col-es-12">
-                <div class="container">
+                <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWBPTemplate->buildBlogTag($objWBPBlog->getPost('tag'));
+                    echo $objWBPBlog->buildBlogTag($objWBPBlog->getPost('tag'));
                     ?>
                 </div>
             </div>

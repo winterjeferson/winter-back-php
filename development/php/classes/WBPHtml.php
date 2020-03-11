@@ -5,22 +5,16 @@ class WBPHtml
 
     public $mainUrl = '';
     public $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
-    public $WBPTranslation = '';
-    public $objWBPUrl = '';
-    public $objWBPTranslation = '';
 
     public function __construct()
     {
-        $this->objWBPUrl = new WBPUrl();
-        $this->objWBPTranslation = new WBPTranslation();
-
-        $this->WBPTranslation = $this->objWBPTranslation->translate();
         $this->mainUrl = $this->buildMainUrl();
     }
 
     public function buildMainUrl()
     {
-        $url = $this->objWBPUrl->getUrlMain();
+        $objWBPUrl = new WBPUrl();
+        $url = $objWBPUrl->getUrlMain();
         $trimmed = str_replace('admin/', '', $url);
 
         return $trimmed;
@@ -38,17 +32,19 @@ class WBPHtml
 
     public function buildHeader()
     {
+        $objWBPSession = new WBPSession();
+        $objTheme = new Theme();
         $string = '';
 
         $string .= '<!DOCTYPE html>';
-        $string .= '    <html lang="' . $this->WBPTranslation['meta_lang'] . '">';
+        $string .= '    <html lang="' . $objWBPSession->getArray('translation', 'meta_lang') . '">';
         $string .= '        <head>';
         $string .= $this->buildHeaderMeta();
-        $string .= $this->buildHeaderAppearance();
+        $string .= $objTheme->buildHeaderAppearance();
         $string .= $this->buildHeaderImage();
         $string .= $this->buildHeaderSEO();
         $string .= $this->buildHeaderFacebook();
-        $string .= $this->buildHeaderCSS();
+        $string .= $objTheme->buildCSS();
         $string .= '        </head>';
         $string .= '        <body class="overflow-hidden">';
 
@@ -70,18 +66,9 @@ class WBPHtml
         return $string;
     }
 
-    public function buildHeaderCSS()
-    {
-        $string = '';
-
-        $string .= $this->buildTagCSS($this->urlFrontEnd . '/css/plugin');
-        $string .= $this->buildTagCSS($this->urlFrontEnd . '/css/style');
-
-        return $string;
-    }
-
     public function buildHeaderFacebook()
     {
+        $objWBPSession = new WBPSession();
         $string = '';
 
         $string .= '<meta property="og:image" content = "' . $this->mainUrl . 'img/logo/600-315.png"/>';
@@ -91,22 +78,23 @@ class WBPHtml
         $string .= '<meta property="og:locale" content="pt_BR" />';
         $string .= '<meta property="og:url" content="' . $this->mainUrl . '" />';
         $string .= '<meta property="og:type" content="website" />';
-        $string .= '<meta property="og:title" content="' . $this->WBPTranslation['meta_title'] . '" />';
-        $string .= '<meta property="og:site_name" content="' . $this->WBPTranslation['meta_title'] . '" />';
-        $string .= '<meta property="og:description" content="' . $this->WBPTranslation['meta_description'] . '" />';
+        $string .= '<meta property="og:title" content="' . $objWBPSession->get('meta_title') . '" />';
+        $string .= '<meta property="og:site_name" content="' . $objWBPSession->get('meta_title') . '" />';
+        $string .= '<meta property="og:description" content="' . $objWBPSession->get('meta_description') . '" />';
 
         return $string;
     }
 
     public function buildHeaderSEO()
     {
+        $objWBPSession = new WBPSession();
         $string = '';
 
-        $string .= '<meta name="application-name" content="' . $this->WBPTranslation['meta_author'] . '" />';
-        $string .= '<title>' . $this->WBPTranslation['meta_title'] . '</title>';
-        $string .= '<meta name="description" content="' . $this->WBPTranslation['meta_description'] . '" />';
-        $string .= '<meta name="author" content="' . $this->WBPTranslation['meta_author'] . '" />';
-        $string .= '<meta name="keywords" content="' . $this->WBPTranslation['meta_keywords'] . '" />';
+        $string .= '<meta name="application-name" content="' . $objWBPSession->get('meta_author') . '" />';
+        $string .= '<title>' . $objWBPSession->get('meta_title') . '</title>';
+        $string .= '<meta name="description" content="' . $objWBPSession->get('meta_description') . '" />';
+        $string .= '<meta name="author" content="' . $objWBPSession->get('meta_author') . '" />';
+        $string .= '<meta name="keywords" content="' . $objWBPSession->get('meta_keywords') . '" />';
 
         return $string;
     }
@@ -120,16 +108,6 @@ class WBPHtml
         $string .= '<meta name="msapplication-tap-highlight" content="no" />';
         $string .= '<meta name="viewport" content="initial-scale=1,maximum-scale=5,user-scalable=yes,width=device-width">';
         $string .= '<base href="' . $this->mainUrl . '">';
-
-        return $string;
-    }
-
-    public function buildHeaderAppearance()
-    {
-        $string = '';
-
-        $string .= '<meta name="theme-color" content="#000000" />';
-        $string .= '<meta name="msapplication-TileColor" content="#000000" />';
 
         return $string;
     }
@@ -150,15 +128,17 @@ class WBPHtml
 
     public function buildFooter()
     {
+        $objWBPSession = new WBPSession();
+        $objTheme = new Theme();
+        $objWBPUrl = new WBPUrl();
         $string = '';
 
         $string .= '<script>';
-        $string .= '    var globalLanguage = "' . $this->objWBPTranslation->getLanguage() . '";';
-        $string .= '    var globalUrl = "' . $this->objWBPUrl->getUrlMain() . '";';
-        $string .= '    var globalTranslation = ' . json_encode($this->WBPTranslation) . ';';
+        $string .= '    var globalLanguage = "' . $objWBPSession->get('language') . '";';
+        $string .= '    var globalUrl = "' . $objWBPUrl->getUrlMain() . '";';
+        $string .= '    var globalTranslation = ' . json_encode($objWBPSession->get('translation')) . ';';
         $string .= '</script>';
-        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
-        $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');
+        $string .= $objTheme->buildJs();
         $string .= $this->buildTagJavascript($this->mainUrl . 'js/WBP');
         $string .= $this->buildAdmin();
 
