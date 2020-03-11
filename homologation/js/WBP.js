@@ -697,15 +697,6 @@ function () {
       this.buildMenu();
     }
   }, {
-    key: "update",
-    value: function update() {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.$select = document.querySelector('#translation_select');
-    }
-  }, {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
@@ -716,15 +707,6 @@ function () {
       this.$select.addEventListener('change', function (event) {
         self.change(this.value);
       });
-    }
-  }, {
-    key: "defineActive",
-    value: function defineActive() {
-      /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.$select.value = globalLanguage;
     }
   }, {
     key: "change",
@@ -746,6 +728,24 @@ function () {
       };
 
       ajax.send(param);
+    }
+  }, {
+    key: "defineActive",
+    value: function defineActive() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$select.value = globalLanguage;
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$select = document.querySelector('#translation_select');
     }
   }]);
 

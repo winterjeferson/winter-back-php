@@ -10,11 +10,6 @@ class WBPTranslation {
         this.buildMenu();
     }
 
-    update() {
-        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$select = document.querySelector('#translation_select');
-    }
-
     buildMenu() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
@@ -22,11 +17,6 @@ class WBPTranslation {
         this.$select.addEventListener('change', function (event) {
             self.change(this.value);
         });
-    }
-
-    defineActive() {
-        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$select.value = globalLanguage;
     }
 
     change(language) {
@@ -45,5 +35,15 @@ class WBPTranslation {
         }
 
         ajax.send(param);
+    }
+
+    defineActive() {
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$select.value = globalLanguage;
+    }
+
+    update() {
+        /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$select = document.querySelector('#translation_select');
     }
 }
