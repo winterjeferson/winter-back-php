@@ -3,15 +3,6 @@ $objWBPLogin = new WBPLogin();
 $objWBPLogin->verifyLogin();
 ?>
 <?php
-$parentFolder = '';
-
-include $parentFolder . 'php/autoload.php';
-
-$objWBPTranslation = new WBPTranslation();
-$objWBPLayout = new WBPLayout();
-$objWBPHtml = new WBPHtml();
-
-$WBPTranslation = $objWBPTranslation->translateContent();
 echo $objWBPHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
@@ -46,8 +37,13 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
+                            |
+                        </li>
+                        <li>
+                            <span class="about mobile-hide"><?php echo $WBPTranslation['language']; ?>:</span>
+                        </li>
+                        <li>
+                            <select id="translation_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -76,13 +72,13 @@ $objWBPUrl = new WBPUrl();
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        admin
+                        <?php echo $WBPTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        blog
+                        <?php echo $WBPTranslation['blog']; ?>
                     </a>
                 </li>
                 
@@ -97,18 +93,18 @@ $objWBPUrl = new WBPUrl();
                 
 
 <div class="padding-re">
-    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
+    <nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
         <ul>
             
             <li>
                 <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="menu-tab-bt bt-re bt">
-                    admin-blog
+                    <?php echo $WBPTranslation['blog_admin']; ?>
                 </a>
             </li>
             
             <li>
                 <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="menu-tab-bt bt-re bt">
-                    admin-logout
+                    <?php echo $WBPTranslation['logout']; ?>
                 </a>
             </li>
             
@@ -118,8 +114,8 @@ $objWBPUrl = new WBPUrl();
             </div>
             <div class="col-es-12">
                 <div class="container">
-                    <h1 class="page-title"><?php echo $WBPTranslation['page_admin']['title'] ?></h1>
-                    <p class="text-center"><?php echo $WBPTranslation['page_admin']['text'] ?></p>
+                    <h1 class="page-title"><?php echo $WBPTranslation['administrative_panel'] ?></h1>
+                    <p class="text-center"><?php echo $WBPTranslation['administrative_panel_text'] ?></p>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ var configuration = require('./configuration.js');
 
 
 
-var fileJsDefaultFinal = 'admin.js';
+var fileJsDefaultFinal = 'WBP.js';
 
 var fileJs = [
     configuration.development + 'js/plugin/**/*.*',

@@ -2,17 +2,16 @@
     <div class="row carousel-slide">
         <div class="col-es-12">
             <ul class="carousel-list">
-                {% set arrSlide = [
-                                    ['MySQL Query Class' , 'cyan'],
-                                    ['Admin Panel' , 'purple'],
-                                    ['Multilanguage routes' , 'orange'],
-                                    ['Friendly URLs' , 'red']
-                                ] %}
-                {% for slide in arrSlide %}
+                {% set arr = [
+                    {color: 'cyan', translation: 'page_initial_language'},
+                    {color: 'orange', translation: 'blog'},
+                    {color: 'red', translation: 'friendly_url'}
+                ] %}
+                {% for i in arr %}
                 <li>
-                    <div class="slide bg-{{slide[1]}}">
+                    <div class="slide bg-{{i.color}}">
                         <div class="col-middle slide-content">
-                            {{slide[0]}}
+                            <?php echo $WBPTranslation['{{i.translation | safe}}']; ?>
                         </div>
                     </div>
                 </li>

@@ -20,7 +20,7 @@ $objWBPAdminBlog = new WBPAdminBlog();
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            <?php echo $WBPTranslation['page_admin_blog']['title']; ?>
+                            <?php echo $WBPTranslation['page_admin_blog_title']; ?>
                         </h2>
                     </div>
                     <form class="row form form-grey" data-id="form_register">
@@ -29,8 +29,8 @@ $objWBPAdminBlog = new WBPAdminBlog();
                             <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
                         </div>
                         <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['page_admin_blog']['url']; ?></label>
-                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog']['title']; ?>">
+                            <label><?php echo $WBPTranslation['friendly_url']; ?></label>
+                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <label><?php echo $WBPTranslation['content']; ?></label>
@@ -38,7 +38,7 @@ $objWBPAdminBlog = new WBPAdminBlog();
                         </div>
                         <div class="col-es-12 form-field">
                             <label><?php echo $WBPTranslation['tags']; ?></label>
-                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['tags']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog']['tags_separator']; ?>">
+                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <nav class="menu menu-horizontal text-right">
@@ -74,7 +74,7 @@ $objWBPAdminBlog = new WBPAdminBlog();
                                     <th>Id</th>
                                     <th><?php echo $WBPTranslation['title']; ?></th>
                                     <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
                                     <th><?php echo $WBPTranslation['tags']; ?></th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>

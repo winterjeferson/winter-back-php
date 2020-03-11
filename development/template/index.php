@@ -7,7 +7,7 @@ $objWBPLayout = new WBPLayout();
 $objWBPHtml = new WBPHtml();
 $objWBPRoute = new WBPRoute();
 
-$WBPTranslation = $objWBPTranslation->translateContent();
+$WBPTranslation = $objWBPTranslation->translate();
 
 $objWBPRoute->addRoute([
     ['home', 'home.php'],

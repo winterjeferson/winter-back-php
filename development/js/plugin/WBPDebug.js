@@ -1,20 +1,20 @@
 /*removeIf(production)*/
 class WBPDebug {
     constructor() {
-        this.isWBPManagement = true;
-
+        this.isWBPAdmin = true;
+        
         this.isWBPAdmin = true;
         this.isWBPAdminBlog = true;
-        this.isWBPAdminPage = true;
         this.isWBPLogin = true;
-
-        this.isWBPGeneric = true;
+        this.isWBPManagement = true;
+        this.isWBPTranslation = true;
+        this.isWBPUrl = true;
     }
 
     debugMethod(obj, method, parameter = '') {
         let string = '';
         let className = obj.constructor.name;
-//        let arrMethod = Object.getOwnPropertyNames(Object.getPrototypeOf(obj));
+        //        let arrMethod = Object.getOwnPropertyNames(Object.getPrototypeOf(obj));
 
         if (!this['is' + className]) {
             return false;
@@ -48,8 +48,8 @@ class WBPDebug {
 
         let e = new Error('dummy');
         let stack = e.stack.split('\n')[2]
-                // " at functionName ( ..." => "functionName"
-                .replace(/^\s+at\s+(.+?)\s.+/g, '$1');
+            // " at functionName ( ..." => "functionName"
+            .replace(/^\s+at\s+(.+?)\s.+/g, '$1');
         let split = stack.split(".");
 
         if (stack !== 'new') {

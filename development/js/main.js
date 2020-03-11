@@ -1,13 +1,11 @@
 /*removeIf(production)*/
 var objWBPDebug = new WBPDebug();
 /*endRemoveIf(production)*/
-var objWBPkAdmin = new WBPAdmin();
+var objWBPAdmin = new WBPAdmin();
 var objWBPAdminBlog = new WBPAdminBlog();
+var objWBPLogin = new WBPLogin();
+var objWBPManagement = new WBPManagement();
+var objWBPTranslation = new WBPTranslation();
+var objWBPUrl = new WBPUrl();
 
-var objWBPkUrl = new WBPUrl();
-var objWBPkAdminManagement = new WBPAdminManagement();
-var objWBPkLogin = new WBPLogin();
-var objWBPkAdmin = new WBPAdmin();
-var objWBPkAdminBlog = new WBPAdminBlog();
-
-objWBPkAdminManagement.verifyLoad();
+objWBPManagement.verifyLoad();

@@ -14,8 +14,8 @@
             </div>
             <div class="col-es-12">
                 <div class="container">
-                    <h1 class="page-title"><?php echo $WBPTranslation['page_admin']['title'] ?></h1>
-                    <p class="text-center"><?php echo $WBPTranslation['page_admin']['text'] ?></p>
+                    <h1 class="page-title"><?php echo $WBPTranslation['administrative_panel'] ?></h1>
+                    <p class="text-center"><?php echo $WBPTranslation['administrative_panel_text'] ?></p>
                 </div>
             </div>
         </div>

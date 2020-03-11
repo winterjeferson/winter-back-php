@@ -7,10 +7,10 @@ class WBPTranslation
 
     public function __construct()
     {
-        $this->defineLanguage();
+        $this->define();
     }
 
-    public function defineLanguage()
+    public function define()
     {
         $objWBPSession = new WBPSession();
         $filterLanguage = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
@@ -29,7 +29,7 @@ class WBPTranslation
         }
     }
 
-    public function translateContent()
+    public function translate()
     {
         $objWBPSession = new WBPSession();
         $class = 'WBPTranslation' . strtoupper($objWBPSession->get('language'));
@@ -38,7 +38,7 @@ class WBPTranslation
         return $translation->translation;
     }
 
-    public function changeLanguage()
+    public function change()
     {
         $objWBPSession = new WBPSession();
         $language = filter_input(INPUT_POST, 'language', FILTER_DEFAULT);

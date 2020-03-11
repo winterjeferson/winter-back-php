@@ -14,7 +14,7 @@ class WBPHtml
         $this->objWBPUrl = new WBPUrl();
         $this->objWBPTranslation = new WBPTranslation();
 
-        $this->WBPTranslation = $this->objWBPTranslation->translateContent();
+        $this->WBPTranslation = $this->objWBPTranslation->translate();
         $this->mainUrl = $this->buildMainUrl();
     }
 
@@ -64,7 +64,6 @@ class WBPHtml
 
         if ($isAdmin) {
             $string .= $this->buildTagCSS($this->mainUrl . 'css/admin');
-            $string .= $this->buildTagJavascript($this->mainUrl . 'js/admin');
             $string .= '<meta name="robots" content="noindex">';
         }
 
@@ -160,6 +159,7 @@ class WBPHtml
         $string .= '</script>';
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
         $string .= $this->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');
+        $string .= $this->buildTagJavascript($this->mainUrl . 'js/WBP');
         $string .= $this->buildAdmin();
 
         $string .= '    </body>';

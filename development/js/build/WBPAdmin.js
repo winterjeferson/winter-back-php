@@ -57,7 +57,7 @@ class WBPAdmin {
         let ajax = new XMLHttpRequest();
         let param = '&c=WBPLogin' + '&m=doLogout';
 
-        ajax.open('POST', objWBPkUrl.getController(), true);
+        ajax.open('POST', objWBPUrl.getController(), true);
         ajax.send(param);
     }
 

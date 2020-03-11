@@ -1,6 +1,6 @@
-{% set arrMenu = [
-'admin',
-'blog'
+{% set arr = [
+    {id: 'admin', translation: 'administrative_panel'},
+    {id: 'blog', translation: 'blog'}
 ] %}
 
 <div class="row">
@@ -10,10 +10,10 @@
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
-                {% for menu in arrMenu %}
+                {% for i in arr %}
                 <li>
-                    <a href="<?php echo $objWBPUrl->getUrlPage(); ?>{{menu}}/" data-id="{{menu}}" class="bt bt-sm bt-fu bt-blue">
-                        {{menu}}
+                    <a href="<?php echo $objWBPUrl->getUrlPage(); ?>{{i.id}}/" data-id="{{i.id}}" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WBPTranslation['{{i.translation | safe}}']; ?>
                     </a>
                 </li>
                 {% endfor %}

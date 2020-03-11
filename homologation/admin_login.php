@@ -1,13 +1,4 @@
 <?php
-$parentFolder = '';
-
-include $parentFolder . 'php/autoload.php';
-
-$objWBPTranslation = new WBPTranslation();
-$objWBPLayout = new WBPLayout();
-$objWBPHtml = new WBPHtml();
-
-$WBPTranslation = $objWBPTranslation->translateContent();
 echo $objWBPHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
@@ -41,8 +32,13 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
+                            |
+                        </li>
+                        <li>
+                            <span class="about mobile-hide"><?php echo $WBPTranslation['language']; ?>:</span>
+                        </li>
+                        <li>
+                            <select id="translation_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -71,13 +67,13 @@ $objWBPUrl = new WBPUrl();
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        admin
+                        <?php echo $WBPTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        blog
+                        <?php echo $WBPTranslation['blog']; ?>
                     </a>
                 </li>
                 

@@ -17,8 +17,13 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
+                            |
+                        </li>
+                        <li>
+                            <span class="about mobile-hide"><?php echo $WBPTranslation['language']; ?>:</span>
+                        </li>
+                        <li>
+                            <select id="translation_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>

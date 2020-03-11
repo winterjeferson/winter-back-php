@@ -54,7 +54,7 @@ class WBPLogin {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
         if (!this.validate()) {
@@ -101,7 +101,7 @@ class WBPLogin {
                 this.$fieldPassword.focus();
                 break;
             default:
-                objWBPkUrl.build('admin');
+                objWBPUrl.build('admin');
                 break;
         }
 

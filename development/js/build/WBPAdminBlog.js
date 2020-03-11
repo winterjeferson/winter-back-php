@@ -54,7 +54,7 @@ class WBPAdminBlog {
             Array.prototype.forEach.call($button, function (item) {
                 item.onclick = function () {
                     objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-                    objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+                    objWFModal.buildContentConfirmationAction('objWBPAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
                 }
             });
         });
@@ -93,7 +93,7 @@ class WBPAdminBlog {
             Array.prototype.forEach.call($buttonDelete, function (item) {
                 item.onclick = function () {
                     objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-                    objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+                    objWFModal.buildContentConfirmationAction('objWBPAdminBlog.delete(' + item.getAttribute('data-id') + ')');
                 }
             });
         });
@@ -103,7 +103,7 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value + '&id=' + self.editId;
 
         if (!this.validateForm()) {
@@ -126,7 +126,7 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id;
 
         ajax.open('POST', url, true);
@@ -158,7 +158,7 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
 
         ajax.open('POST', url, true);
@@ -177,7 +177,7 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + id;
 
         ajax.open('POST', url, true);
@@ -208,7 +208,7 @@ class WBPAdminBlog {
         }
 
         let ajax = new XMLHttpRequest();
-        let url = objWBPkUrl.getController();
+        let url = objWBPUrl.getController();
         let param = '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value;
 
         ajax.open('POST', url, true);
@@ -238,7 +238,7 @@ class WBPAdminBlog {
                 break;
         }
 
-        objWBPkNotification.addNotification(response, color);
+        objWBPNotification.addNotification(response, color);
     }
 
     watchTitle() {
@@ -246,7 +246,7 @@ class WBPAdminBlog {
         let self = this;
 
         this.$formFieldTitle.addEventListener('focusout', function () {
-            let url = objWBPkUrl.buildSEO(self.$formFieldTitle.value);
+            let url = objWBPUrl.buildSEO(self.$formFieldTitle.value);
 
             self.$formFieldUrl.value = url;
         });

@@ -3,15 +3,6 @@ $objWBPLogin = new WBPLogin();
 $objWBPLogin->verifyLogin();
 ?>
 <?php
-$parentFolder = '';
-
-include $parentFolder . 'php/autoload.php';
-
-$objWBPTranslation = new WBPTranslation();
-$objWBPLayout = new WBPLayout();
-$objWBPHtml = new WBPHtml();
-
-$WBPTranslation = $objWBPTranslation->translateContent();
 echo $objWBPHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
@@ -50,8 +41,13 @@ $objWBPUrl = new WBPUrl();
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            <select id="page_language_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
-                                <option value=""><?php echo $WBPTranslation['language']; ?></option>
+                            |
+                        </li>
+                        <li>
+                            <span class="about mobile-hide"><?php echo $WBPTranslation['language']; ?>:</span>
+                        </li>
+                        <li>
+                            <select id="translation_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -80,13 +76,13 @@ $objWBPUrl = new WBPUrl();
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        admin
+                        <?php echo $WBPTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
                     <a href="<?php echo $objWBPUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        blog
+                        <?php echo $WBPTranslation['blog']; ?>
                     </a>
                 </li>
                 
@@ -101,18 +97,18 @@ $objWBPUrl = new WBPUrl();
                 
 
 <div class="padding-re">
-    <nav class="menu-tab menu-tab-blue text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
+    <nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
         <ul>
             
             <li>
                 <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin-blog/" data-id="admin-blog" class="menu-tab-bt bt-re bt">
-                    admin-blog
+                    <?php echo $WBPTranslation['blog_admin']; ?>
                 </a>
             </li>
             
             <li>
                 <a href="<?php echo $objWBPUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="menu-tab-bt bt-re bt">
-                    admin-logout
+                    <?php echo $WBPTranslation['logout']; ?>
                 </a>
             </li>
             
@@ -124,7 +120,7 @@ $objWBPUrl = new WBPUrl();
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            <?php echo $WBPTranslation['page_admin_blog']['title']; ?>
+                            <?php echo $WBPTranslation['page_admin_blog_title']; ?>
                         </h2>
                     </div>
                     <form class="row form form-grey" data-id="form_register">
@@ -133,8 +129,8 @@ $objWBPUrl = new WBPUrl();
                             <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
                         </div>
                         <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['page_admin_blog']['url']; ?></label>
-                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog']['title']; ?>">
+                            <label><?php echo $WBPTranslation['friendly_url']; ?></label>
+                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <label><?php echo $WBPTranslation['content']; ?></label>
@@ -142,7 +138,7 @@ $objWBPUrl = new WBPUrl();
                         </div>
                         <div class="col-es-12 form-field">
                             <label><?php echo $WBPTranslation['tags']; ?></label>
-                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['tags']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog']['tags_separator']; ?>">
+                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
                         </div>
                         <div class="col-es-12 form-field">
                             <nav class="menu menu-horizontal text-right">
@@ -175,7 +171,7 @@ $objWBPUrl = new WBPUrl();
                                     <th>Id</th>
                                     <th><?php echo $WBPTranslation['title']; ?></th>
                                     <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
                                     <th><?php echo $WBPTranslation['tags']; ?></th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
@@ -200,7 +196,7 @@ $objWBPUrl = new WBPUrl();
                                     <th>Id</th>
                                     <th><?php echo $WBPTranslation['title']; ?></th>
                                     <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['page_admin_blog']['url']; ?></th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
                                     <th><?php echo $WBPTranslation['tags']; ?></th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>

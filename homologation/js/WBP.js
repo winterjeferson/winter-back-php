@@ -13,12 +13,13 @@ function () {
   function WBPDebug() {
     _classCallCheck(this, WBPDebug);
 
-    this.isWBPManagement = true;
+    this.isWBPAdmin = true;
     this.isWBPAdmin = true;
     this.isWBPAdminBlog = true;
-    this.isWBPAdminPage = true;
     this.isWBPLogin = true;
-    this.isWBPGeneric = true;
+    this.isWBPManagement = true;
+    this.isWBPTranslation = true;
+    this.isWBPUrl = true;
   }
 
   _createClass(WBPDebug, [{
@@ -162,7 +163,7 @@ function () {
 
       var ajax = new XMLHttpRequest();
       var param = '&c=WBPLogin' + '&m=doLogout';
-      ajax.open('POST', objWBPkUrl.getController(), true);
+      ajax.open('POST', objWBPUrl.getController(), true);
       ajax.send(param);
     }
   }, {
@@ -266,7 +267,7 @@ function () {
         Array.prototype.forEach.call($button, function (item) {
           item.onclick = function () {
             objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+            objWFModal.buildContentConfirmationAction('objWBPAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
           };
         });
       });
@@ -298,7 +299,7 @@ function () {
         Array.prototype.forEach.call($buttonDelete, function (item) {
           item.onclick = function () {
             objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPkAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+            objWFModal.buildContentConfirmationAction('objWBPAdminBlog.delete(' + item.getAttribute('data-id') + ')');
           };
         });
       });
@@ -312,7 +313,7 @@ function () {
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value + '&id=' + self.editId;
 
       if (!this.validateForm()) {
@@ -339,7 +340,7 @@ function () {
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -377,7 +378,7 @@ function () {
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -399,7 +400,7 @@ function () {
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -436,7 +437,7 @@ function () {
       }
 
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -470,7 +471,7 @@ function () {
           break;
       }
 
-      objWBPkNotification.addNotification(response, color);
+      objWBPNotification.addNotification(response, color);
     }
   }, {
     key: "watchTitle",
@@ -481,7 +482,7 @@ function () {
 
       var self = this;
       this.$formFieldTitle.addEventListener('focusout', function () {
-        var url = objWBPkUrl.buildSEO(self.$formFieldTitle.value);
+        var url = objWBPUrl.buildSEO(self.$formFieldTitle.value);
         self.$formFieldUrl.value = url;
       });
     }
@@ -570,7 +571,7 @@ function () {
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPkUrl.getController();
+      var url = objWBPUrl.getController();
       var param = '&c=WBPLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
       if (!this.validate()) {
@@ -625,7 +626,7 @@ function () {
           break;
 
         default:
-          objWBPkUrl.build('admin');
+          objWBPUrl.build('admin');
           break;
       }
 
@@ -636,14 +637,14 @@ function () {
   return WBPLogin;
 }();
 
-var WBPAdminManagement =
+var WBPManagement =
 /*#__PURE__*/
 function () {
-  function WBPAdminManagement() {
-    _classCallCheck(this, WBPAdminManagement);
+  function WBPManagement() {
+    _classCallCheck(this, WBPManagement);
   }
 
-  _createClass(WBPAdminManagement, [{
+  _createClass(WBPManagement, [{
     key: "verifyLoad",
     value: function verifyLoad() {
       /*removeIf(production)*/
@@ -663,13 +664,92 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      objWBPkLogin.build();
-      objWBPkAdmin.build();
-      objWBPkAdminBlog.build();
+      objWBPTranslation.build();
+      objWBPLogin.build();
+      objWBPAdmin.build();
+      objWBPAdminBlog.build();
     }
   }]);
 
-  return WBPAdminManagement;
+  return WBPManagement;
+}();
+
+var WBPTranslation =
+/*#__PURE__*/
+function () {
+  function WBPTranslation() {
+    _classCallCheck(this, WBPTranslation);
+
+    /*removeIf(production)*/
+    objWBPDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(WBPTranslation, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.update();
+      this.defineActive();
+      this.buildMenu();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$select = document.querySelector('#translation_select');
+    }
+  }, {
+    key: "buildMenu",
+    value: function buildMenu() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      this.$select.addEventListener('change', function (event) {
+        self.change(this.value);
+      });
+    }
+  }, {
+    key: "defineActive",
+    value: function defineActive() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$select.value = globalLanguage;
+    }
+  }, {
+    key: "change",
+    value: function change(language) {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var ajax = new XMLHttpRequest();
+      var url = objWBPUrl.getController();
+      var param = '&c=WBPTranslation' + '&m=change' + '&language=' + language;
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          location.reload();
+        }
+      };
+
+      ajax.send(param);
+    }
+  }]);
+
+  return WBPTranslation;
 }();
 
 var WBPUrl =
@@ -729,11 +809,10 @@ function () {
 var objWBPDebug = new WBPDebug();
 /*endRemoveIf(production)*/
 
-var objWBPkAdmin = new WBPAdmin();
+var objWBPAdmin = new WBPAdmin();
 var objWBPAdminBlog = new WBPAdminBlog();
-var objWBPkUrl = new WBPUrl();
-var objWBPkAdminManagement = new WBPAdminManagement();
-var objWBPkLogin = new WBPLogin();
-var objWBPkAdmin = new WBPAdmin();
-var objWBPkAdminBlog = new WBPAdminBlog();
-objWBPkAdminManagement.verifyLoad();
+var objWBPLogin = new WBPLogin();
+var objWBPManagement = new WBPManagement();
+var objWBPTranslation = new WBPTranslation();
+var objWBPUrl = new WBPUrl();
+objWBPManagement.verifyLoad();
