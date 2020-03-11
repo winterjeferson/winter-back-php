@@ -47,7 +47,7 @@ gulp.task('build_css_admin', gulp.series(
 
 gulp.task('css_minify', function () {
     return gulp
-        .src(configuration.homologationPublic + 'css/*.*')
+        .src(configuration.homologation + 'css/*.*')
         .pipe(csso())
         .pipe(gulp.dest(configuration.production + 'css/'));
 });

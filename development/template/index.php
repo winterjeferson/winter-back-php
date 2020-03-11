@@ -21,3 +21,4 @@ $objWBPRoute->addRoute([
 
 $route = $objWBPRoute->getRoute();
 include $route;
+?>

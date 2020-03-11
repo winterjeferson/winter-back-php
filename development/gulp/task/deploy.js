@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var project = require('./project.js');
 var util = require('./util.js');
+var image = require('./image.js');
 
 var project = require('./project.js');
 var js = require('./js.js');
@@ -12,5 +13,6 @@ gulp.task('deploy', gulp.series(
         'js_minify',
         'project_move_production',
         'template_minify',
+        'image_imagemin',
         'beep'
 ));

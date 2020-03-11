@@ -9,14 +9,22 @@ gulp.task('project_move_production', function () {
         .pipe(gulp.dest(configuration.production));
 
     gulp
+        .src(configuration.homologation + '*.xml')
+        .pipe(gulp.dest(configuration.production));
+
+    gulp
+        .src(configuration.homologation + '*.txt')
+        .pipe(gulp.dest(configuration.production));
+
+    gulp
         .src(configuration.homologation + '/php/**/*.*')
         .pipe(gulp.dest(configuration.production + '/php/'));
 
     gulp
-        .src(configuration.homologation + '.htaccess')
-        .pipe(gulp.dest(configuration.production));
+        .src(configuration.homologation + '/img/**/*.*')
+        .pipe(gulp.dest(configuration.production + '/img/'));
 
     return gulp
-        .src(configuration.homologation + '/font/**/*.*')
-        .pipe(gulp.dest(configuration.production + '/font/'));
+        .src(configuration.homologation + '.htaccess')
+        .pipe(gulp.dest(configuration.production));
 });
