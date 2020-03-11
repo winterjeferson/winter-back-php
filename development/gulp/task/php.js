@@ -38,9 +38,15 @@ gulp.task('php_move', function (done) {
     done();
 });
 
+gulp.task('php_delete_tool', function (done) {
+    var files = [configuration.homologation + 'php/tool/**'];
+    return clean(files);
+});
+
 gulp.task('build_php', gulp.series(
     'php_clean',
     'php_move',
+    'php_delete_tool',
     'beep'
 ));
 

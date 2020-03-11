@@ -1,6 +1,5 @@
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
-
 <main class="grid">
     {% include "include/template_header.php" %}
     <section id="main_menu" class="grid-menu">
@@ -40,5 +39,3 @@
     </section>
     {% include "include/template_footer.php" %}
 </main>
-{% include "include/analytics.php" %}
-{% include "include/footer.php" %}

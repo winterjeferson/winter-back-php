@@ -1,6 +1,6 @@
 <?php
 
-include 'php/autoload.php';
+include_once 'php/autoload.php';
 
 $objWBPTranslation = new WBPTranslation();
 $objWBPLayout = new WBPLayout();
@@ -20,5 +20,10 @@ $objWBPRoute->addRoute([
 ]);
 
 $route = $objWBPRoute->getRoute();
+?>
+
+<?php
 include $route;
 ?>
+{% include "include/analytics.php" %}
+{% include "include/footer.php" %}

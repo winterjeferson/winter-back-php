@@ -38,5 +38,3 @@
     </section>
     {% include "include/template_footer.php" %}
 </main>
-{% include "include/analytics.php" %}
-{% include "include/footer.php" %}

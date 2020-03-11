@@ -1,7 +1,6 @@
 {% include "include/verify_login.php" %}
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
-
 <?php
 $objWBPAdminBlog = new WBPAdminBlog();
 ?>
@@ -92,5 +91,3 @@ $objWBPAdminBlog = new WBPAdminBlog();
     </section>
     {% include "include/template_footer.php" %}
 </main>
-{% include "include/analytics.php" %}
-{% include "include/footer.php" %}

@@ -1,4 +1,5 @@
 <?php
+
 $objWBPLogin = new WBPLogin();
 $objWBPLogin->verifyLogin();
 ?>
@@ -16,7 +17,6 @@ echo $objWBPHtml->buildHeader();
         </div>
     </div>
 </div>
-
 <?php
 $objWBPAdminBlog = new WBPAdminBlog();
 ?>
@@ -223,7 +223,3 @@ $objWBPUrl = new WBPUrl();
     </div>
 </footer>
 </main>
-<!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
-<?php
-echo $objWBPHtml->buildFooter();
-?>

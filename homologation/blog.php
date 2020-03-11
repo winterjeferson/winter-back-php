@@ -124,7 +124,3 @@ $objWBPUrl = new WBPUrl();
     </div>
 </footer>
 </main>
-<!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
-<?php
-echo $objWBPHtml->buildFooter();
-?>

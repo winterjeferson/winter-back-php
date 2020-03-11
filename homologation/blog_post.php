@@ -12,7 +12,6 @@ echo $objWBPHtml->buildHeader();
         </div>
     </div>
 </div>
-
 <main class="grid">
     <?php
 $objWBPUrl = new WBPUrl();
@@ -126,7 +125,3 @@ $objWBPUrl = new WBPUrl();
     </div>
 </footer>
 </main>
-<!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
-<?php
-echo $objWBPHtml->buildFooter();
-?>

@@ -30,7 +30,9 @@ class WBPSession
 
     function get($target)
     {
-        return $_SESSION[$target];
+        if ($this->verify($target)) {
+            return $_SESSION[$target];
+        }
     }
 
     function start()

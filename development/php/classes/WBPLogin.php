@@ -10,8 +10,9 @@ class WBPLogin
     function verifyLogin()
     {
         $objWBPSession = new WBPSession();
+        $isLogin = $objWBPSession->get('login');
 
-        if (!$objWBPSession->verify('id')) {
+        if (!$isLogin) {
             $this->redirect('admin-login');
         }
     }
@@ -32,6 +33,7 @@ class WBPLogin
             'table' => [['table' => 'login']],
             'limit' => [['final' => 1]],
         ]);
+
 
         $query = $objWBPQuery->select();
         $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -55,9 +57,10 @@ class WBPLogin
 
         if ($row['password'] === $password) {
             $this->clearSession();
-            $objWBPTranslation->defineLanguage();
+            $objWBPTranslation->define();
             $objWBPSession->set('id', $row['id']);
             $objWBPSession->set('email', $row['email']);
+            $objWBPSession->set('login', true);
             $this->doLoginSetLastActivity($row['id']);
             return 'ok';
         }
@@ -82,8 +85,10 @@ class WBPLogin
 
     function doLogout()
     {
-        $this->clearSession();
-        $this->redirect('admin');
+        $objWBPSession = new WBPSession();
+        $objWBPSession->set('login', false);
+
+        $this->redirect('admin-login');
     }
 
     function clearSession()
@@ -96,5 +101,6 @@ class WBPLogin
     {
         $objWBPUrl = new WBPUrl();
         $objWBPUrl->redirect($target);
+        die();
     }
 }
