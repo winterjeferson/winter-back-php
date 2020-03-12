@@ -118,50 +118,110 @@ $objWBPUrl = new WBPUrl();
             </div>
             <div class="col-es-12">
                 <section class="row">
-                    <div class="col-es-12">
-                        <h2 class="page-title">
-                            <?php echo $WBPTranslation['page_admin_blog_title']; ?>
-                        </h2>
+
+                    
+
+                    
+                    <div class="col-es-6">
+                        <div class="padding-bi">
+                            <div class="card card-es card-grey">
+                                <header>
+                                    <h4>
+                                        <?php echo $WBPTranslation['page_admin_blog_title']; ?> (pt)
+                                    </h4>
+                                </header>
+                                <div class="row card-body">
+                                    <div class="col-es-12">
+                                        <div class="padding-re">
+                                            <form class="row form form-grey" data-id="form_register">
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['title']; ?></label>
+                                                    <input type="text" data-id="field_title_pt" aria-label="<?php echo $WBPTranslation['title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['friendly_url']; ?></label>
+                                                    <input type="text" data-id="field_url_pt" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['content']; ?></label>
+                                                    <textarea data-id="field_content_pt" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['tags']; ?></label>
+                                                    <input type="text" data-id="field_tag_pt" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer>
+                                </footer>
+                            </div>
+                        </div>
                     </div>
-                    <form class="row form form-grey" data-id="form_register">
-                        <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['title']; ?></label>
-                            <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
+
+                    
+                    <div class="col-es-6">
+                        <div class="padding-bi">
+                            <div class="card card-es card-grey">
+                                <header>
+                                    <h4>
+                                        <?php echo $WBPTranslation['page_admin_blog_title']; ?> (en)
+                                    </h4>
+                                </header>
+                                <div class="row card-body">
+                                    <div class="col-es-12">
+                                        <div class="padding-re">
+                                            <form class="row form form-grey" data-id="form_register">
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['title']; ?></label>
+                                                    <input type="text" data-id="field_title_en" aria-label="<?php echo $WBPTranslation['title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['friendly_url']; ?></label>
+                                                    <input type="text" data-id="field_url_en" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['content']; ?></label>
+                                                    <textarea data-id="field_content_en" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['tags']; ?></label>
+                                                    <input type="text" data-id="field_tag_en" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer>
+                                </footer>
+                            </div>
                         </div>
-                        <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['friendly_url']; ?></label>
-                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <label><?php echo $WBPTranslation['content']; ?></label>
-                            <textarea data-id="field_content" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <label><?php echo $WBPTranslation['tags']; ?></label>
-                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <nav class="menu menu-horizontal text-right">
-                                <ul>
-                                    <li>
-                                        <button type="button" class="bt bt-re bt-green" data-id="bt_register">
-                                            <?php echo $WBPTranslation['save']; ?>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </form>
+                    </div>
+
+                    
+
+                    <div class="col-es-12 form-field">
+                        <nav class="menu menu-horizontal text-right">
+                            <ul>
+                                <li>
+                                    <button type="button" class="bt bt-re bt-green" data-id="bt_register">
+                                        <?php echo $WBPTranslation['save']; ?>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </section>
 
                 
-
 
                 
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            <?php echo $WBPTranslation['actives']; ?>
+                            <?php echo $WBPTranslation['listing']; ?>
+                            (<?php echo $WBPTranslation['actives']; ?>)
                         </h2>
                     </div>
                     <div class="col-es-12">
@@ -169,10 +229,14 @@ $objWBPUrl = new WBPUrl();
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th><?php echo $WBPTranslation['title']; ?></th>
-                                    <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
-                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
                             </thead>
@@ -186,7 +250,8 @@ $objWBPUrl = new WBPUrl();
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            <?php echo $WBPTranslation['inactives']; ?>
+                            <?php echo $WBPTranslation['listing']; ?>
+                            (<?php echo $WBPTranslation['inactives']; ?>)
                         </h2>
                     </div>
                     <div class="col-es-12">
@@ -194,10 +259,14 @@ $objWBPUrl = new WBPUrl();
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th><?php echo $WBPTranslation['title']; ?></th>
-                                    <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
-                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
                             </thead>

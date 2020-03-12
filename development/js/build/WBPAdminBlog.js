@@ -21,10 +21,14 @@ class WBPAdminBlog {
         this.editId = 0;
         this.$page = document.querySelector('#page_admin_blog');
         this.$formRegister = this.$page.querySelector('[data-id="form_register"]');
-        this.$formFieldTitle = this.$page.querySelector('[data-id="field_title"]');
-        this.$formFieldUrl = this.$page.querySelector('[data-id="field_url"]');
-        this.$formFieldContent = this.$page.querySelector('[data-id="field_content"]');
-        this.$formFieldTag = this.$page.querySelector('[data-id="field_tag"]');
+        this.$formFieldTitlePt = this.$page.querySelector('[data-id="field_title_pt"]');
+        this.$formFieldTitleEn = this.$page.querySelector('[data-id="field_title_en"]');
+        this.$formFieldUrlPt = this.$page.querySelector('[data-id="field_url_pt"]');
+        this.$formFieldUrlEn = this.$page.querySelector('[data-id="field_url_en"]');
+        this.$formFieldContentPt = this.$page.querySelector('[data-id="field_content_pt"]');
+        this.$formFieldContentEn = this.$page.querySelector('[data-id="field_content_en"]');
+        this.$formFieldTagPt = this.$page.querySelector('[data-id="field_tag_pt"]');
+        this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
     }
 
     buildMenu() {
@@ -104,7 +108,18 @@ class WBPAdminBlog {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWBPUrl.getController();
-        let param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value + '&id=' + self.editId;
+        let param =
+            '&c=WBPAdminBlog' +
+            '&m=doUpdate' +
+            '&titlePt=' + this.$formFieldTitlePt.value +
+            '&titleEn=' + this.$formFieldTitleEn.value +
+            '&urlPt=' + this.$formFieldUrlPt.value +
+            '&urlEn=' + this.$formFieldUrlEn.value +
+            '&contentPt=' + this.$formFieldContentPt.value +
+            '&contentEn=' + this.$formFieldContentEn.value +
+            '&tagPt=' + this.$formFieldTagPt.value +
+            '&tagEn=' + this.$formFieldTagEn.value +
+            '&id=' + self.editId;
 
         if (!this.validateForm()) {
             return;
@@ -145,13 +160,17 @@ class WBPAdminBlog {
         ajax.send(param);
     }
 
-    editFillField(json) {
+    editFillField(obj) {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$formFieldTitle.value = json['title'];
-        this.$formFieldUrl.value = json['url'];
-        this.$formFieldContent.value = json['content'];
-        this.$formFieldTag.value = json['tag'];
-        this.editId = json['id'];
+        this.$formFieldTitlePt.value = obj['title_pt'];
+        this.$formFieldTitleEn.value = obj['title_en'];
+        this.$formFieldUrlPt.value = obj['url_pt'];
+        this.$formFieldUrlEn.value = obj['url_en'];
+        this.$formFieldContentPt.value = obj['content_pt'];
+        this.$formFieldContentEn.value = obj['content_en'];
+        this.$formFieldTagPt.value = obj['tag_pt'];
+        this.$formFieldTagEn.value = obj['tag_en'];
+        this.editId = obj['id'];
     }
 
     modify(id, status) {
@@ -194,7 +213,16 @@ class WBPAdminBlog {
 
     validateForm() {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
-        let arrField = [this.$formFieldTitle, this.$formFieldUrl, this.$formFieldContent, this.$formFieldTag];
+        let arrField = [
+            this.$formFieldTitlePt,
+            this.$formFieldTitleEn,
+            this.$formFieldUrlPt,
+            this.$formFieldUrlEn,
+            this.$formFieldContentPt,
+            this.$formFieldContentEn,
+            this.$formFieldTagPt,
+            this.$formFieldTagEn
+        ];
 
         return objWFForm.validateEmpty(arrField);
     }
@@ -209,7 +237,17 @@ class WBPAdminBlog {
 
         let ajax = new XMLHttpRequest();
         let url = objWBPUrl.getController();
-        let param = '&c=WBPAdminBlog' + '&m=doRegister' + '&title=' + this.$formFieldTitle.value + '&url=' + this.$formFieldUrl.value + '&content=' + this.$formFieldContent.value + '&tag=' + this.$formFieldTag.value;
+        let param =
+            '&c=WBPAdminBlog' +
+            '&m=doRegister' +
+            '&titlePt=' + this.$formFieldTitlePt.value +
+            '&titleEn=' + this.$formFieldTitleEn.value +
+            '&urlPt=' + this.$formFieldUrlPt.value +
+            '&urlEn=' + this.$formFieldUrlEn.value +
+            '&contentPt=' + this.$formFieldContentPt.value +
+            '&contentEn=' + this.$formFieldContentEn.value +
+            '&tagPt=' + this.$formFieldTagPt.value +
+            '&tagEn=' + this.$formFieldTagEn.value;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -245,10 +283,16 @@ class WBPAdminBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        this.$formFieldTitle.addEventListener('focusout', function () {
-            let url = objWBPUrl.buildSEO(self.$formFieldTitle.value);
+        this.$formFieldTitlePt.addEventListener('focusout', function () {
+            let url = objWBPUrl.buildSEO(self.$formFieldTitlePt.value);
 
-            self.$formFieldUrl.value = url;
+            self.$formFieldUrlPt.value = url;
+        });
+
+        this.$formFieldTitleEn.addEventListener('focusout', function () {
+            let url = objWBPUrl.buildSEO(self.$formFieldTitleEn.value);
+
+            self.$formFieldUrlEn.value = url;
         });
     }
 }

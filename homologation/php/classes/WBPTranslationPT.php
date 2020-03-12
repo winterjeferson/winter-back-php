@@ -16,6 +16,7 @@ class WBPTranslationPT
         'home' => 'Início',
         'inactives' => 'Inativos',
         'language' => 'Idioma',
+        'listing' => 'Listagem',
         'logout' => 'Sair',
         'menu' => 'Menu',
         'meta_author' => 'Jeferson Winter',

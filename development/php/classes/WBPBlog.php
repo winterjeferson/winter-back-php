@@ -24,9 +24,12 @@ class WBPBlog
 
         $objWBPQuery->populateArray([
             'column' => [
-                ['table' => 'blog', 'column' => 'title'],
-                ['table' => 'blog', 'column' => 'content'],
-                ['table' => 'blog', 'column' => 'tag'],
+                ['table' => 'blog', 'column' => 'title_pt'],
+                ['table' => 'blog', 'column' => 'title_en'],
+                ['table' => 'blog', 'column' => 'content_pt'],
+                ['table' => 'blog', 'column' => 'content_en'],
+                ['table' => 'blog', 'column' => 'tag_pt'],
+                ['table' => 'blog', 'column' => 'tag_en'],
             ],
             'table' => [['table' => 'blog']],
             'where' => [
@@ -48,8 +51,10 @@ class WBPBlog
         $objWBPQuery->populateArray([
             'column' => [
                 ['table' => 'blog', 'column' => 'id'],
-                ['table' => 'blog', 'column' => 'title'],
-                ['table' => 'blog', 'column' => 'url'],
+                ['table' => 'blog', 'column' => 'title_pt'],
+                ['table' => 'blog', 'column' => 'title_en'],
+                ['table' => 'blog', 'column' => 'url_pt'],
+                ['table' => 'blog', 'column' => 'url_en'],
             ],
             'table' => [['table' => 'blog']],
             'where' => [

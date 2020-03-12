@@ -2,6 +2,7 @@
 
 class WBPSession
 {
+    public $prefix = 'WBP_';
 
     public function __construct()
     {
@@ -15,30 +16,30 @@ class WBPSession
 
     function set($target, $value)
     {
-        $_SESSION[$target] = $value;
+        $_SESSION[$this->prefix . $target] = $value;
     }
 
     function setArray($target, $value)
     {
         if ($this->verify($target)) {
-            array_push($_SESSION[$target], $value);
+            array_push($_SESSION[$this->prefix . $target], $value);
         } else {
-            $_SESSION[$target] = [];
-            array_push($_SESSION[$target], $value);
+            $_SESSION[$this->prefix . $target] = [];
+            array_push($_SESSION[$this->prefix . $target], $value);
         }
     }
 
     function get($target)
     {
         if ($this->verify($target)) {
-            return $_SESSION[$target];
+            return $_SESSION[$this->prefix . $target];
         }
     }
 
     function getArray($array, $target)
     {
         if ($this->verify($array, $target)) {
-            return $_SESSION[$array][$target];
+            return $_SESSION[$this->prefix . $array][$target];
         }
     }
 
@@ -49,14 +50,18 @@ class WBPSession
         }
     }
 
-    function unset()
+    function unset($target = '')
     {
-        session_unset();
+        if ($target === '') {
+            session_unset();
+        } else {
+            unset($_SESSION[$this->prefix . $target]);
+        }
     }
 
     function verify($target)
     {
-        if (isset($_SESSION[$target])) {
+        if (isset($_SESSION[$this->prefix . $target])) {
             return true;
         } else {
             return false;
@@ -65,7 +70,7 @@ class WBPSession
 
     function verifyArray($array, $target)
     {
-        if (isset($_SESSION[$array][$target])) {
+        if (isset($_SESSION[$this->prefix . $array][$target])) {
             return true;
         } else {
             return false;

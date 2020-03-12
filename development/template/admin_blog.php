@@ -17,53 +17,77 @@ $objWBPAdminBlog = new WBPAdminBlog();
             </div>
             <div class="col-es-12">
                 <section class="row">
-                    <div class="col-es-12">
-                        <h2 class="page-title">
-                            <?php echo $WBPTranslation['page_admin_blog_title']; ?>
-                        </h2>
+
+                    {% set arr = [
+                        {language: 'pt'},
+                        {language: 'en'}
+                    ] %}
+
+                    {% for i in arr %}
+                    <div class="col-es-6">
+                        <div class="padding-bi">
+                            <div class="card card-es card-grey">
+                                <header>
+                                    <h4>
+                                        <?php echo $WBPTranslation['page_admin_blog_title']; ?> ({{i.language}})
+                                    </h4>
+                                </header>
+                                <div class="row card-body">
+                                    <div class="col-es-12">
+                                        <div class="padding-re">
+                                            <form class="row form form-grey" data-id="form_register">
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['title']; ?></label>
+                                                    <input type="text" data-id="field_title_{{i.language}}" aria-label="<?php echo $WBPTranslation['title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['friendly_url']; ?></label>
+                                                    <input type="text" data-id="field_url_{{i.language}}" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['content']; ?></label>
+                                                    <textarea data-id="field_content_{{i.language}}" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
+                                                </div>
+                                                <div class="col-es-12 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['tags']; ?></label>
+                                                    <input type="text" data-id="field_tag_{{i.language}}" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer>
+                                </footer>
+                            </div>
+                        </div>
                     </div>
-                    <form class="row form form-grey" data-id="form_register">
-                        <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['title']; ?></label>
-                            <input type="text" data-id="field_title" aria-label="<?php echo $WBPTranslation['title']; ?>">
-                        </div>
-                        <div class="col-es-6 form-field">
-                            <label><?php echo $WBPTranslation['friendly_url']; ?></label>
-                            <input type="text" data-id="field_url" aria-label="<?php echo $WBPTranslation['page_admin_blog_title']; ?>">
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <label><?php echo $WBPTranslation['content']; ?></label>
-                            <textarea data-id="field_content" aria-label="<?php echo $WBPTranslation['content']; ?>"></textarea>
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <label><?php echo $WBPTranslation['tags']; ?></label>
-                            <input type="text" data-id="field_tag" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
-                        </div>
-                        <div class="col-es-12 form-field">
-                            <nav class="menu menu-horizontal text-right">
-                                <ul>
-                                    <li>
-                                        <button type="button" class="bt bt-re bt-green" data-id="bt_register">
-                                            <?php echo $WBPTranslation['save']; ?>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </form>
+
+                    {% endfor %}
+
+                    <div class="col-es-12 form-field">
+                        <nav class="menu menu-horizontal text-right">
+                            <ul>
+                                <li>
+                                    <button type="button" class="bt bt-re bt-green" data-id="bt_register">
+                                        <?php echo $WBPTranslation['save']; ?>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </section>
 
                 {% set arr = [
                     {id: 'active', translation: 'actives'},
                     {id: 'inactive', translation: 'inactives'}
-                 ] %}
-
+                ] %}
 
                 {% for i in arr %}
                 <section class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
-                            <?php echo $WBPTranslation['{{i.translation | safe}}']; ?>
+                            <?php echo $WBPTranslation['listing']; ?>
+                            (<?php echo $WBPTranslation['{{i.translation | safe}}']; ?>)
                         </h2>
                     </div>
                     <div class="col-es-12">
@@ -71,10 +95,14 @@ $objWBPAdminBlog = new WBPAdminBlog();
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th><?php echo $WBPTranslation['title']; ?></th>
-                                    <th><?php echo $WBPTranslation['content']; ?></th>
-                                    <th><?php echo $WBPTranslation['friendly_url']; ?></th>
-                                    <th><?php echo $WBPTranslation['tags']; ?></th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['title']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['content']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['friendly_url']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['tags']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
                             </thead>
