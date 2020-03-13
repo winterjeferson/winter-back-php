@@ -29,6 +29,11 @@ class WBPAdminBlog {
         this.$formFieldContentEn = this.$page.querySelector('[data-id="field_content_en"]');
         this.$formFieldTagPt = this.$page.querySelector('[data-id="field_tag_pt"]');
         this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
+        this.$formFieldDatePostPt = this.$page.querySelector('[data-id="field_date_post_pt"]');
+        this.$formFieldDatePostEn = this.$page.querySelector('[data-id="field_date_post_en"]');
+        this.$formFieldDateEditPt = this.$page.querySelector('[data-id="field_date_edit_pt"]');
+        this.$formFieldDateEditEn = this.$page.querySelector('[data-id="field_date_edit_en"]');
+        this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
     }
 
     buildMenu() {
@@ -119,6 +124,10 @@ class WBPAdminBlog {
             '&contentEn=' + this.$formFieldContentEn.value +
             '&tagPt=' + this.$formFieldTagPt.value +
             '&tagEn=' + this.$formFieldTagEn.value +
+            '&datePostPt=' + this.$formFieldDatePostPt.value +
+            '&datePostEn=' + this.$formFieldDatePostEn.value +
+            '&dateEditPt=' + this.$formFieldDateEditPt.value +
+            '&dateEditEn=' + this.$formFieldDateEditEn.value +
             '&id=' + self.editId;
 
         if (!this.validateForm()) {
@@ -170,7 +179,12 @@ class WBPAdminBlog {
         this.$formFieldContentEn.value = obj['content_en'];
         this.$formFieldTagPt.value = obj['tag_pt'];
         this.$formFieldTagEn.value = obj['tag_en'];
+        this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
+        this.$formFieldDatePostEn.value = obj['date_post_en'].substring(0, 10);
+        this.$formFieldDateEditPt.value = obj['date_edit_pt'].substring(0, 10);
+        this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
         this.editId = obj['id'];
+        this.$formFieldTagEn.value = obj['tag_en'];
     }
 
     modify(id, status) {
@@ -219,9 +233,7 @@ class WBPAdminBlog {
             this.$formFieldUrlPt,
             this.$formFieldUrlEn,
             this.$formFieldContentPt,
-            this.$formFieldContentEn,
-            this.$formFieldTagPt,
-            this.$formFieldTagEn
+            this.$formFieldContentEn
         ];
 
         return objWFForm.validateEmpty(arrField);
@@ -246,6 +258,10 @@ class WBPAdminBlog {
             '&urlEn=' + this.$formFieldUrlEn.value +
             '&contentPt=' + this.$formFieldContentPt.value +
             '&contentEn=' + this.$formFieldContentEn.value +
+            '&datePostPt=' + this.$formFieldDatePostPt.value +
+            '&datePostEn=' + this.$formFieldDatePostEn.value +
+            '&dateEditPt=' + this.$formFieldDateEditPt.value +
+            '&dateEditEn=' + this.$formFieldDateEditEn.value +
             '&tagPt=' + this.$formFieldTagPt.value +
             '&tagEn=' + this.$formFieldTagEn.value;
 

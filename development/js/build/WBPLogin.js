@@ -82,22 +82,18 @@ class WBPLogin {
 
         switch (data) {
             case 'inactive':
-                response = 'precisa traduzir - cadastro inativo';
-                // response = globalTranslation.template.login_inactive;
+                response = globalTranslation.login_inactive;
                 break;
             case 'problem':
-                response = 'precisa traduzir - erro de login';
-                // response = globalTranslation.template.login_wrong_email;
+                response = globalTranslation.login_fail;
                 this.$fielEmail.focus();
                 break;
             case 'empty_email':
-                response = 'precisa traduzir - e-mail vazio';
-                // response = globalTranslation.template.login_empty;
+                response = globalTranslation.empty_field;
                 this.$fielEmail.focus();
                 break;
             case 'empty_password':
-                response = 'precisa traduzir - senha vazia';
-                // response = globalTranslation.template.login_empty;
+                response = globalTranslation.empty_field;
                 this.$fieldPassword.focus();
                 break;
             default:

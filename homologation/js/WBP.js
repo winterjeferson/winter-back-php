@@ -236,6 +236,11 @@ function () {
       this.$formFieldContentEn = this.$page.querySelector('[data-id="field_content_en"]');
       this.$formFieldTagPt = this.$page.querySelector('[data-id="field_tag_pt"]');
       this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
+      this.$formFieldDatePostPt = this.$page.querySelector('[data-id="field_date_post_pt"]');
+      this.$formFieldDatePostEn = this.$page.querySelector('[data-id="field_date_post_en"]');
+      this.$formFieldDateEditPt = this.$page.querySelector('[data-id="field_date_edit_pt"]');
+      this.$formFieldDateEditEn = this.$page.querySelector('[data-id="field_date_edit_en"]');
+      this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
     }
   }, {
     key: "buildMenu",
@@ -318,7 +323,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value + '&id=' + self.editId;
+      var param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&id=' + self.editId;
 
       if (!this.validateForm()) {
         return;
@@ -375,7 +380,12 @@ function () {
       this.$formFieldContentEn.value = obj['content_en'];
       this.$formFieldTagPt.value = obj['tag_pt'];
       this.$formFieldTagEn.value = obj['tag_en'];
+      this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
+      this.$formFieldDatePostEn.value = obj['date_post_en'].substring(0, 10);
+      this.$formFieldDateEditPt.value = obj['date_edit_pt'].substring(0, 10);
+      this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
       this.editId = obj['id'];
+      this.$formFieldTagEn.value = obj['tag_en'];
     }
   }, {
     key: "modify",
@@ -428,7 +438,7 @@ function () {
       objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn, this.$formFieldContentPt, this.$formFieldContentEn, this.$formFieldTagPt, this.$formFieldTagEn];
+      var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn, this.$formFieldContentPt, this.$formFieldContentEn];
       return objWFForm.validateEmpty(arrField);
     }
   }, {
@@ -446,7 +456,7 @@ function () {
 
       var ajax = new XMLHttpRequest();
       var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doRegister' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
+      var param = '&c=WBPAdminBlog' + '&m=doRegister' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -615,25 +625,21 @@ function () {
 
       switch (data) {
         case 'inactive':
-          response = 'precisa traduzir - cadastro inativo'; // response = globalTranslation.template.login_inactive;
-
+          response = globalTranslation.login_inactive;
           break;
 
         case 'problem':
-          response = 'precisa traduzir - erro de login'; // response = globalTranslation.template.login_wrong_email;
-
+          response = globalTranslation.login_fail;
           this.$fielEmail.focus();
           break;
 
         case 'empty_email':
-          response = 'precisa traduzir - e-mail vazio'; // response = globalTranslation.template.login_empty;
-
+          response = globalTranslation.empty_field;
           this.$fielEmail.focus();
           break;
 
         case 'empty_password':
-          response = 'precisa traduzir - senha vazia'; // response = globalTranslation.template.login_empty;
-
+          response = globalTranslation.empty_field;
           this.$fieldPassword.focus();
           break;
 

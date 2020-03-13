@@ -150,6 +150,14 @@ $objWBPUrl = new WBPUrl();
                                                     <label><?php echo $WBPTranslation['tags']; ?></label>
                                                     <input type="text" data-id="field_tag_pt" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
                                                 </div>
+                                                <div class="col-es-6 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['date_post']; ?></label>
+                                                    <input type="date" data-id="field_date_post_pt" aria-label="<?php echo $WBPTranslation['date_post']; ?>">
+                                                </div>
+                                                <div class="col-es-6 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['date_edit']; ?></label>
+                                                    <input type="date" data-id="field_date_edit_pt" aria-label="<?php echo $WBPTranslation['date_edit']; ?>">
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -189,6 +197,14 @@ $objWBPUrl = new WBPUrl();
                                                     <label><?php echo $WBPTranslation['tags']; ?></label>
                                                     <input type="text" data-id="field_tag_en" aria-label="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WBPTranslation['page_admin_blog_tags_separator']; ?>">
                                                 </div>
+                                                <div class="col-es-6 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['date_post']; ?></label>
+                                                    <input type="date" data-id="field_date_post_en" aria-label="<?php echo $WBPTranslation['date_post']; ?>">
+                                                </div>
+                                                <div class="col-es-6 form-field text-left">
+                                                    <label><?php echo $WBPTranslation['date_edit']; ?></label>
+                                                    <input type="date" data-id="field_date_edit_en" aria-label="<?php echo $WBPTranslation['date_edit']; ?>">
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -217,13 +233,15 @@ $objWBPUrl = new WBPUrl();
                 
 
                 
-                <section class="row">
+                <div class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
                             <?php echo $WBPTranslation['listing']; ?>
                             (<?php echo $WBPTranslation['actives']; ?>)
                         </h2>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-es-12">
                         <table class="table table-grey" data-id="table_active">
                             <thead>
@@ -237,6 +255,10 @@ $objWBPUrl = new WBPUrl();
                                     <th><?php echo $WBPTranslation['friendly_url']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['tags']; ?> (PT)</th>
                                     <th><?php echo $WBPTranslation['tags']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['date_post']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['date_post']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['date_edit']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['date_edit']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
                             </thead>
@@ -245,15 +267,17 @@ $objWBPUrl = new WBPUrl();
                             </tbody>
                         </table>
                     </div>
-                </section>
+                </div>
                 
-                <section class="row">
+                <div class="row">
                     <div class="col-es-12">
                         <h2 class="page-title">
                             <?php echo $WBPTranslation['listing']; ?>
                             (<?php echo $WBPTranslation['inactives']; ?>)
                         </h2>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-es-12">
                         <table class="table table-grey" data-id="table_inactive">
                             <thead>
@@ -267,6 +291,10 @@ $objWBPUrl = new WBPUrl();
                                     <th><?php echo $WBPTranslation['friendly_url']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['tags']; ?> (PT)</th>
                                     <th><?php echo $WBPTranslation['tags']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['date_post']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['date_post']; ?> (EN)</th>
+                                    <th><?php echo $WBPTranslation['date_edit']; ?> (PT)</th>
+                                    <th><?php echo $WBPTranslation['date_edit']; ?> (EN)</th>
                                     <th><?php echo $WBPTranslation['actions']; ?></th>
                                 </tr>
                             </thead>
@@ -275,7 +303,7 @@ $objWBPUrl = new WBPUrl();
                             </tbody>
                         </table>
                     </div>
-                </section>
+                </div>
                 
 
             </div>
