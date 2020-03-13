@@ -23,7 +23,7 @@
                             foreach ($query as $key => $value) {
                                 $string .= '<li>';
                                 $string .= '    <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWBPTranslation->getLanguage()] . '/" class="link link-blue">';
-                                $string .= $value['title_' . $objWBPTranslation->getLanguage()];
+                                $string .= utf8_encode($value['title_' . $objWBPTranslation->getLanguage()]);
                                 $string .= '    </a>';
                                 $string .= '</li>';
                             }

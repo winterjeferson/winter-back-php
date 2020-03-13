@@ -53,14 +53,14 @@ class WBPAdminBlog
 
         $string .= '<tr>';
         $string .= '    <td class="minimum">' . $value['id'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['title_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['title_en'] . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['title_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['title_en']) . '</td>';
         $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_pt'])) . '</div></td>';
         $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_en'])) . '</div></td>';
         $string .= '    <td class="minimum">' . $value['url_pt'] . '</td>';
         $string .= '    <td class="minimum">' . $value['url_en'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['tag_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['tag_en'] . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['tag_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['tag_en']) . '</td>';
         $string .= '    <td class="minimum">';
         $string .= '        <nav class="menu menu-horizontal">';
         $string .= '            <ul>';
@@ -104,6 +104,7 @@ class WBPAdminBlog
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
                 ['column' => 'active', 'value' => 1],
+                ['column' => 'view', 'value' => 0],
             ],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
@@ -140,6 +141,7 @@ class WBPAdminBlog
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
                 ['column' => 'active', 'value' => 1],
+                ['column' => 'view', 'value' => 0],
             ]
         ]);
 

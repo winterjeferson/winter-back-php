@@ -479,7 +479,7 @@ function () {
           break;
       }
 
-      objWBPNotification.addNotification(response, color);
+      objWFNotification.add(response, color);
     }
   }, {
     key: "watchTitle",

@@ -276,7 +276,7 @@ class WBPAdminBlog {
                 break;
         }
 
-        objWBPNotification.addNotification(response, color);
+        objWFNotification.add(response, color);
     }
 
     watchTitle() {

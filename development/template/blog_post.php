@@ -6,15 +6,14 @@
         {% include "include/template_menu.php" %}
     </section>
     <section id="main_content" class="grid-content">
-        <?php
-        $objWBPBlog = new WBPBlog();
-        ?>
         <article class="row">
             <div class="col-es-12">
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        echo $objWBPBlog->getPost('title_' . $objWBPTranslation->getLanguage());
+                        $objWBPBlog = new WBPBlog();
+                        $post = $objWBPBlog->getPost();
+                        echo utf8_encode($post['title_' .  $objWBPTranslation->getLanguage()]);
                         ?>
                     </h1>
                 </div>
@@ -22,7 +21,7 @@
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo $objWBPBlog->getPost('content_' . $objWBPTranslation->getLanguage());
+                    echo utf8_encode($post['content_' .  $objWBPTranslation->getLanguage()]);
                     ?>
                 </div>
             </div>
@@ -30,7 +29,7 @@
                 <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWBPBlog->buildBlogTag($objWBPBlog->getPost('tag_' . $objWBPTranslation->getLanguage()));
+                    echo $objWBPBlog->buildBlogTag(utf8_encode($post['tag_' .  $objWBPTranslation->getLanguage()]));
                     ?>
                 </div>
             </div>

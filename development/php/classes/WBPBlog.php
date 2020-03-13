@@ -9,13 +9,28 @@ class WBPBlog
 
     //////////////////////////////////////////////////////////////////////////////// POST
 
-    function getPost($target)
+    function getPost()
     {
         $objWBPUrl = new WBPUrl();
         $id = $objWBPUrl->getUrlParameters()['id'];
-        $query = $this->getPostQuery($id);
+        $this->updatePostView($id);
+        return $this->getPostQuery($id);
+    }
 
-        return utf8_encode($query[$target]);
+    function updatePostView($id)
+    {
+        $objWBPQuery = new WBPQuery();
+
+        $objWBPQuery->unbind();
+        $objWBPQuery->populateArray([
+            'table' => [['table' => 'blog']],
+            'column' => [
+                ['column' => 'view', 'value' => 'view + 1']
+            ],
+            'where' => [['table' => 'blog', 'column' => 'id', 'value' => $id]]
+        ]);
+
+        return $objWBPQuery->update();
     }
 
     function getPostQuery($id)
