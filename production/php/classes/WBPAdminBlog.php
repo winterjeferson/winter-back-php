@@ -14,6 +14,7 @@ class WBPAdminBlog
         $active = $status === 'active' ? 1 : 0;
         $string = '';
         $objWBPQuery = new WBPQuery();
+        $objTheme = new Theme();
 
         $this->buildReportSql($objWBPQuery);
 
@@ -27,7 +28,7 @@ class WBPAdminBlog
         $queryResult = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($queryResult as $key => $value) {
-            $string .= $this->buildReportHTML($value, $status);
+            $string .= $this->buildReportHTML($value, $status, $objTheme);
         }
 
         return $string;
@@ -46,46 +47,30 @@ class WBPAdminBlog
         ]);
     }
 
-    function buildReportHTML($value, $status)
+    function buildReportHTML($value, $status, $objTheme)
     {
-        $objWBPTheme = new WBPTheme();
-
         $string = '';
 
         $string .= '<tr>';
-        $string .= '    <td class="minimum">';
-        $string .= $value['id'];
-        $string .= '    </td>';
-        $string .= '    <td class="minimum">';
-        $string .= $value['title'];
-        $string .= '    </td>';
-        $string .= '    <td>';
-        $string .= '        <div class="td-wrapper">';
-        $string .= utf8_encode(strip_tags($value['content']));
-        $string .= '        </div>';
-        $string .= '    </td>';
-        $string .= '    <td class="minimum">';
-        $string .= $value['url'];
-        $string .= '    </td>';
-        $string .= '    <td class="minimum">';
-        $string .= $value['tag'];
-        $string .= '    </td>';
+        $string .= '    <td class="minimum">' . $value['id'] . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['title_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['title_en']) . '</td>';
+        $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_pt'])) . '</div></td>';
+        $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_en'])) . '</div></td>';
+        $string .= '    <td class="minimum">' . $value['url_pt'] . '</td>';
+        $string .= '    <td class="minimum">' . $value['url_en'] . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['tag_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . utf8_encode($value['tag_en']) . '</td>';
+        $string .= '    <td class="minimum">' . $value['date_post_pt'] . '</td>';
+        $string .= '    <td class="minimum">' . $value['date_post_en'] . '</td>';
+        $string .= '    <td class="minimum">' . $value['date_edit_pt'] . '</td>';
+        $string .= '    <td class="minimum">' . $value['date_edit_en'] . '</td>';
         $string .= '    <td class="minimum">';
         $string .= '        <nav class="menu menu-horizontal">';
         $string .= '            <ul>';
-
-        $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt('edit', $value['id']);
-        $string .= '                </li>';
-
-        $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt($status, $value['id']);
-        $string .= '                </li>';
-
-        $string .= '                <li>';
-        $string .= $objWBPTheme->buildHTMLBt('delete', $value['id']);
-        $string .= '                </li>';
-
+        $string .= '                <li>' . $objTheme->buildHTMLBt('edit', $value['id']) . '</li>';
+        $string .= '                <li>' . $objTheme->buildHTMLBt($status, $value['id']) . '</li>';
+        $string .= '                <li>' . $objTheme->buildHTMLBt('delete', $value['id']) . '</li>';
         $string .= '            </ul>';
         $string .= '        </nav>';
         $string .= '    </td>';
@@ -96,25 +81,38 @@ class WBPAdminBlog
 
     function doUpdate()
     {
+        $objWBPDate = new WBPDate();
         $objWBPQuery = new WBPQuery();
-
-        $title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
-        $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
-        $content = filter_input(INPUT_POST, 'content', FILTER_DEFAULT);
-        $tag = $this->validateTag(filter_input(INPUT_POST, 'tag', FILTER_DEFAULT));
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
 
-        $objWBPQuery->populateArray([
-            'table' => [['table' => $this->sqlTable]]
-        ]);
+        $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
+        $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
+        $urlPt = filter_input(INPUT_POST, 'urlPt', FILTER_DEFAULT);
+        $urlEn = filter_input(INPUT_POST, 'urlEn', FILTER_DEFAULT);
+        $contentPt = filter_input(INPUT_POST, 'contentPt', FILTER_DEFAULT);
+        $contentEn = filter_input(INPUT_POST, 'contentEn', FILTER_DEFAULT);
+        $tagPt = $this->validateTag(filter_input(INPUT_POST, 'tagPt', FILTER_DEFAULT));
+        $tagEn = $this->validateTag(filter_input(INPUT_POST, 'tagEn', FILTER_DEFAULT));
+        $datePostPt = $this->validateTag(filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT));
+        $datePostEn = $this->validateTag(filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT));
+        $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
+        $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
 
         $objWBPQuery->populateArray([
+            'table' => [['table' => $this->sqlTable]],
             'column' => [
-                ['column' => 'title', 'value' => utf8_decode($title)],
-                ['column' => 'url', 'value' => $url],
-                ['column' => 'content', 'value' => utf8_decode($content)],
-                ['column' => 'tag', 'value' => $tag],
-                ['column' => 'active', 'value' => 1],
+                ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
+                ['column' => 'title_en', 'value' => utf8_decode($titleEn)],
+                ['column' => 'url_pt', 'value' => $urlPt],
+                ['column' => 'url_en', 'value' => $urlEn],
+                ['column' => 'content_pt', 'value' => utf8_decode($contentPt)],
+                ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
+                ['column' => 'tag_pt', 'value' => $tagPt],
+                ['column' => 'tag_en', 'value' => $tagEn],
+                ['column' => 'date_post_pt', 'value' => $objWBPDate->buildDate($datePostPt)],
+                ['column' => 'date_post_en', 'value' => $objWBPDate->buildDate($datePostEn)],
+                ['column' => 'date_edit_pt', 'value' => $objWBPDate->buildDate($dateEditPt)],
+                ['column' => 'date_edit_en', 'value' => $objWBPDate->buildDate($dateEditEn)],
             ],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
@@ -125,24 +123,40 @@ class WBPAdminBlog
 
     function doRegister()
     {
+        $objWBPDate = new WBPDate();
         $objWBPQuery = new WBPQuery();
 
-        $title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
-        $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
-        $content = filter_input(INPUT_POST, 'content', FILTER_DEFAULT);
-        $tag = $this->validateTag(filter_input(INPUT_POST, 'tag', FILTER_DEFAULT));
+        $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
+        $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
+        $urlPt = filter_input(INPUT_POST, 'urlPt', FILTER_DEFAULT);
+        $urlEn = filter_input(INPUT_POST, 'urlEn', FILTER_DEFAULT);
+        $contentPt = filter_input(INPUT_POST, 'contentPt', FILTER_DEFAULT);
+        $contentEn = filter_input(INPUT_POST, 'contentEn', FILTER_DEFAULT);
+        $tagPt = $this->validateTag(filter_input(INPUT_POST, 'tagPt', FILTER_DEFAULT));
+        $tagEn = $this->validateTag(filter_input(INPUT_POST, 'tagEn', FILTER_DEFAULT));
+        $datePostPt = $this->validateTag(filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT));
+        $datePostEn = $this->validateTag(filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT));
+        $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
+        $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
 
         $objWBPQuery->populateArray([
-            'table' => [['table' => $this->sqlTable]]
-        ]);
-
-        $objWBPQuery->populateArray([
+            'table' => [['table' => $this->sqlTable]],
             'column' => [
-                ['column' => 'title', 'value' => utf8_decode($title)],
-                ['column' => 'url', 'value' => $url],
-                ['column' => 'content', 'value' => utf8_decode($content)],
-                ['column' => 'tag', 'value' => $tag],
+                ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
+                ['column' => 'title_en', 'value' => utf8_decode($titleEn)],
+                ['column' => 'url_pt', 'value' => $urlPt],
+                ['column' => 'url_en', 'value' => $urlEn],
+                ['column' => 'content_pt', 'value' => utf8_decode($contentPt)],
+                ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
+                ['column' => 'tag_pt', 'value' => $tagPt],
+                ['column' => 'tag_en', 'value' => $tagEn],
+                ['column' => 'date_post_pt', 'value' => $objWBPDate->buildDate($datePostPt)],
+                ['column' => 'date_post_en', 'value' => $objWBPDate->buildDate($datePostEn)],
+                ['column' => 'date_edit_pt', 'value' => $objWBPDate->buildDate($dateEditPt)],
+                ['column' => 'date_edit_en', 'value' => $objWBPDate->buildDate($dateEditEn)],
+
                 ['column' => 'active', 'value' => 1],
+                ['column' => 'view', 'value' => 0],
             ]
         ]);
 
@@ -190,10 +204,18 @@ class WBPAdminBlog
         $objWBPQuery = new WBPQuery();
         $objWBPQuery->populateArray([
             'column' => [
-                ['table' => $this->sqlTable, 'column' => 'title'],
-                ['table' => $this->sqlTable, 'column' => 'url'],
-                ['table' => $this->sqlTable, 'column' => 'content'],
-                ['table' => $this->sqlTable, 'column' => 'tag'],
+                ['table' => $this->sqlTable, 'column' => 'title_pt'],
+                ['table' => $this->sqlTable, 'column' => 'title_en'],
+                ['table' => $this->sqlTable, 'column' => 'url_pt'],
+                ['table' => $this->sqlTable, 'column' => 'url_en'],
+                ['table' => $this->sqlTable, 'column' => 'content_pt'],
+                ['table' => $this->sqlTable, 'column' => 'content_en'],
+                ['table' => $this->sqlTable, 'column' => 'tag_pt'],
+                ['table' => $this->sqlTable, 'column' => 'tag_en'],
+                ['table' => $this->sqlTable, 'column' => 'date_post_pt'],
+                ['table' => $this->sqlTable, 'column' => 'date_post_en'],
+                ['table' => $this->sqlTable, 'column' => 'date_edit_pt'],
+                ['table' => $this->sqlTable, 'column' => 'date_edit_en'],
                 ['table' => $this->sqlTable, 'column' => 'id'],
             ],
             'table' => [['table' => $this->sqlTable]],

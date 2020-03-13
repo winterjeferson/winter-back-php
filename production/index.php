@@ -1,12 +1,12 @@
 <?php
 
-include 'php/autoload.php';
+include_once 'php/autoload.php';
 
 $objWBPTranslation = new WBPTranslation();
-$objWBPLayout = new WBPLayout();
 $objWBPHtml = new WBPHtml();
 $objWBPRoute = new WBPRoute();
 
+$WBPTranslation = $objWBPTranslation->define();
 $WBPTranslation = $objWBPTranslation->translate();
 
 $objWBPRoute->addRoute([
@@ -20,5 +20,8 @@ $objWBPRoute->addRoute([
 ]);
 
 $route = $objWBPRoute->getRoute();
+?> <?php
 include $route;
+?> <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE--> <?php
+echo $objWBPHtml->buildFooter();
 ?>

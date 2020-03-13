@@ -5,8 +5,8 @@ class WBPUrl
 
     function getUrlMain()
     {
-        $objWBPLayout = new WBPLayout();
-        $isLocalHost = $objWBPLayout->verifyLocalhost();
+        $objTheme= new Theme();
+        $isLocalHost = $objTheme->verifyLocalhost();
 
         if ($isLocalHost) {
             return 'http://localhost' . dirname(filter_input(INPUT_SERVER, 'PHP_SELF')) . '/';
@@ -47,10 +47,11 @@ class WBPUrl
         ];
     }
 
-    function redirect($target)
+    function redirect($target = '')
     {
         $lastCharacter = $target === '' ? '' : '/';
 
         header('Location: ' . $this->getUrlPage() . $target . $lastCharacter);
+        // echo '<meta http-equiv="refresh" content="0;url=' . $this->getUrlPage() . $target . $lastCharacter . '">';
     }
 }

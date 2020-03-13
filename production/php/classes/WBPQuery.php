@@ -56,19 +56,21 @@
   return $query;
  */
 
-class WBPQuery {
-
+class WBPQuery
+{
     public $tablePrefix = '';
     public $array = [];
     public $sql = '';
+    public $bind = true;
 
-    public function __construct() {
-        
+    public function __construct()
+    {
     }
 
-//////////////////////////////////////////////////////////////////////////////// DELETE
+    //////////////////////////////////////////////////////////////////////////////// DELETE
 
-    public function delete() {
+    public function delete()
+    {
         $this->deleteSql();
 
         try {
@@ -78,34 +80,35 @@ class WBPQuery {
         }
     }
 
-    public function deleteSql() {
+    public function deleteSql()
+    {
         // DELETE FROM `table`.`column` <JOIN> <USING> WHERE ? = ?
         $string = '';
         $string .= 'DELETE FROM ';
-        $string .= $this->buildSqlTable();
-        $string .= $this->buildSqlWhere();
+        $string .= $this->buildTable();
+        $string .= $this->buildWhere();
         $string .= '';
         $this->sql = $string;
     }
 
-    public function deleteExecute() {
+    public function deleteExecute()
+    {
         $objWBPConnection = WBPConnection::open('site');
         $query = $objWBPConnection->prepare($this->sql);
         $arrayUse = $this->array['where'];
         $length = count($arrayUse);
 
         for ($i = 0; $i < $length; $i++) {
-            $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bindBuildParamenter($arrayUse[$i]['value']));
+            $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bind($arrayUse[$i]['value']));
         }
 
-        $query->execute();
-
-        return 1;
+        return $query->execute();
     }
 
-//////////////////////////////////////////////////////////////////////////////// INSERT
+    //////////////////////////////////////////////////////////////////////////////// INSERT
 
-    public function insert() {
+    public function insert()
+    {
         $this->insertSql();
 
         try {
@@ -115,11 +118,12 @@ class WBPQuery {
         }
     }
 
-    public function insertSql() {
+    public function insertSql()
+    {
         // INSERT INTO table (?, ?, ?) VALUES (?, ?, ?);
         $string = '';
         $string .= 'INSERT INTO ';
-        $string .= $this->buildSqlTable();
+        $string .= $this->buildTable();
         $string .= ' (';
         $string .= $this->buildSqlColumn(false);
         $string .= ') VALUES (';
@@ -129,24 +133,24 @@ class WBPQuery {
         $this->sql = $string;
     }
 
-    public function insertExecute() {
+    public function insertExecute()
+    {
         $objWBPConnection = WBPConnection::open('site');
         $query = $objWBPConnection->prepare($this->sql);
         $arrayUse = $this->array['column'];
         $length = count($arrayUse);
 
         for ($i = 0; $i < $length; $i++) {
-            $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bindBuildParamenter($arrayUse[$i]['value']));
+            $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bind($arrayUse[$i]['value']));
         }
 
-        $query->execute();
-
-        return 1;
+        return $query->execute();
     }
 
-//////////////////////////////////////////////////////////////////////////////// SELECT
+    //////////////////////////////////////////////////////////////////////////////// SELECT
 
-    public function select() {
+    public function select()
+    {
         $this->selectSql();
 
         try {
@@ -156,39 +160,35 @@ class WBPQuery {
         }
     }
 
-    public function selectSql() {
+    public function selectSql()
+    {
         // SELECT ?, ? FROM <JOIN> ? <WHERE> <GROUP> <ORDER> <HAVING> <LIMIT>;  
         $string = '';
 
         $string .= 'SELECT ';
         $string .= $this->buildSqlColumn();
         $string .= ' FROM ';
-        $string .= $this->buildSqlTable();
-        $string .= $this->buildSqlJoin();
-        $string .= $this->buildSqlWhere();
-        $string .= $this->buildSqlOrder();
-        $string .= $this->buildSqlLimit();
+        $string .= $this->buildTable();
+        $string .= $this->buildJoin();
+        $string .= $this->buildWhere();
+        $string .= $this->buildOrder();
+        $string .= $this->buildLimit();
 
         $this->sql = $string;
     }
 
-    public function selectExecute() {
+    public function selectExecute()
+    {
         $objWBPConnection = WBPConnection::open('site');
         $query = $objWBPConnection->prepare($this->sql);
 
         if (isset($this->array['where'])) {
             $arrayUse = $this->array['where'];
             $length = count($arrayUse);
-//            $arrayUseWhere = $this->array['where'];
-//            $lengthWhere = count($arrayUse);
 
             for ($i = 0; $i < $length; $i++) {
-                $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bindBuildParamenter($arrayUse[$i]['value']));
+                $query->bindParam(':' . $arrayUse[$i]['column'], $arrayUse[$i]['value'], $this->bind($arrayUse[$i]['value']));
             }
-
-//            for ($i = 0; $i < $lengthWhere; $i++) {
-//                $query->bindParam(':' . $arrayUseWhere[$i]['column'], $arrayUseWhere[$i]['value'], $this->bindBuildParamenter($arrayUseWhere[$i]['value']));
-//            }
         }
 
         $query->execute();
@@ -196,9 +196,10 @@ class WBPQuery {
         return $query;
     }
 
-//////////////////////////////////////////////////////////////////////////////// UPDATE
+    //////////////////////////////////////////////////////////////////////////////// UPDATE
 
-    public function update() {
+    public function update()
+    {
         $this->updateSql();
 
         try {
@@ -208,35 +209,40 @@ class WBPQuery {
         }
     }
 
-    public function updateSql() {
+    public function updateSql()
+    {
         // UPDATE `table`.`column` SET `?` = '?', `?` = '?' WHERE `?` = '?'
         $string = '';
         $string .= 'UPDATE ';
-        $string .= $this->buildSqlTable();
+        $string .= $this->buildTable();
         $string .= ' SET ';
-
         $arrayUse = $this->array['column'];
         $length = count($arrayUse);
 
         for ($i = 0; $i < $length; $i++) {
-            if(isset($arrayUse[$i]['table'])){
-            $string .= $this->tablePrefix . $arrayUse[$i]['table'];
+            if (isset($arrayUse[$i]['table'])) {
+                $string .= $this->tablePrefix . $arrayUse[$i]['table'];
                 $string .= '.';
             }
-            $string .= $arrayUse[$i]['column'];
-            $string .= ' = :';
-            $string .= $arrayUse[$i]['column'];
+
+            if ($this->bind) {
+                $string .= $arrayUse[$i]['column'] . ' = :' . $arrayUse[$i]['column'];
+            } else {
+                $string .= $arrayUse[$i]['column'] . ' = ' . $arrayUse[$i]['value'];
+            }
 
             if ($i < $length - 1) {
                 $string .= ', ';
             }
         }
 
-        $string .= $this->buildSqlWhere();
+        $string .= $this->buildWhere();
         $this->sql = $string;
     }
 
-    public function updateExecute() {
+
+    public function updateExecute()
+    {
         $objWBPConnection = WBPConnection::open('site');
         $query = $objWBPConnection->prepare($this->sql);
         $arrayUseColumn = $this->array['column'];
@@ -244,22 +250,23 @@ class WBPQuery {
         $arrayUseWhere = $this->array['where'];
         $lengthWhere = count($arrayUseWhere);
 
-        for ($i = 0; $i < $lengthColumn; $i++) {
-            $query->bindParam(':' . $arrayUseColumn[$i]['column'], $arrayUseColumn[$i]['value'], $this->bindBuildParamenter($arrayUseColumn[$i]['value']));
+        if ($this->bind) {
+            for ($i = 0; $i < $lengthColumn; $i++) {
+                $query->bindParam(':' . $arrayUseColumn[$i]['column'], $arrayUseColumn[$i]['value'], $this->bind($arrayUseColumn[$i]['value']));
+            }
         }
 
         for ($i = 0; $i < $lengthWhere; $i++) {
-            $query->bindParam(':' . $arrayUseWhere[$i]['column'], $arrayUseWhere[$i]['value'], $this->bindBuildParamenter($arrayUseWhere[$i]['value']));
+            $query->bindParam(':' . $arrayUseWhere[$i]['column'], $arrayUseWhere[$i]['value'], $this->bind($arrayUseWhere[$i]['value']));
         }
 
-        $query->execute();
-
-        return 1;
+        return $query->execute();
     }
 
-//////////////////////////////////////////////////////////////////////////////// BIND
+    //////////////////////////////////////////////////////////////////////////////// BIND
 
-    public function bindBuildParamenter($paramenter, $kind = '') {
+    public function bind($paramenter, $kind = '')
+    {
         $newKind = '';
 
         if ($kind === '') {
@@ -273,7 +280,7 @@ class WBPQuery {
                 $newKind = 'string';
             }
         } else {
-            $newKind = kind;
+            $newKind = $kind;
         }
 
         switch ($newKind) {
@@ -288,9 +295,10 @@ class WBPQuery {
         }
     }
 
-//////////////////////////////////////////////////////////////////////////////// CLAUSURE
+    //////////////////////////////////////////////////////////////////////////////// CLAUSURE
 
-    public function buildSqlColumn($table = true, $isValue = false) {
+    public function buildSqlColumn($table = true, $isValue = false)
+    {
         $string = '';
         $arrayUse = $this->array['column'];
         $length = count($arrayUse);
@@ -316,7 +324,8 @@ class WBPQuery {
         return $string;
     }
 
-    public function buildSqlJoin() {
+    public function buildJoin()
+    {
         if (!isset($this->array['join'])) {
             return false;
         }
@@ -341,7 +350,8 @@ class WBPQuery {
         return $string;
     }
 
-    public function buildSqlLimit() {
+    public function buildLimit()
+    {
         if (!isset($this->array['limit'])) {
             return false;
         }
@@ -363,7 +373,8 @@ class WBPQuery {
         return $string;
     }
 
-    public function buildSqlOrder() {
+    public function buildOrder()
+    {
         if (!isset($this->array['order'])) {
             return false;
         }
@@ -385,7 +396,8 @@ class WBPQuery {
         return $string;
     }
 
-    public function buildSqlTable() {
+    public function buildTable()
+    {
         if (!isset($this->array['table'])) {
             return false;
         }
@@ -405,7 +417,8 @@ class WBPQuery {
         return $string;
     }
 
-    public function buildSqlWhere() {
+    public function buildWhere()
+    {
         if (!isset($this->array['where'])) {
             return false;
         }
@@ -443,13 +456,15 @@ class WBPQuery {
 
     //////////////////////////////////////////////////////////////////////////////// OTHER
 
-    public function populateArray($array) {
+    public function populateArray($array)
+    {
         foreach ($array as $key => $value) {
             $this->array[$key] = $value;
         }
     }
 
-    public function returnJson($array) {
+    public function returnJson($array)
+    {
         $arr = [];
 
         foreach ($array as $key => $value) {
@@ -459,4 +474,8 @@ class WBPQuery {
         return json_encode($arr);
     }
 
+    public function unbind()
+    {
+        $this->bind = false;
+    }
 }

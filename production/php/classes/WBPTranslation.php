@@ -35,6 +35,7 @@ class WBPTranslation
         $class = 'WBPTranslation' . strtoupper($objWBPSession->get('language'));
         $translation = new $class();
 
+        $objWBPSession->set('translation', $translation->translation);
         return $translation->translation;
     }
 

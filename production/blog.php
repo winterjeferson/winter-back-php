@@ -10,13 +10,11 @@ $objWBPUrl = new WBPUrl();
 
                             foreach ($query as $key => $value) {
                                 $string .= '<li>';
-                                $string .= '    <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url'] . '/" class="link link-blue">';
-                                $string .= $value['title'];
+                                $string .= '    <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWBPTranslation->getLanguage()] . '/" class="link link-blue">';
+                                $string .= utf8_encode($value['title_' . $objWBPTranslation->getLanguage()]);
                                 $string .= '    </a>';
                                 $string .= '</li>';
                             }
 
                             echo $string;
-                            ?> </ul></nav></div></div></div></section><footer id="footer" class="grid-footer"><div class="row"><div class="col-es-12"><span class="about"><?php echo $WBPTranslation['developed_by']; ?>:</span> <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">Jeferson Winter</a></div></div></footer></main><!--PLACE YOUR GOOGLE ANALYTICS CODE HERE--> <?php
-echo $objWBPHtml->buildFooter();
-?>
+                            ?> </ul></nav></div></div></div></section><footer id="footer" class="grid-footer"><div class="row"><div class="col-es-12"><span class="about"><?php echo $WBPTranslation['developed_by']; ?>:</span> <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">Jeferson Winter</a></div></div></footer></main>
