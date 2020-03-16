@@ -59,7 +59,7 @@ class WBPBlog
 
     //////////////////////////////////////////////////////////////////////////////// POST LIST
 
-    function getPostList()
+    function getPostList($target)
     {
         $objWBPQuery = new WBPQuery();
 
@@ -70,15 +70,32 @@ class WBPBlog
                 ['table' => 'blog', 'column' => 'title_en'],
                 ['table' => 'blog', 'column' => 'url_pt'],
                 ['table' => 'blog', 'column' => 'url_en'],
+                ['table' => 'blog', 'column' => 'date_post_pt'],
+                ['table' => 'blog', 'column' => 'date_post_en'],
+                ['table' => 'blog', 'column' => 'date_edit_pt'],
+                ['table' => 'blog', 'column' => 'date_edit_en'],
             ],
             'table' => [['table' => 'blog']],
             'where' => [
                 ['table' => 'blog', 'column' => 'active', 'value' => 1]
-            ],
-            'order' => [
-                ['column' => 'id', 'order' => 'DESC']
             ]
         ]);
+
+        if ($target === 'lastPost') {
+            $objWBPQuery->populateArray([
+                'order' => [
+                    ['column' => 'id', 'order' => 'DESC']
+                ],
+                'limit' => [['final' => 10]],
+            ]);
+        } else {
+            $objWBPQuery->populateArray([
+                'order' => [
+                    ['column' => 'view', 'order' => 'DESC']
+                ],
+                'limit' => [['final' => 3]],
+            ]);
+        }
 
         $query = $objWBPQuery->select();
         return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -86,7 +103,7 @@ class WBPBlog
 
     function buildBlogTag($target)
     {
-        $explode = $pieces = explode('/', $target);
+        $explode = explode('/', $target);
         $length = count($explode);
         $string = '';
 
@@ -99,6 +116,45 @@ class WBPBlog
             $string .= '</li>';
         }
         $string .= '</ul>';
+
+        return $string;
+    }
+
+    function buildBlogPost($target)
+    {
+        $string = '';
+        $objWBPTranslation = new WBPTranslation();
+        $objWBPSession = new WBPSession();
+
+        if ($target === 'lastPost') {
+            $query = $this->getPostList('lastPost');
+        } else {
+            $query = $this->getPostList('mostViewed');
+        }
+
+        foreach ($query as $key => $value) {
+            $string .= '<article>';
+            $string .= '    <div class="blog-list-image">';
+            $string .= '        <img src="http://localhost/e/development/site/branches/framework/winter-front/homologation/img/banner/1.png" alt="image">';
+            $string .= '    </div>';
+            $string .= '    <div class="blog-list-text">';
+            $string .= '        <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWBPTranslation->getLanguage()] . '/" class="link link-blue">';
+            $string .= '            <h2 class="blog-list-title">';
+            $string .= utf8_encode($value['title_' . $objWBPTranslation->getLanguage()]);
+            $string .= '            </h2>';
+            $string .= '        </a>';
+            $string .= '        <small class="color-grey">';
+            $string .= $value['date_post_' . $objWBPTranslation->getLanguage()];
+
+            if ($value['date_post_' . $objWBPTranslation->getLanguage()] !== $value['date_edit_' . $objWBPTranslation->getLanguage()]) {
+                $string .=  '<br/>';
+                $string .=  $objWBPSession->getArray('translation', 'edited_on') . ' ' . $value['date_edit_' . $objWBPTranslation->getLanguage()];
+            }
+
+            $string .= '        </small>';
+            $string .= '    </div>';
+            $string .= '</article>';
+        }
 
         return $string;
     }

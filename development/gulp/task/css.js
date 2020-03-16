@@ -12,8 +12,14 @@ var fileCssAdmin = [
     configuration.development + 'css/admin/*.scss'
 ];
 
+var fileCssTheme = [
+    configuration.development + 'css/theme/*.scss'
+];
+
 var cssAdminConcat = fileCssAdmin;
+var cssThemeConcat = fileCssTheme;
 var fileAdmin = 'admin';
+var fileTheme = 'theme';
 
 
 
@@ -45,6 +51,33 @@ gulp.task('build_css_admin', gulp.series(
 ));
 
 
+
+
+
+
+gulp.task('css_theme_concat', function () {
+    return gulp
+        .src(cssThemeConcat)
+        .pipe(concat(fileTheme + '.scss'))
+        .pipe(gulp.dest(configuration.development + 'css/'));
+});
+
+gulp.task('css_theme_sass', function () {
+    return gulp
+        .src(configuration.development + 'css/' + fileTheme + '.scss')
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(gulp.dest(configuration.homologation + 'css/'));
+});
+
+gulp.task('build_css_theme', gulp.series(
+    'css_theme_concat',
+    'css_theme_sass',
+    'beep'
+));
+
+
+
+
 gulp.task('css_minify', function () {
     return gulp
         .src(configuration.homologation + 'css/*.*')
@@ -56,5 +89,6 @@ gulp.task('css_minify', function () {
 
 
 module.exports = {
-    cssAdminConcat: cssAdminConcat
+    cssAdminConcat: cssAdminConcat,
+    cssThemeConcat: cssThemeConcat
 };

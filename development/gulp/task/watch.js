@@ -16,6 +16,12 @@ gulp.task('default', function () {
         });
 
 
+    gulp.watch(css.cssThemeConcat, gulp.series('build_css_theme'))
+        .on('change', function (evt) {
+            console.log(evt);
+        });
+
+
 
     gulp.watch(js.fileJs, gulp.series('build_js_default', 'js_babel'))
         .on('change', function (evt) {

@@ -63,6 +63,8 @@ class WBPHtml
             $string .= '<meta name="robots" content="noindex">';
         }
 
+        $string .= $this->buildTagCSS($this->mainUrl . 'css/theme');
+
         return $string;
     }
 
