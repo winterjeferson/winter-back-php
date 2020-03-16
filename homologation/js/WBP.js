@@ -513,6 +513,91 @@ function () {
   return WBPAdminBlog;
 }();
 
+var WBPBlog =
+/*#__PURE__*/
+function () {
+  function WBPBlog() {
+    _classCallCheck(this, WBPBlog);
+
+    /*removeIf(production)*/
+    objWBPDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(WBPBlog, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      if (!getUrlWord('blog')) {
+        return;
+      }
+
+      this.update();
+      this.buildMenu();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$lastPost = document.querySelector('#page_blog_last_post');
+      this.$mostViewed = document.querySelector('#page_blog_most_viewed');
+    }
+  }, {
+    key: "buildMenu",
+    value: function buildMenu() {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+
+      if (document.contains(this.$lastPost.querySelector('[data-id="laod_more"]'))) {
+        this.$lastPost.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+          self.loadMore(this);
+        });
+      }
+
+      if (document.contains(this.$mostViewed.querySelector('[data-id="laod_more"]'))) {
+        this.$mostViewed.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+          self.loadMore(this);
+        });
+      }
+    }
+  }, {
+    key: "loadMore",
+    value: function loadMore(target) {
+      /*removeIf(production)*/
+      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
+      var ajax = new XMLHttpRequest();
+      var url = objWBPUrl.getController();
+      var param = '&c=WBPBlog' + '&m=loadMore';
+      target.classList.add('disabled');
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          console.log(ajax.responseText);
+        }
+      };
+
+      ajax.send(param);
+      console.log(parentId);
+    }
+  }]);
+
+  return WBPBlog;
+}();
+
 var WBPLogin =
 /*#__PURE__*/
 function () {
@@ -686,6 +771,7 @@ function () {
       objWBPLogin.build();
       objWBPAdmin.build();
       objWBPAdminBlog.build();
+      objWBPBlog.build();
     }
   }]);
 
@@ -829,6 +915,7 @@ var objWBPDebug = new WBPDebug();
 
 var objWBPAdmin = new WBPAdmin();
 var objWBPAdminBlog = new WBPAdminBlog();
+var objWBPBlog = new WBPBlog();
 var objWBPLogin = new WBPLogin();
 var objWBPManagement = new WBPManagement();
 var objWBPTranslation = new WBPTranslation();

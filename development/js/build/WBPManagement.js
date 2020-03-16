@@ -14,5 +14,6 @@ class WBPManagement {
         objWBPLogin.build();
         objWBPAdmin.build();
         objWBPAdminBlog.build();
+        objWBPBlog.build();
     }
 }

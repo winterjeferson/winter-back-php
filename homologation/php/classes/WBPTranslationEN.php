@@ -25,6 +25,7 @@ class WBPTranslationEN
         'login_fail' => 'Wrong email or password.',
         'login_inactive' => 'User inactive. Verify your email or contact the administrator.',
         'logout' => 'Logout',
+        'load_more' => 'Load more',
         'menu' => 'Menu',
         'meta_author' => 'Jeferson Winter',
         'meta_description' => 'My framework for PHP backend development',

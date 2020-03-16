@@ -10,7 +10,7 @@
             <div class="col-es-12">
                 <div class="container">
                     <div class="row">
-                        <div class="col-es-12 col-bi-7 col-first">
+                        <section class="col-es-12 col-bi-7 col-first" id="page_blog_last_post">
                             <h1 class="page-title">
                                 <?php echo $WBPTranslation['last_post']; ?>
                             </h1>
@@ -20,18 +20,23 @@
                                 echo $objWBPBlog->buildBlogPost('lastPost');
                                 ?>
                             </div>
-                        </div>
-                        <div class="col-es-12 col-bi-5">
+                            <?php
+                            echo $objWBPBlog->buildLoadMoreButton('lastPost');
+                            ?>
+                        </section>
+                        <section class="col-es-12 col-bi-5" id="page_blog_most_viewed">
                             <h1 class="page-title">
                                 <?php echo $WBPTranslation['most_viewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                $objWBPBlog = new WBPBlog();
                                 echo $objWBPBlog->buildBlogPost('mostViewed');
                                 ?>
                             </div>
-                        </div>
+                            <?php
+                            echo $objWBPBlog->buildLoadMoreButton('mostViewed');
+                            ?>
+                        </section>
                     </div>
                 </div>
             </div>

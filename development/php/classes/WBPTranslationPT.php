@@ -25,6 +25,7 @@ class WBPTranslationPT
         'login_inactive' => 'Usuário inativo. Verifique seu email ou entre em contato com o administrador.',
         'login_fail' => 'E-mail ou senha incorretos.',
         'logout' => 'Sair',
+        'load_more' => 'Carregar mais',
         'menu' => 'Menu',
         'meta_author' => 'Jeferson Winter',
         'meta_description' => 'Minha ferramenta para desenvolvimento backend em PHP',

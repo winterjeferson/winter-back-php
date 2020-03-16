@@ -2,6 +2,8 @@
 
 class WBPBlog
 {
+    private $postListLimitLastPost = 10;
+    private $postListLimitMostViewed = 3;
 
     public function __construct()
     {
@@ -81,24 +83,91 @@ class WBPBlog
             ]
         ]);
 
-        if ($target === 'lastPost') {
-            $objWBPQuery->populateArray([
-                'order' => [
-                    ['column' => 'id', 'order' => 'DESC']
-                ],
-                'limit' => [['final' => 10]],
-            ]);
-        } else {
-            $objWBPQuery->populateArray([
-                'order' => [
-                    ['column' => 'view', 'order' => 'DESC']
-                ],
-                'limit' => [['final' => 3]],
-            ]);
+        $this->getPostListTarget($objWBPQuery, $target);
+        $query = $objWBPQuery->select();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $this->getPostListBuildLoadMore($target, $result);
+        return $result;
+    }
+
+    function getPostListBuildLoadMore($target, $result)
+    {
+        $objWBPSession = new WBPSession();
+        $count = count($result);
+
+        switch ($target) {
+            case 'lastPost':
+                if ($count >= $this->postListLimitLastPost) {
+                    $objWBPSession->set('blog_is_load_more_last_post', true);
+                } else {
+                    $objWBPSession->set('blog_is_load_more_last_post', false);
+                }
+                break;
+            case 'mostViewed':
+                if ($count >= $this->postListLimitMostViewed) {
+                    $objWBPSession->set('blog_is_load_more_most_viewed', true);
+                } else {
+                    $objWBPSession->set('blog_is_load_more_most_viewed', false);
+                }
+                break;
+        }
+    }
+
+    function buildLoadMoreButton($target)
+    {
+        $objWBPSession = new WBPSession();
+
+        switch ($target) {
+            case 'lastPost':
+                if (!$objWBPSession->get('blog_is_load_more_last_post')) {
+                    return;
+                }
+                break;
+            case 'mostViewed':
+                if (!$objWBPSession->get('blog_is_load_more_most_viewed')) {
+                    return;
+                }
+                break;
         }
 
-        $query = $objWBPQuery->select();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $this->buildLoadMoreButtonHTML($objWBPSession);
+    }
+
+    function buildLoadMoreButtonHTML($objWBPSession)
+    {
+        $string = '';
+
+        $string .= '<div class="row">';
+        $string .= '    <div class="col-es-12">';
+        $string .= '        <button type="button" class="bt bt-fu bt-blue" data-id="laod_more">';
+        $string .= $objWBPSession->getArray('translation', 'load_more');
+        $string .= '        </button>';
+        $string .= '    </div>';
+        $string .= '</div>';
+
+        return $string;
+    }
+
+    function getPostListTarget($objWBPQuery, $target)
+    {
+        switch ($target) {
+            case 'lastPost':
+                $objWBPQuery->populateArray([
+                    'order' => [
+                        ['column' => 'id', 'order' => 'DESC']
+                    ],
+                    'limit' => [['final' => $this->postListLimitLastPost]],
+                ]);
+                break;
+            case 'mostViewed':
+                $objWBPQuery->populateArray([
+                    'order' => [
+                        ['column' => 'view', 'order' => 'DESC']
+                    ],
+                    'limit' => [['final' => $this->postListLimitMostViewed]],
+                ]);
+                break;
+        }
     }
 
     function buildBlogTag($target)
@@ -157,5 +226,12 @@ class WBPBlog
         }
 
         return $string;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////// LOAD MORE
+
+    function loadMore()
+    {
+        return 'qqqqqqq';
     }
 }
