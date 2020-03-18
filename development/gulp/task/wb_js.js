@@ -9,16 +9,16 @@ var wb_configuration = require('./wb_configuration.js');
 
 
 
-var fileJsDefaultFinal = 'wb_theme.js';
+var fileJs_wb_DefaultFinal = 'wb_theme.js';
 
-var fileJs = [
+var fileJs_wb_ = [
     wb_configuration.development + 'js/shared/**/*.*',
     wb_configuration.development + 'js/wb_theme/**/*.*',
     wb_configuration.development + 'js/wb_main.js'
 ];
 
-var fileJsFinal = [
-    wb_configuration.homologation + 'js/' + fileJsDefaultFinal
+var fileJs_wb_Final = [
+    wb_configuration.homologation + 'js/' + fileJs_wb_DefaultFinal
 ];
 
 
@@ -27,7 +27,7 @@ var fileJsFinal = [
 
 
 gulp.task('wb_js_babel', function () {
-    return gulp.src(fileJsFinal)
+    return gulp.src(fileJs_wb_Final)
         .pipe(babel({
             presets: ['@babel/env']
         }))
@@ -35,8 +35,8 @@ gulp.task('wb_js_babel', function () {
 });
 
 gulp.task('wb_js_default_concat', function () {
-    return gulp.src(fileJs)
-        .pipe(concat(fileJsDefaultFinal))
+    return gulp.src(fileJs_wb_)
+        .pipe(concat(fileJs_wb_DefaultFinal))
         .pipe(gulp.dest(wb_configuration.homologation + 'js/'));
 });
 
@@ -65,5 +65,5 @@ gulp.task('wb_js_minify', function () {
 
 
 module.exports = {
-    fileJs: fileJs
+    fileJs_wb_: fileJs_wb_
 };
