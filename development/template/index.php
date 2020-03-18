@@ -2,14 +2,14 @@
 
 include_once 'php/autoload.php';
 
-$objWBPTranslation = new WBPTranslation();
-$objWBPHtml = new WBPHtml();
-$objWBPRoute = new WBPRoute();
+$objWBTranslation = new WBTranslation();
+$objWBHtml = new WBHtml();
+$objWBRoute = new WBRoute();
 
-$WBPTranslation = $objWBPTranslation->define();
-$WBPTranslation = $objWBPTranslation->translate();
+$WBTranslation = $objWBTranslation->define();
+$WBTranslation = $objWBTranslation->translate();
 
-$objWBPRoute->addRoute([
+$objWBRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
     ['blog-post', 'blog_post.php'],
@@ -19,7 +19,7 @@ $objWBPRoute->addRoute([
     ['admin-logout', 'admin_logout.php'],
 ]);
 
-$route = $objWBPRoute->getRoute();
+$route = $objWBRoute->getRoute();
 ?>
 
 <?php

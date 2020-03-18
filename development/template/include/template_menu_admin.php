@@ -8,8 +8,8 @@
         <ul>
             {% for i in arr %}
             <li>
-                <a href="<?php echo $objWBPUrl->getUrlPage(); ?>{{i.id}}/" data-id="{{i.id}}" class="menu-tab-bt bt-re bt">
-                    <?php echo $WBPTranslation['{{i.translation | safe}}']; ?>
+                <a href="<?php echo $objWBUrl->getUrlPage(); ?>{{i.id}}/" data-id="{{i.id}}" class="menu-tab-bt bt-re bt">
+                    <?php echo $WBTranslation['{{i.translation | safe}}']; ?>
                 </a>
             </li>
             {% endfor %}

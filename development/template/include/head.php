@@ -1,3 +1,3 @@
 <?php
-echo $objWBPHtml->buildHeader();
+echo $objWBHtml->buildHeader();
 ?>

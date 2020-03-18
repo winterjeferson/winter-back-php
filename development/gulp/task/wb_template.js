@@ -4,12 +4,12 @@ var rename = require("gulp-rename");//npm install gulp-rename --save-dev // http
 var htmlmin = require('gulp-htmlmin'); //npm install gulp-htmlmin --save-dev  //https://www.npmjs.com/package/gulp-htmlmin/
 var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/package/del
 
-var wb_configuration = require('./wb_configuration.js');
+var configuration = require('./configuration.js');
 
 
 
 
-var folderTemplate = wb_configuration.development + 'template/';
+var folderTemplate = configuration.development + 'template/';
 var fileTemplate = folderTemplate + '*.php';
 var fileTemplateWatch = [
     folderTemplate + '*.php',
@@ -23,7 +23,7 @@ function clean(path) {
 
 gulp.task('wb_template_clean', function () {
     var files = [
-        wb_configuration.homologation + '*.php'
+        configuration.homologation + '*.php'
     ];
     return clean(files);
 });
@@ -36,14 +36,14 @@ gulp.task('wb_template_include', function () {
             path: [folderTemplate]
         }))
         .pipe(rename({ extname: '.php' }))
-        .pipe(gulp.dest(wb_configuration.homologation));
+        .pipe(gulp.dest(configuration.homologation));
 });
 
 gulp.task('wb_template_minify', function () {
     return gulp
-        .src(wb_configuration.homologation + '*.php')
+        .src(configuration.homologation + '*.php')
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest(wb_configuration.production));
+        .pipe(gulp.dest(configuration.production));
 });
 
 gulp.task('wb_template', gulp.series(

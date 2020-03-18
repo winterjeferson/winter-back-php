@@ -12,29 +12,29 @@
                     <div class="row">
                         <section class="col-es-12 col-bi-7 col-first" id="page_blog_last_post">
                             <h1 class="page-title">
-                                <?php echo $WBPTranslation['last_post']; ?>
+                                <?php echo $WBTranslation['last_post']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                $objWBPBlog = new WBPBlog();
-                                echo $objWBPBlog->buildBlogPost('lastPost');
+                                $objWBBlog = new WBBlog();
+                                echo $objWBBlog->buildBlogPost('lastPost');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBPBlog->buildLoadMoreButton('lastPost');
+                            echo $objWBBlog->buildLoadMoreButton('lastPost');
                             ?>
                         </section>
                         <section class="col-es-12 col-bi-5" id="page_blog_most_viewed">
                             <h1 class="page-title">
-                                <?php echo $WBPTranslation['most_viewed']; ?>
+                                <?php echo $WBTranslation['most_viewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                echo $objWBPBlog->buildBlogPost('mostViewed');
+                                echo $objWBBlog->buildBlogPost('mostViewed');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBPBlog->buildLoadMoreButton('mostViewed');
+                            echo $objWBBlog->buildLoadMoreButton('mostViewed');
                             ?>
                         </section>
                     </div>

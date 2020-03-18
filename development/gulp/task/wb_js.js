@@ -4,7 +4,7 @@ var uglify = require("gulp-uglifyes");//npm install gulp-uglifyes --save-dev //h
 var removeCode = require('gulp-remove-code');//npm install gulp-remove-code --save-dev https://www.npmjs.com/package/gulp-remove-code
 var babel = require('gulp-babel'); //npm install --save-dev gulp-babel @babel/core @babel/preset-env //https://www.npmjs.com/package/gulp-babel
 
-var wb_configuration = require('./wb_configuration.js');
+var configuration = require('./configuration.js');
 
 
 
@@ -12,13 +12,13 @@ var wb_configuration = require('./wb_configuration.js');
 var fileJs_wb_DefaultFinal = 'wb_theme.js';
 
 var fileJs_wb_ = [
-    wb_configuration.development + 'js/shared/**/*.*',
-    wb_configuration.development + 'js/wb_theme/**/*.*',
-    wb_configuration.development + 'js/wb_main.js'
+    configuration.development + 'js/shared/**/*.*',
+    configuration.development + 'js/wb_theme/**/*.*',
+    configuration.development + 'js/wb_main.js'
 ];
 
 var fileJs_wb_Final = [
-    wb_configuration.homologation + 'js/' + fileJs_wb_DefaultFinal
+    configuration.homologation + 'js/' + fileJs_wb_DefaultFinal
 ];
 
 
@@ -31,20 +31,20 @@ gulp.task('wb_js_babel', function () {
         .pipe(babel({
             presets: ['@babel/env']
         }))
-        .pipe(gulp.dest(wb_configuration.homologation + 'js/'));
+        .pipe(gulp.dest(configuration.homologation + 'js/'));
 });
 
 gulp.task('wb_js_default_concat', function () {
     return gulp.src(fileJs_wb_)
         .pipe(concat(fileJs_wb_DefaultFinal))
-        .pipe(gulp.dest(wb_configuration.homologation + 'js/'));
+        .pipe(gulp.dest(configuration.homologation + 'js/'));
 });
 
 gulp.task('wb_js_remove_code', function () {
-    return gulp.src(wb_configuration.homologation + 'js/*.js')
+    return gulp.src(configuration.homologation + 'js/*.js')
         .pipe(removeCode({ production: true }))
         .pipe(removeCode({ noDevFeatures: false, commentStart: '/*', commentEnd: '*/' }))
-        .pipe(gulp.dest(wb_configuration.production + 'js/'));
+        .pipe(gulp.dest(configuration.production + 'js/'));
 });
 
 gulp.task('wb_js_default', gulp.series(
@@ -56,9 +56,9 @@ gulp.task('wb_js_default', gulp.series(
 
 
 gulp.task('wb_js_minify', function () {
-    return gulp.src(wb_configuration.homologation + 'js/*.*')
+    return gulp.src(configuration.homologation + 'js/*.*')
         .pipe(uglify())
-        .pipe(gulp.dest(wb_configuration.production + 'js/'));
+        .pipe(gulp.dest(configuration.production + 'js/'));
 });
 
 

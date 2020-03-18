@@ -1,24 +1,24 @@
 var gulp = require('gulp');
 var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/package/del
 
-var wb_configuration = require('./wb_configuration.js');
+var configuration = require('./configuration.js');
 
 
 
 
 
 var filePHP = [
-    wb_configuration.development + 'php/*',
-    wb_configuration.development + 'php/**',
-    wb_configuration.development + 'php/**/*',
-    wb_configuration.development + 'php/**/*.*'
+    configuration.development + 'php/*',
+    configuration.development + 'php/**',
+    configuration.development + 'php/**/*',
+    configuration.development + 'php/**/*.*'
 ];
 
 var filePHPPublic = [
-    wb_configuration.homologation + 'php/*',
-    wb_configuration.homologation + 'php/**',
-    wb_configuration.homologation + 'php/**/*',
-    wb_configuration.homologation + 'php/**/*.*'
+    configuration.homologation + 'php/*',
+    configuration.homologation + 'php/**',
+    configuration.homologation + 'php/**/*',
+    configuration.homologation + 'php/**/*.*'
 ];
 
 
@@ -27,20 +27,20 @@ function clean(path) {
 }
 
 gulp.task('wb_php_clean', function () {
-    var files = [wb_configuration.homologation + 'php/**'];
+    var files = [configuration.homologation + 'php/**'];
     return clean(files);
 });
 
 
 gulp.task('wb_php_move', function (done) {
     return gulp
-        .src(wb_configuration.development + 'php/**/*.*')
-        .pipe(gulp.dest(wb_configuration.homologation + "php/"));
+        .src(configuration.development + 'php/**/*.*')
+        .pipe(gulp.dest(configuration.homologation + "php/"));
     done();
 });
 
 gulp.task('wb_php_delete_tool', function (done) {
-    var files = [wb_configuration.homologation + 'php/tool/**'];
+    var files = [configuration.homologation + 'php/tool/**'];
     return clean(files);
 });
 

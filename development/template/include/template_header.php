@@ -1,11 +1,11 @@
 <?php
-$objWBPUrl = new WBPUrl();
+$objWBUrl = new WBUrl();
 ?>
 
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBPUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBPTranslation['home']; ?>">
+            <a href="<?php echo $objWBUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -20,10 +20,10 @@ $objWBPUrl = new WBPUrl();
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php echo $WBPTranslation['language']; ?>:</span>
+                            <span class="about mobile-hide"><?php echo $WBTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WBPTranslation['language']; ?>">
+                            <select id="translation_select" aria-label="<?php echo $WBTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>

@@ -20,9 +20,12 @@ $objWBPRoute->addRoute([
 ]);
 
 $route = $objWBPRoute->getRoute();
-?> <?php
+?>
+
+<?php
 include $route;
-?> <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE--> <?php
+?>
+<!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
+<?php
 echo $objWBPHtml->buildFooter();
-?>;
 ?>

@@ -7,22 +7,22 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /*removeIf(production)*/
-var WBPDebug =
+var WBDebug =
 /*#__PURE__*/
 function () {
-  function WBPDebug() {
-    _classCallCheck(this, WBPDebug);
+  function WBDebug() {
+    _classCallCheck(this, WBDebug);
 
-    this.isWBPAdmin = true;
-    this.isWBPAdmin = true;
-    this.isWBPAdminBlog = true;
-    this.isWBPLogin = true;
-    this.isWBPManagement = true;
-    this.isWBPTranslation = true;
-    this.isWBPUrl = true;
+    this.isWBAdmin = true;
+    this.isWBAdmin = true;
+    this.isWBAdminBlog = true;
+    this.isWBLogin = true;
+    this.isWBManagement = true;
+    this.isWBTranslation = true;
+    this.isWBUrl = true;
   }
 
-  _createClass(WBPDebug, [{
+  _createClass(WBDebug, [{
     key: "debugMethod",
     value: function debugMethod(obj, method) {
       var parameter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -72,29 +72,29 @@ function () {
     }
   }]);
 
-  return WBPDebug;
+  return WBDebug;
 }();
 /*endRemoveIf(production)*/
 
 
-var WBPAdmin =
+var WBAdmin =
 /*#__PURE__*/
 function () {
-  function WBPAdmin() {
-    _classCallCheck(this, WBPAdmin);
+  function WBAdmin() {
+    _classCallCheck(this, WBAdmin);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
 
     this.pageCurrent = '';
   }
 
-  _createClass(WBPAdmin, [{
+  _createClass(WBAdmin, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (!getUrlWord('admin')) {
@@ -109,7 +109,7 @@ function () {
     key: "updateVariable",
     value: function updateVariable() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$page = document.querySelector('#page_admin');
@@ -125,7 +125,7 @@ function () {
     key: "buildMenuChangePage",
     value: function buildMenuChangePage(page) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.buildMenuDifeneActive(page);
@@ -138,7 +138,7 @@ function () {
     key: "buildMenuDifeneActive",
     value: function buildMenuDifeneActive() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var classActive = 'menu-tab-active';
@@ -158,19 +158,19 @@ function () {
     key: "buildLogout",
     value: function buildLogout() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var ajax = new XMLHttpRequest();
-      var param = '&c=WBPLogin' + '&m=doLogout';
-      ajax.open('POST', objWBPUrl.getController(), true);
+      var param = '&c=WBLogin' + '&m=doLogout';
+      ajax.open('POST', objWBUrl.getController(), true);
       ajax.send(param);
     }
   }, {
     key: "builTableTdWrapper",
     value: function builTableTdWrapper() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var td = document.querySelectorAll('.td-wrapper');
@@ -187,25 +187,25 @@ function () {
     }
   }]);
 
-  return WBPAdmin;
+  return WBAdmin;
 }();
 
-var WBPAdminBlog =
+var WBAdminBlog =
 /*#__PURE__*/
 function () {
-  function WBPAdminBlog() {
-    _classCallCheck(this, WBPAdminBlog);
+  function WBAdminBlog() {
+    _classCallCheck(this, WBAdminBlog);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(WBPAdminBlog, [{
+  _createClass(WBAdminBlog, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (!getUrlWord('admin-blog')) {
@@ -221,7 +221,7 @@ function () {
     key: "updateVariable",
     value: function updateVariable() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.isEdit = false;
@@ -246,7 +246,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -264,7 +264,7 @@ function () {
     key: "buildMenuTable",
     value: function buildMenuTable() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -276,7 +276,7 @@ function () {
         Array.prototype.forEach.call($button, function (item) {
           item.onclick = function () {
             objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+            objWFModal.buildContentConfirmationAction('objWBAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
           };
         });
       });
@@ -308,7 +308,7 @@ function () {
         Array.prototype.forEach.call($buttonDelete, function (item) {
           item.onclick = function () {
             objWFModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
-            objWFModal.buildContentConfirmationAction('objWBPAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+            objWFModal.buildContentConfirmationAction('objWBAdminBlog.delete(' + item.getAttribute('data-id') + ')');
           };
         });
       });
@@ -317,13 +317,13 @@ function () {
     key: "editSave",
     value: function editSave() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doUpdate' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&id=' + self.editId;
+      var url = objWBUrl.getController();
+      var param = '&c=WBAdminBlog' + '&m=doUpdate' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&id=' + self.editId;
 
       if (!this.validateForm()) {
         return;
@@ -344,13 +344,13 @@ function () {
     key: "editLoadData",
     value: function editLoadData(id) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=editLoadData' + '&id=' + id;
+      var url = objWBUrl.getController();
+      var param = '&c=WBAdminBlog' + '&m=editLoadData' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -369,7 +369,7 @@ function () {
     key: "editFillField",
     value: function editFillField(obj) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$formFieldTitlePt.value = obj['title_pt'];
@@ -391,13 +391,13 @@ function () {
     key: "modify",
     value: function modify(id, status) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
+      var url = objWBUrl.getController();
+      var param = '&c=WBAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -413,13 +413,13 @@ function () {
     key: "delete",
     value: function _delete(id) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doDelete' + '&id=' + id;
+      var url = objWBUrl.getController();
+      var param = '&c=WBAdminBlog' + '&m=doDelete' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -435,7 +435,7 @@ function () {
     key: "validateForm",
     value: function validateForm() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn, this.$formFieldContentPt, this.$formFieldContentEn];
@@ -445,7 +445,7 @@ function () {
     key: "registerContent",
     value: function registerContent() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -455,8 +455,8 @@ function () {
       }
 
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPAdminBlog' + '&m=doRegister' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
+      var url = objWBUrl.getController();
+      var param = '&c=WBAdminBlog' + '&m=doRegister' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -472,7 +472,7 @@ function () {
     key: "showResponse",
     value: function showResponse(data) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var color = '';
@@ -495,40 +495,40 @@ function () {
     key: "watchTitle",
     value: function watchTitle() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       this.$formFieldTitlePt.addEventListener('focusout', function () {
-        var url = objWBPUrl.buildSEO(self.$formFieldTitlePt.value);
+        var url = objWBUrl.buildSEO(self.$formFieldTitlePt.value);
         self.$formFieldUrlPt.value = url;
       });
       this.$formFieldTitleEn.addEventListener('focusout', function () {
-        var url = objWBPUrl.buildSEO(self.$formFieldTitleEn.value);
+        var url = objWBUrl.buildSEO(self.$formFieldTitleEn.value);
         self.$formFieldUrlEn.value = url;
       });
     }
   }]);
 
-  return WBPAdminBlog;
+  return WBAdminBlog;
 }();
 
-var WBPBlog =
+var WBBlog =
 /*#__PURE__*/
 function () {
-  function WBPBlog() {
-    _classCallCheck(this, WBPBlog);
+  function WBBlog() {
+    _classCallCheck(this, WBBlog);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(WBPBlog, [{
+  _createClass(WBBlog, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (!getUrlWord('blog')) {
@@ -542,7 +542,7 @@ function () {
     key: "update",
     value: function update() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$lastPost = document.querySelector('#page_blog_last_post');
@@ -552,7 +552,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -577,13 +577,13 @@ function () {
     key: "loadMore",
     value: function loadMore(target) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPBlog' + '&m=loadMore';
+      var url = objWBUrl.getController();
+      var param = '&c=WBBlog' + '&m=loadMore';
       target.classList.add('disabled');
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -599,25 +599,25 @@ function () {
     }
   }]);
 
-  return WBPBlog;
+  return WBBlog;
 }();
 
-var WBPLogin =
+var WBLogin =
 /*#__PURE__*/
 function () {
-  function WBPLogin() {
-    _classCallCheck(this, WBPLogin);
+  function WBLogin() {
+    _classCallCheck(this, WBLogin);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(WBPLogin, [{
+  _createClass(WBLogin, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (!getUrlWord('admin-login')) {
@@ -631,7 +631,7 @@ function () {
     key: "update",
     value: function update() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.isSignUp = false;
@@ -644,7 +644,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -656,7 +656,7 @@ function () {
     key: "validate",
     value: function validate() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       if (this.$fielEmail.value === '') {
@@ -677,13 +677,13 @@ function () {
     key: "buildLogin",
     value: function buildLogin() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
+      var url = objWBUrl.getController();
+      var param = '&c=WBLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
       if (!this.validate()) {
         return;
@@ -706,7 +706,7 @@ function () {
     key: "buildLoginResponse",
     value: function buildLoginResponse(data) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var response = '';
@@ -733,7 +733,7 @@ function () {
           break;
 
         default:
-          objWBPUrl.build('admin');
+          objWBUrl.build('admin');
           break;
       }
 
@@ -741,21 +741,21 @@ function () {
     }
   }]);
 
-  return WBPLogin;
+  return WBLogin;
 }();
 
-var WBPManagement =
+var WBManagement =
 /*#__PURE__*/
 function () {
-  function WBPManagement() {
-    _classCallCheck(this, WBPManagement);
+  function WBManagement() {
+    _classCallCheck(this, WBManagement);
   }
 
-  _createClass(WBPManagement, [{
+  _createClass(WBManagement, [{
     key: "verifyLoad",
     value: function verifyLoad() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -768,36 +768,36 @@ function () {
     key: "applyClass",
     value: function applyClass() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      objWBPTranslation.build();
-      objWBPLogin.build();
-      objWBPAdmin.build();
-      objWBPAdminBlog.build();
-      objWBPBlog.build();
+      objWBTranslation.build();
+      objWBLogin.build();
+      objWBAdmin.build();
+      objWBAdminBlog.build();
+      objWBBlog.build();
     }
   }]);
 
-  return WBPManagement;
+  return WBManagement;
 }();
 
-var WBPTranslation =
+var WBTranslation =
 /*#__PURE__*/
 function () {
-  function WBPTranslation() {
-    _classCallCheck(this, WBPTranslation);
+  function WBTranslation() {
+    _classCallCheck(this, WBTranslation);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(WBPTranslation, [{
+  _createClass(WBTranslation, [{
     key: "build",
     value: function build() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.update();
@@ -808,7 +808,7 @@ function () {
     key: "buildMenu",
     value: function buildMenu() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var self = this;
@@ -820,12 +820,12 @@ function () {
     key: "change",
     value: function change(language) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       var ajax = new XMLHttpRequest();
-      var url = objWBPUrl.getController();
-      var param = '&c=WBPTranslation' + '&m=change' + '&language=' + language;
+      var url = objWBUrl.getController();
+      var param = '&c=WBTranslation' + '&m=change' + '&language=' + language;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -841,7 +841,7 @@ function () {
     key: "defineActive",
     value: function defineActive() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$select.value = globalLanguage;
@@ -850,32 +850,32 @@ function () {
     key: "update",
     value: function update() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       this.$select = document.querySelector('#translation_select');
     }
   }]);
 
-  return WBPTranslation;
+  return WBTranslation;
 }();
 
-var WBPUrl =
+var WBUrl =
 /*#__PURE__*/
 function () {
-  function WBPUrl() {
-    _classCallCheck(this, WBPUrl);
+  function WBUrl() {
+    _classCallCheck(this, WBUrl);
 
     /*removeIf(production)*/
-    objWBPDebug.debugMethod(this, 'constructor');
+    objWBDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
   }
 
-  _createClass(WBPUrl, [{
+  _createClass(WBUrl, [{
     key: "buildSEO",
     value: function buildSEO(url) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return url.toString() // Convert to string
@@ -893,7 +893,7 @@ function () {
     key: "build",
     value: function build(target) {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return window.location = globalUrl + globalLanguage + '/' + target + '/';
@@ -902,26 +902,26 @@ function () {
     key: "getController",
     value: function getController() {
       /*removeIf(production)*/
-      objWBPDebug.debugMethod(this, objWBPDebug.getMethodName());
+      objWBDebug.debugMethod(this, objWBDebug.getMethodName());
       /*endRemoveIf(production)*/
 
       return globalUrl + 'php/controller.php';
     }
   }]);
 
-  return WBPUrl;
+  return WBUrl;
 }();
 /*removeIf(production)*/
 
 
-var objWBPDebug = new WBPDebug();
+var objWBDebug = new WBDebug();
 /*endRemoveIf(production)*/
 
-var objWBPAdmin = new WBPAdmin();
-var objWBPAdminBlog = new WBPAdminBlog();
-var objWBPBlog = new WBPBlog();
-var objWBPLogin = new WBPLogin();
-var objWBPManagement = new WBPManagement();
-var objWBPTranslation = new WBPTranslation();
-var objWBPUrl = new WBPUrl();
-objWBPManagement.verifyLoad();
+var objWBAdmin = new WBAdmin();
+var objWBAdminBlog = new WBAdminBlog();
+var objWBBlog = new WBBlog();
+var objWBLogin = new WBLogin();
+var objWBManagement = new WBManagement();
+var objWBTranslation = new WBTranslation();
+var objWBUrl = new WBUrl();
+objWBManagement.verifyLoad();

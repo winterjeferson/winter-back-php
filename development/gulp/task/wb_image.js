@@ -3,24 +3,24 @@ var imagemin = require('gulp-imagemin'); //npm install gulp-imagemin --save-dev 
 var newer = require('gulp-newer'); //npm install gulp-newer --save-dev // https://www.npmjs.com/package/gulp-newer/
 var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/package/del
 
-var wb_configuration = require('./wb_configuration.js');
+var configuration = require('./configuration.js');
 
 
 
 
 
 var fileImg = [
-    wb_configuration.development + 'img/*',
-    wb_configuration.development + 'img/**',
-    wb_configuration.development + 'img/**/*',
-    wb_configuration.development + 'img/**/*.*'
+    configuration.development + 'img/*',
+    configuration.development + 'img/**',
+    configuration.development + 'img/**/*',
+    configuration.development + 'img/**/*.*'
 ];
 
 var fileImgPublic = [
-    wb_configuration.homologation + 'img/*',
-    wb_configuration.homologation + 'img/**',
-    wb_configuration.homologation + 'img/**/*',
-    wb_configuration.homologation + 'img/**/*.*'
+    configuration.homologation + 'img/*',
+    configuration.homologation + 'img/**',
+    configuration.homologation + 'img/**/*',
+    configuration.homologation + 'img/**/*.*'
 ];
 
 
@@ -29,14 +29,14 @@ function clean(path) {
 }
 
 gulp.task('wb_image_clean', function () {
-    var files = [wb_configuration.homologation + 'img/**'];
+    var files = [configuration.homologation + 'img/**'];
     return clean(files);
 });
 
 gulp.task('wb_image_move', function (done) {
     return gulp
-        .src(wb_configuration.development + 'img/**/*.*')
-        .pipe(gulp.dest(wb_configuration.homologation + "img/"));
+        .src(configuration.development + 'img/**/*.*')
+        .pipe(gulp.dest(configuration.homologation + "img/"));
     done();
 });
 
@@ -44,10 +44,10 @@ gulp.task('wb_image_move', function (done) {
 // fix enoent problem: node node_modules/optipng-bin/lib/install.js
 gulp.task('wb_image_imagemin', function () {
     return gulp
-        .src(wb_configuration.homologation + 'img/**')
-        // .pipe(newer(wb_configuration.production + "img/"))
+        .src(configuration.homologation + 'img/**')
+        // .pipe(newer(configuration.production + "img/"))
         .pipe(imagemin())
-        .pipe(gulp.dest(wb_configuration.production + "img/"));
+        .pipe(gulp.dest(configuration.production + "img/"));
 });
 
 gulp.task('wb_image', gulp.series(

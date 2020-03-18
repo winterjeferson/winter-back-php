@@ -1,3 +1,3 @@
 <?php
-echo $objWBPHtml->buildFooter();
+echo $objWBHtml->buildFooter();
 ?>
