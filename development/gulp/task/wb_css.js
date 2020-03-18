@@ -9,13 +9,13 @@ var wb_util = require('./wb_util.js');
 
 
 var fileCssAdmin = [
-    configuration.development + 'css/sass/*.scss',
-    configuration.development + 'css/admin/*.scss'
+    configuration.development + 'css/wb_sass/*.scss',
+    configuration.development + 'css/wb_admin/*.scss'
 ];
 
 var fileCssTheme = [
-    configuration.development + 'css/sass/*.scss',
-    configuration.development + 'css/theme/*.scss'
+    configuration.development + 'css/wb_sass/*.scss',
+    configuration.development + 'css/wb_theme/*.scss'
 ];
 
 var cssAdminConcat = fileCssAdmin;
