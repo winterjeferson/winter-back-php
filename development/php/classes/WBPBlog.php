@@ -232,6 +232,6 @@ class WBPBlog
 
     function loadMore()
     {
-        return 'qqqqqqq';
+        return 'loadMore';
     }
 }

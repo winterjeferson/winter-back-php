@@ -13,8 +13,8 @@ class Theme
         $objWBPHtml = new WBPHtml();
         $string = '';
 
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/plugin');
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/style');
+        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
+        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_style');
 
         return $string;
     }
@@ -24,8 +24,8 @@ class Theme
         $objWBPHtml = new WBPHtml();
         $string = '';
 
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/WFplugin');
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/WFscript');
+        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
+        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_script');
 
         return $string;
     }

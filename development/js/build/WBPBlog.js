@@ -23,6 +23,10 @@ class WBPBlog {
         /*removeIf(production)*/ objWBPDebug.debugMethod(this, objWBPDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
+        if (!this.$lastPost) {
+            return;
+        }
+
         if (document.contains(this.$lastPost.querySelector('[data-id="laod_more"]'))) {
             this.$lastPost.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
                 self.loadMore(this);
