@@ -14,7 +14,7 @@ var fileJsDefaultFinal = 'wb_theme.js';
 var fileJs = [
     wb_configuration.development + 'js/shared/**/*.*',
     wb_configuration.development + 'js/wb_theme/**/*.*',
-    wb_configuration.development + 'js/main.js'
+    wb_configuration.development + 'js/wb_main.js'
 ];
 
 var fileJsFinal = [
