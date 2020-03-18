@@ -14,7 +14,7 @@ class Theme
         $string = '';
 
         $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_style');
+        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_theme');
 
         return $string;
     }
@@ -25,7 +25,7 @@ class Theme
         $string = '';
 
         $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_script');
+        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
 
         return $string;
     }
