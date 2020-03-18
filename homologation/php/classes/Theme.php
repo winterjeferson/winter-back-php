@@ -26,7 +26,7 @@ class Theme
         
         $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
         $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
-        $string .= $objWBPHtml->buildTagJavascript($this->mainUrl . 'js/wb_theme');
+        $string .= $objWBPHtml->buildTagJavascript($objWBPHtml->mainUrl . 'js/wb_theme');
 
         return $string;
     }
