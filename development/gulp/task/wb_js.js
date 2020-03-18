@@ -9,11 +9,11 @@ var wb_configuration = require('./wb_configuration.js');
 
 
 
-var fileJsDefaultFinal = 'wb.js';
+var fileJsDefaultFinal = 'wb_theme.js';
 
 var fileJs = [
     wb_configuration.development + 'js/shared/**/*.*',
-    wb_configuration.development + 'js/wb/**/*.*',
+    wb_configuration.development + 'js/wb_theme/**/*.*',
     wb_configuration.development + 'js/main.js'
 ];
 

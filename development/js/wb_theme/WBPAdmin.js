@@ -9,7 +9,7 @@ class WBPAdmin {
         if (!getUrlWord('admin')) {
             return;
         }
-
+        
         this.updateVariable();
         this.buildMenuDifeneActive();
         this.builTableTdWrapper();

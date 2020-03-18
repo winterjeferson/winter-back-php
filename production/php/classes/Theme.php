@@ -14,18 +14,19 @@ class Theme
         $string = '';
 
         $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_style');
-
+        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_theme');
+        
         return $string;
     }
-
+    
     public function buildJs()
     {
         $objWBPHtml = new WBPHtml();
         $string = '';
-
+        
         $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_script');
+        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
+        $string .= $objWBPHtml->buildTagJavascript($this->mainUrl . 'js/wb_theme');
 
         return $string;
     }

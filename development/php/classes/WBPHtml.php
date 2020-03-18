@@ -141,7 +141,6 @@ class WBPHtml
         $string .= '    var globalTranslation = ' . json_encode($objWBPSession->get('translation')) . ';';
         $string .= '</script>';
         $string .= $objTheme->buildJs();
-        $string .= $this->buildTagJavascript($this->mainUrl . 'js/wb');
         $string .= $this->buildAdmin();
 
         $string .= '    </body>';

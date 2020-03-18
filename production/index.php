@@ -24,4 +24,5 @@ $route = $objWBPRoute->getRoute();
 include $route;
 ?> <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE--> <?php
 echo $objWBPHtml->buildFooter();
+?>;
 ?>
