@@ -12,8 +12,8 @@ var wb_configuration = require('./wb_configuration.js');
 var fileJsDefaultFinal = 'wb.js';
 
 var fileJs = [
-    wb_configuration.development + 'js/plugin/**/*.*',
-    wb_configuration.development + 'js/build/**/*.*',
+    wb_configuration.development + 'js/shared/**/*.*',
+    wb_configuration.development + 'js/wb/**/*.*',
     wb_configuration.development + 'js/main.js'
 ];
 

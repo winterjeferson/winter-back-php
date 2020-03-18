@@ -9,10 +9,12 @@ var wb_util = require('./wb_util.js');
 
 
 var fileCssAdmin = [
+    wb_configuration.development + 'css/sass/*.scss',
     wb_configuration.development + 'css/admin/*.scss'
 ];
 
 var fileCssTheme = [
+    wb_configuration.development + 'css/sass/*.scss',
     wb_configuration.development + 'css/theme/*.scss'
 ];
 
