@@ -2,6 +2,8 @@
 
 class WBPBlog
 {
+    private $postListLimitLastPost = 10;
+    private $postListLimitMostViewed = 3;
 
     public function __construct()
     {
@@ -59,7 +61,7 @@ class WBPBlog
 
     //////////////////////////////////////////////////////////////////////////////// POST LIST
 
-    function getPostList()
+    function getPostList($target)
     {
         $objWBPQuery = new WBPQuery();
 
@@ -70,23 +72,107 @@ class WBPBlog
                 ['table' => 'blog', 'column' => 'title_en'],
                 ['table' => 'blog', 'column' => 'url_pt'],
                 ['table' => 'blog', 'column' => 'url_en'],
+                ['table' => 'blog', 'column' => 'date_post_pt'],
+                ['table' => 'blog', 'column' => 'date_post_en'],
+                ['table' => 'blog', 'column' => 'date_edit_pt'],
+                ['table' => 'blog', 'column' => 'date_edit_en'],
             ],
             'table' => [['table' => 'blog']],
             'where' => [
                 ['table' => 'blog', 'column' => 'active', 'value' => 1]
-            ],
-            'order' => [
-                ['column' => 'id', 'order' => 'DESC']
             ]
         ]);
 
+        $this->getPostListTarget($objWBPQuery, $target);
         $query = $objWBPQuery->select();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $this->getPostListBuildLoadMore($target, $result);
+        return $result;
+    }
+
+    function getPostListBuildLoadMore($target, $result)
+    {
+        $objWBPSession = new WBPSession();
+        $count = count($result);
+
+        switch ($target) {
+            case 'lastPost':
+                if ($count >= $this->postListLimitLastPost) {
+                    $objWBPSession->set('blog_is_load_more_last_post', true);
+                } else {
+                    $objWBPSession->set('blog_is_load_more_last_post', false);
+                }
+                break;
+            case 'mostViewed':
+                if ($count >= $this->postListLimitMostViewed) {
+                    $objWBPSession->set('blog_is_load_more_most_viewed', true);
+                } else {
+                    $objWBPSession->set('blog_is_load_more_most_viewed', false);
+                }
+                break;
+        }
+    }
+
+    function buildLoadMoreButton($target)
+    {
+        $objWBPSession = new WBPSession();
+
+        switch ($target) {
+            case 'lastPost':
+                if (!$objWBPSession->get('blog_is_load_more_last_post')) {
+                    return;
+                }
+                break;
+            case 'mostViewed':
+                if (!$objWBPSession->get('blog_is_load_more_most_viewed')) {
+                    return;
+                }
+                break;
+        }
+
+        return $this->buildLoadMoreButtonHTML($objWBPSession);
+    }
+
+    function buildLoadMoreButtonHTML($objWBPSession)
+    {
+        $string = '';
+
+        $string .= '<div class="row">';
+        $string .= '    <div class="col-es-12">';
+        $string .= '        <button type="button" class="bt bt-fu bt-blue" data-id="laod_more">';
+        $string .= $objWBPSession->getArray('translation', 'load_more');
+        $string .= '        </button>';
+        $string .= '    </div>';
+        $string .= '</div>';
+
+        return $string;
+    }
+
+    function getPostListTarget($objWBPQuery, $target)
+    {
+        switch ($target) {
+            case 'lastPost':
+                $objWBPQuery->populateArray([
+                    'order' => [
+                        ['column' => 'id', 'order' => 'DESC']
+                    ],
+                    'limit' => [['final' => $this->postListLimitLastPost]],
+                ]);
+                break;
+            case 'mostViewed':
+                $objWBPQuery->populateArray([
+                    'order' => [
+                        ['column' => 'view', 'order' => 'DESC']
+                    ],
+                    'limit' => [['final' => $this->postListLimitMostViewed]],
+                ]);
+                break;
+        }
     }
 
     function buildBlogTag($target)
     {
-        $explode = $pieces = explode('/', $target);
+        $explode = explode('/', $target);
         $length = count($explode);
         $string = '';
 
@@ -101,5 +187,51 @@ class WBPBlog
         $string .= '</ul>';
 
         return $string;
+    }
+
+    function buildBlogPost($target)
+    {
+        $string = '';
+        $objWBPTranslation = new WBPTranslation();
+        $objWBPSession = new WBPSession();
+
+        if ($target === 'lastPost') {
+            $query = $this->getPostList('lastPost');
+        } else {
+            $query = $this->getPostList('mostViewed');
+        }
+
+        foreach ($query as $key => $value) {
+            $string .= '<article>';
+            $string .= '    <div class="blog-list-image">';
+            $string .= '        <img src="http://localhost/e/development/site/branches/framework/winter-front/homologation/img/banner/1.png" alt="image">';
+            $string .= '    </div>';
+            $string .= '    <div class="blog-list-text">';
+            $string .= '        <a href="' . $objWBPTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWBPTranslation->getLanguage()] . '/" class="link link-blue">';
+            $string .= '            <h2 class="blog-list-title">';
+            $string .= utf8_encode($value['title_' . $objWBPTranslation->getLanguage()]);
+            $string .= '            </h2>';
+            $string .= '        </a>';
+            $string .= '        <small class="color-grey">';
+            $string .= $value['date_post_' . $objWBPTranslation->getLanguage()];
+
+            if ($value['date_post_' . $objWBPTranslation->getLanguage()] !== $value['date_edit_' . $objWBPTranslation->getLanguage()]) {
+                $string .=  '<br/>';
+                $string .=  $objWBPSession->getArray('translation', 'edited_on') . ' ' . $value['date_edit_' . $objWBPTranslation->getLanguage()];
+            }
+
+            $string .= '        </small>';
+            $string .= '    </div>';
+            $string .= '</article>';
+        }
+
+        return $string;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////// LOAD MORE
+
+    function loadMore()
+    {
+        return 'loadMore';
     }
 }

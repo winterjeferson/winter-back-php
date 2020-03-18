@@ -1,0 +1,52 @@
+$re: 4px;
+$bi: $re * 2;
+$eb: $bi * 2;
+
+$break-point-es: 0;
+$break-point-sm: 576px;
+$break-point-re: 768px;
+$break-point-bi: 992px;
+$break-point-eb: 1200px;
+$break-point-fhd: 1900px;
+
+#page_blog {
+  .col-first {
+    @media (min-width: $break-point-es) {
+      padding-right: 0;
+    }
+
+    @media (min-width: $break-point-bi) {
+      padding-right: $eb;
+    }
+  }
+}
+
+.blog-list {
+  article {
+    display: grid;
+    width: 100%;
+    grid-template:
+      "blog-list-image blog-list-text"
+      / 150px auto;
+    margin-bottom: $eb;
+    border: 1px solid #d9dcdf;
+  }
+
+  .blog-list-image {
+    grid-area: blog-list-image;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .blog-list-text {
+    grid-area: blog-list-text;
+    padding: $eb;
+
+    .blog-list-title {
+      margin: 0;
+    }
+  }
+}

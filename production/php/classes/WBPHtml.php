@@ -59,9 +59,11 @@ class WBPHtml
         $isAdmin = strpos($page, 'admin') !== false ? true : false;
 
         if ($isAdmin) {
-            $string .= $this->buildTagCSS($this->mainUrl . 'css/admin');
+            $string .= $this->buildTagCSS($this->mainUrl . 'css/wb_admin');
             $string .= '<meta name="robots" content="noindex">';
         }
+
+        $string .= $this->buildTagCSS($this->mainUrl . 'css/wb_theme');
 
         return $string;
     }
@@ -139,7 +141,7 @@ class WBPHtml
         $string .= '    var globalTranslation = ' . json_encode($objWBPSession->get('translation')) . ';';
         $string .= '</script>';
         $string .= $objTheme->buildJs();
-        $string .= $this->buildTagJavascript($this->mainUrl . 'js/WBP');
+        $string .= $this->buildTagJavascript($this->mainUrl . 'js/wb');
         $string .= $this->buildAdmin();
 
         $string .= '    </body>';
