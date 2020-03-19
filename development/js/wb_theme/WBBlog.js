@@ -1,10 +1,10 @@
-class WBBlog {
+class WbBlog {
     constructor() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
     }
 
     build() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('blog')) {
             return;
         }
@@ -14,13 +14,13 @@ class WBBlog {
     }
 
     update() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$lastPost = document.querySelector('#page_blog_last_post');
         this.$mostViewed = document.querySelector('#page_blog_most_viewed');
     }
 
     buildMenu() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
         if (!this.$lastPost) {
@@ -41,13 +41,15 @@ class WBBlog {
     }
 
     loadMore(target) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
         let parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
         let ajax = new XMLHttpRequest();
-        let url = objWBUrl.getController();
+        let url = objWbUrl.getController();
         let param =
-            '&c=WBBlog' +
-            '&m=loadMore';
+            '&c=WbBlog' +
+            '&m=loadMore' +
+            '&target=' + parentId;
 
         target.classList.add('disabled');
         ajax.open('POST', url, true);
@@ -55,11 +57,16 @@ class WBBlog {
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                console.log(ajax.responseText);
+                self.loadMoreSuccess(parentId, ajax.responseText);
+                target.classList.remove('disabled');
             }
         }
 
         ajax.send(param);
-        console.log(parentId);
+    }
+
+    loadMoreSuccess(parentId, value) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        document.querySelector('#' + parentId + ' .blog-list').insertAdjacentHTML('beforeend', value);
     }
 }

@@ -1,11 +1,11 @@
-class WBUrl {
+class WbUrl {
     constructor() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
 
     }
 
     buildSEO(url) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return url.toString()               // Convert to string
             .normalize('NFD')               // Change diacritics
             .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters
@@ -19,12 +19,12 @@ class WBUrl {
     }
 
     build(target) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
 
     getController() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return globalUrl + 'php/controller.php';
     }
 }

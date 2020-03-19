@@ -1,6 +1,6 @@
-class WBManagement {
+class WbManagement {
     verifyLoad() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
         window.onload = function () {
@@ -9,11 +9,11 @@ class WBManagement {
     }
 
     applyClass() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
-        objWBTranslation.build();
-        objWBLogin.build();
-        objWBAdmin.build();
-        objWBAdminBlog.build();
-        objWBBlog.build();
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        objWbTranslation.build();
+        objWbLogin.build();
+        objWbAdmin.build();
+        objWbAdminBlog.build();
+        objWbBlog.build();
     }
 }

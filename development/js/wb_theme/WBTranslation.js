@@ -1,17 +1,17 @@
-class WBTranslation {
+class WbTranslation {
     constructor() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
     }
 
     build() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.update();
         this.defineActive();
         this.buildMenu();
     }
 
     buildMenu() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
         this.$select.addEventListener('change', function (event) {
@@ -20,10 +20,13 @@ class WBTranslation {
     }
 
     change(language) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let url = objWBUrl.getController();
-        let param = '&c=WBTranslation' + '&m=change' + '&language=' + language;
+        let url = objWbUrl.getController();
+        let param =
+            '&c=WbTranslation' +
+            '&m=change' +
+            '&language=' + language;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -38,12 +41,12 @@ class WBTranslation {
     }
 
     defineActive() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$select.value = globalLanguage;
     }
 
     update() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$select = document.querySelector('#translation_select');
     }
 }

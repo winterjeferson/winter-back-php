@@ -1,11 +1,11 @@
-class WBLogin {
+class WbLogin {
     constructor() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
 
     }
 
     build() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('admin-login')) {
             return;
         }
@@ -15,7 +15,7 @@ class WBLogin {
     }
 
     update() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isSignUp = false;
 
         this.$page = document.querySelector('#page_admin_login');
@@ -25,7 +25,7 @@ class WBLogin {
     }
 
     buildMenu() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
         this.$buttonLogin.addEventListener('click', function (event) {
@@ -34,7 +34,7 @@ class WBLogin {
     }
 
     validate() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (this.$fielEmail.value === '') {
             this.$fielEmail.focus();
             this.buildLoginResponse('empty_email');
@@ -51,11 +51,11 @@ class WBLogin {
     }
 
     buildLogin() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWBUrl.getController();
-        let param = '&c=WBLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
+        let url = objWbUrl.getController();
+        let param = '&c=WbLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
         if (!this.validate()) {
             return;
@@ -76,7 +76,7 @@ class WBLogin {
     }
 
     buildLoginResponse(data) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let response = '';
         let $responseElement = this.$page.querySelector('.form');
 
@@ -97,10 +97,10 @@ class WBLogin {
                 this.$fieldPassword.focus();
                 break;
             default:
-                objWBUrl.build('admin');
+                objWbUrl.build('admin');
                 break;
         }
 
-        objWFNotification.add(response, 'red', $responseElement);
+        objWfNotification.add(response, 'red', $responseElement);
     }
 }

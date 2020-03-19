@@ -31,7 +31,7 @@ class WbLogin
             ],
             'where' => [['table' => 'login', 'column' => 'email', 'value' => $email]],
             'table' => [['table' => 'login']],
-            'limit' => [['final' => 1]],
+            'limit' => [['offset' => 1]],
         ]);
 
 
@@ -56,31 +56,12 @@ class WbLogin
         }
 
         if ($row['password'] === $password) {
-            $this->clearSession();
             $objWbTranslation->define();
             $objWbSession->set('id', $row['id']);
             $objWbSession->set('email', $row['email']);
             $objWbSession->set('login', true);
-            $this->doLoginSetLastActivity($row['id']);
             return 'ok';
         }
-    }
-
-    function doLoginSetLastActivity($id)
-    {
-        $objWbLayout = new WbLayout();
-        $lastActivity = $objWbLayout->getTimezone();
-
-        $objWbQuery = new WbQuery();
-        $objWbQuery->populateArray([
-            'table' => [['table' => 'login']],
-            'column' => [['column' => 'last_activity', 'value' => $lastActivity]],
-            'where' => [['table' => 'login', 'column' => 'id', 'value' => $id]]
-        ]);
-
-        $query = $objWbQuery->update();
-
-        return $query;
     }
 
     function doLogout()
@@ -89,12 +70,6 @@ class WbLogin
         $objWbSession->set('login', false);
 
         $this->redirect('admin-login');
-    }
-
-    function clearSession()
-    {
-        $objWbSession = new WbSession();
-        $objWbSession->clear();
     }
 
     function redirect($target = '')

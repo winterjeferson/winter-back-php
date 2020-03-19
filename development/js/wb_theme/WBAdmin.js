@@ -1,11 +1,11 @@
-class WBAdmin {
+class WbAdmin {
     constructor() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
         this.pageCurrent = '';
     }
 
     build() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('admin')) {
             return;
         }
@@ -16,7 +16,7 @@ class WBAdmin {
     }
 
     updateVariable() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$page = document.querySelector('#page_admin');
 
         if (!document.contains(this.$page)) {
@@ -28,7 +28,7 @@ class WBAdmin {
     }
 
     buildMenuChangePage(page) {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.buildMenuDifeneActive(page);
 
         if (page !== 'admin-logout') {
@@ -37,7 +37,7 @@ class WBAdmin {
     }
 
     buildMenuDifeneActive() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
         let href = window.location.href;
         let split = href.split('/');
@@ -53,16 +53,16 @@ class WBAdmin {
     }
 
     buildLogout() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let param = '&c=WBLogin' + '&m=doLogout';
+        let param = '&c=WbLogin' + '&m=doLogout';
 
-        ajax.open('POST', objWBUrl.getController(), true);
+        ajax.open('POST', objWbUrl.getController(), true);
         ajax.send(param);
     }
 
     builTableTdWrapper() {
-        /*removeIf(production)*/ objWBDebug.debugMethod(this, objWBDebug.getMethodName()); /*endRemoveIf(production)*/
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let td = document.querySelectorAll('.td-wrapper');
         let currentClass = 'td-wrapper-auto';
 

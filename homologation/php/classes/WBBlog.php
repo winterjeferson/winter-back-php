@@ -2,12 +2,11 @@
 
 class WbBlog
 {
-    private $postListLimitLastPost = 10;
+    private $postListLimitLastPost = 5;
     private $postListLimitMostViewed = 3;
-
-    public function __construct()
-    {
-    }
+    private $prefixPagination = 'blog_load_more_current_';
+    private $suffixPaginationLastPost = 'page_blog_last_post';
+    private $suffixPaginationMostViewed = 'page_blog_most_viewed';
 
     //////////////////////////////////////////////////////////////////////////////// POST
 
@@ -152,22 +151,42 @@ class WbBlog
     {
         switch ($target) {
             case 'lastPost':
-                $objWbQuery->populateArray([
-                    'order' => [
-                        ['column' => 'id', 'order' => 'DESC']
-                    ],
-                    'limit' => [['final' => $this->postListLimitLastPost]],
-                ]);
+                $this->getPostListTargetLastPost($objWbQuery);
                 break;
             case 'mostViewed':
-                $objWbQuery->populateArray([
-                    'order' => [
-                        ['column' => 'view', 'order' => 'DESC']
-                    ],
-                    'limit' => [['final' => $this->postListLimitMostViewed]],
-                ]);
+                $this->getPostListTargetMostViewed($objWbQuery);
                 break;
         }
+    }
+
+    function getPostListTargetLastPost($objWbQuery)
+    {
+        $objWbSession = new WbSession();
+
+        $objWbQuery->populateArray([
+            'order' => [
+                ['column' => 'date_post_' . $objWbSession->get('language'), 'order' => 'DESC']
+            ],
+            'limit' => [
+                ['initial' => $objWbSession->get($this->prefixPagination . $this->suffixPaginationLastPost)],
+                ['offset' => $this->postListLimitLastPost]
+            ],
+        ]);
+    }
+
+    function getPostListTargetMostViewed($objWbQuery)
+    {
+        $objWbSession = new WbSession();
+
+        $objWbQuery->populateArray([
+            'order' => [
+                ['column' => 'view', 'order' => 'DESC']
+            ],
+            'limit' => [
+                ['initial' => $objWbSession->get($this->prefixPagination . $this->suffixPaginationMostViewed)],
+                ['offset' =>  $this->postListLimitMostViewed]
+            ],
+        ]);
     }
 
     function buildBlogTag($target)
@@ -232,6 +251,44 @@ class WbBlog
 
     function loadMore()
     {
-        return 'loadMore';
+        $target = filter_input(INPUT_POST, 'target', FILTER_SANITIZE_EMAIL);
+
+        switch ($target) {
+            case 'page_blog_last_post':
+                $return = $this->buildBlogPost('lastPost');
+                break;
+            case 'page_blog_most_viewed':
+                $return = $this->buildBlogPost('mostViewed');
+                break;
+        }
+
+        return $return;
+    }
+
+    function loadMoreSetLast($target)
+    {
+        switch ($target) {
+            case 'page_blog_last_post':
+                $this->loadMoreSetLastSession($target, $this->postListLimitLastPost, false);
+                break;
+            case 'page_blog_most_viewed':
+                $this->loadMoreSetLastSession($target, $this->postListLimitMostViewed, false);
+                break;
+            default:
+                $this->loadMoreSetLastSession($this->suffixPaginationLastPost, $this->postListLimitLastPost, true);
+                $this->loadMoreSetLastSession($this->suffixPaginationMostViewed, $this->postListLimitMostViewed, true);
+                break;
+        }
+    }
+
+    function loadMoreSetLastSession($target, $value, $isReset)
+    {
+        $objWbSession = new WbSession();
+
+        if ($isReset) {
+            $objWbSession->set($this->prefixPagination  . $target, 0);
+        } else {
+            $objWbSession->set($this->prefixPagination  . $target, $objWbSession->get($this->prefixPagination  . $target) + $value);
+        }
     }
 }

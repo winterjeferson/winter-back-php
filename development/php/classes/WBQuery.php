@@ -367,7 +367,9 @@ class WbQuery
                 $string .= ', ';
             }
 
-            $string .= $arrayUse[$i]['final'];
+            if (isset($arrayUse[$i]['offset'])) {
+                $string .= $arrayUse[$i]['offset'];
+            }
         }
 
         return $string;
@@ -461,17 +463,6 @@ class WbQuery
         foreach ($array as $key => $value) {
             $this->array[$key] = $value;
         }
-    }
-
-    public function returnJson($array)
-    {
-        $arr = [];
-
-        foreach ($array as $key => $value) {
-            $arr[$key] = is_string($value) ? utf8_encode($value) : $value;
-        }
-
-        return json_encode($arr);
     }
 
     public function unbind()

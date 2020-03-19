@@ -202,6 +202,7 @@ class WbAdminBlog
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $objWbQuery = new WbQuery();
+        $objHelp = new WbHelp();
         $objWbQuery->populateArray([
             'column' => [
                 ['table' => $this->sqlTable, 'column' => 'title_pt'],
@@ -226,7 +227,7 @@ class WbAdminBlog
         $query = $objWbQuery->select();
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 
-        return $objWbQuery->returnJson($queryResult);
+        return $objHelp->buildJson($queryResult);
     }
 
     function validateTag($target)

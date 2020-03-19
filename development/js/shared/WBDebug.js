@@ -1,14 +1,14 @@
 /*removeIf(production)*/
-class WBDebug {
+class WbDebug {
     constructor() {
-        this.isWBAdmin = true;
+        this.isWbAdmin = true;
         
-        this.isWBAdmin = true;
-        this.isWBAdminBlog = true;
-        this.isWBLogin = true;
-        this.isWBManagement = true;
-        this.isWBTranslation = true;
-        this.isWBUrl = true;
+        this.isWbAdmin = true;
+        this.isWbAdminBlog = true;
+        this.isWbLogin = true;
+        this.isWbManagement = true;
+        this.isWbTranslation = true;
+        this.isWbUrl = true;
     }
 
     debugMethod(obj, method, parameter = '') {
@@ -35,7 +35,7 @@ class WBDebug {
         string += '%c';
         string += ');';
 
-        console.log(string, 'color: black', 'color: blue', 'color: red', 'color: blue');
+        console.log(string, 'color: black', 'color: blue', 'color: red', 'color: green');
     }
 
     getMethodName() {

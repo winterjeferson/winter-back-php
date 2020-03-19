@@ -1,12 +1,12 @@
 /*removeIf(production)*/
-var objWBDebug = new WBDebug();
+var objWbDebug = new WbDebug();
 /*endRemoveIf(production)*/
-var objWBAdmin = new WBAdmin();
-var objWBAdminBlog = new WBAdminBlog();
-var objWBBlog = new WBBlog();
-var objWBLogin = new WBLogin();
-var objWBManagement = new WBManagement();
-var objWBTranslation = new WBTranslation();
-var objWBUrl = new WBUrl();
+var objWbAdmin = new WbAdmin();
+var objWbAdminBlog = new WbAdminBlog();
+var objWbBlog = new WbBlog();
+var objWbLogin = new WbLogin();
+var objWbManagement = new WbManagement();
+var objWbTranslation = new WbTranslation();
+var objWbUrl = new WbUrl();
 
-objWBManagement.verifyLoad();
+objWbManagement.verifyLoad();

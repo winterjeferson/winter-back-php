@@ -94,7 +94,9 @@ $objWbUrl = new WbUrl();
                             <div class="row blog-list">
                                 <?php
                                 $objWbBlog = new WbBlog();
+                                $objWbBlog->loadMoreSetLast('reset');
                                 echo $objWbBlog->buildBlogPost('lastPost');
+                                $objWbBlog->loadMoreSetLast('page_blog_last_post');
                                 ?>
                             </div>
                             <?php
@@ -108,6 +110,7 @@ $objWbUrl = new WbUrl();
                             <div class="row blog-list">
                                 <?php
                                 echo $objWbBlog->buildBlogPost('mostViewed');
+                                $objWbBlog->loadMoreSetLast('page_blog_most_viewed');
                                 ?>
                             </div>
                             <?php
