@@ -1,8 +1,8 @@
 <?php
 
-class WBSession
+class WbSession
 {
-    public $prefix = 'WB_';
+    public $prefix = 'Wb_';
 
     public function __construct()
     {

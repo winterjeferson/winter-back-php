@@ -1,5 +1,5 @@
 <?php
-echo $objWBHtml->buildHeader();
+echo $objWbHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
     <div class="col-middle">
@@ -14,13 +14,13 @@ echo $objWBHtml->buildHeader();
 </div>
 <main class="grid">
     <?php
-$objWBUrl = new WBUrl();
+$objWbUrl = new WbUrl();
 ?>
 
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBTranslation['home']; ?>">
+            <a href="<?php echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WbTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -35,10 +35,10 @@ $objWBUrl = new WBUrl();
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php echo $WBTranslation['language']; ?>:</span>
+                            <span class="about mobile-hide"><?php echo $WbTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WBTranslation['language']; ?>">
+                            <select id="translation_select" aria-label="<?php echo $WbTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -59,21 +59,21 @@ $objWBUrl = new WBUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBTranslation['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WbTranslation['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['administrative_panel']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['blog']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['blog']; ?>
                     </a>
                 </li>
                 
@@ -94,7 +94,7 @@ $objWBUrl = new WBUrl();
                 <li>
                     <div class="slide bg-cyan">
                         <div class="col-middle slide-content">
-                            <?php echo $WBTranslation['page_initial_language']; ?>
+                            <?php echo $WbTranslation['page_initial_language']; ?>
                         </div>
                     </div>
                 </li>
@@ -102,7 +102,7 @@ $objWBUrl = new WBUrl();
                 <li>
                     <div class="slide bg-orange">
                         <div class="col-middle slide-content">
-                            <?php echo $WBTranslation['blog']; ?>
+                            <?php echo $WbTranslation['blog']; ?>
                         </div>
                     </div>
                 </li>
@@ -110,7 +110,7 @@ $objWBUrl = new WBUrl();
                 <li>
                     <div class="slide bg-red">
                         <div class="col-middle slide-content">
-                            <?php echo $WBTranslation['friendly_url']; ?>
+                            <?php echo $WbTranslation['friendly_url']; ?>
                         </div>
                     </div>
                 </li>
@@ -121,12 +121,12 @@ $objWBUrl = new WBUrl();
     <div class="menu-horizontal carousel-disabled">
         <ul class="navigation-arrow">
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $WBTranslation['previous']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $WbTranslation['previous']; ?>">
                     <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $WBTranslation['next']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $WbTranslation['next']; ?>">
                     <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
                 </button>
             </li>
@@ -143,7 +143,7 @@ $objWBUrl = new WBUrl();
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about"><?php echo $WBTranslation['developed_by']; ?>:</span>
+            <span class="about"><?php echo $WbTranslation['developed_by']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

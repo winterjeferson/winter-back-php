@@ -13,8 +13,8 @@
             </div>
             <div class="col-es-12">
                 <div class="container">
-                    <h1 class="page-title"><?php echo $WBTranslation['administrative_panel'] ?></h1>
-                    <p class="text-center"><?php echo $WBTranslation['administrative_panel_text'] ?></p>
+                    <h1 class="page-title"><?php echo $WbTranslation['administrative_panel'] ?></h1>
+                    <p class="text-center"><?php echo $WbTranslation['administrative_panel_text'] ?></p>
                 </div>
             </div>
         </div>

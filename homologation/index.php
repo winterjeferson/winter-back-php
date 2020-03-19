@@ -2,14 +2,14 @@
 
 include_once 'php/autoload.php';
 
-$objWBTranslation = new WBTranslation();
-$objWBHtml = new WBHtml();
-$objWBRoute = new WBRoute();
+$objWbTranslation = new WbTranslation();
+$objWbHtml = new WbHtml();
+$objWbRoute = new WbRoute();
 
-$WBTranslation = $objWBTranslation->define();
-$WBTranslation = $objWBTranslation->translate();
+$WbTranslation = $objWbTranslation->define();
+$WbTranslation = $objWbTranslation->translate();
 
-$objWBRoute->addRoute([
+$objWbRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
     ['blog-post', 'blog_post.php'],
@@ -19,7 +19,7 @@ $objWBRoute->addRoute([
     ['admin-logout', 'admin_logout.php'],
 ]);
 
-$route = $objWBRoute->getRoute();
+$route = $objWbRoute->getRoute();
 ?>
 
 <?php
@@ -27,5 +27,5 @@ include $route;
 ?>
 <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 <?php
-echo $objWBHtml->buildFooter();
+echo $objWbHtml->buildFooter();
 ?>

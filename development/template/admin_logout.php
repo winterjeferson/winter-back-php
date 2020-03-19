@@ -2,6 +2,6 @@
 
 include 'php/autoload.php';
 
-$objWBLogin = new WBLogin();
-$objWBLogin->doLogout();
+$objWbLogin = new WbLogin();
+$objWbLogin->doLogout();
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-final class WBConnection
+final class WbConnection
 {
 
     private static $coon = array();
@@ -22,7 +22,7 @@ final class WBConnection
             if ($isLocalhost) {
                 $db['user'] = 'root';
                 $db['pass'] = '';
-                $db['name'] = 'WB';
+                $db['name'] = 'wb';
                 $db['host'] = 'localhost';
                 $db['type'] = 'mysql';
             } else {

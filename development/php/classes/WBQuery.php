@@ -56,7 +56,7 @@
   return $query;
  */
 
-class WBQuery
+class WbQuery
 {
     public $tablePrefix = '';
     public $array = [];
@@ -93,8 +93,8 @@ class WBQuery
 
     public function deleteExecute()
     {
-        $objWBConnection = WBConnection::open('site');
-        $query = $objWBConnection->prepare($this->sql);
+        $objWbConnection = WbConnection::open('site');
+        $query = $objWbConnection->prepare($this->sql);
         $arrayUse = $this->array['where'];
         $length = count($arrayUse);
 
@@ -135,8 +135,8 @@ class WBQuery
 
     public function insertExecute()
     {
-        $objWBConnection = WBConnection::open('site');
-        $query = $objWBConnection->prepare($this->sql);
+        $objWbConnection = WbConnection::open('site');
+        $query = $objWbConnection->prepare($this->sql);
         $arrayUse = $this->array['column'];
         $length = count($arrayUse);
 
@@ -179,8 +179,8 @@ class WBQuery
 
     public function selectExecute()
     {
-        $objWBConnection = WBConnection::open('site');
-        $query = $objWBConnection->prepare($this->sql);
+        $objWbConnection = WbConnection::open('site');
+        $query = $objWbConnection->prepare($this->sql);
 
         if (isset($this->array['where'])) {
             $arrayUse = $this->array['where'];
@@ -243,8 +243,8 @@ class WBQuery
 
     public function updateExecute()
     {
-        $objWBConnection = WBConnection::open('site');
-        $query = $objWBConnection->prepare($this->sql);
+        $objWbConnection = WbConnection::open('site');
+        $query = $objWbConnection->prepare($this->sql);
         $arrayUseColumn = $this->array['column'];
         $lengthColumn = count($arrayUseColumn);
         $arrayUseWhere = $this->array['where'];

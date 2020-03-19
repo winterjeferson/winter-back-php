@@ -1,5 +1,5 @@
 <?php
-echo $objWBHtml->buildHeader();
+echo $objWbHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
     <div class="col-middle">
@@ -14,13 +14,13 @@ echo $objWBHtml->buildHeader();
 </div>
 <main class="grid">
     <?php
-$objWBUrl = new WBUrl();
+$objWbUrl = new WbUrl();
 ?>
 
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBTranslation['home']; ?>">
+            <a href="<?php echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WbTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -35,10 +35,10 @@ $objWBUrl = new WBUrl();
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php echo $WBTranslation['language']; ?>:</span>
+                            <span class="about mobile-hide"><?php echo $WbTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WBTranslation['language']; ?>">
+                            <select id="translation_select" aria-label="<?php echo $WbTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -59,21 +59,21 @@ $objWBUrl = new WBUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBTranslation['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WbTranslation['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['administrative_panel']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['blog']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['blog']; ?>
                     </a>
                 </li>
                 
@@ -88,9 +88,9 @@ $objWBUrl = new WBUrl();
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        $objWBBlog = new WBBlog();
-                        $post = $objWBBlog->getPost();
-                        echo utf8_encode($post['title_' .  $objWBTranslation->getLanguage()]);
+                        $objWbBlog = new WbBlog();
+                        $post = $objWbBlog->getPost();
+                        echo utf8_encode($post['title_' .  $objWbTranslation->getLanguage()]);
                         ?>
                     </h1>
                 </div>
@@ -98,7 +98,7 @@ $objWBUrl = new WBUrl();
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo utf8_encode($post['content_' .  $objWBTranslation->getLanguage()]);
+                    echo utf8_encode($post['content_' .  $objWbTranslation->getLanguage()]);
                     ?>
                 </div>
             </div>
@@ -106,7 +106,7 @@ $objWBUrl = new WBUrl();
                 <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWBBlog->buildBlogTag(utf8_encode($post['tag_' .  $objWBTranslation->getLanguage()]));
+                    echo $objWbBlog->buildBlogTag(utf8_encode($post['tag_' .  $objWbTranslation->getLanguage()]));
                     ?>
                 </div>
             </div>
@@ -115,7 +115,7 @@ $objWBUrl = new WBUrl();
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about"><?php echo $WBTranslation['developed_by']; ?>:</span>
+            <span class="about"><?php echo $WbTranslation['developed_by']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

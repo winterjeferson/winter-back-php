@@ -1,6 +1,6 @@
 <?php
 
-class WBHtml
+class WbHtml
 {
 
     public $mainUrl = '';
@@ -13,8 +13,8 @@ class WBHtml
 
     public function buildMainUrl()
     {
-        $objWBUrl = new WBUrl();
-        $url = $objWBUrl->getUrlMain();
+        $objWbUrl = new WbUrl();
+        $url = $objWbUrl->getUrlMain();
         $trimmed = str_replace('admin/', '', $url);
 
         return $trimmed;
@@ -32,12 +32,12 @@ class WBHtml
 
     public function buildHeader()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $objTheme = new Theme();
         $string = '';
 
         $string .= '<!DOCTYPE html>';
-        $string .= '    <html lang="' . $objWBSession->getArray('translation', 'meta_lang') . '">';
+        $string .= '    <html lang="' . $objWbSession->getArray('translation', 'meta_lang') . '">';
         $string .= '        <head>';
         $string .= $this->buildHeaderMeta();
         $string .= $objTheme->buildHeaderAppearance();
@@ -54,23 +54,23 @@ class WBHtml
     public function buildAdmin()
     {
         $string = '';
-        $objWBUrl = new WBUrl();
-        $page = $objWBUrl->getUrlParameters()['page'];
+        $objWbUrl = new WbUrl();
+        $page = $objWbUrl->getUrlParameters()['page'];
         $isAdmin = strpos($page, 'admin') !== false ? true : false;
 
         if ($isAdmin) {
-            $string .= $this->buildTagCSS($this->mainUrl . 'css/wb_admin');
+            $string .= $this->buildTagCSS($this->mainUrl . 'css/Wb_admin');
             $string .= '<meta name="robots" content="noindex">';
         }
 
-        $string .= $this->buildTagCSS($this->mainUrl . 'css/wb_theme');
+        $string .= $this->buildTagCSS($this->mainUrl . 'css/Wb_theme');
 
         return $string;
     }
 
     public function buildHeaderFacebook()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $string = '';
 
         $string .= '<meta property="og:image" content = "' . $this->mainUrl . 'img/logo/600-315.png"/>';
@@ -80,23 +80,23 @@ class WBHtml
         $string .= '<meta property="og:locale" content="pt_BR" />';
         $string .= '<meta property="og:url" content="' . $this->mainUrl . '" />';
         $string .= '<meta property="og:type" content="website" />';
-        $string .= '<meta property="og:title" content="' . $objWBSession->get('meta_title') . '" />';
-        $string .= '<meta property="og:site_name" content="' . $objWBSession->get('meta_title') . '" />';
-        $string .= '<meta property="og:description" content="' . $objWBSession->get('meta_description') . '" />';
+        $string .= '<meta property="og:title" content="' . $objWbSession->get('meta_title') . '" />';
+        $string .= '<meta property="og:site_name" content="' . $objWbSession->get('meta_title') . '" />';
+        $string .= '<meta property="og:description" content="' . $objWbSession->get('meta_description') . '" />';
 
         return $string;
     }
 
     public function buildHeaderSEO()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $string = '';
 
-        $string .= '<meta name="application-name" content="' . $objWBSession->get('meta_author') . '" />';
-        $string .= '<title>' . $objWBSession->get('meta_title') . '</title>';
-        $string .= '<meta name="description" content="' . $objWBSession->get('meta_description') . '" />';
-        $string .= '<meta name="author" content="' . $objWBSession->get('meta_author') . '" />';
-        $string .= '<meta name="keywords" content="' . $objWBSession->get('meta_keywords') . '" />';
+        $string .= '<meta name="application-name" content="' . $objWbSession->get('meta_author') . '" />';
+        $string .= '<title>' . $objWbSession->get('meta_title') . '</title>';
+        $string .= '<meta name="description" content="' . $objWbSession->get('meta_description') . '" />';
+        $string .= '<meta name="author" content="' . $objWbSession->get('meta_author') . '" />';
+        $string .= '<meta name="keywords" content="' . $objWbSession->get('meta_keywords') . '" />';
 
         return $string;
     }
@@ -130,15 +130,15 @@ class WBHtml
 
     public function buildFooter()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $objTheme = new Theme();
-        $objWBUrl = new WBUrl();
+        $objWbUrl = new WbUrl();
         $string = '';
 
         $string .= '<script>';
-        $string .= '    var globalLanguage = "' . $objWBSession->get('language') . '";';
-        $string .= '    var globalUrl = "' . $objWBUrl->getUrlMain() . '";';
-        $string .= '    var globalTranslation = ' . json_encode($objWBSession->get('translation')) . ';';
+        $string .= '    var globalLanguage = "' . $objWbSession->get('language') . '";';
+        $string .= '    var globalUrl = "' . $objWbUrl->getUrlMain() . '";';
+        $string .= '    var globalTranslation = ' . json_encode($objWbSession->get('translation')) . ';';
         $string .= '</script>';
         $string .= $objTheme->buildJs();
         $string .= $this->buildAdmin();

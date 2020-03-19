@@ -11,9 +11,9 @@
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        $objWBBlog = new WBBlog();
-                        $post = $objWBBlog->getPost();
-                        echo utf8_encode($post['title_' .  $objWBTranslation->getLanguage()]);
+                        $objWbBlog = new WbBlog();
+                        $post = $objWbBlog->getPost();
+                        echo utf8_encode($post['title_' .  $objWbTranslation->getLanguage()]);
                         ?>
                     </h1>
                 </div>
@@ -21,7 +21,7 @@
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo utf8_encode($post['content_' .  $objWBTranslation->getLanguage()]);
+                    echo utf8_encode($post['content_' .  $objWbTranslation->getLanguage()]);
                     ?>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWBBlog->buildBlogTag(utf8_encode($post['tag_' .  $objWBTranslation->getLanguage()]));
+                    echo $objWbBlog->buildBlogTag(utf8_encode($post['tag_' .  $objWbTranslation->getLanguage()]));
                     ?>
                 </div>
             </div>

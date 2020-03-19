@@ -11,7 +11,7 @@
                 <li>
                     <div class="slide bg-{{i.color}}">
                         <div class="col-middle slide-content">
-                            <?php echo $WBTranslation['{{i.translation | safe}}']; ?>
+                            <?php echo $WbTranslation['{{i.translation | safe}}']; ?>
                         </div>
                     </div>
                 </li>
@@ -22,12 +22,12 @@
     <div class="menu-horizontal carousel-disabled">
         <ul class="navigation-arrow">
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $WBTranslation['previous']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-left" aria-label="<?php echo $WbTranslation['previous']; ?>">
                     <span class="fa fa-angle-left fa-4x" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $WBTranslation['next']; ?>">
+                <button type="button" class="bt bt-big" data-id="nav-right" aria-label="<?php echo $WbTranslation['next']; ?>">
                     <span class="fa fa-angle-right fa-4x" aria-hidden="true"></span>
                 </button>
             </li>

@@ -1,6 +1,6 @@
 <?php
 
-class WBDate
+class WbDate
 {
     public $timezoneBr = [
         'AC' => 'America/Rio_branco',

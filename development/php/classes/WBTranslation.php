@@ -1,6 +1,6 @@
 <?php
 
-class WBTranslation
+class WbTranslation
 {
     public $language = '';
     public $arrLanguage = ['pt', 'en'];
@@ -12,9 +12,9 @@ class WBTranslation
 
     public function define()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $filterLanguage = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
-        $sessionLanguage =  $objWBSession->get('language');
+        $sessionLanguage =  $objWbSession->get('language');
 
         if (!isset($sessionLanguage)) {
             $this->language = substr($filterLanguage, 0, 2);
@@ -23,27 +23,27 @@ class WBTranslation
                 $this->language = 'en';
             }
 
-            $objWBSession->set('language', $this->language);
+            $objWbSession->set('language', $this->language);
         } else {
-            $this->language = $objWBSession->get('language');
+            $this->language = $objWbSession->get('language');
         }
     }
 
     public function translate()
     {
-        $objWBSession = new WBSession();
-        $class = 'WBTranslation' . strtoupper($objWBSession->get('language'));
+        $objWbSession = new WbSession();
+        $class = 'WbTranslation' . strtoupper($objWbSession->get('language'));
         $translation = new $class();
 
-        $objWBSession->set('translation', $translation->translation);
+        $objWbSession->set('translation', $translation->translation);
         return $translation->translation;
     }
 
     public function change()
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $language = filter_input(INPUT_POST, 'language', FILTER_DEFAULT);
-        $objWBSession->set('language', $language);
+        $objWbSession->set('language', $language);
 
         return 'r1';
     }

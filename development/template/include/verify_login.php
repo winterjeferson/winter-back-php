@@ -1,5 +1,5 @@
 <?php
 
-$objWBLogin = new WBLogin();
-$objWBLogin->verifyLogin();
+$objWbLogin = new WbLogin();
+$objWbLogin->verifyLogin();
 ?>

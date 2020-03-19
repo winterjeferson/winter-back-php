@@ -1,5 +1,5 @@
 <?php
-echo $objWBHtml->buildHeader();
+echo $objWbHtml->buildHeader();
 ?>
 <div id="loading_main" class="bg-grey">
     <div class="col-middle">
@@ -14,13 +14,13 @@ echo $objWBHtml->buildHeader();
 </div>
 <main class="grid">
     <?php
-$objWBUrl = new WBUrl();
+$objWbUrl = new WbUrl();
 ?>
 
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $objWBUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WBTranslation['home']; ?>">
+            <a href="<?php echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WbTranslation['home']; ?>">
                 <span class="fa fa-home" aria-hidden="true"></span>
             </a>
         </div>
@@ -35,10 +35,10 @@ $objWBUrl = new WBUrl();
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php echo $WBTranslation['language']; ?>:</span>
+                            <span class="about mobile-hide"><?php echo $WbTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WBTranslation['language']; ?>">
+                            <select id="translation_select" aria-label="<?php echo $WbTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -59,21 +59,21 @@ $objWBUrl = new WBUrl();
 
 <div class="row">
     <div class="col-es-12">
-        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WBTranslation['menu']; ?>">
+        <button type="button" class="bt bt-re bt-toggle bt-grey" aria-label="<?php echo $WbTranslation['menu']; ?>">
             <span class="fa fa-bars" aria-hidden="true"></span>
         </button>
         <nav class="menu menu-vertical text-center menu-drop-down">
             <ul>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['administrative_panel']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['administrative_panel']; ?>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="<?php echo $objWBUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WBTranslation['blog']; ?>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>blog/" data-id="blog" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['blog']; ?>
                     </a>
                 </li>
                 
@@ -89,29 +89,29 @@ $objWBUrl = new WBUrl();
                     <div class="row">
                         <section class="col-es-12 col-bi-7 col-first" id="page_blog_last_post">
                             <h1 class="page-title">
-                                <?php echo $WBTranslation['last_post']; ?>
+                                <?php echo $WbTranslation['last_post']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                $objWBBlog = new WBBlog();
-                                echo $objWBBlog->buildBlogPost('lastPost');
+                                $objWbBlog = new WbBlog();
+                                echo $objWbBlog->buildBlogPost('lastPost');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBBlog->buildLoadMoreButton('lastPost');
+                            echo $objWbBlog->buildLoadMoreButton('lastPost');
                             ?>
                         </section>
                         <section class="col-es-12 col-bi-5" id="page_blog_most_viewed">
                             <h1 class="page-title">
-                                <?php echo $WBTranslation['most_viewed']; ?>
+                                <?php echo $WbTranslation['most_viewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                echo $objWBBlog->buildBlogPost('mostViewed');
+                                echo $objWbBlog->buildBlogPost('mostViewed');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBBlog->buildLoadMoreButton('mostViewed');
+                            echo $objWbBlog->buildLoadMoreButton('mostViewed');
                             ?>
                         </section>
                     </div>
@@ -122,7 +122,7 @@ $objWBUrl = new WBUrl();
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about"><?php echo $WBTranslation['developed_by']; ?>:</span>
+            <span class="about"><?php echo $WbTranslation['developed_by']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

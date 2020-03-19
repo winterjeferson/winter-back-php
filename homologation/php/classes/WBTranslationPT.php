@@ -1,6 +1,6 @@
 <?php
 
-class WBTranslationPT
+class WbTranslationPT
 {
     public $translation = [
         'administrative_panel' => 'Painel administrativo',
@@ -31,7 +31,7 @@ class WBTranslationPT
         'meta_description' => 'Minha ferramenta para desenvolvimento backend em PHP',
         'meta_lang' => 'pt-br',
         'meta_keywords' => 'PHP, mysql, git, backend, Jeferson, Winter, javascript, html, css, gulp',
-        'meta_title' => 'WB: Winter Backend PHP',
+        'meta_title' => 'Wb: Winter Backend PHP',
         'most_viewed' => 'Mais lidas',
         'next' => 'Próximo',
         'page_admin_blog_title' => 'Cadastrar Blog',

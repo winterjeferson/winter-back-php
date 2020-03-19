@@ -12,29 +12,29 @@
                     <div class="row">
                         <section class="col-es-12 col-bi-7 col-first" id="page_blog_last_post">
                             <h1 class="page-title">
-                                <?php echo $WBTranslation['last_post']; ?>
+                                <?php echo $WbTranslation['last_post']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                $objWBBlog = new WBBlog();
-                                echo $objWBBlog->buildBlogPost('lastPost');
+                                $objWbBlog = new WbBlog();
+                                echo $objWbBlog->buildBlogPost('lastPost');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBBlog->buildLoadMoreButton('lastPost');
+                            echo $objWbBlog->buildLoadMoreButton('lastPost');
                             ?>
                         </section>
                         <section class="col-es-12 col-bi-5" id="page_blog_most_viewed">
                             <h1 class="page-title">
-                                <?php echo $WBTranslation['most_viewed']; ?>
+                                <?php echo $WbTranslation['most_viewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                echo $objWBBlog->buildBlogPost('mostViewed');
+                                echo $objWbBlog->buildBlogPost('mostViewed');
                                 ?>
                             </div>
                             <?php
-                            echo $objWBBlog->buildLoadMoreButton('mostViewed');
+                            echo $objWbBlog->buildLoadMoreButton('mostViewed');
                             ?>
                         </section>
                     </div>

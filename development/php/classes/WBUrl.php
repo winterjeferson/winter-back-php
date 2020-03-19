@@ -1,6 +1,6 @@
 <?php
 
-class WBUrl
+class WbUrl
 {
 
     function getUrlMain()
@@ -21,10 +21,10 @@ class WBUrl
 
     function getUrlPage()
     {
-        $objWBTranslation = new WBTranslation();
+        $objWbTranslation = new WbTranslation();
         $mainUrl = $this->getUrlMain();
 
-        return $mainUrl . $objWBTranslation->getLanguage() . '/';
+        return $mainUrl . $objWbTranslation->getLanguage() . '/';
     }
 
     function getUrlParameters()

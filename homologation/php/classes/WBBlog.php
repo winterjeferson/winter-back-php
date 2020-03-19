@@ -1,6 +1,6 @@
 <?php
 
-class WBBlog
+class WbBlog
 {
     private $postListLimitLastPost = 10;
     private $postListLimitMostViewed = 3;
@@ -13,18 +13,18 @@ class WBBlog
 
     function getPost()
     {
-        $objWBUrl = new WBUrl();
-        $id = $objWBUrl->getUrlParameters()['id'];
+        $objWbUrl = new WbUrl();
+        $id = $objWbUrl->getUrlParameters()['id'];
         $this->updatePostView($id);
         return $this->getPostQuery($id);
     }
 
     function updatePostView($id)
     {
-        $objWBQuery = new WBQuery();
+        $objWbQuery = new WbQuery();
 
-        $objWBQuery->unbind();
-        $objWBQuery->populateArray([
+        $objWbQuery->unbind();
+        $objWbQuery->populateArray([
             'table' => [['table' => 'blog']],
             'column' => [
                 ['column' => 'view', 'value' => 'view + 1']
@@ -32,14 +32,14 @@ class WBBlog
             'where' => [['table' => 'blog', 'column' => 'id', 'value' => $id]]
         ]);
 
-        return $objWBQuery->update();
+        return $objWbQuery->update();
     }
 
     function getPostQuery($id)
     {
-        $objWBQuery = new WBQuery();
+        $objWbQuery = new WbQuery();
 
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'column' => [
                 ['table' => 'blog', 'column' => 'title_pt'],
                 ['table' => 'blog', 'column' => 'title_en'],
@@ -55,7 +55,7 @@ class WBBlog
             ]
         ]);
 
-        $query = $objWBQuery->select();
+        $query = $objWbQuery->select();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -63,9 +63,9 @@ class WBBlog
 
     function getPostList($target)
     {
-        $objWBQuery = new WBQuery();
+        $objWbQuery = new WbQuery();
 
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'column' => [
                 ['table' => 'blog', 'column' => 'id'],
                 ['table' => 'blog', 'column' => 'title_pt'],
@@ -83,8 +83,8 @@ class WBBlog
             ]
         ]);
 
-        $this->getPostListTarget($objWBQuery, $target);
-        $query = $objWBQuery->select();
+        $this->getPostListTarget($objWbQuery, $target);
+        $query = $objWbQuery->select();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $this->getPostListBuildLoadMore($target, $result);
         return $result;
@@ -92,22 +92,22 @@ class WBBlog
 
     function getPostListBuildLoadMore($target, $result)
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
         $count = count($result);
 
         switch ($target) {
             case 'lastPost':
                 if ($count >= $this->postListLimitLastPost) {
-                    $objWBSession->set('blog_is_load_more_last_post', true);
+                    $objWbSession->set('blog_is_load_more_last_post', true);
                 } else {
-                    $objWBSession->set('blog_is_load_more_last_post', false);
+                    $objWbSession->set('blog_is_load_more_last_post', false);
                 }
                 break;
             case 'mostViewed':
                 if ($count >= $this->postListLimitMostViewed) {
-                    $objWBSession->set('blog_is_load_more_most_viewed', true);
+                    $objWbSession->set('blog_is_load_more_most_viewed', true);
                 } else {
-                    $objWBSession->set('blog_is_load_more_most_viewed', false);
+                    $objWbSession->set('blog_is_load_more_most_viewed', false);
                 }
                 break;
         }
@@ -115,32 +115,32 @@ class WBBlog
 
     function buildLoadMoreButton($target)
     {
-        $objWBSession = new WBSession();
+        $objWbSession = new WbSession();
 
         switch ($target) {
             case 'lastPost':
-                if (!$objWBSession->get('blog_is_load_more_last_post')) {
+                if (!$objWbSession->get('blog_is_load_more_last_post')) {
                     return;
                 }
                 break;
             case 'mostViewed':
-                if (!$objWBSession->get('blog_is_load_more_most_viewed')) {
+                if (!$objWbSession->get('blog_is_load_more_most_viewed')) {
                     return;
                 }
                 break;
         }
 
-        return $this->buildLoadMoreButtonHTML($objWBSession);
+        return $this->buildLoadMoreButtonHTML($objWbSession);
     }
 
-    function buildLoadMoreButtonHTML($objWBSession)
+    function buildLoadMoreButtonHTML($objWbSession)
     {
         $string = '';
 
         $string .= '<div class="row">';
         $string .= '    <div class="col-es-12">';
         $string .= '        <button type="button" class="bt bt-fu bt-blue" data-id="laod_more">';
-        $string .= $objWBSession->getArray('translation', 'load_more');
+        $string .= $objWbSession->getArray('translation', 'load_more');
         $string .= '        </button>';
         $string .= '    </div>';
         $string .= '</div>';
@@ -148,11 +148,11 @@ class WBBlog
         return $string;
     }
 
-    function getPostListTarget($objWBQuery, $target)
+    function getPostListTarget($objWbQuery, $target)
     {
         switch ($target) {
             case 'lastPost':
-                $objWBQuery->populateArray([
+                $objWbQuery->populateArray([
                     'order' => [
                         ['column' => 'id', 'order' => 'DESC']
                     ],
@@ -160,7 +160,7 @@ class WBBlog
                 ]);
                 break;
             case 'mostViewed':
-                $objWBQuery->populateArray([
+                $objWbQuery->populateArray([
                     'order' => [
                         ['column' => 'view', 'order' => 'DESC']
                     ],
@@ -192,8 +192,8 @@ class WBBlog
     function buildBlogPost($target)
     {
         $string = '';
-        $objWBTranslation = new WBTranslation();
-        $objWBSession = new WBSession();
+        $objWbTranslation = new WbTranslation();
+        $objWbSession = new WbSession();
 
         if ($target === 'lastPost') {
             $query = $this->getPostList('lastPost');
@@ -207,17 +207,17 @@ class WBBlog
             $string .= '        <img src="http://localhost/e/development/site/branches/framework/winter-front/homologation/img/banner/1.png" alt="image">';
             $string .= '    </div>';
             $string .= '    <div class="blog-list-text">';
-            $string .= '        <a href="' . $objWBTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWBTranslation->getLanguage()] . '/" class="link link-blue">';
+            $string .= '        <a href="' . $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/" class="link link-blue">';
             $string .= '            <h2 class="blog-list-title">';
-            $string .= utf8_encode($value['title_' . $objWBTranslation->getLanguage()]);
+            $string .= utf8_encode($value['title_' . $objWbTranslation->getLanguage()]);
             $string .= '            </h2>';
             $string .= '        </a>';
             $string .= '        <small class="color-grey">';
-            $string .= $value['date_post_' . $objWBTranslation->getLanguage()];
+            $string .= $value['date_post_' . $objWbTranslation->getLanguage()];
 
-            if ($value['date_post_' . $objWBTranslation->getLanguage()] !== $value['date_edit_' . $objWBTranslation->getLanguage()]) {
+            if ($value['date_post_' . $objWbTranslation->getLanguage()] !== $value['date_edit_' . $objWbTranslation->getLanguage()]) {
                 $string .=  '<br/>';
-                $string .=  $objWBSession->getArray('translation', 'edited_on') . ' ' . $value['date_edit_' . $objWBTranslation->getLanguage()];
+                $string .=  $objWbSession->getArray('translation', 'edited_on') . ' ' . $value['date_edit_' . $objWbTranslation->getLanguage()];
             }
 
             $string .= '        </small>';

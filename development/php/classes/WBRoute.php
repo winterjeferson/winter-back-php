@@ -1,6 +1,6 @@
 <?php
 
-class WBRoute
+class WbRoute
 {
 
     private $arrRoute = [];
@@ -11,8 +11,8 @@ class WBRoute
 
     function getUrlMain()
     {
-        $objWBLayout = new WBLayout();
-        $isLocalHost = $objWBLayout->verifyLocalhost();
+        $objWbLayout = new WbLayout();
+        $isLocalHost = $objWbLayout->verifyLocalhost();
 
         if ($isLocalHost) {
             return 'http://localhost' . dirname(filter_input(INPUT_SERVER, 'PHP_SELF')) . '/';

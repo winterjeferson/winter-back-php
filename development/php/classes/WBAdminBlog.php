@@ -1,6 +1,6 @@
 <?php
 
-class WBAdminBlog
+class WbAdminBlog
 {
 
     private $sqlTable = 'blog';
@@ -13,18 +13,18 @@ class WBAdminBlog
     {
         $active = $status === 'active' ? 1 : 0;
         $string = '';
-        $objWBQuery = new WBQuery();
+        $objWbQuery = new WbQuery();
         $objTheme = new Theme();
 
-        $this->buildReportSql($objWBQuery);
+        $this->buildReportSql($objWbQuery);
 
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'where' => [
                 ['table' => $this->sqlTable, 'column' => 'active', 'value' => $active]
             ]
         ]);
 
-        $query = $objWBQuery->select();
+        $query = $objWbQuery->select();
         $queryResult = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($queryResult as $key => $value) {
@@ -34,9 +34,9 @@ class WBAdminBlog
         return $string;
     }
 
-    function buildReportSql($objWBQuery)
+    function buildReportSql($objWbQuery)
     {
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'column' => [
                 ['table' => $this->sqlTable, 'column' => '*']
             ],
@@ -81,8 +81,8 @@ class WBAdminBlog
 
     function doUpdate()
     {
-        $objWBDate = new WBDate();
-        $objWBQuery = new WBQuery();
+        $objWbDate = new WbDate();
+        $objWbQuery = new WbQuery();
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
 
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
@@ -98,7 +98,7 @@ class WBAdminBlog
         $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
         $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
 
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'column' => [
                 ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
@@ -109,22 +109,22 @@ class WBAdminBlog
                 ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
-                ['column' => 'date_post_pt', 'value' => $objWBDate->buildDate($datePostPt)],
-                ['column' => 'date_post_en', 'value' => $objWBDate->buildDate($datePostEn)],
-                ['column' => 'date_edit_pt', 'value' => $objWBDate->buildDate($dateEditPt)],
-                ['column' => 'date_edit_en', 'value' => $objWBDate->buildDate($dateEditEn)],
+                ['column' => 'date_post_pt', 'value' => $objWbDate->buildDate($datePostPt)],
+                ['column' => 'date_post_en', 'value' => $objWbDate->buildDate($datePostEn)],
+                ['column' => 'date_edit_pt', 'value' => $objWbDate->buildDate($dateEditPt)],
+                ['column' => 'date_edit_en', 'value' => $objWbDate->buildDate($dateEditEn)],
             ],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
 
-        $query = $objWBQuery->update();
+        $query = $objWbQuery->update();
         return $query;
     }
 
     function doRegister()
     {
-        $objWBDate = new WBDate();
-        $objWBQuery = new WBQuery();
+        $objWbDate = new WbDate();
+        $objWbQuery = new WbQuery();
 
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
         $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
@@ -139,7 +139,7 @@ class WBAdminBlog
         $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
         $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
 
-        $objWBQuery->populateArray([
+        $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'column' => [
                 ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
@@ -150,17 +150,17 @@ class WBAdminBlog
                 ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
-                ['column' => 'date_post_pt', 'value' => $objWBDate->buildDate($datePostPt)],
-                ['column' => 'date_post_en', 'value' => $objWBDate->buildDate($datePostEn)],
-                ['column' => 'date_edit_pt', 'value' => $objWBDate->buildDate($dateEditPt)],
-                ['column' => 'date_edit_en', 'value' => $objWBDate->buildDate($dateEditEn)],
+                ['column' => 'date_post_pt', 'value' => $objWbDate->buildDate($datePostPt)],
+                ['column' => 'date_post_en', 'value' => $objWbDate->buildDate($datePostEn)],
+                ['column' => 'date_edit_pt', 'value' => $objWbDate->buildDate($dateEditPt)],
+                ['column' => 'date_edit_en', 'value' => $objWbDate->buildDate($dateEditEn)],
 
                 ['column' => 'active', 'value' => 1],
                 ['column' => 'view', 'value' => 0],
             ]
         ]);
 
-        $query = $objWBQuery->insert();
+        $query = $objWbQuery->insert();
         return $query;
     }
 
@@ -170,8 +170,8 @@ class WBAdminBlog
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
         $value = $status === 'inactivate' ? 0 : 1;
 
-        $objWBQuery = new WBQuery();
-        $objWBQuery->populateArray([
+        $objWbQuery = new WbQuery();
+        $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'column' => [
                 ['column' => 'active', 'value' => $value],
@@ -179,7 +179,7 @@ class WBAdminBlog
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
 
-        $query = $objWBQuery->update();
+        $query = $objWbQuery->update();
 
         return $query;
     }
@@ -188,21 +188,21 @@ class WBAdminBlog
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $objWBQuery = new WBQuery();
-        $objWBQuery->populateArray([
+        $objWbQuery = new WbQuery();
+        $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
 
-        $query = $objWBQuery->delete();
+        $query = $objWbQuery->delete();
         return $query;
     }
 
     function editLoadData()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
-        $objWBQuery = new WBQuery();
-        $objWBQuery->populateArray([
+        $objWbQuery = new WbQuery();
+        $objWbQuery->populateArray([
             'column' => [
                 ['table' => $this->sqlTable, 'column' => 'title_pt'],
                 ['table' => $this->sqlTable, 'column' => 'title_en'],
@@ -223,10 +223,10 @@ class WBAdminBlog
             'limit' => [['final' => 1]],
         ]);
 
-        $query = $objWBQuery->select();
+        $query = $objWbQuery->select();
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 
-        return $objWBQuery->returnJson($queryResult);
+        return $objWbQuery->returnJson($queryResult);
     }
 
     function validateTag($target)
