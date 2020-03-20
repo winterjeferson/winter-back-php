@@ -1,16 +1,16 @@
-body{
+body {
   overflow-x: hidden !important;
 }
 
-#page_admin_blog {
+#pageAdminBlog {
   .table {
     .menu {
-        white-space: nowrap;
+      white-space: nowrap;
     }
   }
 }
 
-#page_admin_login {
+#pageAdminLogin {
   background-color: $grey;
   height: 100%;
   display: flex;

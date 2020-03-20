@@ -11,8 +11,8 @@ class WbRoute
 
     function getUrlMain()
     {
-        $objWbLayout = new WbLayout();
-        $isLocalHost = $objWbLayout->verifyLocalhost();
+        $objWbHelp = new WbHelp();
+        $isLocalHost = $objWbHelp->verifyLocalhost();
 
         if ($isLocalHost) {
             return 'http://localhost' . dirname(filter_input(INPUT_SERVER, 'PHP_SELF')) . '/';

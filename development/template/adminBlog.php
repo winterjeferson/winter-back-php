@@ -7,11 +7,11 @@ $objWbAdminBlog = new WbAdminBlog();
 
 <main class="grid">
     {% include "include/template_header.php" %}
-    <section id="main_menu" class="grid-menu">
+    <section id="mainMenu" class="grid-menu">
         {% include "include/template_menu.php" %}
     </section>
-    <section id="main_content" class="grid-content">
-        <div id="page_admin_blog" class="row">
+    <section id="mainContent" class="grid-content">
+        <div id="pageAdminBlog" class="row">
             <div class="col-es-12">
                 {% include "include/template_menu_admin.php" %}
             </div>
@@ -19,8 +19,8 @@ $objWbAdminBlog = new WbAdminBlog();
                 <section class="row">
 
                     {% set arr = [
-                        {language: 'pt'},
-                        {language: 'en'}
+                        {language: 'Pt'},
+                        {language: 'En'}
                     ] %}
 
                     {% for i in arr %}
@@ -29,36 +29,36 @@ $objWbAdminBlog = new WbAdminBlog();
                             <div class="card card-es card-grey">
                                 <header>
                                     <h4>
-                                        <?php echo $WbTranslation['page_admin_blog_title']; ?> ({{i.language}})
+                                        <?php echo $WbTranslation['pageAdminBlogTitle']; ?> ({{i.language}})
                                     </h4>
                                 </header>
                                 <div class="row card-body">
                                     <div class="col-es-12">
                                         <div class="padding-re">
-                                            <form class="row form form-grey" data-id="form_register">
+                                            <form class="row form form-grey" data-id="formRegister">
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['title']; ?></label>
-                                                    <input type="text" data-id="field_title_{{i.language}}" aria-label="<?php echo $WbTranslation['title']; ?>">
+                                                    <input type="text" data-id="fieldTitle{{i.language}}" aria-label="<?php echo $WbTranslation['title']; ?>">
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
-                                                    <label><?php echo $WbTranslation['friendly_url']; ?></label>
-                                                    <input type="text" data-id="field_url_{{i.language}}" aria-label="<?php echo $WbTranslation['page_admin_blog_title']; ?>">
+                                                    <label><?php echo $WbTranslation['friendlyUrl']; ?></label>
+                                                    <input type="text" data-id="fieldUrl{{i.language}}" aria-label="<?php echo $WbTranslation['pageAdminBlogTitle']; ?>">
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['content']; ?></label>
-                                                    <textarea data-id="field_content_{{i.language}}" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
+                                                    <textarea data-id="fieldContent{{i.language}}" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['tags']; ?></label>
-                                                    <input type="text" data-id="field_tag_{{i.language}}" aria-label="<?php echo $WbTranslation['page_admin_blog_tags_separator']; ?>" placeholder="<?php echo $WbTranslation['page_admin_blog_tags_separator']; ?>">
+                                                    <input type="text" data-id="fieldTag{{i.language}}" aria-label="<?php echo $WbTranslation['pageAdminBlogTagsSeparator']; ?>" placeholder="<?php echo $WbTranslation['pageAdminBlogTagsSeparator']; ?>">
                                                 </div>
                                                 <div class="col-es-6 form-field text-left">
-                                                    <label><?php echo $WbTranslation['date_post']; ?></label>
-                                                    <input type="date" data-id="field_date_post_{{i.language}}" aria-label="<?php echo $WbTranslation['date_post']; ?>">
+                                                    <label><?php echo $WbTranslation['datePost']; ?></label>
+                                                    <input type="date" data-id="fieldDatePost{{i.language}}" aria-label="<?php echo $WbTranslation['datePost']; ?>">
                                                 </div>
                                                 <div class="col-es-6 form-field text-left">
-                                                    <label><?php echo $WbTranslation['date_edit']; ?></label>
-                                                    <input type="date" data-id="field_date_edit_{{i.language}}" aria-label="<?php echo $WbTranslation['date_edit']; ?>">
+                                                    <label><?php echo $WbTranslation['dateEdit']; ?></label>
+                                                    <input type="date" data-id="fieldDateEdit{{i.language}}" aria-label="<?php echo $WbTranslation['dateEdit']; ?>">
                                                 </div>
                                             </form>
                                         </div>
@@ -76,7 +76,7 @@ $objWbAdminBlog = new WbAdminBlog();
                         <nav class="menu menu-horizontal text-right">
                             <ul>
                                 <li>
-                                    <button type="button" class="bt bt-re bt-green" data-id="bt_register">
+                                    <button type="button" class="bt bt-re bt-green" data-id="btRegister">
                                         <?php echo $WbTranslation['save']; ?>
                                     </button>
                                 </li>
@@ -86,8 +86,8 @@ $objWbAdminBlog = new WbAdminBlog();
                 </section>
 
                 {% set arr = [
-                    {id: 'active', translation: 'actives'},
-                    {id: 'inactive', translation: 'inactives'}
+                    {id: 'Active', php: 'active',translation: 'actives'},
+                    {id: 'Inactive', php: 'inactive',translation: 'inactives'}
                 ] %}
 
                 {% for i in arr %}
@@ -101,7 +101,7 @@ $objWbAdminBlog = new WbAdminBlog();
                 </div>
                 <div class="row">
                     <div class="col-es-12">
-                        <table class="table table-grey" data-id="table_{{i.id | safe}}">
+                        <table class="table table-grey" data-id="table{{i.id | safe}}">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -109,19 +109,19 @@ $objWbAdminBlog = new WbAdminBlog();
                                     <th><?php echo $WbTranslation['title']; ?> (EN)</th>
                                     <th><?php echo $WbTranslation['content']; ?> (PT)</th>
                                     <th><?php echo $WbTranslation['content']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['friendly_url']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['friendly_url']; ?> (EN)</th>
+                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
+                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
                                     <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
                                     <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['date_post']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['date_post']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['date_edit']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['date_edit']; ?> (EN)</th>
+                                    <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
+                                    <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
+                                    <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
+                                    <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
                                     <th><?php echo $WbTranslation['actions']; ?></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php echo $objWbAdminBlog->buildReport('{{i.id | safe}}'); ?>
+                                <?php echo $objWbAdminBlog->buildReport('{{i.php | safe}}'); ?>
                             </tbody>
                         </table>
                     </div>

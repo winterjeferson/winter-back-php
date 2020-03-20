@@ -12,11 +12,11 @@ $WbTranslation = $objWbTranslation->translate();
 $objWbRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
-    ['blog-post', 'blog_post.php'],
+    ['blog-post', 'blogPost.php'],
     ['admin', 'admin.php'],
-    ['admin-blog', 'admin_blog.php'],
-    ['admin-login', 'admin_login.php'],
-    ['admin-logout', 'admin_logout.php'],
+    ['admin-blog', 'adminBlog.php'],
+    ['admin-login', 'adminLogin.php'],
+    ['admin-logout', 'adminLogout.php'],
 ]);
 
 $route = $objWbRoute->getRoute();

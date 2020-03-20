@@ -23,7 +23,7 @@ $objWbUrl = new WbUrl();
                             <span class="about mobile-hide"><?php echo $WbTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WbTranslation['language']; ?>">
+                            <select id="translationSelect" aria-label="<?php echo $WbTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>

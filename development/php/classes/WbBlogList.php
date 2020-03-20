@@ -4,10 +4,10 @@ class WbBlogList
 {
     private $postListLimitLastPost = 10;
     private $postListLimitMostViewed = 3;
-    private $prefixPagination = 'blog_load_more_current_';
-    private $prefixLoadMore = 'blog_is_load_more_';
-    private $suffixPaginationLastPost = 'page_blog_lastPost';
-    private $suffixPaginationMostViewed = 'page_blog_mostViewed';
+    private $prefixPagination = 'blogLoadMoreCurrent';
+    private $prefixLoadMore = 'blogIsLoadMore';
+    private $suffixPaginationLastPost = 'pageBlogLastPost';
+    private $suffixPaginationMostViewed = 'pageBlogMostViewed';
 
     function getList($target)
     {
@@ -92,7 +92,7 @@ class WbBlogList
 
             if ($value['date_post_' . $objWbTranslation->getLanguage()] !== $value['date_edit_' . $objWbTranslation->getLanguage()]) {
                 $string .=  '<br/>';
-                $string .=  $objWbSession->getArray('translation', 'edited_on') . ' ' . $value['date_edit_' . $objWbTranslation->getLanguage()];
+                $string .=  $objWbSession->getArray('translation', 'editedOn') . ' ' . $value['date_edit_' . $objWbTranslation->getLanguage()];
             }
 
             $string .= '        </small>';
@@ -142,7 +142,7 @@ class WbBlogList
         }
 
         $string .= '<button type="button" class="bt bt-fu bt-blue" data-id="loadMore">';
-        $string .= $objWbSession->getArray('translation', 'load_more');
+        $string .= $objWbSession->getArray('translation', 'loadMore');
         $string .= '</button>';
 
         return $string;

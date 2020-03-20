@@ -37,7 +37,7 @@ class WbHtml
         $string = '';
 
         $string .= '<!DOCTYPE html>';
-        $string .= '    <html lang="' . $objWbSession->getArray('translation', 'meta_lang') . '">';
+        $string .= '    <html lang="' . $objWbSession->getArray('translation', 'metaLang') . '">';
         $string .= '        <head>';
         $string .= $this->buildHeaderMeta();
         $string .= $objTheme->buildHeaderAppearance();
@@ -80,9 +80,9 @@ class WbHtml
         $string .= '<meta property="og:locale" content="pt_BR" />';
         $string .= '<meta property="og:url" content="' . $this->mainUrl . '" />';
         $string .= '<meta property="og:type" content="website" />';
-        $string .= '<meta property="og:title" content="' . $objWbSession->get('meta_title') . '" />';
-        $string .= '<meta property="og:site_name" content="' . $objWbSession->get('meta_title') . '" />';
-        $string .= '<meta property="og:description" content="' . $objWbSession->get('meta_description') . '" />';
+        $string .= '<meta property="og:title" content="' . $objWbSession->get('metaTitle') . '" />';
+        $string .= '<meta property="og:site_name" content="' . $objWbSession->get('metaTitle') . '" />';
+        $string .= '<meta property="og:description" content="' . $objWbSession->get('metaDescription') . '" />';
 
         return $string;
     }
@@ -93,10 +93,10 @@ class WbHtml
         $string = '';
 
         $string .= '<meta name="application-name" content="' . $objWbSession->get('meta_author') . '" />';
-        $string .= '<title>' . $objWbSession->get('meta_title') . '</title>';
-        $string .= '<meta name="description" content="' . $objWbSession->get('meta_description') . '" />';
-        $string .= '<meta name="author" content="' . $objWbSession->get('meta_author') . '" />';
-        $string .= '<meta name="keywords" content="' . $objWbSession->get('meta_keywords') . '" />';
+        $string .= '<title>' . $objWbSession->get('metaTitle') . '</title>';
+        $string .= '<meta name="description" content="' . $objWbSession->get('metaDescription') . '" />';
+        $string .= '<meta name="author" content="' . $objWbSession->get('metaAuthor') . '" />';
+        $string .= '<meta name="keywords" content="' . $objWbSession->get('metaKeywords') . '" />';
 
         return $string;
     }

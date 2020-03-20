@@ -47,6 +47,6 @@ class WbTranslation {
 
     update() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$select = document.querySelector('#translation_select');
+        this.$select = document.querySelector('#translationSelect');
     }
 }

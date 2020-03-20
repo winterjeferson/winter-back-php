@@ -13,4 +13,12 @@ class WbHelp
 
         return json_encode($arr);
     }
+
+    public function verifyLocalhost()
+    {
+        getcwd();
+        $isLocalhost = filter_input(INPUT_SERVER, 'HTTP_HOST') === 'localhost' ? true : false;
+
+        return $isLocalhost;
+    }
 }

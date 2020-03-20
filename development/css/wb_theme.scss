@@ -10,7 +10,7 @@ $break-point-eb: 1200px;
 $break-point-fhd: 1900px;
 
 $grey: grey;
-#page_blog {
+#pageBlog {
   .col-first {
     @media (min-width: $break-point-es) {
       padding-right: 0;
@@ -20,34 +20,34 @@ $grey: grey;
       padding-right: $eb;
     }
   }
-}
 
-.blog-list {
-  article {
-    display: grid;
-    width: 100%;
-    grid-template:
-      "blog-list-image blog-list-text"
-      / 150px auto;
-    margin-bottom: $eb;
-    border: 1px solid #d9dcdf;
-  }
-
-  .blog-list-image {
-    grid-area: blog-list-image;
-
-    img {
-      width: 150px;
-      height: 150px;
+  .blog-list {
+    article {
+      display: grid;
+      width: 100%;
+      grid-template:
+        "blog-list-image blog-list-text"
+        / 150px auto;
+      margin-bottom: $eb;
+      border: 1px solid #d9dcdf;
     }
-  }
-
-  .blog-list-text {
-    grid-area: blog-list-text;
-    padding: $eb;
-
-    .blog-list-title {
-      margin: 0;
+  
+    .blog-list-image {
+      grid-area: blog-list-image;
+  
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  
+    .blog-list-text {
+      grid-area: blog-list-text;
+      padding: $eb;
+  
+      .blog-list-title {
+        margin: 0;
+      }
     }
   }
 }

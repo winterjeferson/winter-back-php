@@ -1,16 +1,16 @@
 body {
   overflow-x: hidden !important; }
 
-#page_admin_blog .table .menu {
+#pageAdminBlog .table .menu {
   white-space: nowrap; }
 
-#page_admin_login {
+#pageAdminLogin {
   background-color: grey;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center; }
-  #page_admin_login .login-wrapper {
+  #pageAdminLogin .login-wrapper {
     background-color: white;
     border: 1px solid grey;
     border-radius: 4px;

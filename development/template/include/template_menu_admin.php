@@ -1,10 +1,10 @@
 {% set arr = [
-    {id: 'admin-blog', translation: 'blog_admin'},
+    {id: 'admin-blog', translation: 'blogAdmin'},
     {id: 'admin-logout', translation: 'logout'}
 ] %}
 
 <div class="padding-re">
-    <nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="page_admin_menu">
+    <nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="pageAdminMenu">
         <ul>
             {% for i in arr %}
             <li>

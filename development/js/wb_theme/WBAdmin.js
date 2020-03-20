@@ -23,8 +23,8 @@ class WbAdmin {
             return;
         }
 
-        this.$btBlog = this.$page.querySelector('[data-id="bt_blog"]');
-        this.$btLogout = this.$page.querySelector('[data-id="bt_logout"]');
+        this.$btBlog = this.$page.querySelector('[data-id="btBlog"]');
+        this.$btLogout = this.$page.querySelector('[data-id="btLogout"]');
     }
 
     buildMenuChangePage(page) {

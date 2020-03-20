@@ -7,17 +7,17 @@ $objWbBlogList->resetSession();
 {% include "include/loading_main.php" %}
 <main class="grid">
     {% include "include/template_header.php" %}
-    <section id="main_menu" class="grid-menu">
+    <section id="mainMenu" class="grid-menu">
         {% include "include/template_menu.php" %}
     </section>
-    <section id="main_content" class="grid-content">
-        <div id="page_blog" class="row">
+    <section id="mainContent" class="grid-content">
+        <div id="pageBlog" class="row">
             <div class="col-es-12">
                 <div class="container">
                     <div class="row">
                         <section class="col-es-12 col-bi-7 col-first" id="pageBlogLastPost">
                             <h1 class="page-title">
-                                <?php echo $WbTranslation['last_post']; ?>
+                                <?php echo $WbTranslation['lastPost']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
@@ -36,7 +36,7 @@ $objWbBlogList->resetSession();
                         </section>
                         <section class="col-es-12 col-bi-5" id="pageBlogMostViewed">
                             <h1 class="page-title">
-                                <?php echo $WbTranslation['most_viewed']; ?>
+                                <?php echo $WbTranslation['mostViewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php

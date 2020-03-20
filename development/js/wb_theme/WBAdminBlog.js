@@ -19,27 +19,27 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isEdit = false;
         this.editId = 0;
-        this.$page = document.querySelector('#page_admin_blog');
-        this.$formRegister = this.$page.querySelector('[data-id="form_register"]');
-        this.$formFieldTitlePt = this.$page.querySelector('[data-id="field_title_pt"]');
-        this.$formFieldTitleEn = this.$page.querySelector('[data-id="field_title_en"]');
-        this.$formFieldUrlPt = this.$page.querySelector('[data-id="field_url_pt"]');
-        this.$formFieldUrlEn = this.$page.querySelector('[data-id="field_url_en"]');
-        this.$formFieldContentPt = this.$page.querySelector('[data-id="field_content_pt"]');
-        this.$formFieldContentEn = this.$page.querySelector('[data-id="field_content_en"]');
-        this.$formFieldTagPt = this.$page.querySelector('[data-id="field_tag_pt"]');
-        this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
-        this.$formFieldDatePostPt = this.$page.querySelector('[data-id="field_date_post_pt"]');
-        this.$formFieldDatePostEn = this.$page.querySelector('[data-id="field_date_post_en"]');
-        this.$formFieldDateEditPt = this.$page.querySelector('[data-id="field_date_edit_pt"]');
-        this.$formFieldDateEditEn = this.$page.querySelector('[data-id="field_date_edit_en"]');
-        this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
+        this.$page = document.querySelector('#pageAdminBlog');
+        this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
+        this.$formFieldTitlePt = this.$page.querySelector('[data-id="fieldTitlePt"]');
+        this.$formFieldTitleEn = this.$page.querySelector('[data-id="fieldTitleEn"]');
+        this.$formFieldUrlPt = this.$page.querySelector('[data-id="fieldUrlPt"]');
+        this.$formFieldUrlEn = this.$page.querySelector('[data-id="fieldUrlEn"]');
+        this.$formFieldContentPt = this.$page.querySelector('[data-id="fieldContentPt"]');
+        this.$formFieldContentEn = this.$page.querySelector('[data-id="fieldContentEn"]');
+        this.$formFieldTagPt = this.$page.querySelector('[data-id="fieldTagPt"]');
+        this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+        this.$formFieldDatePostPt = this.$page.querySelector('[data-id="fieldDatePostPt"]');
+        this.$formFieldDatePostEn = this.$page.querySelector('[data-id="fieldDatePostEn"]');
+        this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
+        this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
+        this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
-        let $btRegister = this.$page.querySelector('[data-id="bt_register"]');
+        let $btRegister = this.$page.querySelector('[data-id="btRegister"]');
 
         $btRegister.onclick = function () {
             if (self.isEdit) {
@@ -54,8 +54,8 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let $table = this.$page.querySelectorAll('.table');
-        let $tableActive = this.$page.querySelectorAll('[data-id="table_active"]');
-        let $tableInactive = this.$page.querySelectorAll('[data-id="table_inactive"]');
+        let $tableActive = this.$page.querySelectorAll('[data-id="tableActive"]');
+        let $tableInactive = this.$page.querySelectorAll('[data-id="tableInactive"]');
 
         Array.prototype.forEach.call($tableActive, function (table) {
             let $button = table.querySelectorAll('[data-action="inactivate"]');

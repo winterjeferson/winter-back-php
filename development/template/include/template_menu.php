@@ -1,5 +1,5 @@
 {% set arr = [
-    {id: 'admin', translation: 'administrative_panel'},
+    {id: 'admin', translation: 'administrativePanel'},
     {id: 'blog', translation: 'blog'}
 ] %}
 

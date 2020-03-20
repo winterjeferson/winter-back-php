@@ -221,9 +221,10 @@ class WbAdminBlog
             ],
             'table' => [['table' => $this->sqlTable]],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]],
-            'limit' => [['final' => 1]],
+            'limit' => [['offset' => 1]],
         ]);
 
+        
         $query = $objWbQuery->select();
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 

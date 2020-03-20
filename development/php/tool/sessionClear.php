@@ -1,6 +1,6 @@
 <?php
 
-include 'display_error.php';
+include 'displayError.php';
 
 session_start();
 

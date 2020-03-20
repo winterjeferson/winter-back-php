@@ -18,10 +18,10 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isSignUp = false;
 
-        this.$page = document.querySelector('#page_admin_login');
-        this.$buttonLogin = document.querySelector('#page_admin_login_bt');
-        this.$fielEmail = document.querySelector('#page_admin_login_user');
-        this.$fieldPassword = document.querySelector('#page_admin_login_password');
+        this.$page = document.querySelector('#pageAdminLogin');
+        this.$buttonLogin = document.querySelector('#pageAdminLoginBt');
+        this.$fielEmail = document.querySelector('#pageAdminLoginUser');
+        this.$fieldPassword = document.querySelector('#pageAdminLoginPassword');
     }
 
     buildMenu() {
@@ -55,7 +55,11 @@ class WbLogin {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param = '&c=WbLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
+        let param = 
+            '&c=WbLogin' + 
+            '&m=doLogin' + 
+            '&email=' + this.$fielEmail.value + 
+            '&password=' + this.$fieldPassword.value;
 
         if (!this.validate()) {
             return;

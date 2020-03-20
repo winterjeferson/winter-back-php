@@ -5,7 +5,7 @@ $post = $objWbBlogPost->getPost();
 <?php
 echo $objWbHtml->buildHeader();
 ?>
-<div id="loading_main" class="bg-grey">
+<div id="loadingMain" class="bg-grey">
     <div class="col-middle">
         <div class="row">
             <div class="col-es-2 col-es-off-5">
@@ -42,7 +42,7 @@ $objWbUrl = new WbUrl();
                             <span class="about mobile-hide"><?php echo $WbTranslation['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translation_select" aria-label="<?php echo $WbTranslation['language']; ?>">
+                            <select id="translationSelect" aria-label="<?php echo $WbTranslation['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
@@ -58,7 +58,7 @@ $objWbUrl = new WbUrl();
         </div>
     </div>
 </header>
-    <section id="main_menu" class="grid-menu">
+    <section id="mainMenu" class="grid-menu">
         
 
 <div class="row">
@@ -71,7 +71,7 @@ $objWbUrl = new WbUrl();
                 
                 <li>
                     <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin/" data-id="admin" class="bt bt-sm bt-fu bt-blue">
-                        <?php echo $WbTranslation['administrative_panel']; ?>
+                        <?php echo $WbTranslation['administrativePanel']; ?>
                     </a>
                 </li>
                 
@@ -86,7 +86,7 @@ $objWbUrl = new WbUrl();
     </div>
 </div>
     </section>
-    <section id="main_content" class="grid-content">
+    <section id="mainContent" class="grid-content">
         <article class="row">
             <div class="col-es-12">
                 <div class="container">
@@ -117,7 +117,7 @@ $objWbUrl = new WbUrl();
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
-            <span class="about"><?php echo $WbTranslation['developed_by']; ?>:</span>
+            <span class="about"><?php echo $WbTranslation['developedBy']; ?>:</span>
             <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>

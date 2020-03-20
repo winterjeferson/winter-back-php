@@ -118,8 +118,8 @@ function () {
         return;
       }
 
-      this.$btBlog = this.$page.querySelector('[data-id="bt_blog"]');
-      this.$btLogout = this.$page.querySelector('[data-id="bt_logout"]');
+      this.$btBlog = this.$page.querySelector('[data-id="btBlog"]');
+      this.$btLogout = this.$page.querySelector('[data-id="btLogout"]');
     }
   }, {
     key: "buildMenuChangePage",
@@ -226,21 +226,21 @@ function () {
 
       this.isEdit = false;
       this.editId = 0;
-      this.$page = document.querySelector('#page_admin_blog');
-      this.$formRegister = this.$page.querySelector('[data-id="form_register"]');
-      this.$formFieldTitlePt = this.$page.querySelector('[data-id="field_title_pt"]');
-      this.$formFieldTitleEn = this.$page.querySelector('[data-id="field_title_en"]');
-      this.$formFieldUrlPt = this.$page.querySelector('[data-id="field_url_pt"]');
-      this.$formFieldUrlEn = this.$page.querySelector('[data-id="field_url_en"]');
-      this.$formFieldContentPt = this.$page.querySelector('[data-id="field_content_pt"]');
-      this.$formFieldContentEn = this.$page.querySelector('[data-id="field_content_en"]');
-      this.$formFieldTagPt = this.$page.querySelector('[data-id="field_tag_pt"]');
-      this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
-      this.$formFieldDatePostPt = this.$page.querySelector('[data-id="field_date_post_pt"]');
-      this.$formFieldDatePostEn = this.$page.querySelector('[data-id="field_date_post_en"]');
-      this.$formFieldDateEditPt = this.$page.querySelector('[data-id="field_date_edit_pt"]');
-      this.$formFieldDateEditEn = this.$page.querySelector('[data-id="field_date_edit_en"]');
-      this.$formFieldTagEn = this.$page.querySelector('[data-id="field_tag_en"]');
+      this.$page = document.querySelector('#pageAdminBlog');
+      this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
+      this.$formFieldTitlePt = this.$page.querySelector('[data-id="fieldTitlePt"]');
+      this.$formFieldTitleEn = this.$page.querySelector('[data-id="fieldTitleEn"]');
+      this.$formFieldUrlPt = this.$page.querySelector('[data-id="fieldUrlPt"]');
+      this.$formFieldUrlEn = this.$page.querySelector('[data-id="fieldUrlEn"]');
+      this.$formFieldContentPt = this.$page.querySelector('[data-id="fieldContentPt"]');
+      this.$formFieldContentEn = this.$page.querySelector('[data-id="fieldContentEn"]');
+      this.$formFieldTagPt = this.$page.querySelector('[data-id="fieldTagPt"]');
+      this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+      this.$formFieldDatePostPt = this.$page.querySelector('[data-id="fieldDatePostPt"]');
+      this.$formFieldDatePostEn = this.$page.querySelector('[data-id="fieldDatePostEn"]');
+      this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
+      this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
+      this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
     }
   }, {
     key: "buildMenu",
@@ -250,7 +250,7 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      var $btRegister = this.$page.querySelector('[data-id="bt_register"]');
+      var $btRegister = this.$page.querySelector('[data-id="btRegister"]');
 
       $btRegister.onclick = function () {
         if (self.isEdit) {
@@ -269,8 +269,8 @@ function () {
 
       var self = this;
       var $table = this.$page.querySelectorAll('.table');
-      var $tableActive = this.$page.querySelectorAll('[data-id="table_active"]');
-      var $tableInactive = this.$page.querySelectorAll('[data-id="table_inactive"]');
+      var $tableActive = this.$page.querySelectorAll('[data-id="tableActive"]');
+      var $tableInactive = this.$page.querySelectorAll('[data-id="tableInactive"]');
       Array.prototype.forEach.call($tableActive, function (table) {
         var $button = table.querySelectorAll('[data-action="inactivate"]');
         Array.prototype.forEach.call($button, function (item) {
@@ -658,10 +658,10 @@ function () {
       /*endRemoveIf(production)*/
 
       this.isSignUp = false;
-      this.$page = document.querySelector('#page_admin_login');
-      this.$buttonLogin = document.querySelector('#page_admin_login_bt');
-      this.$fielEmail = document.querySelector('#page_admin_login_user');
-      this.$fieldPassword = document.querySelector('#page_admin_login_password');
+      this.$page = document.querySelector('#pageAdminLogin');
+      this.$buttonLogin = document.querySelector('#pageAdminLoginBt');
+      this.$fielEmail = document.querySelector('#pageAdminLoginUser');
+      this.$fieldPassword = document.querySelector('#pageAdminLoginPassword');
     }
   }, {
     key: "buildMenu",
@@ -876,7 +876,7 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.$select = document.querySelector('#translation_select');
+      this.$select = document.querySelector('#translationSelect');
     }
   }]);
 
