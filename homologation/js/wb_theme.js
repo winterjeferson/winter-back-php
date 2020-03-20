@@ -47,7 +47,7 @@ function () {
 
       string += '%c';
       string += ');';
-      console.log(string, 'color: black', 'color: blue', 'color: red', 'color: green');
+      console.log(string, 'color: black', 'color: green', 'color: red', 'color: green');
     }
   }, {
     key: "getMethodName",
@@ -522,6 +522,8 @@ function () {
     /*removeIf(production)*/
     objWbDebug.debugMethod(this, 'constructor');
     /*endRemoveIf(production)*/
+
+    this.classlaodMore = 'loadMore';
   }
 
   _createClass(WbBlog, [{
@@ -545,8 +547,9 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      this.$lastPost = document.querySelector('#page_blog_last_post');
-      this.$mostViewed = document.querySelector('#page_blog_most_viewed');
+      this.page = 'pageBlog';
+      this.$lastPost = document.querySelector('#' + this.page + 'LastPost');
+      this.$mostViewed = document.querySelector('#' + this.page + 'MostViewed');
     }
   }, {
     key: "buildMenu",
@@ -561,14 +564,14 @@ function () {
         return;
       }
 
-      if (document.contains(this.$lastPost.querySelector('[data-id="laod_more"]'))) {
-        this.$lastPost.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+      if (document.contains(this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+        this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
           self.loadMore(this);
         });
       }
 
-      if (document.contains(this.$mostViewed.querySelector('[data-id="laod_more"]'))) {
-        this.$mostViewed.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+      if (document.contains(this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+        this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
           self.loadMore(this);
         });
       }
@@ -582,17 +585,18 @@ function () {
 
       var self = this;
       var parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
+      var parentIdString = parentId.substring(this.page.length);
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbBlog' + '&m=loadMore' + '&target=' + parentId;
+      var param = '&c=WbBlogList' + '&m=buildLoadMoreButtonClick' + '&target=' + parentIdString;
       target.classList.add('disabled');
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
       ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-          self.loadMoreSuccess(parentId, ajax.responseText);
           target.classList.remove('disabled');
+          self.loadMoreSuccess(parentId, ajax.responseText);
         }
       };
 
@@ -605,7 +609,16 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      document.querySelector('#' + parentId + ' .blog-list').insertAdjacentHTML('beforeend', value);
+      var json = JSON.parse(value);
+      var $section = document.querySelector('#' + parentId);
+      var $sectionList = $section.querySelector('.blog-list');
+      var $bt = $section.querySelector('[data-id="' + this.classlaodMore + '"]');
+
+      if (!json[this.classlaodMore]) {
+        $bt.classList.add('disabled');
+      }
+
+      $sectionList.insertAdjacentHTML('beforeend', json['html']);
     }
   }]);
 

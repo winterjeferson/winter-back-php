@@ -1,6 +1,7 @@
 class WbBlog {
     constructor() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        this.classlaodMore = 'loadMore';
     }
 
     build() {
@@ -15,8 +16,9 @@ class WbBlog {
 
     update() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$lastPost = document.querySelector('#page_blog_last_post');
-        this.$mostViewed = document.querySelector('#page_blog_most_viewed');
+        this.page = 'pageBlog';
+        this.$lastPost = document.querySelector('#' + this.page + 'LastPost');
+        this.$mostViewed = document.querySelector('#' + this.page + 'MostViewed');
     }
 
     buildMenu() {
@@ -27,14 +29,14 @@ class WbBlog {
             return;
         }
 
-        if (document.contains(this.$lastPost.querySelector('[data-id="laod_more"]'))) {
-            this.$lastPost.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+        if (document.contains(this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+            this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
                 self.loadMore(this);
             });
         }
 
-        if (document.contains(this.$mostViewed.querySelector('[data-id="laod_more"]'))) {
-            this.$mostViewed.querySelector('[data-id="laod_more"]').addEventListener('click', function (event) {
+        if (document.contains(this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+            this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
                 self.loadMore(this);
             });
         }
@@ -44,12 +46,13 @@ class WbBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
+        let parentIdString = parentId.substring(this.page.length);
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
         let param =
-            '&c=WbBlog' +
-            '&m=loadMore' +
-            '&target=' + parentId;
+            '&c=WbBlogList' +
+            '&m=buildLoadMoreButtonClick' +
+            '&target=' + parentIdString;
 
         target.classList.add('disabled');
         ajax.open('POST', url, true);
@@ -57,8 +60,8 @@ class WbBlog {
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.loadMoreSuccess(parentId, ajax.responseText);
                 target.classList.remove('disabled');
+                self.loadMoreSuccess(parentId, ajax.responseText);
             }
         }
 
@@ -67,6 +70,15 @@ class WbBlog {
 
     loadMoreSuccess(parentId, value) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        document.querySelector('#' + parentId + ' .blog-list').insertAdjacentHTML('beforeend', value);
+        let json = JSON.parse(value);
+        let $section = document.querySelector('#' + parentId);
+        let $sectionList = $section.querySelector('.blog-list');
+        let $bt = $section.querySelector('[data-id="' + this.classlaodMore + '"]');
+
+        if (!json[this.classlaodMore]) {
+            $bt.classList.add('disabled');
+        }
+
+        $sectionList.insertAdjacentHTML('beforeend', json['html']);
     }
 }

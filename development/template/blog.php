@@ -1,3 +1,8 @@
+<?php
+$objWbBlogList = new WbBlogList();
+$objWbBlogList->resetSession();
+?>
+
 {% include "include/head.php" %}
 {% include "include/loading_main.php" %}
 <main class="grid">
@@ -10,35 +15,43 @@
             <div class="col-es-12">
                 <div class="container">
                     <div class="row">
-                        <section class="col-es-12 col-bi-7 col-first" id="page_blog_last_post">
+                        <section class="col-es-12 col-bi-7 col-first" id="pageBlogLastPost">
                             <h1 class="page-title">
                                 <?php echo $WbTranslation['last_post']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                $objWbBlog = new WbBlog();
-                                $objWbBlog->loadMoreSetLast('reset');
-                                echo $objWbBlog->buildBlogPost('lastPost');
-                                $objWbBlog->loadMoreSetLast('page_blog_last_post');
+                                $list = $objWbBlogList->getList('lastPost');
+                                $json = json_decode($list, true);
+                                echo $json['html'];
                                 ?>
                             </div>
-                            <?php
-                            echo $objWbBlog->buildLoadMoreButton('lastPost');
-                            ?>
+                            <div class="row">
+                                <div class="col-es-12">
+                                    <?php
+                                    echo $objWbBlogList->buildLoadMoreButton('lastPost');
+                                    ?>
+                                </div>
+                            </div>
                         </section>
-                        <section class="col-es-12 col-bi-5" id="page_blog_most_viewed">
+                        <section class="col-es-12 col-bi-5" id="pageBlogMostViewed">
                             <h1 class="page-title">
                                 <?php echo $WbTranslation['most_viewed']; ?>
                             </h1>
                             <div class="row blog-list">
                                 <?php
-                                echo $objWbBlog->buildBlogPost('mostViewed');
-                                $objWbBlog->loadMoreSetLast('page_blog_most_viewed');
+                                $list = $objWbBlogList->getList('mostViewed');
+                                $json = json_decode($list, true);
+                                echo $json['html'];
                                 ?>
                             </div>
-                            <?php
-                            echo $objWbBlog->buildLoadMoreButton('mostViewed');
-                            ?>
+                            <div class="row">
+                                <div class="col-es-12">
+                                    <?php
+                                    echo $objWbBlogList->buildLoadMoreButton('mostViewed');
+                                    ?>
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </div>

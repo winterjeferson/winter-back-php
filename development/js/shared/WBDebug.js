@@ -35,7 +35,7 @@ class WbDebug {
         string += '%c';
         string += ');';
 
-        console.log(string, 'color: black', 'color: blue', 'color: red', 'color: green');
+        console.log(string, 'color: black', 'color: green', 'color: red', 'color: green');
     }
 
     getMethodName() {
