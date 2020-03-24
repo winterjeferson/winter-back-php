@@ -4,8 +4,8 @@ var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https
 var csso = require('gulp-csso');//npm install gulp-csso --save-dev //https://www.npmjs.com/package/gulp-csso/
 
 var configuration = require('./configuration.js');
-var wb_project = require('./wb_project.js');
-var wb_util = require('./wb_util.js');
+var wb_project = require('./wb-project.js');
+var wb_util = require('./wb-util.js');
 
 
 var fileCssAdmin = [

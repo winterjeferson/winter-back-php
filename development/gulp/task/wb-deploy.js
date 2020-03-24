@@ -1,11 +1,11 @@
 var gulp = require('gulp');
 
-var project = require('./wb_project.js');
-var util = require('./wb_util.js');
-var image = require('./wb_image.js');
-var project = require('./wb_project.js');
-var js = require('./wb_js.js');
-var template = require('./wb_template.js');
+var project = require('./wb-project.js');
+var util = require('./wb-util.js');
+var image = require('./wb-image.js');
+var project = require('./wb-project.js');
+var js = require('./wb-js.js');
+var template = require('./wb-template.js');
 
 gulp.task('wb_deploy', gulp.series(
         'wb_css_minify',

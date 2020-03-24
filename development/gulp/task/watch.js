@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 
-var wb_css = require('./wb_css.js');
-var wb_js = require('./wb_js.js');
-var wb_other = require('./wb_other.js');
-var wb_php = require('./wb_php.js');
-var wb_template = require('./wb_template.js');
+var wb_css = require('./wb-css.js');
+var wb_js = require('./wb-js.js');
+var wb_other = require('./wb-other.js');
+var wb_php = require('./wb-php.js');
+var wb_template = require('./wb-template.js');
 
 
 

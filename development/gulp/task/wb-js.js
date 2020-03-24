@@ -13,8 +13,8 @@ var fileJs_wb_DefaultFinal = 'wb-theme.js';
 
 var fileJs_wb_ = [
     configuration.development + 'js/shared/**/*.*',
-    configuration.development + 'js/wb_theme/**/*.*',
-    configuration.development + 'js/wb_main.js'
+    configuration.development + 'js/wb-theme/**/*.*',
+    configuration.development + 'js/wb-main.js'
 ];
 
 var fileJs_wb_Final = [
