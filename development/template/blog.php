@@ -4,11 +4,11 @@ $objWbBlogList->resetSession();
 ?>
 
 {% include "include/head.php" %}
-{% include "include/loading_main.php" %}
+{% include "include/loading-main.php" %}
 <main class="grid">
-    {% include "include/template_header.php" %}
+    {% include "include/template-header.php" %}
     <section id="mainMenu" class="grid-menu">
-        {% include "include/template_menu.php" %}
+        {% include "include/template-menu.php" %}
     </section>
     <section id="mainContent" class="grid-content">
         <div id="pageBlog" class="row">
@@ -58,5 +58,5 @@ $objWbBlogList->resetSession();
             </div>
         </div>
     </section>
-    {% include "include/template_footer.php" %}
+    {% include "include/template-footer.php" %}
 </main>

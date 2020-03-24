@@ -51,23 +51,6 @@ class WbHtml
         return $string;
     }
 
-    public function buildAdmin()
-    {
-        $string = '';
-        $objWbUrl = new WbUrl();
-        $page = $objWbUrl->getUrlParameters()['page'];
-        $isAdmin = strpos($page, 'admin') !== false ? true : false;
-
-        if ($isAdmin) {
-            $string .= $this->buildTagCSS($this->mainUrl . 'css/Wb_admin');
-            $string .= '<meta name="robots" content="noindex">';
-        }
-
-        $string .= $this->buildTagCSS($this->mainUrl . 'css/Wb_theme');
-
-        return $string;
-    }
-
     public function buildHeaderFacebook()
     {
         $objWbSession = new WbSession();
@@ -141,7 +124,7 @@ class WbHtml
         $string .= '    var globalTranslation = ' . json_encode($objWbSession->get('translation')) . ';';
         $string .= '</script>';
         $string .= $objTheme->buildJs();
-        $string .= $this->buildAdmin();
+        $string .= $objTheme->buildAdmin();
 
         $string .= '    </body>';
         $string .= '</html>';

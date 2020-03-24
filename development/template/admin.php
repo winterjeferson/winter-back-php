@@ -1,15 +1,15 @@
-{% include "include/verify_login.php" %}
+{% include "include/verify-login.php" %}
 {% include "include/head.php" %}
-{% include "include/loading_main.php" %}
+{% include "include/loading-main.php" %}
 <main class="grid">
-    {% include "include/template_header.php" %}
+    {% include "include/template-header.php" %}
     <section id="mainMenu" class="grid-menu">
-        {% include "include/template_menu.php" %}
+        {% include "include/template-menu.php" %}
     </section>
     <section id="mainContent" class="grid-content">
         <div id="pageAdmin" class="row">
             <div class="col-es-12">
-                {% include "include/template_menu_admin.php" %}
+                {% include "include/template-menu-admin.php" %}
             </div>
             <div class="col-es-12">
                 <div class="container">
@@ -19,5 +19,5 @@
             </div>
         </div>
     </section>
-    {% include "include/template_footer.php" %}
+    {% include "include/template-footer.php" %}
 </main>
