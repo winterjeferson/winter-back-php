@@ -9,7 +9,7 @@ var configuration = require('./configuration.js');
 
 
 
-var fileJs_wb_DefaultFinal = 'wb_theme.js';
+var fileJs_wb_DefaultFinal = 'wb-theme.js';
 
 var fileJs_wb_ = [
     configuration.development + 'js/shared/**/*.*',

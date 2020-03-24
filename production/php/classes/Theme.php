@@ -10,23 +10,23 @@ class Theme
 
     public function buildCSS()
     {
-        $objWBPHtml = new WBPHtml();
+        $objWbHtml = new WbHtml();
         $string = '';
 
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
-        $string .= $objWBPHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_theme');
+        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
+        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_theme');
         
         return $string;
     }
     
     public function buildJs()
     {
-        $objWBPHtml = new WBPHtml();
+        $objWbHtml = new WbHtml();
         $string = '';
         
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
-        $string .= $objWBPHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
-        $string .= $objWBPHtml->buildTagJavascript($objWBPHtml->mainUrl . 'js/wb_theme');
+        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
+        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
+        $string .= $objWbHtml->buildTagJavascript($objWbHtml->mainUrl . 'js/Wb_theme');
 
         return $string;
     }

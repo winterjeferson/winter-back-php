@@ -2,30 +2,26 @@
 
 include_once 'php/autoload.php';
 
-$objWBPTranslation = new WBPTranslation();
-$objWBPHtml = new WBPHtml();
-$objWBPRoute = new WBPRoute();
+$objWbTranslation = new WbTranslation();
+$objWbHtml = new WbHtml();
+$objWbRoute = new WbRoute();
 
-$WBPTranslation = $objWBPTranslation->define();
-$WBPTranslation = $objWBPTranslation->translate();
+$WbTranslation = $objWbTranslation->define();
+$WbTranslation = $objWbTranslation->translate();
 
-$objWBPRoute->addRoute([
+$objWbRoute->addRoute([
     ['home', 'home.php'],
     ['blog', 'blog.php'],
-    ['blog-post', 'blog_post.php'],
+    ['blog-post', 'blogPost.php'],
     ['admin', 'admin.php'],
-    ['admin-blog', 'admin_blog.php'],
-    ['admin-login', 'admin_login.php'],
-    ['admin-logout', 'admin_logout.php'],
+    ['admin-blog', 'adminBlog.php'],
+    ['admin-login', 'adminLogin.php'],
+    ['admin-logout', 'adminLogout.php'],
 ]);
 
-$route = $objWBPRoute->getRoute();
-?>
-
-<?php
+$route = $objWbRoute->getRoute();
+?> <?php
 include $route;
-?>
-<!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
-<?php
-echo $objWBPHtml->buildFooter();
+?> <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE--> <?php
+echo $objWbHtml->buildFooter();
 ?>

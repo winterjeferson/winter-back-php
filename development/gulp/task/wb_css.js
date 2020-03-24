@@ -9,19 +9,19 @@ var wb_util = require('./wb_util.js');
 
 
 var fileCssAdmin = [
-    configuration.development + 'css/wb_sass/*.scss',
-    configuration.development + 'css/wb_admin/*.scss'
+    configuration.development + 'css/wb-sass/*.scss',
+    configuration.development + 'css/wb-admin/*.scss'
 ];
 
 var fileCssTheme = [
-    configuration.development + 'css/wb_sass/*.scss',
-    configuration.development + 'css/wb_theme/*.scss'
+    configuration.development + 'css/wb-sass/*.scss',
+    configuration.development + 'css/wb-theme/*.scss'
 ];
 
 var cssAdminConcat = fileCssAdmin;
 var cssThemeConcat = fileCssTheme;
-var fileAdmin = 'wb_admin';
-var fileTheme = 'wb_theme';
+var fileAdmin = 'wb-admin';
+var fileTheme = 'wb-theme';
 
 
 
