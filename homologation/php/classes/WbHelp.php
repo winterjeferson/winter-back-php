@@ -8,7 +8,7 @@ class WbHelp
         $arr = [];
 
         foreach ($array as $key => $value) {
-            $arr[$key] = is_string($value) ? utf8_encode($value) : $value;
+            $arr[$key] = is_string($value) ? $this->encode($value) : $value;
         }
 
         return json_encode($arr);
@@ -20,5 +20,10 @@ class WbHelp
         $isLocalhost = filter_input(INPUT_SERVER, 'HTTP_HOST') === 'localhost' ? true : false;
 
         return $isLocalhost;
+    }
+
+    public function encode($text)
+    {
+        return iconv(mb_detect_encoding($text, mb_detect_order(), true), "UTF-8", $text);
     }
 }

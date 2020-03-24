@@ -74,17 +74,18 @@ class WbBlogList
 
     function buildHtml($query, $objWbSession, $objWbTranslation)
     {
+        $objWbHelp = new WbHelp();
         $string = '';
 
         foreach ($query as $key => $value) {
             $string .= '<article>';
             $string .= '    <div class="blog-list-image">';
-            $string .= '        <img src="http://localhost/e/development/site/branches/framework/winter-front/homologation/img/banner/1.png" alt="image">';
+            $string .= '        <img src="https://winterjeferson.github.io/winter-front/production/img/banner/1.png" alt="image">';
             $string .= '    </div>';
             $string .= '    <div class="blog-list-text">';
             $string .= '        <a href="' . $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/" class="link link-blue">';
             $string .= '            <h2 class="blog-list-title">';
-            $string .= utf8_encode($value['title_' . $objWbTranslation->getLanguage()]);
+            $string .= $objWbHelp->encode($value['title_' . $objWbTranslation->getLanguage()]);
             $string .= '            </h2>';
             $string .= '        </a>';
             $string .= '        <small class="color-grey">';

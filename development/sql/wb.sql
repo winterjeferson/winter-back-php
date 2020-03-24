@@ -32,14 +32,14 @@ DROP TABLE IF EXISTS `blog`;
 CREATE TABLE IF NOT EXISTS `blog` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `active` tinyint(1) NOT NULL,
-  `title_pt` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `title_en` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `content_pt` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `content_en` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `url_pt` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `url_en` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `tag_pt` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `tag_en` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `title_pt` varchar(100)  NOT NULL,
+  `title_en` varchar(100)  NOT NULL,
+  `content_pt` longtext  NOT NULL,
+  `content_en` longtext  NOT NULL,
+  `url_pt` varchar(100)  NOT NULL,
+  `url_en` varchar(100)  NOT NULL,
+  `tag_pt` varchar(200)  NOT NULL,
+  `tag_en` varchar(200)  NOT NULL,
   `date_post_en` datetime DEFAULT NULL,
   `date_post_pt` datetime DEFAULT NULL,
   `date_edit_en` datetime DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `view` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12;
 
 --
 -- Extraindo dados da tabela `blog`
@@ -74,12 +74,12 @@ INSERT INTO `blog` (`id`, `active`, `title_pt`, `title_en`, `content_pt`, `conte
 DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `email` varchar(100)  NOT NULL,
+  `password` varchar(100)  NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 
 --
 -- Extraindo dados da tabela `login`

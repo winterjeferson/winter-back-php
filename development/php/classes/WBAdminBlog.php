@@ -49,18 +49,19 @@ class WbAdminBlog
 
     function buildReportHTML($value, $status, $objTheme)
     {
+        $objWbHelp = new WbHelp();
         $string = '';
 
         $string .= '<tr>';
         $string .= '    <td class="minimum">' . $value['id'] . '</td>';
-        $string .= '    <td class="minimum">' . utf8_encode($value['title_pt']) . '</td>';
-        $string .= '    <td class="minimum">' . utf8_encode($value['title_en']) . '</td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_pt'])) . '</div></td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . utf8_encode(strip_tags($value['content_en'])) . '</div></td>';
+        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['title_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['title_en']) . '</td>';
+        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>';
+        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>';
         $string .= '    <td class="minimum">' . $value['url_pt'] . '</td>';
         $string .= '    <td class="minimum">' . $value['url_en'] . '</td>';
-        $string .= '    <td class="minimum">' . utf8_encode($value['tag_pt']) . '</td>';
-        $string .= '    <td class="minimum">' . utf8_encode($value['tag_en']) . '</td>';
+        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>';
+        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>';
         $string .= '    <td class="minimum">' . $value['date_post_pt'] . '</td>';
         $string .= '    <td class="minimum">' . $value['date_post_en'] . '</td>';
         $string .= '    <td class="minimum">' . $value['date_edit_pt'] . '</td>';
@@ -83,8 +84,9 @@ class WbAdminBlog
     {
         $objWbDate = new WbDate();
         $objWbQuery = new WbQuery();
-        $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
+        $objWbHelp = new WbHelp();
 
+        $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
         $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
         $urlPt = filter_input(INPUT_POST, 'urlPt', FILTER_DEFAULT);
@@ -101,12 +103,12 @@ class WbAdminBlog
         $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'column' => [
-                ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
-                ['column' => 'title_en', 'value' => utf8_decode($titleEn)],
+                ['column' => 'title_pt', 'value' => $objWbHelp->encode($titlePt)],
+                ['column' => 'title_en', 'value' => $objWbHelp->encode($titleEn)],
                 ['column' => 'url_pt', 'value' => $urlPt],
                 ['column' => 'url_en', 'value' => $urlEn],
-                ['column' => 'content_pt', 'value' => utf8_decode($contentPt)],
-                ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
+                ['column' => 'content_pt', 'value' => $objWbHelp->encode($contentPt)],
+                ['column' => 'content_en', 'value' => $objWbHelp->encode($contentEn)],
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
                 ['column' => 'date_post_pt', 'value' => $objWbDate->buildDate($datePostPt)],
@@ -125,6 +127,7 @@ class WbAdminBlog
     {
         $objWbDate = new WbDate();
         $objWbQuery = new WbQuery();
+        $objWbHelp = new WbHelp();
 
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
         $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
@@ -142,12 +145,12 @@ class WbAdminBlog
         $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
             'column' => [
-                ['column' => 'title_pt', 'value' => utf8_decode($titlePt)],
-                ['column' => 'title_en', 'value' => utf8_decode($titleEn)],
+                ['column' => 'title_pt', 'value' => $objWbHelp->encode($titlePt)],
+                ['column' => 'title_en', 'value' => $objWbHelp->encode($titleEn)],
                 ['column' => 'url_pt', 'value' => $urlPt],
                 ['column' => 'url_en', 'value' => $urlEn],
-                ['column' => 'content_pt', 'value' => utf8_decode($contentPt)],
-                ['column' => 'content_en', 'value' => utf8_decode($contentEn)],
+                ['column' => 'content_pt', 'value' => $objWbHelp->encode($contentPt)],
+                ['column' => 'content_en', 'value' => $objWbHelp->encode($contentEn)],
                 ['column' => 'tag_pt', 'value' => $tagPt],
                 ['column' => 'tag_en', 'value' => $tagEn],
                 ['column' => 'date_post_pt', 'value' => $objWbDate->buildDate($datePostPt)],

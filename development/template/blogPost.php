@@ -1,5 +1,6 @@
 <?php
 $objWbBlogPost = new WbBlogPost();
+$objWbHelp = new WbHelp();
 $post = $objWbBlogPost->getPost();
 ?>
 {% include "include/head.php" %}
@@ -15,7 +16,7 @@ $post = $objWbBlogPost->getPost();
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        echo utf8_encode($post['title_' .  $objWbTranslation->getLanguage()]);
+                        echo $objWbHelp->encode($post['title_' .  $objWbTranslation->getLanguage()]);
                         ?>
                     </h1>
                 </div>
@@ -23,7 +24,7 @@ $post = $objWbBlogPost->getPost();
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo utf8_encode($post['content_' .  $objWbTranslation->getLanguage()]);
+                    echo $objWbHelp->encode($post['content_' .  $objWbTranslation->getLanguage()]);
                     ?>
                 </div>
             </div>
@@ -31,7 +32,7 @@ $post = $objWbBlogPost->getPost();
                 <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWbBlogPost->buildTag(utf8_encode($post['tag_' .  $objWbTranslation->getLanguage()]));
+                    echo $objWbBlogPost->buildTag($objWbHelp->encode($post['tag_' .  $objWbTranslation->getLanguage()]));
                     ?>
                 </div>
             </div>
