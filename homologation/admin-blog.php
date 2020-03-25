@@ -144,7 +144,7 @@ $objWbUrl = new WbUrl();
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['content']; ?></label>
-                                                    <textarea data-id="fieldContentPt" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
+                                                    <textarea id="fieldContentPt" data-id="fieldContentPt" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['tags']; ?></label>
@@ -191,7 +191,7 @@ $objWbUrl = new WbUrl();
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['content']; ?></label>
-                                                    <textarea data-id="fieldContentEn" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
+                                                    <textarea id="fieldContentEn" data-id="fieldContentEn" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['tags']; ?></label>
@@ -309,6 +309,7 @@ $objWbUrl = new WbUrl();
             </div>
         </div>
     </section>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">

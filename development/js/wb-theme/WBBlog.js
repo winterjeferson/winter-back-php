@@ -49,7 +49,7 @@ class WbBlog {
         let parentIdString = parentId.substring(this.page.length);
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbBlogList' +
             '&m=buildLoadMoreButtonClick' +
             '&target=' + parentIdString;
@@ -65,7 +65,7 @@ class WbBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     loadMoreSuccess(parentId, value) {

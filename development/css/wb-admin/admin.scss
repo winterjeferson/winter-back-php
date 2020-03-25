@@ -1,7 +1,3 @@
-body {
-  overflow-x: hidden !important;
-}
-
 #pageAdminBlog {
   .table {
     .menu {
@@ -36,4 +32,10 @@ body {
       }
     }
   }
+}
+
+.table td{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

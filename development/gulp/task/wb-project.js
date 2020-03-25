@@ -6,6 +6,9 @@ var configuration = require('./configuration.js');
 
 gulp.task('wb_project_move_production', function () {
     gulp
+        .src(configuration.homologation + '*/**/*.*')
+        .pipe(gulp.dest(configuration.production));
+    gulp
         .src(configuration.homologation + '*.php')
         .pipe(gulp.dest(configuration.production));
     gulp

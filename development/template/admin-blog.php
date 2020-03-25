@@ -46,7 +46,7 @@ $objWbAdminBlog = new WbAdminBlog();
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['content']; ?></label>
-                                                    <textarea data-id="fieldContent{{i.language}}" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
+                                                    <textarea id="fieldContent{{i.language}}" data-id="fieldContent{{i.language}}" aria-label="<?php echo $WbTranslation['content']; ?>"></textarea>
                                                 </div>
                                                 <div class="col-es-12 form-field text-left">
                                                     <label><?php echo $WbTranslation['tags']; ?></label>
@@ -131,5 +131,6 @@ $objWbAdminBlog = new WbAdminBlog();
             </div>
         </div>
     </section>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     {% include "include/template-footer.php" %}
 </main>

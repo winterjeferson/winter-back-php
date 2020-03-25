@@ -9,7 +9,7 @@ class WbAdmin {
         if (!getUrlWord('admin')) {
             return;
         }
-        
+
         this.updateVariable();
         this.buildMenuDifeneActive();
         this.builTableTdWrapper();
@@ -55,10 +55,12 @@ class WbAdmin {
     buildLogout() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let param = '&c=WbLogin' + '&m=doLogout';
+        let parameter =
+            '&c=WbLogin' +
+            '&m=doLogout';
 
         ajax.open('POST', objWbUrl.getController(), true);
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     builTableTdWrapper() {

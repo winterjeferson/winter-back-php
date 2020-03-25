@@ -55,7 +55,7 @@ class WbLogin {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param = 
+        let parameter = 
             '&c=WbLogin' + 
             '&m=doLogin' + 
             '&email=' + this.$fielEmail.value + 
@@ -76,7 +76,7 @@ class WbLogin {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     buildLoginResponse(data) {

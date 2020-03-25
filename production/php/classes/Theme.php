@@ -13,8 +13,8 @@ class Theme
         $objWbHtml = new WbHtml();
         $string = '';
 
-        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_plugin');
-        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf_theme');
+        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf-plugin');
+        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf-theme');
         
         return $string;
     }
@@ -24,9 +24,27 @@ class Theme
         $objWbHtml = new WbHtml();
         $string = '';
         
-        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_plugin');
-        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf_theme');
-        $string .= $objWbHtml->buildTagJavascript($objWbHtml->mainUrl . 'js/Wb_theme');
+        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf-plugin');
+        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf-theme');
+        $string .= $objWbHtml->buildTagJavascript($objWbHtml->mainUrl . 'js/wb-theme');
+
+        return $string;
+    }
+
+    public function buildAdmin()
+    {
+        $string = '';
+        $objWbUrl = new WbUrl();
+        $objWbHtml = new WbHtml();
+        $page = $objWbUrl->getUrlParameters()['page'];
+        $isAdmin = strpos($page, 'admin') !== false ? true : false;
+
+        if ($isAdmin) {
+            $string .= $objWbHtml->buildTagCSS($objWbHtml->mainUrl . 'css/wb-admin');
+            $string .= '<meta name="robots" content="noindex">';
+        }
+
+        $string .= $objWbHtml->buildTagCSS($objWbHtml->mainUrl . 'css/wb-theme');
 
         return $string;
     }

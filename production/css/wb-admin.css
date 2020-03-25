@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden !important; }
+
 #pageAdminBlog .table .menu {
   white-space: nowrap; }
 
@@ -18,8 +21,3 @@
 
 #admin .table .menu ul {
   width: max-content; }
-
-.table td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; }

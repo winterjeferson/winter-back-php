@@ -9,6 +9,9 @@ class WbAdminBlog {
             return;
         }
 
+        CKEDITOR.replace('fieldContentPt');
+        CKEDITOR.replace('fieldContentEn');
+
         this.updateVariable();
         this.buildMenu();
         this.buildMenuTable();
@@ -34,6 +37,8 @@ class WbAdminBlog {
         this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
         this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
         this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+        this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
+        this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
 
     buildMenu() {
@@ -45,7 +50,7 @@ class WbAdminBlog {
             if (self.isEdit) {
                 self.editSave();
             } else {
-                self.registerContent();
+                self.saveContent();
             }
         }
     }
@@ -113,22 +118,11 @@ class WbAdminBlog {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbAdminBlog' +
             '&m=doUpdate' +
-            '&titlePt=' + this.$formFieldTitlePt.value +
-            '&titleEn=' + this.$formFieldTitleEn.value +
-            '&urlPt=' + this.$formFieldUrlPt.value +
-            '&urlEn=' + this.$formFieldUrlEn.value +
-            '&contentPt=' + this.$formFieldContentPt.value +
-            '&contentEn=' + this.$formFieldContentEn.value +
-            '&tagPt=' + this.$formFieldTagPt.value +
-            '&tagEn=' + this.$formFieldTagEn.value +
-            '&datePostPt=' + this.$formFieldDatePostPt.value +
-            '&datePostEn=' + this.$formFieldDatePostEn.value +
-            '&dateEditPt=' + this.$formFieldDateEditPt.value +
-            '&dateEditEn=' + this.$formFieldDateEditEn.value +
-            '&id=' + self.editId;
+            '&id=' + self.editId +
+            this.buildParameter();
 
         if (!this.validateForm()) {
             return;
@@ -143,7 +137,7 @@ class WbAdminBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     editLoadData(id) {
@@ -151,7 +145,7 @@ class WbAdminBlog {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbAdminBlog' +
             '&m=editLoadData' +
             '&id=' + id;
@@ -168,7 +162,7 @@ class WbAdminBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     editFillField(obj) {
@@ -177,8 +171,6 @@ class WbAdminBlog {
         this.$formFieldTitleEn.value = obj['title_en'];
         this.$formFieldUrlPt.value = obj['url_pt'];
         this.$formFieldUrlEn.value = obj['url_en'];
-        this.$formFieldContentPt.value = obj['content_pt'];
-        this.$formFieldContentEn.value = obj['content_en'];
         this.$formFieldTagPt.value = obj['tag_pt'];
         this.$formFieldTagEn.value = obj['tag_en'];
         this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
@@ -187,6 +179,14 @@ class WbAdminBlog {
         this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
         this.editId = obj['id'];
         this.$formFieldTagEn.value = obj['tag_en'];
+
+        this.$ckEditorPt.setData(obj['content_pt'], function () {
+            this.checkDirty();
+        });
+
+        this.$ckEditorEn.setData(obj['content_en'], function () {
+            this.checkDirty();
+        });
     }
 
     modify(id, status) {
@@ -194,7 +194,7 @@ class WbAdminBlog {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbAdminBlog' +
             '&m=doModify' +
             '&status=' + status +
@@ -208,7 +208,7 @@ class WbAdminBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     delete(id) {
@@ -216,7 +216,7 @@ class WbAdminBlog {
         let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbAdminBlog' +
             '&m=doDelete' +
             '&id=' + id;
@@ -229,7 +229,7 @@ class WbAdminBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     validateForm() {
@@ -238,15 +238,30 @@ class WbAdminBlog {
             this.$formFieldTitlePt,
             this.$formFieldTitleEn,
             this.$formFieldUrlPt,
-            this.$formFieldUrlEn,
-            this.$formFieldContentPt,
-            this.$formFieldContentEn
+            this.$formFieldUrlEn
         ];
 
         return objWfForm.validateEmpty(arrField);
     }
 
-    registerContent() {
+    buildParameter() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return '' +
+            '&titlePt=' + this.$formFieldTitlePt.value +
+            '&titleEn=' + this.$formFieldTitleEn.value +
+            '&urlPt=' + this.$formFieldUrlPt.value +
+            '&urlEn=' + this.$formFieldUrlEn.value +
+            '&contentPt=' + this.$ckEditorPt.getData() +
+            '&contentEn=' + this.$ckEditorEn.getData() +
+            '&datePostPt=' + this.$formFieldDatePostPt.value +
+            '&datePostEn=' + this.$formFieldDatePostEn.value +
+            '&dateEditPt=' + this.$formFieldDateEditPt.value +
+            '&dateEditEn=' + this.$formFieldDateEditEn.value +
+            '&tagPt=' + this.$formFieldTagPt.value +
+            '&tagEn=' + this.$formFieldTagEn.value;
+    }
+
+    saveContent() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
@@ -256,21 +271,10 @@ class WbAdminBlog {
 
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbAdminBlog' +
-            '&m=doRegister' +
-            '&titlePt=' + this.$formFieldTitlePt.value +
-            '&titleEn=' + this.$formFieldTitleEn.value +
-            '&urlPt=' + this.$formFieldUrlPt.value +
-            '&urlEn=' + this.$formFieldUrlEn.value +
-            '&contentPt=' + this.$formFieldContentPt.value +
-            '&contentEn=' + this.$formFieldContentEn.value +
-            '&datePostPt=' + this.$formFieldDatePostPt.value +
-            '&datePostEn=' + this.$formFieldDatePostEn.value +
-            '&dateEditPt=' + this.$formFieldDateEditPt.value +
-            '&dateEditEn=' + this.$formFieldDateEditEn.value +
-            '&tagPt=' + this.$formFieldTagPt.value +
-            '&tagEn=' + this.$formFieldTagEn.value;
+            '&m=doSave' +
+            this.buildParameter();
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -280,7 +284,7 @@ class WbAdminBlog {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     showResponse(data) {

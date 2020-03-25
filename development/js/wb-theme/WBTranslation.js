@@ -23,7 +23,7 @@ class WbTranslation {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController();
-        let param =
+        let parameter =
             '&c=WbTranslation' +
             '&m=change' +
             '&language=' + language;
@@ -37,7 +37,7 @@ class WbTranslation {
             }
         }
 
-        ajax.send(param);
+        ajax.send(parameter);
     }
 
     defineActive() {

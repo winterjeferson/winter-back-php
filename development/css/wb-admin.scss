@@ -10,10 +10,6 @@ $break-point-eb: 1200px;
 $break-point-fhd: 1900px;
 
 $grey: grey;
-body {
-  overflow-x: hidden !important;
-}
-
 #pageAdminBlog {
   .table {
     .menu {
@@ -48,4 +44,10 @@ body {
       }
     }
   }
+}
+
+.table td{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

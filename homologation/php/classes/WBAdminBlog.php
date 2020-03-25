@@ -123,7 +123,7 @@ class WbAdminBlog
         return $query;
     }
 
-    function doRegister()
+    function doSave()
     {
         $objWbDate = new WbDate();
         $objWbQuery = new WbQuery();
