@@ -146,7 +146,7 @@ function () {
       var split = href.split('/');
       var length = split.length;
       var target = split[length - 2];
-      var selector = document.querySelector('#page_admin_menu [data-id="' + target + '"]');
+      var selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
 
       if (selector === null) {
         return;
@@ -530,6 +530,115 @@ function () {
   return WbAdminBlog;
 }();
 
+var WBAdminUploadImage =
+/*#__PURE__*/
+function () {
+  function WBAdminUploadImage() {
+    _classCallCheck(this, WBAdminUploadImage);
+
+    /*removeIf(production)*/
+    objWbDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(WBAdminUploadImage, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      if (!getUrlWord('admin-upload-image')) {
+        return;
+      }
+
+      this.updateVariable();
+      this.buildMenu();
+    }
+  }, {
+    key: "updateVariable",
+    value: function updateVariable() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$btUploadThumbnail = document.querySelector('[data-id="btUploadThumbnail"]');
+      this.$btUploadBanner = document.querySelector('[data-id="btUploadBanner"]');
+    }
+  }, {
+    key: "buildMenu",
+    value: function buildMenu() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      this.$btUploadThumbnail.addEventListener('click', function (event) {
+        self.upload(this, 'blog/thumbnail/');
+      });
+      this.$btUploadBanner.addEventListener('click', function (event) {
+        self.upload(this, 'blog/banner/');
+      });
+    }
+  }, {
+    key: "upload",
+    value: function upload(target, path) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      var $form = target.parentNode.parentNode.parentNode.parentNode.parentNode;
+      var $file = $form.querySelector('[type=file]');
+      var data = new FormData();
+      var ajax = new XMLHttpRequest();
+      var file = $file.files[0];
+      var url = objWbUrl.getController();
+
+      if ($file.files.length === 0) {
+        $file.click();
+        return;
+      }
+
+      data.append('c', 'WBAdminUploadImage');
+      data.append('m', 'upload');
+      data.append('p', path);
+      data.append('f', file);
+      this.$btUploadThumbnail.setAttribute('disabled', 'disabled');
+      ajax.open('POST', url);
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.$btUploadThumbnail.removeAttribute('disabled');
+          self.uploadResponse(ajax.responseText, $form);
+        }
+      };
+
+      ajax.send(data);
+    }
+  }, {
+    key: "uploadResponse",
+    value: function uploadResponse(response, $form) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      switch (response) {
+        case 'uploadImageDone':
+          objWfNotification.add(globalTranslation[response], 'green', $form);
+          document.location.reload();
+          break;
+
+        default:
+          objWfNotification.add(globalTranslation[response], 'red', $form);
+          break;
+      }
+    }
+  }]);
+
+  return WBAdminUploadImage;
+}();
+
 var WbBlog =
 /*#__PURE__*/
 function () {
@@ -815,6 +924,7 @@ function () {
       objWbLogin.build();
       objWbAdmin.build();
       objWbAdminBlog.build();
+      objWBAdminUploadImage.build();
       objWbBlog.build();
     }
   }]);
@@ -959,6 +1069,7 @@ var objWbDebug = new WbDebug();
 
 var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
+var objWBAdminUploadImage = new WBAdminUploadImage();
 var objWbBlog = new WbBlog();
 var objWbLogin = new WbLogin();
 var objWbManagement = new WbManagement();

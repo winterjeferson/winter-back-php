@@ -14,6 +14,7 @@ class WbManagement {
         objWbLogin.build();
         objWbAdmin.build();
         objWbAdminBlog.build();
+        objWBAdminUploadImage.build();
         objWbBlog.build();
     }
 }

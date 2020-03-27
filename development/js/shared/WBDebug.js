@@ -2,7 +2,7 @@
 class WbDebug {
     constructor() {
         this.isWbAdmin = true;
-        
+
         this.isWbAdmin = true;
         this.isWbAdminBlog = true;
         this.isWbLogin = true;

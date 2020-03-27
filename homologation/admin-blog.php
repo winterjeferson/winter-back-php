@@ -107,6 +107,12 @@ $objWbUrl = new WbUrl();
             </li>
             
             <li>
+                <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin-upload-image/" data-id="admin-upload-image" class="menu-tab-bt bt-re bt">
+                    <?php echo $WbTranslation['uploadImage']; ?>
+                </a>
+            </li>
+            
+            <li>
                 <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="menu-tab-bt bt-re bt">
                     <?php echo $WbTranslation['logout']; ?>
                 </a>
@@ -122,7 +128,7 @@ $objWbUrl = new WbUrl();
                     
 
                     
-                    <div class="col-es-6">
+                    <div class="col-es-12 col-eb-6">
                         <div class="padding-bi">
                             <div class="card card-es card-grey">
                                 <header>
@@ -169,7 +175,7 @@ $objWbUrl = new WbUrl();
                     </div>
 
                     
-                    <div class="col-es-6">
+                    <div class="col-es-12 col-eb-6">
                         <div class="padding-bi">
                             <div class="card card-es card-grey">
                                 <header>
@@ -233,75 +239,75 @@ $objWbUrl = new WbUrl();
                 
 
                 
-                <div class="row">
-                    <div class="col-es-12">
-                        <h2 class="page-title">
-                            <?php echo $WbTranslation['listing']; ?>
-                            (<?php echo $WbTranslation['actives']; ?>)
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-es-12">
-                        <table class="table table-grey" data-id="tableActive">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th><?php echo $WbTranslation['title']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['title']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['content']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['content']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['actions']; ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php echo $objWbAdminBlog->buildReport('active'); ?>
-                            </tbody>
-                        </table>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-es-12">
+                            <h2 class="page-title">
+                                <?php echo $WbTranslation['listing']; ?>
+                                (<?php echo $WbTranslation['actives']; ?>)
+                            </h2>
+                        </div>
+                        <div class="col-es-12 col-eb-12">
+                            <table class="table table-grey" data-id="tableActive">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th><?php echo $WbTranslation['title']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['title']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['content']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['content']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['actions']; ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php echo $objWbAdminBlog->buildReport('active'); ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-es-12">
-                        <h2 class="page-title">
-                            <?php echo $WbTranslation['listing']; ?>
-                            (<?php echo $WbTranslation['inactives']; ?>)
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-es-12">
-                        <table class="table table-grey" data-id="tableInactive">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th><?php echo $WbTranslation['title']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['title']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['content']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['content']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
-                                    <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
-                                    <th><?php echo $WbTranslation['actions']; ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php echo $objWbAdminBlog->buildReport('inactive'); ?>
-                            </tbody>
-                        </table>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-es-12">
+                            <h2 class="page-title">
+                                <?php echo $WbTranslation['listing']; ?>
+                                (<?php echo $WbTranslation['inactives']; ?>)
+                            </h2>
+                        </div>
+                        <div class="col-es-12 col-eb-12">
+                            <table class="table table-grey" data-id="tableInactive">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th><?php echo $WbTranslation['title']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['title']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['content']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['content']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['actions']; ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php echo $objWbAdminBlog->buildReport('inactive'); ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 
@@ -309,6 +315,7 @@ $objWbUrl = new WbUrl();
             </div>
         </div>
     </section>
+    <!-- <script src="ckeditor_4.14.0_standard/ckeditor/ckeditor.js"></script> -->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <footer id="footer" class="grid-footer">
     <div class="row">

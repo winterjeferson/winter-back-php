@@ -43,7 +43,7 @@ class WbAdmin {
         let split = href.split('/');
         let length = split.length;
         let target = split[length - 2];
-        let selector = document.querySelector('#page_admin_menu [data-id="' + target + '"]');
+        let selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
 
         if (selector === null) {
             return;

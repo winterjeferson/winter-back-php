@@ -103,6 +103,12 @@ $objWbUrl = new WbUrl();
             </li>
             
             <li>
+                <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin-upload-image/" data-id="admin-upload-image" class="menu-tab-bt bt-re bt">
+                    <?php echo $WbTranslation['uploadImage']; ?>
+                </a>
+            </li>
+            
+            <li>
                 <a href="<?php echo $objWbUrl->getUrlPage(); ?>admin-logout/" data-id="admin-logout" class="menu-tab-bt bt-re bt">
                     <?php echo $WbTranslation['logout']; ?>
                 </a>
