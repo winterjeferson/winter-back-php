@@ -124,7 +124,6 @@ $objWbUrl = new WbUrl();
             </div>
             <div class="col-es-12">
                 <section class="row">
-
                     
 
                     
@@ -223,6 +222,57 @@ $objWbUrl = new WbUrl();
 
                     
 
+                    <div class="col-es-12">
+                        <div class="padding-bi">
+                            <div class="card card-es card-grey">
+                                <header>
+                                    <h4>
+                                        <?php echo $WbTranslation['thumbnail']; ?>
+                                    </h4>
+                                </header>
+                                <div class="row card-body">
+                                    <div class="col-es-12">
+                                        <div class="padding-re">
+                                            <table class="table table-grey table-thumbnail">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Imagem</th>
+                                                        <th>Menu</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="minimum">
+                                                            <img src="img/blog/thumbnail/1.jpg">
+                                                        </td>
+                                                        <td>
+                                                            <nav class="menu menu-horizontal text-right">
+                                                                <ul>
+                                                                    <li>
+                                                                        <button type="button" class="bt bt-re bt-green" data-id="btRegister">
+                                                                            <?php echo $WbTranslation['edit']; ?>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button type="button" class="bt bt-re bt-red" data-id="btRegister">
+                                                                            <?php echo $WbTranslation['delete']; ?>
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </nav>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-es-12 form-field">
                         <nav class="menu menu-horizontal text-right">
                             <ul>
@@ -234,6 +284,7 @@ $objWbUrl = new WbUrl();
                             </ul>
                         </nav>
                     </div>
+
                 </section>
 
                 
@@ -315,7 +366,6 @@ $objWbUrl = new WbUrl();
             </div>
         </div>
     </section>
-    <!-- <script src="ckeditor_4.14.0_standard/ckeditor/ckeditor.js"></script> -->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <footer id="footer" class="grid-footer">
     <div class="row">
