@@ -54,7 +54,9 @@ class WbTranslationPT
         'title' => 'Título',
         'thumbnail' => 'Miniatura',
         'uploadImage' => 'Upload de imagem',
-        'uploadImageDone' => 'Upload de imagem concluído',
-        'uploadImageFail' => 'Problema no upload de imagem',
+        'uploadDone' => 'Upload de arquivo concluído',
+        'uploadFail' => 'Problema no upload do arquivo',
+        'uploadInvalid' => 'Formato de arquivo inválido',
+        'uploadSize' => 'O peso do arquivo ultrapassa o limite permitido',
     ];
 }

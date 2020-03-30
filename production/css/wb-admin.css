@@ -1,6 +1,3 @@
-body {
-  overflow-x: hidden !important; }
-
 #pageAdminBlog .table .menu {
   white-space: nowrap; }
 
@@ -19,5 +16,12 @@ body {
     height: auto;
     margin: auto; }
 
-#admin .table .menu ul {
-  width: max-content; }
+.table-wrapper {
+  max-height: 300px;
+  overflow-y: auto; }
+
+.table-thumbnail {
+  text-align: left; }
+  .table-thumbnail img {
+    width: auto;
+    height: 100px; }

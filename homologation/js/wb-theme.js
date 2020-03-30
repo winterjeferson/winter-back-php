@@ -624,7 +624,7 @@ function () {
       /*endRemoveIf(production)*/
 
       switch (response) {
-        case 'uploadImageDone':
+        case 'uploadDone':
           objWfNotification.add(globalTranslation[response], 'green', $form);
           document.location.reload();
           break;

@@ -17,6 +17,7 @@ $objWbRoute->addRoute([
     ['admin-blog', 'admin-blog.php'],
     ['admin-login', 'admin-login.php'],
     ['admin-logout', 'admin-logout.php'],
+    ['admin-upload-image', 'admin-upload-image.php'],
 ]);
 
 $route = $objWbRoute->getRoute();

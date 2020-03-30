@@ -2,70 +2,60 @@
 
 class WBAdminUploadImage
 {
-
-    function upload()
+    function validateSize($fileTmpName)
     {
-        $fileName = $_FILES['f']['name']; // The file name
-        $fileTmpName = $_FILES['f']['tmp_name'];
-        $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
-        $url = '../img/' . $path;
-
-        if (!is_dir($url)) {
-            return 'invalidPath';
-        }
-
-        if (move_uploaded_file($fileTmpName, $url . $fileName)) {
-            return 'uploadImageDone';
-        } else {
-            return 'uploadImageFail';
+        $check = getimagesize($fileTmpName);
+        if (!$check) {
+            exit('uploadInvalid');
         }
     }
 
-    function upload2()
+    function validateFormat($targetFile)
     {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        // Check if image file is a actual image or fake image
-        if (isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if ($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
-            }
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $arrFile = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+
+        if (!in_array($imageFileType, $arrFile)) {
+            exit('uploadInvalid');
         }
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
+    }
+
+    function validateLarge($fileSize)
+    {
+        if ($fileSize > 500000) {
+            exit('uploadInvalid');
         }
-        // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
+    }
+
+    function validateFileExists($targetFile)
+    {
+        if (file_exists($targetFile)) {
+            exit('Sorry, file already exists.');
         }
-        // Allow certain file formats
-        if (
-            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif"
-        ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
+    }
+
+    function upload()
+    {
+        $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
+        $fileName = $_FILES['f']['name']; // The file name
+        $fileTmpName = $_FILES['f']['tmp_name'];
+        $fileSize = $_FILES['f']['size'];
+        $url = '../img/' . $path;
+        $targetFile = $url . basename($fileName);
+        $extension  = pathinfo($fileName, PATHINFO_EXTENSION);
+        $randomName  = uniqid() . '-' . time();
+        $basename  = $randomName . '.' . $extension;
+
+        if (!is_dir($url)) {
+            exit('invalidPath');
         }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
+
+        $this->validateLarge($fileSize);
+        $this->validateSize($fileTmpName);
+        $this->validateFormat($targetFile);
+        $this->validateFileExists($targetFile);
+
+        move_uploaded_file($fileTmpName, $url . $basename);
+        return 'uploadDone';
     }
 }

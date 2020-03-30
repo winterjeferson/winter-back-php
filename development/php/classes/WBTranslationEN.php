@@ -54,7 +54,9 @@ class WbTranslationEN
         'title' => 'Title',
         'thumbnail' => 'Thumbnail',
         'uploadImage' => 'Image upload',
-        'uploadImageDone' => 'Image upload done',
-        'uploadImageFail' => 'Image upload problem',
+        'uploadDone' => 'File upload done',
+        'uploadFail' => 'File upload problem',
+        'uploadInvalid' => 'This file type is not allowed',
+        'uploadSize' => 'Sorry, your file is too large.',
     ];
 }

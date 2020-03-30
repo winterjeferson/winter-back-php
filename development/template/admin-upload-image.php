@@ -18,8 +18,8 @@ $objWBAdminUploadImageList = new WBAdminUploadImageList();
             </div>
 
             {% set arr = [
-                {id: 'Thumbnail', folder: 'thumbnail', path: 'thumbnail', label: 'file', labelRecommended: 'recommendedSize150'},
-                {id: 'Banner', folder: 'banner', path: 'banner', label: 'file', labelRecommended: 'recommendedSize1300'}
+                {id: 'Thumbnail', path: 'thumbnail', label: 'file', labelRecommended: 'recommendedSize150'},
+                {id: 'Banner', path: 'banner', label: 'file', labelRecommended: 'recommendedSize1300'}
             ] %}
 
             {% for i in arr %}
@@ -28,7 +28,7 @@ $objWBAdminUploadImageList = new WBAdminUploadImageList();
                     <div class="card card-es card-grey">
                         <header>
                             <h4>
-                                <?php echo $WbTranslation['{{i.folder | safe}}']; ?>
+                                <?php echo $WbTranslation['{{i.path | safe}}']; ?>
                             </h4>
                         </header>
                         <div class="row card-body">

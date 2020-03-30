@@ -146,7 +146,7 @@ function () {
       var split = href.split('/');
       var length = split.length;
       var target = split[length - 2];
-      var selector = document.querySelector('#page_admin_menu [data-id="' + target + '"]');
+      var selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
 
       if (selector === null) {
         return;
@@ -162,9 +162,9 @@ function () {
       /*endRemoveIf(production)*/
 
       var ajax = new XMLHttpRequest();
-      var param = '&c=WbLogin' + '&m=doLogout';
+      var parameter = '&c=WbLogin' + '&m=doLogout';
       ajax.open('POST', objWbUrl.getController(), true);
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "builTableTdWrapper",
@@ -212,6 +212,8 @@ function () {
         return;
       }
 
+      CKEDITOR.replace('fieldContentPt');
+      CKEDITOR.replace('fieldContentEn');
       this.updateVariable();
       this.buildMenu();
       this.buildMenuTable();
@@ -241,6 +243,8 @@ function () {
       this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
       this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
       this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+      this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
+      this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
   }, {
     key: "buildMenu",
@@ -256,7 +260,7 @@ function () {
         if (self.isEdit) {
           self.editSave();
         } else {
-          self.registerContent();
+          self.saveContent();
         }
       };
     }
@@ -323,7 +327,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbAdminBlog' + '&m=doUpdate' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&id=' + self.editId;
+      var parameter = '&c=WbAdminBlog' + '&m=doUpdate' + '&id=' + self.editId + this.buildParameter();
 
       if (!this.validateForm()) {
         return;
@@ -338,7 +342,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "editLoadData",
@@ -350,7 +354,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbAdminBlog' + '&m=editLoadData' + '&id=' + id;
+      var parameter = '&c=WbAdminBlog' + '&m=editLoadData' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -363,7 +367,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "editFillField",
@@ -376,8 +380,6 @@ function () {
       this.$formFieldTitleEn.value = obj['title_en'];
       this.$formFieldUrlPt.value = obj['url_pt'];
       this.$formFieldUrlEn.value = obj['url_en'];
-      this.$formFieldContentPt.value = obj['content_pt'];
-      this.$formFieldContentEn.value = obj['content_en'];
       this.$formFieldTagPt.value = obj['tag_pt'];
       this.$formFieldTagEn.value = obj['tag_en'];
       this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
@@ -386,6 +388,12 @@ function () {
       this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
       this.editId = obj['id'];
       this.$formFieldTagEn.value = obj['tag_en'];
+      this.$ckEditorPt.setData(obj['content_pt'], function () {
+        this.checkDirty();
+      });
+      this.$ckEditorEn.setData(obj['content_en'], function () {
+        this.checkDirty();
+      });
     }
   }, {
     key: "modify",
@@ -397,7 +405,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
+      var parameter = '&c=WbAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -407,7 +415,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "delete",
@@ -419,7 +427,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbAdminBlog' + '&m=doDelete' + '&id=' + id;
+      var parameter = '&c=WbAdminBlog' + '&m=doDelete' + '&id=' + id;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -429,7 +437,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "validateForm",
@@ -438,12 +446,21 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn, this.$formFieldContentPt, this.$formFieldContentEn];
+      var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn];
       return objWfForm.validateEmpty(arrField);
     }
   }, {
-    key: "registerContent",
-    value: function registerContent() {
+    key: "buildParameter",
+    value: function buildParameter() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      return '' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$ckEditorPt.getData() + '&contentEn=' + this.$ckEditorEn.getData() + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
+    }
+  }, {
+    key: "saveContent",
+    value: function saveContent() {
       /*removeIf(production)*/
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
@@ -456,7 +473,7 @@ function () {
 
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbAdminBlog' + '&m=doRegister' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$formFieldContentPt.value + '&contentEn=' + this.$formFieldContentEn.value + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
+      var parameter = '&c=WbAdminBlog' + '&m=doSave' + this.buildParameter();
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -466,7 +483,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "showResponse",
@@ -511,6 +528,115 @@ function () {
   }]);
 
   return WbAdminBlog;
+}();
+
+var WBAdminUploadImage =
+/*#__PURE__*/
+function () {
+  function WBAdminUploadImage() {
+    _classCallCheck(this, WBAdminUploadImage);
+
+    /*removeIf(production)*/
+    objWbDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(WBAdminUploadImage, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      if (!getUrlWord('admin-upload-image')) {
+        return;
+      }
+
+      this.updateVariable();
+      this.buildMenu();
+    }
+  }, {
+    key: "updateVariable",
+    value: function updateVariable() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$btUploadThumbnail = document.querySelector('[data-id="btUploadThumbnail"]');
+      this.$btUploadBanner = document.querySelector('[data-id="btUploadBanner"]');
+    }
+  }, {
+    key: "buildMenu",
+    value: function buildMenu() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      this.$btUploadThumbnail.addEventListener('click', function (event) {
+        self.upload(this, 'blog/thumbnail/');
+      });
+      this.$btUploadBanner.addEventListener('click', function (event) {
+        self.upload(this, 'blog/banner/');
+      });
+    }
+  }, {
+    key: "upload",
+    value: function upload(target, path) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      var $form = target.parentNode.parentNode.parentNode.parentNode.parentNode;
+      var $file = $form.querySelector('[type=file]');
+      var data = new FormData();
+      var ajax = new XMLHttpRequest();
+      var file = $file.files[0];
+      var url = objWbUrl.getController();
+
+      if ($file.files.length === 0) {
+        $file.click();
+        return;
+      }
+
+      data.append('c', 'WBAdminUploadImage');
+      data.append('m', 'upload');
+      data.append('p', path);
+      data.append('f', file);
+      this.$btUploadThumbnail.setAttribute('disabled', 'disabled');
+      ajax.open('POST', url);
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.$btUploadThumbnail.removeAttribute('disabled');
+          self.uploadResponse(ajax.responseText, $form);
+        }
+      };
+
+      ajax.send(data);
+    }
+  }, {
+    key: "uploadResponse",
+    value: function uploadResponse(response, $form) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      switch (response) {
+        case 'uploadDone':
+          objWfNotification.add(globalTranslation[response], 'green', $form);
+          document.location.reload();
+          break;
+
+        default:
+          objWfNotification.add(globalTranslation[response], 'red', $form);
+          break;
+      }
+    }
+  }]);
+
+  return WBAdminUploadImage;
 }();
 
 var WbBlog =
@@ -588,7 +714,7 @@ function () {
       var parentIdString = parentId.substring(this.page.length);
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbBlogList' + '&m=buildLoadMoreButtonClick' + '&target=' + parentIdString;
+      var parameter = '&c=WbBlogList' + '&m=buildLoadMoreButtonClick' + '&target=' + parentIdString;
       target.classList.add('disabled');
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -600,7 +726,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "loadMoreSuccess",
@@ -706,7 +832,7 @@ function () {
       var self = this;
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
+      var parameter = '&c=WbLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
 
       if (!this.validate()) {
         return;
@@ -723,7 +849,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "buildLoginResponse",
@@ -798,6 +924,7 @@ function () {
       objWbLogin.build();
       objWbAdmin.build();
       objWbAdminBlog.build();
+      objWBAdminUploadImage.build();
       objWbBlog.build();
     }
   }]);
@@ -848,7 +975,7 @@ function () {
 
       var ajax = new XMLHttpRequest();
       var url = objWbUrl.getController();
-      var param = '&c=WbTranslation' + '&m=change' + '&language=' + language;
+      var parameter = '&c=WbTranslation' + '&m=change' + '&language=' + language;
       ajax.open('POST', url, true);
       ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -858,7 +985,7 @@ function () {
         }
       };
 
-      ajax.send(param);
+      ajax.send(parameter);
     }
   }, {
     key: "defineActive",
@@ -942,6 +1069,7 @@ var objWbDebug = new WbDebug();
 
 var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
+var objWBAdminUploadImage = new WBAdminUploadImage();
 var objWbBlog = new WbBlog();
 var objWbLogin = new WbLogin();
 var objWbManagement = new WbManagement();
