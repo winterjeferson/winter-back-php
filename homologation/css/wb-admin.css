@@ -20,8 +20,8 @@
   max-height: 300px;
   overflow-y: auto; }
 
-.table-thumbnail {
+.thumbnail-table {
   text-align: left; }
-  .table-thumbnail img {
+  .thumbnail-table img {
     width: auto;
     height: 100px; }

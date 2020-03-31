@@ -222,7 +222,7 @@ $objWbUrl = new WbUrl();
 
                     
 
-                    <div class="col-es-12">
+                    <div class="col-es-12" data-id="thumbnailWrapper">
                         <div class="padding-bi">
                             <div class="card card-es card-grey">
                                 <header>
@@ -233,28 +233,28 @@ $objWbUrl = new WbUrl();
                                 <div class="row card-body">
                                     <div class="col-es-12">
                                         <div class="padding-re">
-                                            <table class="table table-grey table-thumbnail">
+                                            <table class="table table-grey thumbnail-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Imagem</th>
-                                                        <th>Menu</th>
+                                                        <th><?php echo $WbTranslation['image']; ?></th>
+                                                        <th><?php echo $WbTranslation['menu']; ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td class="minimum">
-                                                            <img src="img/blog/thumbnail/1.jpg">
+                                                            <img src="img/blog/thumbnail/default.jpg" data-id="thumbnail">
                                                         </td>
                                                         <td>
                                                             <nav class="menu menu-horizontal text-right">
                                                                 <ul>
                                                                     <li>
-                                                                        <button type="button" class="bt bt-re bt-green" data-id="btRegister">
+                                                                        <button type="button" class="bt bt-re bt-blue" data-id="btThumbnailEdit">
                                                                             <?php echo $WbTranslation['edit']; ?>
                                                                         </button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button" class="bt bt-re bt-red" data-id="btRegister">
+                                                                        <button type="button" class="bt bt-re bt-red" data-id="btThumbnailDelete">
                                                                             <?php echo $WbTranslation['delete']; ?>
                                                                         </button>
                                                                     </li>

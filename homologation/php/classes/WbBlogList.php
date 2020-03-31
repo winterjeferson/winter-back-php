@@ -38,6 +38,7 @@ class WbBlogList
                 ['table' => 'blog', 'column' => 'date_post_en'],
                 ['table' => 'blog', 'column' => 'date_edit_pt'],
                 ['table' => 'blog', 'column' => 'date_edit_en'],
+                ['table' => 'blog', 'column' => 'thumbnail'],
             ],
             'table' => [['table' => 'blog']],
             'where' => [
@@ -77,10 +78,13 @@ class WbBlogList
         $objWbHelp = new WbHelp();
         $string = '';
 
+
         foreach ($query as $key => $value) {
+            $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+
             $string .= '<article>';
             $string .= '    <div class="blog-list-image">';
-            $string .= '        <img src="https://winterjeferson.github.io/winter-front/production/img/banner/1.png" alt="image">';
+            $string .= '        <img src="img/blog/thumbnail/' . $thumbnail . '" alt="image">';
             $string .= '    </div>';
             $string .= '    <div class="blog-list-text">';
             $string .= '        <a href="' . $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/" class="link link-blue">';

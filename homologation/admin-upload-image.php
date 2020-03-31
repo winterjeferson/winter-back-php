@@ -160,7 +160,7 @@ $objWbUrl = new WbUrl();
                             <div class="col-es-12">
                                 <div class="padding-bi">
                                     <div class="table-wrapper">
-                                        <table class="table table-grey table-thumbnail">
+                                        <table class="table table-grey thumbnail-table">
                                             <thead>
                                                 <tr>
                                                     <th><?php echo $WbTranslation['image']; ?></th>
@@ -216,7 +216,7 @@ $objWbUrl = new WbUrl();
                             <div class="col-es-12">
                                 <div class="padding-bi">
                                     <div class="table-wrapper">
-                                        <table class="table table-grey table-thumbnail">
+                                        <table class="table table-grey thumbnail-table">
                                             <thead>
                                                 <tr>
                                                     <th><?php echo $WbTranslation['image']; ?></th>

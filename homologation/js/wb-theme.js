@@ -243,6 +243,10 @@ function () {
       this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
       this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
       this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+      this.$thumbnailWrapper = this.$page.querySelector('[data-id="thumbnailWrapper"]');
+      this.thumbnailDefault = 'default.jpg';
+      this.thumbnailPath = 'img/blog/thumbnail/';
+      this.thumbnail = '';
       this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
       this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
@@ -364,10 +368,32 @@ function () {
           document.documentElement.scrollTop = 0;
           self.isEdit = true;
           self.editFillField(obj);
+          self.editChangeImage(obj);
         }
       };
 
       ajax.send(parameter);
+    }
+  }, {
+    key: "editChangeImage",
+    value: function editChangeImage(obj) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var $image = this.$thumbnailWrapper.querySelector('[data-id="thumbnail"]');
+      var image = obj['thumbnail'];
+      var src = '';
+
+      if (image === null) {
+        this.thumbnail = '';
+        src = this.thumbnailPath + this.thumbnail;
+      } else {
+        this.thumbnail = obj['thumbnail'];
+        src = this.thumbnailPath + obj['thumbnail'];
+      }
+
+      $image.setAttribute('src', src);
     }
   }, {
     key: "editFillField",
@@ -456,7 +482,7 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      return '' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$ckEditorPt.getData() + '&contentEn=' + this.$ckEditorEn.getData() + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
+      return '' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$ckEditorPt.getData() + '&contentEn=' + this.$ckEditorEn.getData() + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&thumbnail=' + this.thumbnail + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
     }
   }, {
     key: "saveContent",

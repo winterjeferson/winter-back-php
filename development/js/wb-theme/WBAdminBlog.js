@@ -37,14 +37,18 @@ class WbAdminBlog {
         this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
         this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
         this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
+        this.$thumbnailWrapper = this.$page.querySelector('[data-id="thumbnailWrapper"]');
+        this.thumbnailDefault = 'default.jpg';
+        this.thumbnailPath = 'img/blog/thumbnail/';
+        this.thumbnail = '';
         this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
         this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
-        let $btRegister = this.$page.querySelector('[data-id="btRegister"]');
+        const self = this;
+        const $btRegister = this.$page.querySelector('[data-id="btRegister"]');
 
         $btRegister.onclick = function () {
             if (self.isEdit) {
@@ -159,10 +163,28 @@ class WbAdminBlog {
                 document.documentElement.scrollTop = 0;
                 self.isEdit = true;
                 self.editFillField(obj);
+                self.editChangeImage(obj);
             }
         }
 
         ajax.send(parameter);
+    }
+
+    editChangeImage(obj) {
+          /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const $image = this.$thumbnailWrapper.querySelector('[data-id="thumbnail"]');
+        let image = obj['thumbnail'];
+        let src = '';
+
+        if (image === null) {
+            this.thumbnail = '';
+            src = this.thumbnailPath + this.thumbnail;
+        } else {
+            this.thumbnail = obj['thumbnail'];
+            src = this.thumbnailPath + obj['thumbnail'];
+        }
+
+        $image.setAttribute('src', src);
     }
 
     editFillField(obj) {
@@ -257,6 +279,7 @@ class WbAdminBlog {
             '&datePostEn=' + this.$formFieldDatePostEn.value +
             '&dateEditPt=' + this.$formFieldDateEditPt.value +
             '&dateEditEn=' + this.$formFieldDateEditEn.value +
+            '&thumbnail=' + this.thumbnail +
             '&tagPt=' + this.$formFieldTagPt.value +
             '&tagEn=' + this.$formFieldTagEn.value;
     }

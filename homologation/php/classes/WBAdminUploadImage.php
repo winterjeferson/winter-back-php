@@ -43,7 +43,7 @@ class WBAdminUploadImage
         $url = '../img/' . $path;
         $targetFile = $url . basename($fileName);
         $extension  = pathinfo($fileName, PATHINFO_EXTENSION);
-        $randomName  = uniqid() . '-' . time();
+        $randomName  = uniqid() . time();
         $basename  = $randomName . '.' . $extension;
 
         if (!is_dir($url)) {
