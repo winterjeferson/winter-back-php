@@ -1,6 +1,6 @@
 <?php
 
-class WBAdminUploadImage
+class WbAdminUploadImage
 {
     function validateSize($fileTmpName)
     {
@@ -27,13 +27,6 @@ class WBAdminUploadImage
         }
     }
 
-    function validateFileExists($targetFile)
-    {
-        if (file_exists($targetFile)) {
-            exit('Sorry, file already exists.');
-        }
-    }
-
     function upload()
     {
         $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
@@ -53,9 +46,21 @@ class WBAdminUploadImage
         $this->validateLarge($fileSize);
         $this->validateSize($fileTmpName);
         $this->validateFormat($targetFile);
-        $this->validateFileExists($targetFile);
 
         move_uploaded_file($fileTmpName, $url . $basename);
         return 'uploadDone';
+    }
+
+    function delete()
+    {
+        $file = filter_input(INPUT_POST, 'f', FILTER_DEFAULT);
+        $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
+        $url = '../img/' . $path . '/';
+
+        if (unlink($url . $file)) {
+            return 'fileDeleted';
+        } else {
+            return 'fileDeleteError';
+        }
     }
 }

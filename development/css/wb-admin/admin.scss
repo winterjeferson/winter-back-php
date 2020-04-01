@@ -31,9 +31,13 @@
 
 .thumbnail-table {
   text-align: left;
+}
 
-  img {
-    width: auto;
-    height: 100px;
+#pageAdminBlog {
+  .table {
+    img {
+      width: auto;
+      height: 50px;
+    }
   }
 }

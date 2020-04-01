@@ -1,9 +1,10 @@
 <?php
 
-class WBAdminUploadImageList
+class WbAdminUploadImageList
 {
     function buildList($path)
     {
+        $objWbSession = new WbSession();
         $string = '';
         $arrFile = $this->getFile($path);
 
@@ -12,24 +13,37 @@ class WBAdminUploadImageList
         }
 
         foreach ($arrFile as $key => $value) {
-            $string .= $this->buildListHtml($path, $value);
+            if ($value !== 'default.jpg') {
+                $string .= $this->buildListHtml($objWbSession, $path, $value);
+            }
         }
 
         return $string;
     }
 
-    function buildListHtml($path, $value)
+    function buildListHtml($objWbSession, $path, $value)
     {
-        $string = '';
-
-        $string .= '<tr>';
-        $string .= '     <td class="minimum">';
-        $string .= '         <img src="img/' . $path . '/' . $value . '">';
-        $string .= '     </td>';
-        $string .= '     <td>';
-        $string .= $value;
-        $string .= '     </td>';
-        $string .= '</tr>';
+        $string = '
+            <tr>
+                <td class="minimum">
+                    <img src="img/' . $path . '/' . $value . '">
+                </td>
+                <td data-id="fileName">
+                    ' . $value . '
+                </td>
+                <td class="minimum">
+                    <nav class="menu menu-horizontal text-right">           
+                        <ul>           
+                            <li>
+                                <button type="button" class="bt bt-red bt-sm has-tooltip" data-action="delete" data-tooltip="true" data-tooltip-color="black" title="' . $objWbSession->getArray('translation', 'delete') . '">   
+                                    <span class="fa fa-close" aria-hidden="true"></span>
+                                </button>
+                            </li>           
+                        </ul>        
+                    </nav>
+                </td>
+            </tr>
+        ';
 
         return $string;
     }
@@ -37,13 +51,13 @@ class WBAdminUploadImageList
     function buildListEmpty()
     {
         $objWbSession = new WbSession();
-        $string = '';
-
-        $string .= '<tr>';
-        $string .= '    <td colspan="2" class="text-center">';
-        $string .=  $objWbSession->getArray('translation', 'emptyList');
-        $string .= '    </td>';
-        $string .= '</tr>';
+        $string = '
+            <tr>
+                <td colspan="2" class="text-center">
+                ' . $objWbSession->getArray('translation', 'emptyList') . '
+                </td>
+            </tr>
+        ';
 
         return $string;
     }

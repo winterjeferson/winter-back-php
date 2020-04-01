@@ -249,13 +249,13 @@ $objWbUrl = new WbUrl();
                                                             <nav class="menu menu-horizontal text-right">
                                                                 <ul>
                                                                     <li>
-                                                                        <button type="button" class="bt bt-re bt-blue" data-id="btThumbnailEdit">
-                                                                            <?php echo $WbTranslation['edit']; ?>
+                                                                        <button type="button" class="bt bt-sm bt-blue" data-id="btThumbnailEdit" data-tooltip="true" data-tooltip-color="black" title="<?php echo $WbTranslation['edit']; ?>">
+                                                                            <span class="fa fa-pencil" aria-hidden="true"></span>
                                                                         </button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button" class="bt bt-re bt-red" data-id="btThumbnailDelete">
-                                                                            <?php echo $WbTranslation['delete']; ?>
+                                                                        <button type="button" class="bt bt-sm bt-red" data-id="btThumbnailDelete" data-tooltip="true" data-tooltip-color="black" title="<?php echo $WbTranslation['delete']; ?>">
+                                                                            <span class="fa fa-close" aria-hidden="true"></span>
                                                                         </button>
                                                                     </li>
                                                                 </ul>
@@ -303,6 +303,7 @@ $objWbUrl = new WbUrl();
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th><?php echo $WbTranslation['thumbnail']; ?></th>
                                         <th><?php echo $WbTranslation['title']; ?> (PT)</th>
                                         <th><?php echo $WbTranslation['title']; ?> (EN)</th>
                                         <th><?php echo $WbTranslation['content']; ?> (PT)</th>
@@ -339,6 +340,7 @@ $objWbUrl = new WbUrl();
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th><?php echo $WbTranslation['thumbnail']; ?></th>
                                         <th><?php echo $WbTranslation['title']; ?> (PT)</th>
                                         <th><?php echo $WbTranslation['title']; ?> (EN)</th>
                                         <th><?php echo $WbTranslation['content']; ?> (PT)</th>

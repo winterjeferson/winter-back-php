@@ -15,6 +15,7 @@ class WbAdminBlog
         $string = '';
         $objWbQuery = new WbQuery();
         $objTheme = new Theme();
+        $objWbSession = new WbSession();
 
         $this->buildReportSql($objWbQuery);
 
@@ -28,7 +29,7 @@ class WbAdminBlog
         $queryResult = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($queryResult as $key => $value) {
-            $string .= $this->buildReportHTML($value, $status, $objTheme);
+            $string .= $this->buildReportHTML($value, $status, $objTheme, $objWbSession);
         }
 
         return $string;
@@ -47,35 +48,36 @@ class WbAdminBlog
         ]);
     }
 
-    function buildReportHTML($value, $status, $objTheme)
+    function buildReportHTML($value, $status, $objTheme, $objWbSession)
     {
         $objWbHelp = new WbHelp();
-        $string = '';
-
-        $string .= '<tr>';
-        $string .= '    <td class="minimum">' . $value['id'] . '</td>';
-        $string .= '    <td class="minimum"><b>' . $objWbHelp->encode($value['title_pt']) . '</b></td>';
-        $string .= '    <td class="minimum"><b>' . $objWbHelp->encode($value['title_en']) . '</b></td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>';
-        $string .= '    <td class="minimum">' . $value['url_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['url_en'] . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_post_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_post_en'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_edit_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_edit_en'] . '</td>';
-        $string .= '    <td class="minimum">';
-        $string .= '        <nav class="menu menu-horizontal">';
-        $string .= '            <ul>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt('edit', $value['id']) . '</li>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt($status, $value['id']) . '</li>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt('delete', $value['id']) . '</li>';
-        $string .= '            </ul>';
-        $string .= '        </nav>';
-        $string .= '    </td>';
-        $string .= '</tr>';
+        $string = '
+            <tr>
+                <td class="minimum">' . $value['id'] . '</td>
+                <td class="minimum"><img src="img/blog/thumbnail/default.jpg" alt="' . $objWbSession->getArray('translation', 'thumbnail') . '"></td>
+                <td class="minimum"><b>' . $objWbHelp->encode($value['title_pt']) . '</b></td>
+                <td class="minimum"><b>' . $objWbHelp->encode($value['title_en']) . '</b></td>
+                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>
+                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>
+                <td class="minimum">' . $value['url_pt'] . '</td>
+                <td class="minimum">' . $value['url_en'] . '</td>
+                <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>
+                <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>
+                <td class="minimum">' . $value['date_post_pt'] . '</td>
+                <td class="minimum">' . $value['date_post_en'] . '</td>
+                <td class="minimum">' . $value['date_edit_pt'] . '</td>
+                <td class="minimum">' . $value['date_edit_en'] . '</td>
+                <td class="minimum">
+                    <nav class="menu menu-horizontal">
+                        <ul>
+                            <li>' . $objTheme->buildHTMLBt('edit', $value['id']) . '</li>
+                            <li>' . $objTheme->buildHTMLBt($status, $value['id']) . '</li>
+                            <li>' . $objTheme->buildHTMLBt('delete', $value['id']) . '</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        ';
 
         return $string;
     }

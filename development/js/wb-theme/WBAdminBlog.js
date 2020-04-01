@@ -71,7 +71,7 @@ class WbAdminBlog {
 
             Array.prototype.forEach.call($button, function (item) {
                 item.onclick = function () {
-                    objWfModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
                     objWfModal.buildContentConfirmationAction('objWbAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
                 }
             });
@@ -110,7 +110,7 @@ class WbAdminBlog {
 
             Array.prototype.forEach.call($buttonDelete, function (item) {
                 item.onclick = function () {
-                    objWfModal.buildModal('confirmation', 'Deseja realmente desativar este conteúdo?');
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
                     objWfModal.buildContentConfirmationAction('objWbAdminBlog.delete(' + item.getAttribute('data-id') + ')');
                 }
             });

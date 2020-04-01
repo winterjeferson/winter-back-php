@@ -1,6 +1,7 @@
-class WBAdminUploadImage {
+class WbAdminUploadImage {
     constructor() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        this.deleteElement = '';
     }
 
     build() {
@@ -22,6 +23,7 @@ class WBAdminUploadImage {
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         const self = this;
+        let $buttonDelete = document.querySelectorAll('[data-action="delete"]');
 
         this.$btUploadThumbnail.addEventListener('click', function (event) {
             self.upload(this, 'blog/thumbnail/');
@@ -30,6 +32,46 @@ class WBAdminUploadImage {
         this.$btUploadBanner.addEventListener('click', function (event) {
             self.upload(this, 'blog/banner/');
         });
+
+        Array.prototype.forEach.call($buttonDelete, function (item) {
+            item.onclick = function () {
+                self.deleteImage(item);
+            }
+        });
+    }
+
+    deleteImage(button) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.deleteElement = button;
+
+        objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
+        objWfModal.buildContentConfirmationAction('objWbAdminUploadImage.deleteImageAjax()');
+    }
+
+    deleteImageAjax() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const data = new FormData();
+        const ajax = new XMLHttpRequest();
+        let file = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('[data-id="fileName"]').innerText;
+        let path = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('data-path');
+        let $return = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+        data.append('c', 'WbAdminUploadImage');
+        data.append('m', 'delete');
+        data.append('f', file);
+        data.append('p', path);
+
+        ajax.open('POST', objWbUrl.getController());
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.buildResponse(ajax.responseText, $return);
+                objWfModal.closeModal();
+            }
+        }
+
+        ajax.send(data);
     }
 
     upload(target, path) {
@@ -47,7 +89,7 @@ class WBAdminUploadImage {
             return;
         }
 
-        data.append('c', 'WBAdminUploadImage');
+        data.append('c', 'WbAdminUploadImage');
         data.append('m', 'upload');
         data.append('p', path);
         data.append('f', file);
@@ -58,22 +100,23 @@ class WBAdminUploadImage {
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 self.$btUploadThumbnail.removeAttribute('disabled');
-                self.uploadResponse(ajax.responseText, $form);
+                self.buildResponse(ajax.responseText, $form);
             }
         }
 
         ajax.send(data);
     }
 
-    uploadResponse(response, $form) {
+    buildResponse(response, $target) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         switch (response) {
+            case 'fileDeleted':
             case 'uploadDone':
-                objWfNotification.add(globalTranslation[response], 'green', $form);
+                objWfNotification.add(globalTranslation[response], 'green', $target);
                 document.location.reload();
                 break;
             default:
-                objWfNotification.add(globalTranslation[response], 'red', $form);
+                objWfNotification.add(globalTranslation[response], 'red', $target);
                 break;
         }
     }

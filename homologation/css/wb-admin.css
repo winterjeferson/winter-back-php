@@ -22,6 +22,7 @@
 
 .thumbnail-table {
   text-align: left; }
-  .thumbnail-table img {
-    width: auto;
-    height: 100px; }
+
+#pageAdminBlog .table img {
+  width: auto;
+  height: 50px; }

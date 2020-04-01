@@ -160,11 +160,12 @@ $objWbUrl = new WbUrl();
                             <div class="col-es-12">
                                 <div class="padding-bi">
                                     <div class="table-wrapper">
-                                        <table class="table table-grey thumbnail-table">
+                                        <table class="table table-grey thumbnail-table" data-path="blog/thumbnail">
                                             <thead>
                                                 <tr>
                                                     <th><?php echo $WbTranslation['image']; ?></th>
-                                                    <th>Url</th>
+                                                    <th><?php echo $WbTranslation['name']; ?></th>
+                                                    <th><?php echo $WbTranslation['menu']; ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -216,11 +217,12 @@ $objWbUrl = new WbUrl();
                             <div class="col-es-12">
                                 <div class="padding-bi">
                                     <div class="table-wrapper">
-                                        <table class="table table-grey thumbnail-table">
+                                        <table class="table table-grey thumbnail-table" data-path="blog/banner">
                                             <thead>
                                                 <tr>
                                                     <th><?php echo $WbTranslation['image']; ?></th>
-                                                    <th>Url</th>
+                                                    <th><?php echo $WbTranslation['name']; ?></th>
+                                                    <th><?php echo $WbTranslation['menu']; ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

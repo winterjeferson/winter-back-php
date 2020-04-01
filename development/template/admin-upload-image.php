@@ -18,8 +18,8 @@ $objWBAdminUploadImageList = new WBAdminUploadImageList();
             </div>
 
             {% set arr = [
-                {id: 'Thumbnail', path: 'thumbnail', label: 'file', labelRecommended: 'recommendedSize150'},
-                {id: 'Banner', path: 'banner', label: 'file', labelRecommended: 'recommendedSize1300'}
+                {id: 'Thumbnail', translation: 'thumbnail', path: 'blog/thumbnail', label: 'file', labelRecommended: 'recommendedSize150'},
+                {id: 'Banner', translation: 'banner', path: 'blog/banner', label: 'file', labelRecommended: 'recommendedSize1300'}
             ] %}
 
             {% for i in arr %}
@@ -28,7 +28,7 @@ $objWBAdminUploadImageList = new WBAdminUploadImageList();
                     <div class="card card-es card-grey">
                         <header>
                             <h4>
-                                <?php echo $WbTranslation['{{i.path | safe}}']; ?>
+                                <?php echo $WbTranslation['{{i.translation}}']; ?>
                             </h4>
                         </header>
                         <div class="row card-body">
@@ -56,16 +56,17 @@ $objWBAdminUploadImageList = new WBAdminUploadImageList();
                             <div class="col-es-12">
                                 <div class="padding-bi">
                                     <div class="table-wrapper">
-                                        <table class="table table-grey thumbnail-table">
+                                        <table class="table table-grey thumbnail-table" data-path="{{i.path}}">
                                             <thead>
                                                 <tr>
                                                     <th><?php echo $WbTranslation['image']; ?></th>
-                                                    <th>Url</th>
+                                                    <th><?php echo $WbTranslation['name']; ?></th>
+                                                    <th><?php echo $WbTranslation['menu']; ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                echo $objWBAdminUploadImageList->buildList('blog/{{i.path | safe}}');
+                                                echo $objWBAdminUploadImageList->buildList('{{i.path | safe}}');
                                                 ?>
                                             </tbody>
                                         </table>

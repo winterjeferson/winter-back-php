@@ -10,6 +10,8 @@ class WbTranslationPT
         'banner' => 'Banner',
         'blog' => 'Blog',
         'blogAdmin' => 'Administrar Blog',
+        'confirmationDelete' => 'Deseja realmente deletar este item?',
+        'confirmationInactivate' => 'Deseja realmente inativar este item?',
         'content' => 'Conteúdo',
         'dateEdit' => 'Data de edição',
         'datePost' => 'Data de postagem',
@@ -21,6 +23,8 @@ class WbTranslationPT
         'email' => 'E-mail',
         'emptyList' => 'Lista vazia',
         'file' => 'Arquivo',
+        'fileDeleted' => 'Arquivo deletado',
+        'fileDeleteError' => 'Erro ao excluir o arquivo',
         'friendlyUrl' => 'URL Amigável',
         'home' => 'Início',
         'image' => 'Imagem',
@@ -40,6 +44,7 @@ class WbTranslationPT
         'metaKeywords' => 'PHP, mysql, git, backend, Jeferson, Winter, javascript, html, css, gulp',
         'metaTitle' => 'Wb: Winter Backend PHP',
         'mostViewed' => 'Mais lidas',
+        'name' => 'Nome',
         'next' => 'Próximo',
         'pageAdminBlogTitle' => 'Cadastrar Blog',
         'pageAdminBlogTagsSeparator' => 'Separar por: /',
@@ -58,5 +63,6 @@ class WbTranslationPT
         'uploadFail' => 'Problema no upload do arquivo',
         'uploadInvalid' => 'Formato de arquivo inválido',
         'uploadSize' => 'O peso do arquivo ultrapassa o limite permitido',
+        'url' => 'URL',
     ];
 }
