@@ -50,11 +50,12 @@ class WbAdminBlog
 
     function buildReportHTML($value, $status, $objTheme, $objWbSession)
     {
+        $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
         $objWbHelp = new WbHelp();
         $string = '
             <tr>
                 <td class="minimum">' . $value['id'] . '</td>
-                <td class="minimum"><img src="img/blog/thumbnail/default.jpg" alt="' . $objWbSession->getArray('translation', 'thumbnail') . '"></td>
+                <td class="minimum"><img src="img/blog/thumbnail/' . $thumbnail . '" alt="' . $objWbSession->getArray('translation', 'thumbnail') . '"></td>
                 <td class="minimum"><b>' . $objWbHelp->encode($value['title_pt']) . '</b></td>
                 <td class="minimum"><b>' . $objWbHelp->encode($value['title_en']) . '</b></td>
                 <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>
