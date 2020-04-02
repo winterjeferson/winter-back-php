@@ -217,6 +217,7 @@ function () {
       this.updateVariable();
       this.buildMenu();
       this.buildMenuTable();
+      this.buildMenuThumbnail();
       this.watchTitle();
     }
   }, {
@@ -229,21 +230,25 @@ function () {
       this.isEdit = false;
       this.editId = 0;
       this.$page = document.querySelector('#pageAdminBlog');
-      this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
-      this.$formFieldTitlePt = this.$page.querySelector('[data-id="fieldTitlePt"]');
-      this.$formFieldTitleEn = this.$page.querySelector('[data-id="fieldTitleEn"]');
-      this.$formFieldUrlPt = this.$page.querySelector('[data-id="fieldUrlPt"]');
-      this.$formFieldUrlEn = this.$page.querySelector('[data-id="fieldUrlEn"]');
-      this.$formFieldContentPt = this.$page.querySelector('[data-id="fieldContentPt"]');
-      this.$formFieldContentEn = this.$page.querySelector('[data-id="fieldContentEn"]');
-      this.$formFieldTagPt = this.$page.querySelector('[data-id="fieldTagPt"]');
-      this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
-      this.$formFieldDatePostPt = this.$page.querySelector('[data-id="fieldDatePostPt"]');
-      this.$formFieldDatePostEn = this.$page.querySelector('[data-id="fieldDatePostEn"]');
-      this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
-      this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
-      this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
-      this.$thumbnailWrapper = this.$page.querySelector('[data-id="thumbnailWrapper"]');
+      this.$contentEdit = document.querySelector('#pageAdminBlogEdit');
+      this.$contentEditThumbnail = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+      this.$contentList = document.querySelector('#pageAdminBlogList');
+      this.$formRegister = this.$contentEdit.querySelector('[data-id="formRegister"]');
+      this.$formFieldTitlePt = this.$contentEdit.querySelector('[data-id="fieldTitlePt"]');
+      this.$formFieldTitleEn = this.$contentEdit.querySelector('[data-id="fieldTitleEn"]');
+      this.$formFieldUrlPt = this.$contentEdit.querySelector('[data-id="fieldUrlPt"]');
+      this.$formFieldUrlEn = this.$contentEdit.querySelector('[data-id="fieldUrlEn"]');
+      this.$formFieldContentPt = this.$contentEdit.querySelector('[data-id="fieldContentPt"]');
+      this.$formFieldContentEn = this.$contentEdit.querySelector('[data-id="fieldContentEn"]');
+      this.$formFieldTagPt = this.$contentEdit.querySelector('[data-id="fieldTagPt"]');
+      this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+      this.$formFieldDatePostPt = this.$contentEdit.querySelector('[data-id="fieldDatePostPt"]');
+      this.$formFieldDatePostEn = this.$contentEdit.querySelector('[data-id="fieldDatePostEn"]');
+      this.$formFieldDateEditPt = this.$contentEdit.querySelector('[data-id="fieldDateEditPt"]');
+      this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
+      this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+      this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+      this.thumbnailCurrent = '';
       this.thumbnailDefault = 'default.jpg';
       this.thumbnailPath = 'img/blog/thumbnail/';
       this.thumbnail = '';
@@ -269,6 +274,24 @@ function () {
       };
     }
   }, {
+    key: "buildMenuThumbnail",
+    value: function buildMenuThumbnail() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      var $target = this.$contentEditThumbnail.querySelectorAll('.table');
+      Array.prototype.forEach.call($target, function (table) {
+        var $button = table.querySelectorAll('[data-action="edit"]');
+        Array.prototype.forEach.call($button, function (item) {
+          item.onclick = function () {
+            objWfModal.buildModal('ajax', './admin-upload-image-list.php');
+          };
+        });
+      });
+    }
+  }, {
     key: "buildMenuTable",
     value: function buildMenuTable() {
       /*removeIf(production)*/
@@ -276,23 +299,15 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-      var $table = this.$page.querySelectorAll('.table');
-      var $tableActive = this.$page.querySelectorAll('[data-id="tableActive"]');
-      var $tableInactive = this.$page.querySelectorAll('[data-id="tableInactive"]');
+      var $table = this.$contentList.querySelectorAll('.table');
+      var $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
+      var $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
       Array.prototype.forEach.call($tableActive, function (table) {
         var $button = table.querySelectorAll('[data-action="inactivate"]');
         Array.prototype.forEach.call($button, function (item) {
           item.onclick = function () {
             objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
             objWfModal.buildContentConfirmationAction('objWbAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
-          };
-        });
-      });
-      Array.prototype.forEach.call($tableInactive, function (table) {
-        var $button = table.querySelectorAll('[data-action="activate"]');
-        Array.prototype.forEach.call($button, function (item) {
-          item.onclick = function () {
-            self.modify(item.getAttribute('data-id'), 'activate');
           };
         });
       });
@@ -368,32 +383,12 @@ function () {
           document.documentElement.scrollTop = 0;
           self.isEdit = true;
           self.editFillField(obj);
-          self.editChangeImage(obj);
+          self.thumbnailCurrent = obj['thumbnail'];
+          self.modifyThumbnail();
         }
       };
 
       ajax.send(parameter);
-    }
-  }, {
-    key: "editChangeImage",
-    value: function editChangeImage(obj) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var $image = this.$thumbnailWrapper.querySelector('[data-id="thumbnail"]');
-      var image = obj['thumbnail'];
-      var src = '';
-
-      if (image === null) {
-        this.thumbnail = '';
-        src = this.thumbnailPath + this.thumbnail;
-      } else {
-        this.thumbnail = obj['thumbnail'];
-        src = this.thumbnailPath + obj['thumbnail'];
-      }
-
-      $image.setAttribute('src', src);
     }
   }, {
     key: "editFillField",
@@ -550,6 +545,36 @@ function () {
         var url = objWbUrl.buildSEO(self.$formFieldTitleEn.value);
         self.$formFieldUrlEn.value = url;
       });
+    }
+  }, {
+    key: "selectImage",
+    value: function selectImage(target) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var $card = target.parentNode.parentNode.parentNode.parentNode;
+      var imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
+      this.thumbnailCurrent = imageName;
+      objWfModal.closeModal();
+      this.modifyThumbnail();
+    }
+  }, {
+    key: "modifyThumbnail",
+    value: function modifyThumbnail() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
+      var $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
+
+      if (this.thumbnailCurrent === '' || this.thumbnailCurrent === null) {
+        this.thumbnailCurrent = this.thumbnailDefault;
+      }
+
+      $image.setAttribute('src', this.thumbnailPath + this.thumbnailCurrent);
+      $name.innerHTML = this.thumbnailCurrent;
     }
   }]);
 

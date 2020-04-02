@@ -33,6 +33,18 @@
   text-align: left;
 }
 
+.card {
+  header {
+    display: block !important;
+  }
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #pageAdminBlog {
   .table {
     img {

@@ -15,6 +15,7 @@ class WbAdminBlog {
         this.updateVariable();
         this.buildMenu();
         this.buildMenuTable();
+        this.buildMenuThumbnail();
         this.watchTitle();
     }
 
@@ -23,21 +24,25 @@ class WbAdminBlog {
         this.isEdit = false;
         this.editId = 0;
         this.$page = document.querySelector('#pageAdminBlog');
-        this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
-        this.$formFieldTitlePt = this.$page.querySelector('[data-id="fieldTitlePt"]');
-        this.$formFieldTitleEn = this.$page.querySelector('[data-id="fieldTitleEn"]');
-        this.$formFieldUrlPt = this.$page.querySelector('[data-id="fieldUrlPt"]');
-        this.$formFieldUrlEn = this.$page.querySelector('[data-id="fieldUrlEn"]');
-        this.$formFieldContentPt = this.$page.querySelector('[data-id="fieldContentPt"]');
-        this.$formFieldContentEn = this.$page.querySelector('[data-id="fieldContentEn"]');
-        this.$formFieldTagPt = this.$page.querySelector('[data-id="fieldTagPt"]');
-        this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
-        this.$formFieldDatePostPt = this.$page.querySelector('[data-id="fieldDatePostPt"]');
-        this.$formFieldDatePostEn = this.$page.querySelector('[data-id="fieldDatePostEn"]');
-        this.$formFieldDateEditPt = this.$page.querySelector('[data-id="fieldDateEditPt"]');
-        this.$formFieldDateEditEn = this.$page.querySelector('[data-id="fieldDateEditEn"]');
-        this.$formFieldTagEn = this.$page.querySelector('[data-id="fieldTagEn"]');
-        this.$thumbnailWrapper = this.$page.querySelector('[data-id="thumbnailWrapper"]');
+        this.$contentEdit = document.querySelector('#pageAdminBlogEdit');
+        this.$contentEditThumbnail = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+        this.$contentList = document.querySelector('#pageAdminBlogList');
+        this.$formRegister = this.$contentEdit.querySelector('[data-id="formRegister"]');
+        this.$formFieldTitlePt = this.$contentEdit.querySelector('[data-id="fieldTitlePt"]');
+        this.$formFieldTitleEn = this.$contentEdit.querySelector('[data-id="fieldTitleEn"]');
+        this.$formFieldUrlPt = this.$contentEdit.querySelector('[data-id="fieldUrlPt"]');
+        this.$formFieldUrlEn = this.$contentEdit.querySelector('[data-id="fieldUrlEn"]');
+        this.$formFieldContentPt = this.$contentEdit.querySelector('[data-id="fieldContentPt"]');
+        this.$formFieldContentEn = this.$contentEdit.querySelector('[data-id="fieldContentEn"]');
+        this.$formFieldTagPt = this.$contentEdit.querySelector('[data-id="fieldTagPt"]');
+        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+        this.$formFieldDatePostPt = this.$contentEdit.querySelector('[data-id="fieldDatePostPt"]');
+        this.$formFieldDatePostEn = this.$contentEdit.querySelector('[data-id="fieldDatePostEn"]');
+        this.$formFieldDateEditPt = this.$contentEdit.querySelector('[data-id="fieldDateEditPt"]');
+        this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
+        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+        this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+        this.thumbnailCurrent = '';
         this.thumbnailDefault = 'default.jpg';
         this.thumbnailPath = 'img/blog/thumbnail/';
         this.thumbnail = '';
@@ -59,12 +64,29 @@ class WbAdminBlog {
         }
     }
 
+    buildMenuThumbnail() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const $target = this.$contentEditThumbnail.querySelectorAll('.table');
+
+        Array.prototype.forEach.call($target, function (table) {
+            let $button = table.querySelectorAll('[data-action="edit"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('ajax', './admin-upload-image-list.php');
+                }
+            });
+        });
+
+    }
+
     buildMenuTable() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
-        let $table = this.$page.querySelectorAll('.table');
-        let $tableActive = this.$page.querySelectorAll('[data-id="tableActive"]');
-        let $tableInactive = this.$page.querySelectorAll('[data-id="tableInactive"]');
+        let $table = this.$contentList.querySelectorAll('.table');
+        let $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
+        let $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
 
         Array.prototype.forEach.call($tableActive, function (table) {
             let $button = table.querySelectorAll('[data-action="inactivate"]');
@@ -73,16 +95,6 @@ class WbAdminBlog {
                 item.onclick = function () {
                     objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
                     objWfModal.buildContentConfirmationAction('objWbAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
-                }
-            });
-        });
-
-        Array.prototype.forEach.call($tableInactive, function (table) {
-            let $button = table.querySelectorAll('[data-action="activate"]');
-
-            Array.prototype.forEach.call($button, function (item) {
-                item.onclick = function () {
-                    self.modify(item.getAttribute('data-id'), 'activate');
                 }
             });
         });
@@ -163,28 +175,12 @@ class WbAdminBlog {
                 document.documentElement.scrollTop = 0;
                 self.isEdit = true;
                 self.editFillField(obj);
-                self.editChangeImage(obj);
+                self.thumbnailCurrent = obj['thumbnail'];
+                self.modifyThumbnail();
             }
         }
 
         ajax.send(parameter);
-    }
-
-    editChangeImage(obj) {
-          /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        const $image = this.$thumbnailWrapper.querySelector('[data-id="thumbnail"]');
-        let image = obj['thumbnail'];
-        let src = '';
-
-        if (image === null) {
-            this.thumbnail = '';
-            src = this.thumbnailPath + this.thumbnail;
-        } else {
-            this.thumbnail = obj['thumbnail'];
-            src = this.thumbnailPath + obj['thumbnail'];
-        }
-
-        $image.setAttribute('src', src);
     }
 
     editFillField(obj) {
@@ -343,5 +339,28 @@ class WbAdminBlog {
 
             self.$formFieldUrlEn.value = url;
         });
+    }
+
+    selectImage(target) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let $card = target.parentNode.parentNode.parentNode.parentNode;
+        let imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
+
+        this.thumbnailCurrent = imageName;
+        objWfModal.closeModal();
+        this.modifyThumbnail();
+    }
+
+    modifyThumbnail() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
+        let $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
+
+        if (this.thumbnailCurrent === '' || this.thumbnailCurrent === null) {
+            this.thumbnailCurrent = this.thumbnailDefault;
+        }
+
+        $image.setAttribute('src', this.thumbnailPath + this.thumbnailCurrent);
+        $name.innerHTML = this.thumbnailCurrent;
     }
 }

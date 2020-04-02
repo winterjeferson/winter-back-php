@@ -84,7 +84,7 @@ class WbBlogList
 
             $string .= '<article>';
             $string .= '    <div class="blog-list-image">';
-            $string .= '        <img src="img/blog/thumbnail/' . $thumbnail . '" alt="image">';
+            $string .= '        <img data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">';
             $string .= '    </div>';
             $string .= '    <div class="blog-list-text">';
             $string .= '        <a href="' . $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/" class="link link-blue">';

@@ -123,7 +123,7 @@ $objWbUrl = new WbUrl();
 </div>
             </div>
             <div class="col-es-12">
-                <section class="row">
+                <section id="pageAdminBlogEdit" class="row">
                     
 
                     
@@ -237,6 +237,7 @@ $objWbUrl = new WbUrl();
                                                 <thead>
                                                     <tr>
                                                         <th><?php echo $WbTranslation['image']; ?></th>
+                                                        <th><?php echo $WbTranslation['name']; ?></th>
                                                         <th><?php echo $WbTranslation['menu']; ?></th>
                                                     </tr>
                                                 </thead>
@@ -245,17 +246,15 @@ $objWbUrl = new WbUrl();
                                                         <td class="minimum">
                                                             <img src="img/blog/thumbnail/default.jpg" data-id="thumbnail">
                                                         </td>
-                                                        <td>
+                                                        <td data-id="name">
+                                                            default.jpg
+                                                        </td>
+                                                        <td class="minimum">
                                                             <nav class="menu menu-horizontal text-right">
                                                                 <ul>
                                                                     <li>
-                                                                        <button type="button" class="bt bt-sm bt-blue" data-id="btThumbnailEdit" data-tooltip="true" data-tooltip-color="black" title="<?php echo $WbTranslation['edit']; ?>">
+                                                                        <button type="button" class="bt bt-sm bt-blue" data-action="edit" data-tooltip="true" data-tooltip-color="black" title="<?php echo $WbTranslation['edit']; ?>">
                                                                             <span class="fa fa-pencil" aria-hidden="true"></span>
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button type="button" class="bt bt-sm bt-red" data-id="btThumbnailDelete" data-tooltip="true" data-tooltip-color="black" title="<?php echo $WbTranslation['delete']; ?>">
-                                                                            <span class="fa fa-close" aria-hidden="true"></span>
                                                                         </button>
                                                                     </li>
                                                                 </ul>
@@ -287,18 +286,18 @@ $objWbUrl = new WbUrl();
 
                 </section>
 
-                
+                <section id="pageAdminBlogList" class="row">
+                    
 
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-es-12">
-                            <h2 class="page-title">
-                                <?php echo $WbTranslation['listing']; ?>
-                                (<?php echo $WbTranslation['actives']; ?>)
-                            </h2>
-                        </div>
-                        <div class="col-es-12 col-eb-12">
+                    
+                    <div class="col-es-12">
+                        <h2 class="page-title">
+                            <?php echo $WbTranslation['listing']; ?>
+                            (<?php echo $WbTranslation['actives']; ?>)
+                        </h2>
+                    </div>
+                    <div class="col-es-12">
+                        <div class="container">
                             <table class="table table-grey" data-id="tableActive">
                                 <thead>
                                     <tr>
@@ -325,17 +324,15 @@ $objWbUrl = new WbUrl();
                             </table>
                         </div>
                     </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-es-12">
-                            <h2 class="page-title">
-                                <?php echo $WbTranslation['listing']; ?>
-                                (<?php echo $WbTranslation['inactives']; ?>)
-                            </h2>
-                        </div>
-                        <div class="col-es-12 col-eb-12">
+                    
+                    <div class="col-es-12">
+                        <h2 class="page-title">
+                            <?php echo $WbTranslation['listing']; ?>
+                            (<?php echo $WbTranslation['inactives']; ?>)
+                        </h2>
+                    </div>
+                    <div class="col-es-12">
+                        <div class="container">
                             <table class="table table-grey" data-id="tableInactive">
                                 <thead>
                                     <tr>
@@ -362,8 +359,8 @@ $objWbUrl = new WbUrl();
                             </table>
                         </div>
                     </div>
-                </div>
-                
+                    
+                </section>
 
             </div>
         </div>
