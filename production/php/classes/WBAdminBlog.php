@@ -15,6 +15,7 @@ class WbAdminBlog
         $string = '';
         $objWbQuery = new WbQuery();
         $objTheme = new Theme();
+        $objWbSession = new WbSession();
 
         $this->buildReportSql($objWbQuery);
 
@@ -28,7 +29,7 @@ class WbAdminBlog
         $queryResult = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($queryResult as $key => $value) {
-            $string .= $this->buildReportHTML($value, $status, $objTheme);
+            $string .= $this->buildReportHTML($value, $status, $objTheme, $objWbSession);
         }
 
         return $string;
@@ -47,35 +48,37 @@ class WbAdminBlog
         ]);
     }
 
-    function buildReportHTML($value, $status, $objTheme)
+    function buildReportHTML($value, $status, $objTheme, $objWbSession)
     {
+        $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
         $objWbHelp = new WbHelp();
-        $string = '';
-
-        $string .= '<tr>';
-        $string .= '    <td class="minimum">' . $value['id'] . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['title_pt']) . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['title_en']) . '</td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>';
-        $string .= '    <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>';
-        $string .= '    <td class="minimum">' . $value['url_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['url_en'] . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>';
-        $string .= '    <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_post_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_post_en'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_edit_pt'] . '</td>';
-        $string .= '    <td class="minimum">' . $value['date_edit_en'] . '</td>';
-        $string .= '    <td class="minimum">';
-        $string .= '        <nav class="menu menu-horizontal">';
-        $string .= '            <ul>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt('edit', $value['id']) . '</li>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt($status, $value['id']) . '</li>';
-        $string .= '                <li>' . $objTheme->buildHTMLBt('delete', $value['id']) . '</li>';
-        $string .= '            </ul>';
-        $string .= '        </nav>';
-        $string .= '    </td>';
-        $string .= '</tr>';
+        $string = '
+            <tr>
+                <td class="minimum">' . $value['id'] . '</td>
+                <td class="minimum"><img data-src="img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true" alt="' . $objWbSession->getArray('translation', 'thumbnail') . '"></td>
+                <td class="minimum"><b>' . $objWbHelp->encode($value['title_pt']) . '</b></td>
+                <td class="minimum"><b>' . $objWbHelp->encode($value['title_en']) . '</b></td>
+                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>
+                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>
+                <td class="minimum">' . $value['url_pt'] . '</td>
+                <td class="minimum">' . $value['url_en'] . '</td>
+                <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>
+                <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>
+                <td class="minimum">' . $value['date_post_pt'] . '</td>
+                <td class="minimum">' . $value['date_post_en'] . '</td>
+                <td class="minimum">' . $value['date_edit_pt'] . '</td>
+                <td class="minimum">' . $value['date_edit_en'] . '</td>
+                <td class="minimum">
+                    <nav class="menu menu-horizontal">
+                        <ul>
+                            <li>' . $objTheme->buildHTMLBt('edit', $value['id']) . '</li>
+                            <li>' . $objTheme->buildHTMLBt($status, $value['id']) . '</li>
+                            <li>' . $objTheme->buildHTMLBt('delete', $value['id']) . '</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        ';
 
         return $string;
     }
@@ -95,10 +98,11 @@ class WbAdminBlog
         $contentEn = filter_input(INPUT_POST, 'contentEn', FILTER_DEFAULT);
         $tagPt = $this->validateTag(filter_input(INPUT_POST, 'tagPt', FILTER_DEFAULT));
         $tagEn = $this->validateTag(filter_input(INPUT_POST, 'tagEn', FILTER_DEFAULT));
-        $datePostPt = $this->validateTag(filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT));
-        $datePostEn = $this->validateTag(filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT));
-        $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
-        $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
+        $datePostPt = filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT);
+        $datePostEn = filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT);
+        $dateEditPt = filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT);
+        $dateEditEn = filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT);
+        $thumbnail = filter_input(INPUT_POST, 'thumbnail', FILTER_DEFAULT);
 
         $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
@@ -115,6 +119,7 @@ class WbAdminBlog
                 ['column' => 'date_post_en', 'value' => $objWbDate->buildDate($datePostEn)],
                 ['column' => 'date_edit_pt', 'value' => $objWbDate->buildDate($dateEditPt)],
                 ['column' => 'date_edit_en', 'value' => $objWbDate->buildDate($dateEditEn)],
+                ['column' => 'thumbnail', 'value' => $thumbnail],
             ],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]]
         ]);
@@ -137,10 +142,11 @@ class WbAdminBlog
         $contentEn = filter_input(INPUT_POST, 'contentEn', FILTER_DEFAULT);
         $tagPt = $this->validateTag(filter_input(INPUT_POST, 'tagPt', FILTER_DEFAULT));
         $tagEn = $this->validateTag(filter_input(INPUT_POST, 'tagEn', FILTER_DEFAULT));
-        $datePostPt = $this->validateTag(filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT));
-        $datePostEn = $this->validateTag(filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT));
-        $dateEditPt = $this->validateTag(filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT));
-        $dateEditEn = $this->validateTag(filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT));
+        $datePostPt = filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT);
+        $datePostEn = filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT);
+        $dateEditPt = filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT);
+        $dateEditEn = filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT);
+        $thumbnail = filter_input(INPUT_POST, 'thumbnail', FILTER_DEFAULT);
 
         $objWbQuery->populateArray([
             'table' => [['table' => $this->sqlTable]],
@@ -157,6 +163,7 @@ class WbAdminBlog
                 ['column' => 'date_post_en', 'value' => $objWbDate->buildDate($datePostEn)],
                 ['column' => 'date_edit_pt', 'value' => $objWbDate->buildDate($dateEditPt)],
                 ['column' => 'date_edit_en', 'value' => $objWbDate->buildDate($dateEditEn)],
+                ['column' => 'thumbnail', 'value' => $thumbnail],
 
                 ['column' => 'active', 'value' => 1],
                 ['column' => 'view', 'value' => 0],
@@ -221,13 +228,14 @@ class WbAdminBlog
                 ['table' => $this->sqlTable, 'column' => 'date_edit_pt'],
                 ['table' => $this->sqlTable, 'column' => 'date_edit_en'],
                 ['table' => $this->sqlTable, 'column' => 'id'],
+                ['table' => $this->sqlTable, 'column' => 'thumbnail'],
             ],
             'table' => [['table' => $this->sqlTable]],
             'where' => [['table' => $this->sqlTable, 'column' => 'id', 'value' => $id]],
             'limit' => [['offset' => 1]],
         ]);
 
-        
+
         $query = $objWbQuery->select();
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 

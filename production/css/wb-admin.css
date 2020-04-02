@@ -20,8 +20,17 @@
   max-height: 300px;
   overflow-y: auto; }
 
-.table-thumbnail {
+.thumbnail-table {
   text-align: left; }
-  .table-thumbnail img {
-    width: auto;
-    height: 100px; }
+
+.card header {
+  display: block !important; }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+#pageAdminBlog .table img {
+  width: auto;
+  height: 50px; }
