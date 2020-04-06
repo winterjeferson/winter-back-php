@@ -248,10 +248,9 @@ function () {
       this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
       this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
       this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
-      this.thumbnailCurrent = '';
+      this.thumbnail = '';
       this.thumbnailDefault = 'default.jpg';
       this.thumbnailPath = 'img/blog/thumbnail/';
-      this.thumbnail = '';
       this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
       this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
@@ -286,7 +285,7 @@ function () {
         var $button = table.querySelectorAll('[data-action="edit"]');
         Array.prototype.forEach.call($button, function (item) {
           item.onclick = function () {
-            objWfModal.buildModal('ajax', './admin-upload-image-list.php');
+            objWfModal.buildModal('ajax', './admin-upload-image-list.php', 'eb');
           };
         });
       });
@@ -383,7 +382,7 @@ function () {
           document.documentElement.scrollTop = 0;
           self.isEdit = true;
           self.editFillField(obj);
-          self.thumbnailCurrent = obj['thumbnail'];
+          self.thumbnail = obj['thumbnail'];
           self.modifyThumbnail();
         }
       };
@@ -555,7 +554,7 @@ function () {
 
       var $card = target.parentNode.parentNode.parentNode.parentNode;
       var imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
-      this.thumbnailCurrent = imageName;
+      this.thumbnail = imageName;
       objWfModal.closeModal();
       this.modifyThumbnail();
     }
@@ -569,12 +568,12 @@ function () {
       var $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
       var $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
 
-      if (this.thumbnailCurrent === '' || this.thumbnailCurrent === null) {
-        this.thumbnailCurrent = this.thumbnailDefault;
+      if (this.thumbnail === '' || this.thumbnail === null) {
+        this.thumbnail = this.thumbnailDefault;
       }
 
-      $image.setAttribute('src', this.thumbnailPath + this.thumbnailCurrent);
-      $name.innerHTML = this.thumbnailCurrent;
+      $image.setAttribute('src', this.thumbnailPath + this.thumbnail);
+      $name.innerHTML = this.thumbnail;
     }
   }]);
 
@@ -844,6 +843,8 @@ function () {
       }
 
       $sectionList.insertAdjacentHTML('beforeend', json['html']);
+      window.scrollTo(0, document.documentElement.scrollTop + 1);
+      window.scrollTo(0, document.documentElement.scrollTop - 1);
     }
   }]);
 

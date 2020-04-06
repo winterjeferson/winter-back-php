@@ -149,7 +149,7 @@ $objWbAdminBlog = new WbAdminBlog();
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="container">
+                        <div class="padding-bi">
                             <table class="table table-grey" data-id="table{{i.id | safe}}">
                                 <thead>
                                     <tr>

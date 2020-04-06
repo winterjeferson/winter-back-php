@@ -42,10 +42,9 @@ class WbAdminBlog {
         this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
         this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
         this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
-        this.thumbnailCurrent = '';
+        this.thumbnail = '';
         this.thumbnailDefault = 'default.jpg';
         this.thumbnailPath = 'img/blog/thumbnail/';
-        this.thumbnail = '';
         this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
         this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
@@ -74,7 +73,7 @@ class WbAdminBlog {
 
             Array.prototype.forEach.call($button, function (item) {
                 item.onclick = function () {
-                    objWfModal.buildModal('ajax', './admin-upload-image-list.php');
+                    objWfModal.buildModal('ajax', './admin-upload-image-list.php', 'eb');
                 }
             });
         });
@@ -175,7 +174,7 @@ class WbAdminBlog {
                 document.documentElement.scrollTop = 0;
                 self.isEdit = true;
                 self.editFillField(obj);
-                self.thumbnailCurrent = obj['thumbnail'];
+                self.thumbnail = obj['thumbnail'];
                 self.modifyThumbnail();
             }
         }
@@ -346,7 +345,7 @@ class WbAdminBlog {
         let $card = target.parentNode.parentNode.parentNode.parentNode;
         let imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
 
-        this.thumbnailCurrent = imageName;
+        this.thumbnail = imageName;
         objWfModal.closeModal();
         this.modifyThumbnail();
     }
@@ -356,11 +355,11 @@ class WbAdminBlog {
         let $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
         let $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
 
-        if (this.thumbnailCurrent === '' || this.thumbnailCurrent === null) {
-            this.thumbnailCurrent = this.thumbnailDefault;
+        if (this.thumbnail === '' || this.thumbnail === null) {
+            this.thumbnail = this.thumbnailDefault;
         }
 
-        $image.setAttribute('src', this.thumbnailPath + this.thumbnailCurrent);
-        $name.innerHTML = this.thumbnailCurrent;
+        $image.setAttribute('src', this.thumbnailPath + this.thumbnail);
+        $name.innerHTML = this.thumbnail;
     }
 }

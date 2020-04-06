@@ -80,5 +80,7 @@ class WbBlog {
         }
 
         $sectionList.insertAdjacentHTML('beforeend', json['html']);
+        window.scrollTo(0, document.documentElement.scrollTop + 1);
+        window.scrollTo(0, document.documentElement.scrollTop - 1);
     }
 }

@@ -88,7 +88,7 @@ class Theme
     {
         $concat = '';
 
-        $concat .= '<button type="button" class="bt bt-sm has-tooltip bt-' . $arr['color'] . '" title="' . $arr['title'] . '" data-action="' . $arr['action'] . '" data-id="' . $id . '" data-tooltip-color="black" data-tooltip-placement="right">';
+        $concat .= '<button type="button" class="bt bt-sm bt-' . $arr['color'] . '" title="' . $arr['title'] . '" data-action="' . $arr['action'] . '" data-id="' . $id . '" data-tooltip="true" data-tooltip-color="black" data-tooltip-placement="top">';
         $concat .= '    <span class="fa ' . $arr['icon'] . '" aria-hidden="true"></span>';
         $concat .= '</button>';
 

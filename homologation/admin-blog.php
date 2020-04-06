@@ -297,7 +297,7 @@ $objWbUrl = new WbUrl();
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="container">
+                        <div class="padding-bi">
                             <table class="table table-grey" data-id="tableActive">
                                 <thead>
                                     <tr>
@@ -332,7 +332,7 @@ $objWbUrl = new WbUrl();
                         </h2>
                     </div>
                     <div class="col-es-12">
-                        <div class="container">
+                        <div class="padding-bi">
                             <table class="table table-grey" data-id="tableInactive">
                                 <thead>
                                     <tr>
