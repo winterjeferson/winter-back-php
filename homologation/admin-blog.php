@@ -1,10 +1,18 @@
 <?php
+$objWbAdminBlog = new WbAdminBlog();
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'blog')
+];
+?>
+<?php
 
 $objWbLogin = new WbLogin();
 $objWbLogin->verifyLogin();
 ?>
 <?php
-echo $objWbHtml->buildHeader();
+$metaData = isset($metaDataCustom) ? $metaDataCustom : '';
+echo $objWbHtml->buildHeader($metaData);
 ?>
 <div id="loadingMain" class="bg-grey">
     <div class="col-middle">
@@ -17,10 +25,6 @@ echo $objWbHtml->buildHeader();
         </div>
     </div>
 </div>
-<?php
-$objWbAdminBlog = new WbAdminBlog();
-?>
-
 <main class="grid">
     <?php
 $objWbUrl = new WbUrl();

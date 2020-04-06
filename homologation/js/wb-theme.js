@@ -329,7 +329,7 @@ function () {
         });
         Array.prototype.forEach.call($buttonDelete, function (item) {
           item.onclick = function () {
-            objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
+            objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
             objWfModal.buildContentConfirmationAction('objWbAdminBlog.delete(' + item.getAttribute('data-id') + ')');
           };
         });

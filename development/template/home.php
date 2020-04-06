@@ -1,3 +1,10 @@
+<?php
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'home')
+];
+?>
+
 {% include "include/head.php" %}
 {% include "include/loading-main.php" %}
 <main class="grid">

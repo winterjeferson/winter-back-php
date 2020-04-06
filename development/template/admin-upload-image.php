@@ -1,5 +1,9 @@
 <?php
 $objWBAdminUploadImageList = new WBAdminUploadImageList();
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'uploadImage')
+];
 ?>
 
 {% include "include/verify-login.php" %}

@@ -1,10 +1,13 @@
+<?php
+$objWbAdminBlog = new WbAdminBlog();
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'blog')
+];
+?>
 {% include "include/verify-login.php" %}
 {% include "include/head.php" %}
 {% include "include/loading-main.php" %}
-<?php
-$objWbAdminBlog = new WbAdminBlog();
-?>
-
 <main class="grid">
     {% include "include/template-header.php" %}
     <section id="mainMenu" class="grid-menu">

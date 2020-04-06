@@ -1,3 +1,4 @@
 <?php
-echo $objWbHtml->buildHeader();
+$metaData = isset($metaDataCustom) ? $metaDataCustom : '';
+echo $objWbHtml->buildHeader($metaData);
 ?>

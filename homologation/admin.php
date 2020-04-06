@@ -1,10 +1,18 @@
 <?php
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel')
+];
+?>
+
+<?php
 
 $objWbLogin = new WbLogin();
 $objWbLogin->verifyLogin();
 ?>
 <?php
-echo $objWbHtml->buildHeader();
+$metaData = isset($metaDataCustom) ? $metaDataCustom : '';
+echo $objWbHtml->buildHeader($metaData);
 ?>
 <div id="loadingMain" class="bg-grey">
     <div class="col-middle">

@@ -1,7 +1,16 @@
 <?php
 $objWbBlogPost = new WbBlogPost();
+$objWbSession = new WbSession();
 $objWbHelp = new WbHelp();
+
 $post = $objWbBlogPost->getPost();
+$postTitle = $objWbHelp->encode($post['title_' .  $objWbTranslation->getLanguage()]);
+$postContent = $objWbHelp->encode($post['content_' .  $objWbTranslation->getLanguage()]);
+$postTag = $objWbBlogPost->buildTag($objWbHelp->encode($post['tag_' .  $objWbTranslation->getLanguage()]));
+
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'blog') . ' - ' . $postTitle
+];
 ?>
 {% include "include/head.php" %}
 {% include "include/loading-main.php" %}
@@ -16,7 +25,7 @@ $post = $objWbBlogPost->getPost();
                 <div class="container">
                     <h1 class="page-title">
                         <?php
-                        echo $objWbHelp->encode($post['title_' .  $objWbTranslation->getLanguage()]);
+                        echo $postTitle;
                         ?>
                     </h1>
                 </div>
@@ -24,7 +33,7 @@ $post = $objWbBlogPost->getPost();
             <div class="col-es-12">
                 <div class="container">
                     <?php
-                    echo $objWbHelp->encode($post['content_' .  $objWbTranslation->getLanguage()]);
+                    echo $postContent;
                     ?>
                 </div>
             </div>
@@ -32,7 +41,7 @@ $post = $objWbBlogPost->getPost();
                 <div class="container padding-bi">
                     tags:
                     <?php
-                    echo $objWbBlogPost->buildTag($objWbHelp->encode($post['tag_' .  $objWbTranslation->getLanguage()]));
+                    echo $postTag;
                     ?>
                 </div>
             </div>

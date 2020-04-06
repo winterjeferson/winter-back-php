@@ -1,3 +1,10 @@
+<?php
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel')
+];
+?>
+
 {% include "include/verify-login.php" %}
 {% include "include/head.php" %}
 {% include "include/loading-main.php" %}

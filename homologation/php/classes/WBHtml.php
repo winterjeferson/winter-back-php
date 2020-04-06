@@ -30,7 +30,7 @@ class WbHtml
         return '<link href="' . $src . '.css" rel="stylesheet">';
     }
 
-    public function buildHeader()
+    public function buildHeader($metaCustom)
     {
         $objWbSession = new WbSession();
         $objTheme = new Theme();
@@ -42,8 +42,8 @@ class WbHtml
         $string .= $this->buildHeaderMeta();
         $string .= $objTheme->buildHeaderAppearance();
         $string .= $this->buildHeaderImage();
-        $string .= $this->buildHeaderSEO();
-        $string .= $this->buildHeaderFacebook();
+        $string .= $this->buildHeaderSeo($metaCustom);
+        $string .= $this->buildHeaderFacebook($metaCustom);
         $string .= $objTheme->buildCSS();
         $string .= '        </head>';
         $string .= '        <body class="overflow-hidden">';
@@ -51,62 +51,76 @@ class WbHtml
         return $string;
     }
 
-    public function buildHeaderFacebook()
+    public function buildHeaderFacebook($metaCustom)
     {
         $objWbSession = new WbSession();
-        $string = '';
+        $title = isset($metaCustom['title']) ? $metaCustom['title'] : $objWbSession->getArray('translation', 'metaTitle');
+        $description = isset($metaCustom['description']) ? $metaCustom['description'] : $objWbSession->getArray('translation', 'metaDescription');
 
-        $string .= '<meta property="og:image" content = "' . $this->mainUrl . 'img/logo/600-315.png"/>';
-        $string .= '<meta property="og:image:type" content="image/png" />';
-        $string .= '<meta property="og:image:width" content="600" />';
-        $string .= '<meta property="og:image:height" content="315" />';
-        $string .= '<meta property="og:locale" content="pt_BR" />';
-        $string .= '<meta property="og:url" content="' . $this->mainUrl . '" />';
-        $string .= '<meta property="og:type" content="website" />';
-        $string .= '<meta property="og:title" content="' . $objWbSession->get('metaTitle') . '" />';
-        $string .= '<meta property="og:site_name" content="' . $objWbSession->get('metaTitle') . '" />';
-        $string .= '<meta property="og:description" content="' . $objWbSession->get('metaDescription') . '" />';
+        $string = '
+            <meta property="og:image" content = "' . $this->mainUrl . 'img/logo/600-315.png"/>
+            <meta property="og:image:type" content="image/png" />
+            <meta property="og:image:width" content="600" />
+            <meta property="og:image:height" content="315" />
+            <meta property="og:locale" content="pt_BR" />
+            <meta property="og:url" content="' . $this->mainUrl . '" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="' . $title . '" />
+            <meta property="og:site_name" content="' . $title . '" />
+            <meta property="og:description" content="' . $description . '" />
+        ';
 
         return $string;
     }
 
-    public function buildHeaderSEO()
+    public function buildHeaderSeo($metaCustom)
     {
         $objWbSession = new WbSession();
-        $string = '';
+        $title = isset($metaCustom['title']) ? $metaCustom['title'] : $objWbSession->getArray('translation', 'metaTitle');
+        $author = isset($metaCustom['author']) ? $metaCustom['author'] : $objWbSession->getArray('translation', 'metaAuthor');
+        $description = isset($metaCustom['description']) ? $metaCustom['description'] : $objWbSession->getArray('translation', 'metaDescription');
+        $keywords = isset($metaCustom['keywords']) ? $metaCustom['keywords'] : $objWbSession->getArray('translation', 'metaKeywords');
 
-        $string .= '<meta name="application-name" content="' . $objWbSession->get('meta_author') . '" />';
-        $string .= '<title>' . $objWbSession->get('metaTitle') . '</title>';
-        $string .= '<meta name="description" content="' . $objWbSession->get('metaDescription') . '" />';
-        $string .= '<meta name="author" content="' . $objWbSession->get('metaAuthor') . '" />';
-        $string .= '<meta name="keywords" content="' . $objWbSession->get('metaKeywords') . '" />';
+        $string = '
+            <meta name="application-name" content="' . $title . '" />
+            <title>' . $title . '</title>
+            <meta name="description" content="' . $description . '" />
+            <meta name="author" content="' . $author . '" />
+            <meta name="keywords" content="' . $keywords . '" />
+        ';
 
         return $string;
+    }
+
+    public function buildHeaderSeoForce($array)
+    {
+        var_dump($array);
     }
 
     public function buildHeaderMeta()
     {
-        $string = '';
-
-        $string .= '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
-        $string .= '<meta name="format-detection" content="telephone=yes" />';
-        $string .= '<meta name="msapplication-tap-highlight" content="no" />';
-        $string .= '<meta name="viewport" content="initial-scale=1,maximum-scale=5,user-scalable=yes,width=device-width">';
-        $string .= '<base href="' . $this->mainUrl . '">';
+        $string = '
+            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+            <meta name="format-detection" content="telephone=yes" />
+            <meta name="msapplication-tap-highlight" content="no" />
+            <meta name="viewport" content="initial-scale=1,maximum-scale=5,user-scalable=yes,width=device-width">
+            <base href="' . $this->mainUrl . '">
+        ';
 
         return $string;
     }
 
     public function buildHeaderImage()
     {
-        $string = '';
+        $string = '
+            <link rel="shortcut icon" href="' . $this->mainUrl . 'img/logo/16-16.png" />
 
-        $string .= '<link rel="shortcut icon" href="' . $this->mainUrl . 'img/logo/16-16.png" />';
-        $string .= '<link rel="apple-touch-icon" href="' . $this->mainUrl . 'img/logo/57-57.png" />';
-        $string .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $this->mainUrl . 'img/logo/72-72.png" />';
-        $string .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $this->mainUrl . 'img/logo/114-114.png" />';
+            <link rel="apple-touch-icon" href="' . $this->mainUrl . 'img/logo/57-57.png" />
+            <link rel="apple-touch-icon" sizes="72x72" href="' . $this->mainUrl . 'img/logo/72-72.png" />
+            <link rel="apple-touch-icon" sizes="114x114" href="' . $this->mainUrl . 'img/logo/114-114.png" />
 
-        $string .= '<meta name="msapplication-TileImage" content="' . $this->mainUrl . 'img/logo/144-144.png" />';
+            <meta name="msapplication-TileImage" content="' . $this->mainUrl . 'img/logo/144-144.png" />
+        ';
 
         return $string;
     }
@@ -116,18 +130,17 @@ class WbHtml
         $objWbSession = new WbSession();
         $objTheme = new Theme();
         $objWbUrl = new WbUrl();
-        $string = '';
-
-        $string .= '<script>';
-        $string .= '    var globalLanguage = "' . $objWbSession->get('language') . '";';
-        $string .= '    var globalUrl = "' . $objWbUrl->getUrlMain() . '";';
-        $string .= '    var globalTranslation = ' . json_encode($objWbSession->get('translation')) . ';';
-        $string .= '</script>';
-        $string .= $objTheme->buildJs();
-        $string .= $objTheme->buildAdmin();
-
-        $string .= '    </body>';
-        $string .= '</html>';
+        $string = '
+                    <script>
+                        var globalLanguage = "' . $objWbSession->get('language') . '";
+                        var globalUrl = "' . $objWbUrl->getUrlMain() . '";
+                        var globalTranslation = ' . json_encode($objWbSession->get('translation')) . ';
+                    </script>
+                    ' . $objTheme->buildJs() . '
+                    ' . $objTheme->buildAdmin() . '
+                </body>
+            </html>
+        ';
 
         return $string;
     }

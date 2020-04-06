@@ -1,10 +1,18 @@
 <?php
+$objWbSession = new WbSession();
 $objWbBlogList = new WbBlogList();
+
 $objWbBlogList->resetSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'blog'),
+    'keywords' => $objWbSession->getArray('translation', 'metaKeywords'),
+    'description' => $objWbSession->getArray('translation', 'metaDescription'),
+];
 ?>
 
 <?php
-echo $objWbHtml->buildHeader();
+$metaData = isset($metaDataCustom) ? $metaDataCustom : '';
+echo $objWbHtml->buildHeader($metaData);
 ?>
 <div id="loadingMain" class="bg-grey">
     <div class="col-middle">

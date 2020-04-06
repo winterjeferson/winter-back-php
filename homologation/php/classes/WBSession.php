@@ -19,14 +19,22 @@ class WbSession
         $_SESSION[$this->prefix . $target] = $value;
     }
 
-    function setArray($target, $value)
+    function setArray($array, $value)
     {
-        if ($this->verify($target)) {
-            array_push($_SESSION[$this->prefix . $target], $value);
-        } else {
-            $_SESSION[$this->prefix . $target] = [];
-            array_push($_SESSION[$this->prefix . $target], $value);
+        if (!$this->verify($array)) {
+            $_SESSION[$this->prefix . $array] = [];
         }
+
+        $_SESSION[$this->prefix . $array] = $value;
+    }
+
+    function setArrayMultidimensionl($array, $index, $value)
+    {
+        if (!$this->verifyIndex($array, $index)) {
+            $_SESSION[$this->prefix . $array][$index] = [];
+        }
+
+        $_SESSION[$this->prefix . $array][$index] = $value;
     }
 
     function get($target)
@@ -62,6 +70,15 @@ class WbSession
     function verify($target)
     {
         if (isset($_SESSION[$this->prefix . $target])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function verifyIndex($target, $index)
+    {
+        if (isset($_SESSION[$this->prefix . $target][$index])) {
             return true;
         } else {
             return false;

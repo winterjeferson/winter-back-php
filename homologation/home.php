@@ -1,5 +1,13 @@
 <?php
-echo $objWbHtml->buildHeader();
+$objWbSession = new WbSession();
+$metaDataCustom = [
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'home')
+];
+?>
+
+<?php
+$metaData = isset($metaDataCustom) ? $metaDataCustom : '';
+echo $objWbHtml->buildHeader($metaData);
 ?>
 <div id="loadingMain" class="bg-grey">
     <div class="col-middle">
