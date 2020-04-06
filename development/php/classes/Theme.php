@@ -51,10 +51,10 @@ class Theme
 
     public function buildHeaderAppearance()
     {
-        $string = '';
-
-        $string .= '<meta name="theme-color" content="#000000" />';
-        $string .= '<meta name="msapplication-TileColor" content="#000000" />';
+        $string = '
+            <meta name="theme-color" content="#000000" />
+            <meta name="msapplication-TileColor" content="#000000" />
+        ';
 
         return $string;
     }

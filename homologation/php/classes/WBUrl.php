@@ -52,6 +52,5 @@ class WbUrl
         $lastCharacter = $target === '' ? '' : '/';
 
         header('Location: ' . $this->getUrlPage() . $target . $lastCharacter);
-        // echo '<meta http-equiv="refresh" content="0;url=' . $this->getUrlPage() . $target . $lastCharacter . '">';
     }
 }
