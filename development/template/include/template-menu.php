@@ -1,6 +1,7 @@
 {% set arr = [
     {id: 'admin', translation: 'administrativePanel'},
-    {id: 'blog', translation: 'blog'}
+    {id: 'blog', translation: 'blog'},
+    {id: 'form', translation: 'form'}
 ] %}
 
 <div class="row">

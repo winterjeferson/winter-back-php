@@ -851,6 +851,119 @@ function () {
   return WbBlog;
 }();
 
+var WbForm =
+/*#__PURE__*/
+function () {
+  function WbForm() {
+    _classCallCheck(this, WbForm);
+
+    /*removeIf(production)*/
+    objWbDebug.debugMethod(this, 'constructor');
+    /*endRemoveIf(production)*/
+  }
+
+  _createClass(WbForm, [{
+    key: "build",
+    value: function build() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      if (!getUrlWord('form')) {
+        return;
+      }
+
+      this.update();
+      this.buildMenu();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      this.$page = document.querySelector('#pageForm');
+      this.$form = this.$page.querySelector('.form');
+      this.$btSend = this.$page.querySelector('#pageFormBtSend');
+    }
+  }, {
+    key: "buildMenu",
+    value: function buildMenu() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      this.$btSend.addEventListener('click', function (event) {
+        self.send();
+      });
+    }
+  }, {
+    key: "send",
+    value: function send() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var self = this;
+      var ajax = new XMLHttpRequest();
+      var url = objWbUrl.getController();
+      var parameter = '&c=WbForm' + '&m=sendForm' + '&d=' + JSON.stringify(self.getData());
+      this.$btSend.setAttribute('disabled', 'disabled');
+      ajax.open('POST', url, true);
+      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          self.$btSend.removeAttribute('disabled');
+          self.response(ajax.responseText);
+        }
+      };
+
+      ajax.send(parameter);
+    }
+  }, {
+    key: "getData",
+    value: function getData() {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var arr = [];
+      arr.push(['text', 'text content']);
+      arr.push(['textarea', 'textarea content']);
+      return arr;
+    }
+  }, {
+    key: "response",
+    value: function response(data) {
+      /*removeIf(production)*/
+      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
+      /*endRemoveIf(production)*/
+
+      var response = '';
+      var color = '';
+
+      switch (data) {
+        case 'ok':
+          color = 'green';
+          response = globalTranslation.formSent;
+          break;
+
+        default:
+          color = 'red';
+          response = globalTranslation.formProblemSend;
+          break;
+      }
+
+      objWfNotification.add(response, color, this.$form);
+    }
+  }]);
+
+  return WbForm;
+}();
+
 var WbLogin =
 /*#__PURE__*/
 function () {
@@ -1026,6 +1139,7 @@ function () {
       objWbAdminBlog.build();
       objWbAdminUploadImage.build();
       objWbBlog.build();
+      objWbForm.build();
     }
   }]);
 
@@ -1171,6 +1285,7 @@ var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
 var objWbAdminUploadImage = new WbAdminUploadImage();
 var objWbBlog = new WbBlog();
+var objWbForm = new WbForm();
 var objWbLogin = new WbLogin();
 var objWbManagement = new WbManagement();
 var objWbTranslation = new WbTranslation();

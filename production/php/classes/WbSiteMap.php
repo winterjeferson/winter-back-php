@@ -36,18 +36,17 @@ class WbSiteMap
         $lengthQuery = count($result);
         $url = substr($objWbUrl->getUrlMain(), 0, -4);
         $urlBlog = '/blog-post/';
+        $string = '';
 
-        $string = $this->buildTagHeader();
+        $string .= $this->buildTagHeader();
         $string .= '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml">';
 
         for ($i = 0; $i < $lengthQuery; $i++) {
-            $string .= '
-            <url>
-                <loc>' . $url . $objWbTranslation->arrLanguage[0] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[0]] . '/' . '</loc>
-                <xhtml:link rel="alternate" hreflang="' . $objWbTranslation->arrLanguage[0] . '" href="' . $url . $objWbTranslation->arrLanguage[0] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[0]] . '/' . '"/>
-                <xhtml:link rel="alternate" hreflang="' . $objWbTranslation->arrLanguage[1] . '" href="' . $url . $objWbTranslation->arrLanguage[1] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[1]] . '/' . '"/>
-            </url>
-            ';
+            $string .= '<url>';
+            $string .= '<loc>' . $url . $objWbTranslation->arrLanguage[0] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[0]] . '/' . '</loc>';
+            $string .= '<xhtml:link rel="alternate" hreflang="' . $objWbTranslation->arrLanguage[0] . '" href="' . $url . $objWbTranslation->arrLanguage[0] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[0]] . '/' . '"/>';
+            $string .= '<xhtml:link rel="alternate" hreflang="' . $objWbTranslation->arrLanguage[1] . '" href="' . $url . $objWbTranslation->arrLanguage[1] . $urlBlog . $result[$i]['id'] . '/' . $result[$i]['url_' . $objWbTranslation->arrLanguage[1]] . '/' . '"/>';
+            $string .= '</url>';
         }
 
         $string .= '</urlset>';

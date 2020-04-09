@@ -92,6 +92,12 @@ $objWbUrl = new WbUrl();
                     </a>
                 </li>
                 
+                <li>
+                    <a href="<?php echo $objWbUrl->getUrlPage(); ?>form/" data-id="form" class="bt bt-sm bt-fu bt-blue">
+                        <?php echo $WbTranslation['form']; ?>
+                    </a>
+                </li>
+                
             </ul>
         </nav>
     </div>

@@ -1,12 +1,7 @@
 <?php
 $objWbSession = new WbSession();
-$objWbBlogList = new WbBlogList();
-
-$objWbBlogList->resetSession();
 $metaDataCustom = [
-    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'blog'),
-    'keywords' => $objWbSession->getArray('translation', 'metaKeywords'),
-    'description' => $objWbSession->getArray('translation', 'metaDescription'),
+    'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'form')
 ];
 ?>
 
@@ -102,49 +97,41 @@ $objWbUrl = new WbUrl();
 </div>
     </section>
     <section id="mainContent" class="grid-content">
-        <div id="pageBlog" class="row">
-            <div class="col-es-12">
-                <div class="container">
-                    <div class="row">
-                        <section class="col-es-12 col-bi-7 col-first" id="pageBlogLastPost">
-                            <h1 class="page-title">
-                                <?php echo $WbTranslation['lastPost']; ?>
-                            </h1>
-                            <div class="row blog-list">
-                                <?php
-                                $list = $objWbBlogList->getList('lastPost');
-                                $json = json_decode($list, true);
-                                echo $json['html'];
-                                ?>
+        <div id="pageForm" class="container">
+            <div class="row">
+                <div class="col-es-12">
+                    <h1 class="page-title"><?php echo $WbTranslation['form'] ?></h1>
+                </div>
+                <div class="col-es-12">
+                    <form class="row form form-grey">
+                        <div class="col-es-12 form-field">
+                            <label><?php echo $WbTranslation['email'] ?></label>
+                            <input type="text" value="" required aria-label="<?php echo $WbTranslation['email'] ?>" />
+                        </div>
+                        <div class="col-es-12 form-field">
+                            <div class="checkbox" tabindex="0">
+                                <input id="checkbox1" name="checkbox" type="checkbox" tabindex="-1">
+                                <label for="checkbox1" class="checkbox-label">Checkbox 1</label>
                             </div>
-                            <div class="row">
-                                <div class="col-es-12">
-                                    <?php
-                                    echo $objWbBlogList->buildLoadMoreButton('lastPost');
-                                    ?>
-                                </div>
+                            <div class="checkbox" tabindex="0">
+                                <input id="checkbox2" name="checkbox" type="checkbox" tabindex="-1">
+                                <label for="checkbox2" class="checkbox-label">Checkbox 2</label>
                             </div>
-                        </section>
-                        <section class="col-es-12 col-bi-5" id="pageBlogMostViewed">
-                            <h1 class="page-title">
-                                <?php echo $WbTranslation['mostViewed']; ?>
-                            </h1>
-                            <div class="row blog-list">
-                                <?php
-                                $list = $objWbBlogList->getList('mostViewed');
-                                $json = json_decode($list, true);
-                                echo $json['html'];
-                                ?>
+                            <div class="checkbox">
+                                <input id="checkbox3" name="checkbox" type="checkbox" tabindex="-1">
+                                <label for="checkbox3" class="checkbox-label">Checkbox 3</label>
                             </div>
-                            <div class="row">
-                                <div class="col-es-12">
-                                    <?php
-                                    echo $objWbBlogList->buildLoadMoreButton('mostViewed');
-                                    ?>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                        </div>
+                        <div class="col-es-12 form-field">
+                            <label><?php echo $WbTranslation['message'] ?></label>
+                            <textarea aria-label="textarea" required></textarea>
+                        </div>
+                        <div class="col-es-12 form-field text-right">
+                            <button type="button" class="bt bt-re bt-blue" id="pageFormBtSend">
+                                <?php echo $WbTranslation['send'] ?>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
