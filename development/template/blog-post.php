@@ -37,14 +37,18 @@ $metaDataCustom = [
                     ?>
                 </div>
             </div>
-            <div class="col-es-12">
-                <div class="container padding-bi">
-                    tags:
-                    <?php
-                    echo $postTag;
-                    ?>
-                </div>
-            </div>
+            <?php
+            if (!is_null($postTag)) {
+                $string = '<div class="col-es-12">';
+                $string .= '     <div class="container padding-bi">';
+                $string .= '     tags: ';
+                $string .= $postTag;
+                $string .= '     </div>';
+                $string .= '</div>';
+
+                echo $string;
+            }
+            ?>
         </article>
     </section>
     {% include "include/template-footer.php" %}

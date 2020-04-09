@@ -88,6 +88,7 @@ class WbAdminBlog
         $objWbDate = new WbDate();
         $objWbQuery = new WbQuery();
         $objWbHelp = new WbHelp();
+        $objWbSiteMap = new WbSiteMap();
 
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
@@ -125,6 +126,7 @@ class WbAdminBlog
         ]);
 
         $query = $objWbQuery->update();
+        $objWbSiteMap->build();
         return $query;
     }
 
@@ -133,6 +135,7 @@ class WbAdminBlog
         $objWbDate = new WbDate();
         $objWbQuery = new WbQuery();
         $objWbHelp = new WbHelp();
+        $objWbSiteMap = new WbSiteMap();
 
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
         $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
@@ -171,6 +174,7 @@ class WbAdminBlog
         ]);
 
         $query = $objWbQuery->insert();
+        $objWbSiteMap->build();
         return $query;
     }
 

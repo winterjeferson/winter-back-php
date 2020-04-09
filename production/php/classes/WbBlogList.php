@@ -81,28 +81,29 @@ class WbBlogList
 
         foreach ($query as $key => $value) {
             $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+            $dateEdit = $value['date_edit_' . $objWbTranslation->getLanguage()];
+            $datePost = $value['date_post_' . $objWbTranslation->getLanguage()];
+            $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $objWbSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
+            $url = $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/';
 
-            $string .= '<article>';
-            $string .= '    <div class="blog-list-image">';
-            $string .= '        <img data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">';
-            $string .= '    </div>';
-            $string .= '    <div class="blog-list-text">';
-            $string .= '        <a href="' . $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/" class="link link-blue">';
-            $string .= '            <h2 class="blog-list-title">';
-            $string .= $objWbHelp->encode($value['title_' . $objWbTranslation->getLanguage()]);
-            $string .= '            </h2>';
-            $string .= '        </a>';
-            $string .= '        <small class="color-grey">';
-            $string .= $value['date_post_' . $objWbTranslation->getLanguage()];
-
-            if ($value['date_post_' . $objWbTranslation->getLanguage()] !== $value['date_edit_' . $objWbTranslation->getLanguage()]) {
-                $string .=  '<br/>';
-                $string .=  $objWbSession->getArray('translation', 'editedOn') . ' ' . $value['date_edit_' . $objWbTranslation->getLanguage()];
-            }
-
-            $string .= '        </small>';
-            $string .= '    </div>';
-            $string .= '</article>';
+            $string .= '
+                <article>
+                    <div class="blog-list-image">
+                        <img data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
+                    </div>
+                    <div class="blog-list-text">
+                        <a href="' . $url . '" class="link link-blue">
+                            <h2 class="blog-list-title">
+                            ' . $objWbHelp->encode($value['title_' . $objWbTranslation->getLanguage()]) . '
+                            </h2>
+                        </a>
+                        <small class="color-grey">
+                        ' . $value['date_post_' . $objWbTranslation->getLanguage()] . '
+                        ' . $ternaryDate . '
+                        </small>
+                    </div>
+                </article>
+            ';
         }
 
         return $string;
@@ -140,15 +141,16 @@ class WbBlogList
     function buildLoadMoreButton($target)
     {
         $objWbSession = new WbSession();
-        $string = '';
 
         if (!$objWbSession->get($this->prefixLoadMore . $target)) {
-            return;
+            exit;
         }
 
-        $string .= '<button type="button" class="bt bt-fu bt-blue" data-id="loadMore">';
-        $string .= $objWbSession->getArray('translation', 'loadMore');
-        $string .= '</button>';
+        $string = '
+            <button type="button" class="bt bt-fu bt-blue" data-id="loadMore">
+                ' . $objWbSession->getArray('translation', 'loadMore') . '
+            </button>
+        ';
 
         return $string;
     }
