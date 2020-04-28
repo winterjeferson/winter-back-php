@@ -26,3 +26,6 @@
 #pageAdminBlog .table img {
   width: auto;
   height: 50px; }
+
+#pageAdminBlogList table tbody td {
+  font-size: 0.8em; }
