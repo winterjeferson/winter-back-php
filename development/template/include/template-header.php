@@ -6,7 +6,7 @@ $objWbUrl = new WbUrl();
     <div class="row">
         <div class="col-es-2 text-left">
             <a href="<?php echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WbTranslation['home']; ?>">
-                <span class="fa fa-home" aria-hidden="true"></span>
+                <span aria-hidden="true">&#127968;</span>
             </a>
         </div>
         <div class="col-es-10 text-right">

@@ -36,7 +36,7 @@ $objWbUrl = new WbUrl();
     <div class="row">
         <div class="col-es-2 text-left">
             <a href="<?php echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $WbTranslation['home']; ?>">
-                <span class="fa fa-home" aria-hidden="true"></span>
+                <span aria-hidden="true">&#127968;</span>
             </a>
         </div>
         <div class="col-es-10 text-right">
@@ -254,11 +254,12 @@ $objWbUrl = new WbUrl();
             
 
     </section>
+    <link href="https://winterjeferson.github.io/winter-front/production/css/plugin.css" rel="stylesheet">
     <footer id="footer" class="grid-footer">
     <div class="row">
         <div class="col-es-12">
             <span class="about"><?php echo $WbTranslation['developedBy']; ?>:</span>
-            <a href="https://www.jefersonwinter.com" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
+            <a href="https://www.jefersonwinter.com.br" target="_blank" rel="noopener" class="bt bt-sm bt-grey">
                 Jeferson Winter
             </a>
         </div>
