@@ -15,7 +15,7 @@ class WbBlogList
         $objWbSession = new WbSession();
         $objWbTranslation = new WbTranslation();
 
-        $this->getListQueryDefault($objWbQuery);
+        $this->getListQueryDefault($objWbQuery, $objWbSession);
         $this->{'getListQuery' . ucfirst($target)}($objWbQuery, $objWbSession);
         $query = $objWbQuery->select();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -25,19 +25,16 @@ class WbBlogList
         return json_encode(['html' => $html, 'loadMore' => $objWbSession->get($this->prefixLoadMore . $target)]);
     }
 
-    function getListQueryDefault($objWbQuery)
+    function getListQueryDefault($objWbQuery, $objWbSession)
     {
         $objWbQuery->populateArray([
             'column' => [
                 ['table' => 'blog', 'column' => 'id'],
-                ['table' => 'blog', 'column' => 'title_pt'],
-                ['table' => 'blog', 'column' => 'title_en'],
-                ['table' => 'blog', 'column' => 'url_pt'],
-                ['table' => 'blog', 'column' => 'url_en'],
-                ['table' => 'blog', 'column' => 'date_post_pt'],
-                ['table' => 'blog', 'column' => 'date_post_en'],
-                ['table' => 'blog', 'column' => 'date_edit_pt'],
-                ['table' => 'blog', 'column' => 'date_edit_en'],
+                ['table' => 'blog', 'column' => 'title_' . $objWbSession->get('language')],
+                ['table' => 'blog', 'column' => 'url_' . $objWbSession->get('language')],
+                ['table' => 'blog', 'column' => 'content_' . $objWbSession->get('language')],
+                ['table' => 'blog', 'column' => 'date_post_' . $objWbSession->get('language')],
+                ['table' => 'blog', 'column' => 'date_edit_' . $objWbSession->get('language')],
                 ['table' => 'blog', 'column' => 'thumbnail'],
             ],
             'table' => [['table' => 'blog']],
@@ -85,11 +82,12 @@ class WbBlogList
             $datePost = $value['date_post_' . $objWbTranslation->getLanguage()];
             $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $objWbSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
             $url = $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/';
+            $removeImage = strip_tags($value['content_' . $objWbTranslation->getLanguage()]);
 
             $string .= '
                 <article>
                     <div class="blog-list-image">
-                        <img data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
+                        <img class="img-responsive" data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
                     </div>
                     <div class="blog-list-text">
                         <a href="' . $url . '" class="link link-blue">
@@ -97,7 +95,10 @@ class WbBlogList
                             ' . $objWbHelp->encode($value['title_' . $objWbTranslation->getLanguage()]) . '
                             </h2>
                         </a>
-                        <small class="color-grey">
+                        <p class="text">
+                        ' . substr($removeImage, 0, 80) . '...
+                        </p>
+                        <small class="date">
                         ' . $value['date_post_' . $objWbTranslation->getLanguage()] . '
                         ' . $ternaryDate . '
                         </small>

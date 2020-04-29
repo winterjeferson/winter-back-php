@@ -2,61 +2,9 @@
 
 class Theme
 {
-    public $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
 
     public function __construct()
     {
-    }
-
-    public function buildCSS()
-    {
-        $objWbHtml = new WbHtml();
-        $string = '';
-
-        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf-plugin');
-        $string .= $objWbHtml->buildTagCSS($this->urlFrontEnd . 'css/wf-theme');
-        
-        return $string;
-    }
-    
-    public function buildJs()
-    {
-        $objWbHtml = new WbHtml();
-        $string = '';
-        
-        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf-plugin');
-        $string .= $objWbHtml->buildTagJavascript($this->urlFrontEnd . 'js/wf-theme');
-        $string .= $objWbHtml->buildTagJavascript($objWbHtml->mainUrl . 'js/wb-theme');
-
-        return $string;
-    }
-
-    public function buildAdmin()
-    {
-        $string = '';
-        $objWbUrl = new WbUrl();
-        $objWbHtml = new WbHtml();
-        $page = $objWbUrl->getUrlParameters()['page'];
-        $isAdmin = strpos($page, 'admin') !== false ? true : false;
-
-        if ($isAdmin) {
-            $string .= $objWbHtml->buildTagCSS($objWbHtml->mainUrl . 'css/wb-admin');
-            $string .= '<meta name="robots" content="noindex">';
-        }
-
-        $string .= $objWbHtml->buildTagCSS($objWbHtml->mainUrl . 'css/wb-theme');
-
-        return $string;
-    }
-
-    public function buildHeaderAppearance()
-    {
-        $string = '
-            <meta name="theme-color" content="#000000" />
-            <meta name="msapplication-TileColor" content="#000000" />
-        ';
-
-        return $string;
     }
 
     function buildHTMLBt($status, $id)
@@ -93,13 +41,5 @@ class Theme
         $concat .= '</button>';
 
         return $concat;
-    }
-
-    function verifyLocalhost()
-    {
-        getcwd();
-        $isLocalhost = filter_input(INPUT_SERVER, 'HTTP_HOST') === 'localhost' ? true : false;
-
-        return $isLocalhost;
     }
 }

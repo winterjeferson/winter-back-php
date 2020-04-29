@@ -61,7 +61,7 @@ class WbTranslationPT
         'selectImage' => 'Selecione a imagem',
         'send' => 'Enviar',
         'save' => 'Salvar',
-        'tags' => 'Tags (etiquetas)',
+        'tags' => 'Tags',
         'title' => 'Título',
         'thumbnail' => 'Miniatura',
         'uploadImage' => 'Upload de imagem',

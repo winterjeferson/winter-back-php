@@ -3,7 +3,6 @@
 include_once 'php/autoload.php';
 
 $objWbTranslation = new WbTranslation();
-$objWbHtml = new WbHtml();
 $objWbRoute = new WbRoute();
 
 $WbTranslation = $objWbTranslation->define();
