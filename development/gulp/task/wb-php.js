@@ -27,7 +27,7 @@ function clean(path) {
 }
 
 gulp.task('wb_php_clean', function () {
-    var files = [configuration.homologation + 'php/**'];
+    var files = [configuration.homologation + configuration.assets + 'php/**'];
     return clean(files);
 });
 
@@ -35,12 +35,12 @@ gulp.task('wb_php_clean', function () {
 gulp.task('wb_php_move', function (done) {
     return gulp
         .src(configuration.development + 'php/**/*.*')
-        .pipe(gulp.dest(configuration.homologation + "php/"));
+        .pipe(gulp.dest(configuration.homologation + configuration.assets + "php/"));
     done();
 });
 
 gulp.task('wb_php_delete_tool', function (done) {
-    var files = [configuration.homologation + 'php/tool/**'];
+    var files = [configuration.homologation + configuration.assets + 'php/tool/**'];
     return clean(files);
 });
 

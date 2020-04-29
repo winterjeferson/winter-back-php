@@ -22,7 +22,7 @@ $description = isset($metaDataCustom['description']) ? $metaDataCustom['descript
 $keywords = isset($metaDataCustom['keywords']) ? $metaDataCustom['keywords'] : $objWbSession->getArray('translation', 'metaKeywords');
 $mainUrl =  $objWbUrl->getUrlMain();;
 $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
-$assets = '';
+$assets = 'assets/';
 ?> <!DOCTYPE html><html lang="<?php echo $lang ?>"><head> <?php
     if ($isAdmin) {
         echo '<meta name="robots" content="noindex">';

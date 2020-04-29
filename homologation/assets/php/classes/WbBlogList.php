@@ -87,7 +87,7 @@ class WbBlogList
             $string .= '
                 <article>
                     <div class="blog-list-image">
-                        <img class="img-responsive" data-src="img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
+                        <img class="img-responsive" data-src="assets/img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
                     </div>
                     <div class="blog-list-text">
                         <a href="' . $url . '" class="link link-blue">

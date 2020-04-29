@@ -106,7 +106,7 @@ class WbAdminUploadImageList
                         <div class="col-es-12">
                             <div class="padding-re">
                                 <button type="button" onclick="objWbAdminBlog.selectImage(this)" >
-                                    <img src="img/' . $path . '/' . $value . '" class="img-responsive">
+                                    <img src="assets/img/' . $path . '/' . $value . '" class="img-responsive">
                                 </button>
                             </div>
                         </div>

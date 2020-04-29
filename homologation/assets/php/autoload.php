@@ -6,8 +6,8 @@ if (!function_exists('loader')) {
     {
         $arrFolders = ['classes'];
 
-        if (is_dir('php/classes')) {
-            array_push($arrFolders, 'php/classes');
+        if (is_dir('assets/php/classes')) {
+            array_push($arrFolders, 'assets/php/classes');
         }
 
         foreach ($arrFolders as $folder) {

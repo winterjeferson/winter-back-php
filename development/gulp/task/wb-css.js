@@ -43,7 +43,7 @@ gulp.task('wb_css_admin_sass', function () {
     return gulp
         .src(configuration.development + 'css/' + fileAdmin + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
-        .pipe(gulp.dest(configuration.homologation + 'css/'));
+        .pipe(gulp.dest(configuration.homologation + configuration.assets + 'css/'));
 });
 
 gulp.task('wb_css_admin', gulp.series(
@@ -68,7 +68,7 @@ gulp.task('wb_css_theme_sass', function () {
     return gulp
         .src(configuration.development + 'css/' + fileTheme + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
-        .pipe(gulp.dest(configuration.homologation + 'css/'));
+        .pipe(gulp.dest(configuration.homologation + configuration.assets + 'css/'));
 });
 
 gulp.task('wb_css_theme', gulp.series(
@@ -82,9 +82,9 @@ gulp.task('wb_css_theme', gulp.series(
 
 gulp.task('wb_css_minify', function () {
     return gulp
-        .src(configuration.homologation + 'css/*.*')
+        .src(configuration.homologation + configuration.assets + 'css/*.*')
         .pipe(csso())
-        .pipe(gulp.dest(configuration.production + 'css/'));
+        .pipe(gulp.dest(configuration.production + configuration.assets + 'css/'));
 });
 
 

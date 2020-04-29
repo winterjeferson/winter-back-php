@@ -62,6 +62,6 @@ class WbSiteMap
     function wtriteXml($string, $file)
     {
         $xmlobj = new SimpleXMLElement($string);
-        $xmlobj->asXML('../' . $file . '.xml');
+        $xmlobj->asXML('../../' . $file . '.xml');
     }
 }

@@ -44,7 +44,7 @@ class WbAdminBlog {
         this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
         this.thumbnail = '';
         this.thumbnailDefault = 'default.jpg';
-        this.thumbnailPath = 'img/blog/thumbnail/';
+        this.thumbnailPath = 'assets/img/blog/thumbnail/';
         this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
         this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }

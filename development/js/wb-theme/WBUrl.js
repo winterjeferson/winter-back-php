@@ -25,6 +25,6 @@ class WbUrl {
 
     getController() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        return globalUrl + 'php/controller.php';
+        return globalUrl + 'assets/php/controller.php';
     }
 }

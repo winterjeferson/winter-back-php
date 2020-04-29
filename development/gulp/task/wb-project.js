@@ -16,8 +16,8 @@ gulp.task('wb_project_move_production', function () {
         .pipe(gulp.dest(configuration.production));
 
     gulp
-        .src(configuration.homologation + '/php/**/*.*')
-        .pipe(gulp.dest(configuration.production + '/php/'));
+        .src(configuration.homologation + configuration.assets + '/php/**/*.*')
+        .pipe(gulp.dest(configuration.production + configuration.assets + '/php/'));
 
     gulp
         .src(configuration.homologation + '/img/**/*.*')

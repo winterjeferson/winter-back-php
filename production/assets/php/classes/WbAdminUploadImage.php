@@ -33,7 +33,7 @@ class WbAdminUploadImage
         $fileName = $_FILES['f']['name']; // The file name
         $fileTmpName = $_FILES['f']['tmp_name'];
         $fileSize = $_FILES['f']['size'];
-        $url = '../img/' . $path;
+        $url = '../assets/img/' . $path;
         $targetFile = $url . basename($fileName);
         $extension  = pathinfo($fileName, PATHINFO_EXTENSION);
         $randomName  = uniqid() . time();
@@ -55,7 +55,7 @@ class WbAdminUploadImage
     {
         $file = filter_input(INPUT_POST, 'f', FILTER_DEFAULT);
         $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
-        $url = '../img/' . $path . '/';
+        $url = '../assets/img/' . $path . '/';
 
         if (unlink($url . $file)) {
             return 'fileDeleted';

@@ -24,7 +24,7 @@ $description = isset($metaDataCustom['description']) ? $metaDataCustom['descript
 $keywords = isset($metaDataCustom['keywords']) ? $metaDataCustom['keywords'] : $objWbSession->getArray('translation', 'metaKeywords');
 $mainUrl =  $objWbUrl->getUrlMain();;
 $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
-$assets = '';
+$assets = 'assets/';
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang ?>">
@@ -321,7 +321,7 @@ $objWbUrl = new WbUrl();
                                                 <tbody>
                                                     <tr>
                                                         <td class="minimum">
-                                                            <img src="img/blog/thumbnail/default.jpg" data-id="thumbnail">
+                                                            <img src="assets/img/blog/thumbnail/default.jpg" data-id="thumbnail">
                                                         </td>
                                                         <td data-id="name">
                                                             default.jpg

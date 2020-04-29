@@ -250,7 +250,7 @@ function () {
       this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
       this.thumbnail = '';
       this.thumbnailDefault = 'default.jpg';
-      this.thumbnailPath = 'img/blog/thumbnail/';
+      this.thumbnailPath = 'assets/img/blog/thumbnail/';
       this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
       this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
     }
@@ -1269,7 +1269,7 @@ function () {
       objWbDebug.debugMethod(this, objWbDebug.getMethodName());
       /*endRemoveIf(production)*/
 
-      return globalUrl + 'php/controller.php';
+      return globalUrl + 'assets/php/controller.php';
     }
   }]);
 

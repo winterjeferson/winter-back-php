@@ -1,6 +1,6 @@
 <?php
 
-include_once 'php/autoload.php';
+include_once 'assets/php/autoload.php';
 
 $objWbTranslation = new WbTranslation();
 $objWbRoute = new WbRoute();

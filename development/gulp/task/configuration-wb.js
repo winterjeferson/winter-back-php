@@ -11,4 +11,5 @@ module.exports = {
     development: projectAdress + projectName + projectVersion + 'development/',
     homologation: projectAdress + projectName + projectVersion + 'homologation/',
     production: projectAdress + projectName + projectVersion + 'production/',
+    assets: 'assets/',
 }

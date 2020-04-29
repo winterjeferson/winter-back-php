@@ -96,7 +96,7 @@ $metaDataCustom = [
                                                 <tbody>
                                                     <tr>
                                                         <td class="minimum">
-                                                            <img src="img/blog/thumbnail/default.jpg" data-id="thumbnail">
+                                                            <img src="assets/img/blog/thumbnail/default.jpg" data-id="thumbnail">
                                                         </td>
                                                         <td data-id="name">
                                                             default.jpg
