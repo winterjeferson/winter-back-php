@@ -52,7 +52,7 @@ class WbTranslationPT
         'name' => 'Nome',
         'next' => 'Próximo',
         'pageAdminBlogTitle' => 'Cadastrar Blog',
-        'pageAdminBlogTagsSeparator' => 'Separar por: /',
+        'pageAdminBlogTagsSeparator' => 'Separar por: #',
         'pageInitialLanguage' => 'PHP, MySql, Nunjucks',
         'password' => 'Senha',
         'previous' => 'Anterior',

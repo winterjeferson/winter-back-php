@@ -380,18 +380,12 @@ $objWbUrl = new WbUrl();
                                     <tr>
                                         <th>Id</th>
                                         <th><?php echo $WbTranslation['thumbnail']; ?></th>
-                                        <th><?php echo $WbTranslation['title']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['title']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['content']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['content']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['title']; ?></th>
+                                        <th><?php echo $WbTranslation['content']; ?></th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?></th>
+                                        <th><?php echo $WbTranslation['tags']; ?></th>
+                                        <th><?php echo $WbTranslation['datePost']; ?></th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?></th>
                                         <th><?php echo $WbTranslation['actions']; ?></th>
                                     </tr>
                                 </thead>
@@ -415,18 +409,12 @@ $objWbUrl = new WbUrl();
                                     <tr>
                                         <th>Id</th>
                                         <th><?php echo $WbTranslation['thumbnail']; ?></th>
-                                        <th><?php echo $WbTranslation['title']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['title']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['content']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['content']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['friendlyUrl']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['tags']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['tags']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['datePost']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['datePost']; ?> (EN)</th>
-                                        <th><?php echo $WbTranslation['dateEdit']; ?> (PT)</th>
-                                        <th><?php echo $WbTranslation['dateEdit']; ?> (EN)</th>
+                                        <th><?php echo $WbTranslation['title']; ?></th>
+                                        <th><?php echo $WbTranslation['content']; ?></th>
+                                        <th><?php echo $WbTranslation['friendlyUrl']; ?></th>
+                                        <th><?php echo $WbTranslation['tags']; ?></th>
+                                        <th><?php echo $WbTranslation['datePost']; ?></th>
+                                        <th><?php echo $WbTranslation['dateEdit']; ?></th>
                                         <th><?php echo $WbTranslation['actions']; ?></th>
                                     </tr>
                                 </thead>

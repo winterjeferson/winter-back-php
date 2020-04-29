@@ -52,7 +52,7 @@ class WbTranslationEN
         'name' => 'Name',
         'next' => 'Next',
         'pageAdminBlogTitle' => 'Register Blog',
-        'pageAdminBlogTagsSeparator' => 'Separate by: /',
+        'pageAdminBlogTagsSeparator' => 'Separate by: #',
         'pageInitialLanguage' => 'PHP, MySql, Nunjucks',
         'password' => 'Password',
         'previous' => 'Previous',

@@ -50,24 +50,35 @@ class WbAdminBlog
 
     function buildReportHTML($value, $status, $objTheme, $objWbSession)
     {
-        $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+        $objWbSession = new WbSession();
         $objWbHelp = new WbHelp();
-        $string = '
+
+        $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+        $explodeTag = explode('#',  $objWbHelp->encode($value['tag_' . $objWbSession->get('language')]));
+        $lengthExplode = count($explodeTag);
+        $string = '';
+
+        $string .= '
             <tr>
                 <td class="minimum">' . $value['id'] . '</td>
                 <td class="minimum"><img data-src="assets/img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true" alt="' . $objWbSession->getArray('translation', 'thumbnail') . '"></td>
-                <td class="minimum"><b>' . $objWbHelp->encode($value['title_pt']) . '</b></td>
-                <td class="minimum"><b>' . $objWbHelp->encode($value['title_en']) . '</b></td>
-                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_pt'])) . '</div></td>
-                <td class="minimum"><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_en'])) . '</div></td>
-                <td class="minimum">' . $value['url_pt'] . '</td>
-                <td class="minimum">' . $value['url_en'] . '</td>
-                <td class="minimum">' . $objWbHelp->encode($value['tag_pt']) . '</td>
-                <td class="minimum">' . $objWbHelp->encode($value['tag_en']) . '</td>
-                <td class="minimum">' . $value['date_post_pt'] . '</td>
-                <td class="minimum">' . $value['date_post_en'] . '</td>
-                <td class="minimum">' . $value['date_edit_pt'] . '</td>
-                <td class="minimum">' . $value['date_edit_en'] . '</td>
+                <td><b>' . $objWbHelp->encode($value['title_' . $objWbSession->get('language')]) . '</b></td>
+                <td><div class="td-wrapper">' . $objWbHelp->encode(strip_tags($value['content_' . $objWbSession->get('language')])) . '</div></td>
+                <td class="minimum">' . $value['url_' . $objWbSession->get('language')] . '</td>
+                <td class="minimum">
+        ';
+
+        for ($i = 0; $i < $lengthExplode; $i++) {
+            if ($explodeTag[$i] !== '') {
+                $string .= '<small>#' . $explodeTag[$i] . '</small>';
+                $string .= '<br/>';
+            }
+        }
+
+        $string .= '
+                </td>
+                <td class="minimum"><small>' . $value['date_post_' . $objWbSession->get('language')] . '</small></td>
+                <td class="minimum"><small>' . $value['date_edit_' . $objWbSession->get('language')] . '</small></td>
                 <td class="minimum">
                     <nav class="menu menu-horizontal">
                         <ul>
@@ -250,7 +261,7 @@ class WbAdminBlog
     {
         $verifyString = substr($target, -1);
 
-        if ($verifyString === '/') {
+        if ($verifyString === '#') {
             return substr_replace($target, '', -1);
         }
 
