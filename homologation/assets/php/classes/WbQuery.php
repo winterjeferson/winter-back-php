@@ -442,7 +442,11 @@ class WbQuery
                 $string .= ' = ';
             }
 
-            $string .= ':' . $arrayUse[$i]['column'];
+            if ($this->bind) {
+                $string .= ':' . $arrayUse[$i]['column'];
+            } else {
+                $string .= $arrayUse[$i]['value'];
+            }
 
             if (isset($arrayUse[$i]['comparisonEnd'])) {
                 $string .= $arrayUse[$i]['comparisonEnd'];

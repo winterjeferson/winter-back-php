@@ -52,6 +52,8 @@ class WbBlogPost
 
     function buildTag($target)
     {
+        $objWbUrl = new WbUrl();
+        
         if ($target !== '') {
             $explode = explode('#', $target);
             $length = count($explode);
@@ -62,7 +64,7 @@ class WbBlogPost
                     $string .= '
                         <li>
                             <div class="tag-item tag-grey">
-                                <a href="javascript:;" class="link link-grey">
+                                <a href="' . $objWbUrl->getUrlPage() . 'blog-search/&q=' . $explode[$i] . '" class="link link-grey">
                                     <span class="text">' . $explode[$i] . '</span>
                                 </a>
                             </div>

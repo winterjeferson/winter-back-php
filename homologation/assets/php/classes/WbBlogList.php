@@ -74,37 +74,41 @@ class WbBlogList
     {
         $objWbHelp = new WbHelp();
         $string = '';
+        $language = $objWbTranslation->getLanguage();
 
+        if (count($query) === 0) {
+            $string .= '<h2 class="color-red text-center">' . $objWbSession->getArray('translation', 'noResult') . '</h2>';
+        } else {
+            foreach ($query as $key => $value) {
+                $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+                $dateEdit = $value['date_edit_' . $language];
+                $datePost = $value['date_post_' . $language];
+                $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $objWbSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
+                $url = $language . '/blog-post/' . $value['id'] . '/' . $value['url_' . $language] . '/';
+                $removeImage = strip_tags($value['content_' . $language]);
 
-        foreach ($query as $key => $value) {
-            $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
-            $dateEdit = $value['date_edit_' . $objWbTranslation->getLanguage()];
-            $datePost = $value['date_post_' . $objWbTranslation->getLanguage()];
-            $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $objWbSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
-            $url = $objWbTranslation->getLanguage() . '/blog-post/' . $value['id'] . '/' . $value['url_' . $objWbTranslation->getLanguage()] . '/';
-            $removeImage = strip_tags($value['content_' . $objWbTranslation->getLanguage()]);
-
-            $string .= '
-                <article>
-                    <div class="blog-list-image">
-                        <img class="img-responsive" data-src="assets/img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
-                    </div>
-                    <div class="blog-list-text">
-                        <a href="' . $url . '" class="link link-blue">
-                            <h2 class="blog-list-title">
-                            ' . $objWbHelp->encode($value['title_' . $objWbTranslation->getLanguage()]) . '
-                            </h2>
-                        </a>
-                        <p class="text">
-                        ' . substr($removeImage, 0, 80) . '...
-                        </p>
-                        <small class="date">
-                        ' . $value['date_post_' . $objWbTranslation->getLanguage()] . '
-                        ' . $ternaryDate . '
-                        </small>
-                    </div>
-                </article>
-            ';
+                $string .= '
+                    <article>
+                        <div class="blog-list-image">
+                            <img class="img-responsive" data-src="assets/img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
+                        </div>
+                        <div class="blog-list-text">
+                            <a href="' . $url . '" class="link link-blue">
+                                <h2 class="blog-list-title">
+                                ' . $objWbHelp->encode($value['title_' . $language]) . '
+                                </h2>
+                            </a>
+                            <p class="text">
+                            ' . substr($removeImage, 0, 80) . '...
+                            </p>
+                            <small class="date">
+                            ' . $value['date_post_' . $language] . '
+                            ' . $ternaryDate . '
+                            </small>
+                        </div>
+                    </article>
+                ';
+            }
         }
 
         return $string;

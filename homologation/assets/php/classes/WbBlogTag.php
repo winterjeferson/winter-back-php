@@ -50,7 +50,7 @@ class WbBlogTag
                 }
             }
         }
-        
+
         $key = array_column($arr, 'sum');
         array_multisort($key, SORT_DESC, $arr);
 
@@ -59,13 +59,14 @@ class WbBlogTag
 
     function buildHtml($arr)
     {
+        $objWbUrl = new WbUrl();
         $string = '<ul class="tag-list">';
 
         foreach ($arr as $value => $key) {
             $string .= '
                 <li>
                     <div class="tag-item tag-grey">
-                        <a href="javascript:;" class="link link-grey">
+                        <a href="' . $objWbUrl->getUrlPage() . 'blog-search/&q=' . $value . '" class="link link-grey">
                             <span class="text">' . $value . '</span>
                         </a>
                     </div>
