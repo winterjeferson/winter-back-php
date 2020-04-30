@@ -26,7 +26,7 @@ class WbAdminUploadImageList
         $string = '
             <tr>
                 <td class="minimum">
-                    <img data-src="img/' . $path . '/' . $value . '" data-lazy-load="true">
+                    <img data-src="assets/img/' . $path . '/' . $value . '" data-lazy-load="true">
                 </td>
                 <td data-id="fileName">
                     ' . $value . '
@@ -53,7 +53,7 @@ class WbAdminUploadImageList
         $objWbSession = new WbSession();
         $string = '
             <tr>
-                <td colspan="2" class="text-center">
+                <td colspan="3" class="text-center">
                 ' . $objWbSession->getArray('translation', 'emptyList') . '
                 </td>
             </tr>
@@ -64,7 +64,7 @@ class WbAdminUploadImageList
 
     function getFile($path)
     {
-        $directory = 'img/' . $path;
+        $directory = 'assets/img/' . $path;
         $isDir = is_dir($directory);
 
         if ($isDir) {

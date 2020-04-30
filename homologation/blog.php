@@ -1,6 +1,7 @@
 <?php
 $objWbSession = new WbSession();
 $objWbBlogList = new WbBlogList();
+$objWbBlogTag = new WbBlogTag();
 
 $objWbBlogList->resetSession();
 $metaDataCustom = [
@@ -193,22 +194,34 @@ $objWbUrl = new WbUrl();
                             </div>
                         </section>
                         <section class="col-es-12 col-bi-5" id="pageBlogMostViewed">
-                            <h1 class="page-title">
-                                <?php echo $WbTranslation['mostViewed']; ?>
-                            </h1>
-                            <div class="row blog-list">
-                                <?php
-                                $list = $objWbBlogList->getList('mostViewed');
-                                $json = json_decode($list, true);
-                                echo $json['html'];
-                                ?>
-                            </div>
-                            <div class="row">
-                                <div class="col-es-12">
+                            <div id="pageBlogMostViewed">
+                                <h1 class="page-title">
+                                    <?php echo $WbTranslation['mostViewed']; ?>
+                                </h1>
+                                <div class="row blog-list">
                                     <?php
-                                    echo $objWbBlogList->buildLoadMoreButton('mostViewed');
+                                    $list = $objWbBlogList->getList('mostViewed');
+                                    $json = json_decode($list, true);
+                                    echo $json['html'];
                                     ?>
                                 </div>
+                                <div class="row">
+                                    <div class="col-es-12">
+                                        <?php
+                                        echo $objWbBlogList->buildLoadMoreButton('mostViewed');
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pageBlogTag">
+                                <h1 class="page-title">
+                                    <?php echo $WbTranslation['tags']; ?>
+                                </h1>
+                                <ul class="tag-list">
+                                    <?php
+                                    echo $objWbBlogTag->getList();
+                                    ?>
+                                </ul>
                             </div>
                         </section>
                     </div>
