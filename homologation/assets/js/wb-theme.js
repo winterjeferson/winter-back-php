@@ -1,1298 +1,1033 @@
-"use strict";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 /*removeIf(production)*/
-var WbDebug =
-/*#__PURE__*/
-function () {
-  function WbDebug() {
-    _classCallCheck(this, WbDebug);
+class WbDebug {
+    constructor() {
+        this.isWbAdmin = true;
 
-    this.isWbAdmin = true;
-    this.isWbAdmin = true;
-    this.isWbAdminBlog = true;
-    this.isWbLogin = true;
-    this.isWbManagement = true;
-    this.isWbTranslation = true;
-    this.isWbUrl = true;
-  }
-
-  _createClass(WbDebug, [{
-    key: "debugMethod",
-    value: function debugMethod(obj, method) {
-      var parameter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      var string = '';
-      var className = obj.constructor.name; //        let arrMethod = Object.getOwnPropertyNames(Object.getPrototypeOf(obj));
-
-      if (!this['is' + className]) {
-        return false;
-      }
-
-      string += '%c';
-      string += 'obj' + className;
-      string += '.';
-      string += '%c';
-      string += method;
-      string += '(';
-      string += '%c';
-
-      if (parameter !== '') {
-        string += parameter;
-      }
-
-      string += '%c';
-      string += ');';
-      console.log(string, 'color: black', 'color: green', 'color: red', 'color: green');
+        this.isWbAdmin = true;
+        this.isWbAdminBlog = true;
+        this.isWbLogin = true;
+        this.isWbManagement = true;
+        this.isWbTranslation = true;
+        this.isWbUrl = true;
     }
-  }, {
-    key: "getMethodName",
-    value: function getMethodName() {
-      var userAgent = window.navigator.userAgent;
-      var msie = userAgent.indexOf('.NET ');
 
-      if (msie > 0) {
-        return false;
-      }
+    debugMethod(obj, method, parameter = '') {
+        let string = '';
+        let className = obj.constructor.name;
+        //        let arrMethod = Object.getOwnPropertyNames(Object.getPrototypeOf(obj));
 
-      var e = new Error('dummy');
-      var stack = e.stack.split('\n')[2] // " at functionName ( ..." => "functionName"
-      .replace(/^\s+at\s+(.+?)\s.+/g, '$1');
-      var split = stack.split(".");
+        if (!this['is' + className]) {
+            return false;
+        }
 
-      if (stack !== 'new') {
-        return split[1];
-      } else {
-        return 'constructor';
-      }
+        string += '%c';
+        string += 'obj' + className;
+        string += '.';
+        string += '%c';
+        string += method;
+        string += '(';
+
+        string += '%c';
+        if (parameter !== '') {
+            string += parameter;
+        }
+
+        string += '%c';
+        string += ');';
+
+        console.log(string, 'color: black', 'color: green', 'color: red', 'color: green');
     }
-  }]);
 
-  return WbDebug;
-}();
-/*endRemoveIf(production)*/
+    getMethodName() {
+        let userAgent = window.navigator.userAgent;
+        let msie = userAgent.indexOf('.NET ');
 
+        if (msie > 0) {
+            return false;
+        }
 
-var WbAdmin =
-/*#__PURE__*/
-function () {
-  function WbAdmin() {
-    _classCallCheck(this, WbAdmin);
+        let e = new Error('dummy');
+        let stack = e.stack.split('\n')[2]
+            // " at functionName ( ..." => "functionName"
+            .replace(/^\s+at\s+(.+?)\s.+/g, '$1');
+        let split = stack.split(".");
 
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-
-    this.pageCurrent = '';
-  }
-
-  _createClass(WbAdmin, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('admin')) {
-        return;
-      }
-
-      this.updateVariable();
-      this.buildMenuDifeneActive();
-      this.builTableTdWrapper();
-    }
-  }, {
-    key: "updateVariable",
-    value: function updateVariable() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.$page = document.querySelector('#page_admin');
-
-      if (!document.contains(this.$page)) {
-        return;
-      }
-
-      this.$btBlog = this.$page.querySelector('[data-id="btBlog"]');
-      this.$btLogout = this.$page.querySelector('[data-id="btLogout"]');
-    }
-  }, {
-    key: "buildMenuChangePage",
-    value: function buildMenuChangePage(page) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.buildMenuDifeneActive(page);
-
-      if (page !== 'admin-logout') {
-        window.location.href = page + '/';
-      }
-    }
-  }, {
-    key: "buildMenuDifeneActive",
-    value: function buildMenuDifeneActive() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var classActive = 'menu-tab-active';
-      var href = window.location.href;
-      var split = href.split('/');
-      var length = split.length;
-      var target = split[length - 2];
-      var selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
-
-      if (selector === null) {
-        return;
-      }
-
-      selector.parentNode.classList.add(classActive);
-    }
-  }, {
-    key: "buildLogout",
-    value: function buildLogout() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var ajax = new XMLHttpRequest();
-      var parameter = '&c=WbLogin' + '&m=doLogout';
-      ajax.open('POST', objWbUrl.getController(), true);
-      ajax.send(parameter);
-    }
-  }, {
-    key: "builTableTdWrapper",
-    value: function builTableTdWrapper() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var td = document.querySelectorAll('.td-wrapper');
-      var currentClass = 'td-wrapper-auto';
-      Array.prototype.forEach.call(td, function (item) {
-        item.onclick = function () {
-          if (item.classList.contains(currentClass)) {
-            item.classList.remove(currentClass);
-          } else {
-            item.classList.add(currentClass);
-          }
-        };
-      });
-    }
-  }]);
-
-  return WbAdmin;
-}();
-
-var WbAdminBlog =
-/*#__PURE__*/
-function () {
-  function WbAdminBlog() {
-    _classCallCheck(this, WbAdminBlog);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(WbAdminBlog, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('admin-blog')) {
-        return;
-      }
-
-      CKEDITOR.replace('fieldContentPt', {
-        entities: false
-      });
-      CKEDITOR.replace('fieldContentEn', {
-        entities: false
-      });
-      CKEDITOR.replace('fieldContentPt');
-      CKEDITOR.replace('fieldContentEn');
-      this.updateVariable();
-      this.buildMenu();
-      this.buildMenuTable();
-      this.buildMenuThumbnail();
-      this.watchTitle();
-    }
-  }, {
-    key: "updateVariable",
-    value: function updateVariable() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.isEdit = false;
-      this.editId = 0;
-      this.$page = document.querySelector('#pageAdminBlog');
-      this.$contentEdit = document.querySelector('#pageAdminBlogEdit');
-      this.$contentEditThumbnail = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
-      this.$contentList = document.querySelector('#pageAdminBlogList');
-      this.$formRegister = this.$contentEdit.querySelector('[data-id="formRegister"]');
-      this.$formFieldTitlePt = this.$contentEdit.querySelector('[data-id="fieldTitlePt"]');
-      this.$formFieldTitleEn = this.$contentEdit.querySelector('[data-id="fieldTitleEn"]');
-      this.$formFieldUrlPt = this.$contentEdit.querySelector('[data-id="fieldUrlPt"]');
-      this.$formFieldUrlEn = this.$contentEdit.querySelector('[data-id="fieldUrlEn"]');
-      this.$formFieldContentPt = this.$contentEdit.querySelector('[data-id="fieldContentPt"]');
-      this.$formFieldContentEn = this.$contentEdit.querySelector('[data-id="fieldContentEn"]');
-      this.$formFieldTagPt = this.$contentEdit.querySelector('[data-id="fieldTagPt"]');
-      this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
-      this.$formFieldDatePostPt = this.$contentEdit.querySelector('[data-id="fieldDatePostPt"]');
-      this.$formFieldDatePostEn = this.$contentEdit.querySelector('[data-id="fieldDatePostEn"]');
-      this.$formFieldDateEditPt = this.$contentEdit.querySelector('[data-id="fieldDateEditPt"]');
-      this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
-      this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
-      this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
-      this.thumbnail = '';
-      this.thumbnailDefault = 'default.jpg';
-      this.thumbnailPath = 'assets/img/blog/thumbnail/';
-      this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
-      this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var $btRegister = this.$page.querySelector('[data-id="btRegister"]');
-
-      $btRegister.onclick = function () {
-        if (self.isEdit) {
-          self.editSave();
+        if (stack !== 'new') {
+            return split[1];
         } else {
-          self.saveContent();
+            return 'constructor';
         }
-      };
     }
-  }, {
-    key: "buildMenuThumbnail",
-    value: function buildMenuThumbnail() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var $target = this.$contentEditThumbnail.querySelectorAll('.table');
-      Array.prototype.forEach.call($target, function (table) {
-        var $button = table.querySelectorAll('[data-action="edit"]');
-        Array.prototype.forEach.call($button, function (item) {
-          item.onclick = function () {
-            objWfModal.buildModal('ajax', './admin-upload-image-list.php', 'eb');
-          };
-        });
-      });
+}
+/*endRemoveIf(production)*/
+class WbAdmin {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        this.pageCurrent = '';
     }
-  }, {
-    key: "buildMenuTable",
-    value: function buildMenuTable() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+ 
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin')) {
+            return;
+        }
 
-      var self = this;
-      var $table = this.$contentList.querySelectorAll('.table');
-      var $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
-      var $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
-      Array.prototype.forEach.call($tableActive, function (table) {
-        var $button = table.querySelectorAll('[data-action="inactivate"]');
-        Array.prototype.forEach.call($button, function (item) {
-          item.onclick = function () {
-            objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
-            objWfModal.buildContentConfirmationAction('objWbAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
-          };
+        this.updateVariable();
+        this.buildMenuDifeneActive();
+        this.builTableTdWrapper();
+    }
+
+    updateVariable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$page = document.querySelector('#page_admin');
+
+        if (!document.contains(this.$page)) {
+            return;
+        }
+
+        this.$btBlog = this.$page.querySelector('[data-id="btBlog"]');
+        this.$btLogout = this.$page.querySelector('[data-id="btLogout"]');
+    }
+
+    buildMenuChangePage(page) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.buildMenuDifeneActive(page);
+
+        if (page !== 'admin-logout') {
+            window.location.href = page + '/';
+        }
+    }
+
+    buildMenuDifeneActive() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let classActive = 'menu-tab-active';
+        let href = window.location.href;
+        let split = href.split('/');
+        let length = split.length;
+        let target = split[length - 2];
+        let selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
+
+        if (selector === null) {
+            return;
+        }
+
+        selector.parentNode.classList.add(classActive);
+    }
+
+    buildLogout() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let ajax = new XMLHttpRequest();
+        let parameter =
+            '&c=WbLogin' +
+            '&m=doLogout';
+
+        ajax.open('POST', objWbUrl.getController(), true);
+        ajax.send(parameter);
+    }
+
+    builTableTdWrapper() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let td = document.querySelectorAll('.td-wrapper');
+        let currentClass = 'td-wrapper-auto';
+
+        Array.prototype.forEach.call(td, function (item) {
+            item.onclick = function () {
+                if (item.classList.contains(currentClass)) {
+                    item.classList.remove(currentClass);
+                } else {
+                    item.classList.add(currentClass);
+                }
+            }
         });
-      });
-      Array.prototype.forEach.call($tableInactive, function (table) {
-        var $button = table.querySelectorAll('[data-action="activate"]');
-        Array.prototype.forEach.call($button, function (item) {
-          item.onclick = function () {
-            self.modify(item.getAttribute('data-id'), 'activate');
-          };
+    }
+}
+class WbAdminBlog {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+    }
+
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin-blog')) {
+            return;
+        }
+
+        CKEDITOR.replace('fieldContentPt', {
+            entities: false
         });
-      });
-      Array.prototype.forEach.call($table, function (table) {
-        var $buttonEdit = table.querySelectorAll('[data-action="edit"]');
-        var $buttonDelete = table.querySelectorAll('[data-action="delete"]');
-        Array.prototype.forEach.call($buttonEdit, function (item) {
-          item.onclick = function () {
-            self.editId = item.getAttribute('data-id');
-            self.editLoadData(self.editId);
-          };
+        CKEDITOR.replace('fieldContentEn', {
+            entities: false
         });
+
+        CKEDITOR.replace('fieldContentPt');
+        CKEDITOR.replace('fieldContentEn');
+
+        this.updateVariable();
+        this.buildMenu();
+        this.buildMenuTable();
+        this.buildMenuThumbnail();
+        this.watchTitle();
+    }
+
+    updateVariable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.isEdit = false;
+        this.editId = 0;
+        this.$page = document.querySelector('#pageAdminBlog');
+        this.$contentEdit = document.querySelector('#pageAdminBlogEdit');
+        this.$contentEditThumbnail = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+        this.$contentList = document.querySelector('#pageAdminBlogList');
+        this.$formRegister = this.$contentEdit.querySelector('[data-id="formRegister"]');
+        this.$formFieldTitlePt = this.$contentEdit.querySelector('[data-id="fieldTitlePt"]');
+        this.$formFieldTitleEn = this.$contentEdit.querySelector('[data-id="fieldTitleEn"]');
+        this.$formFieldUrlPt = this.$contentEdit.querySelector('[data-id="fieldUrlPt"]');
+        this.$formFieldUrlEn = this.$contentEdit.querySelector('[data-id="fieldUrlEn"]');
+        this.$formFieldContentPt = this.$contentEdit.querySelector('[data-id="fieldContentPt"]');
+        this.$formFieldContentEn = this.$contentEdit.querySelector('[data-id="fieldContentEn"]');
+        this.$formFieldTagPt = this.$contentEdit.querySelector('[data-id="fieldTagPt"]');
+        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+        this.$formFieldDatePostPt = this.$contentEdit.querySelector('[data-id="fieldDatePostPt"]');
+        this.$formFieldDatePostEn = this.$contentEdit.querySelector('[data-id="fieldDatePostEn"]');
+        this.$formFieldDateEditPt = this.$contentEdit.querySelector('[data-id="fieldDateEditPt"]');
+        this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
+        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+        this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+        this.thumbnail = '';
+        this.thumbnailDefault = 'default.jpg';
+        this.thumbnailPath = 'assets/img/blog/thumbnail/';
+        this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
+        this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
+    }
+
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const $btRegister = this.$page.querySelector('[data-id="btRegister"]');
+
+        $btRegister.onclick = function () {
+            if (self.isEdit) {
+                self.editSave();
+            } else {
+                self.saveContent();
+            }
+        }
+    }
+
+    buildMenuThumbnail() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const $target = this.$contentEditThumbnail.querySelectorAll('.table');
+
+        Array.prototype.forEach.call($target, function (table) {
+            let $button = table.querySelectorAll('[data-action="edit"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('ajax', './admin-upload-image-list.php', 'eb');
+                }
+            });
+        });
+
+    }
+
+    buildMenuTable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let $table = this.$contentList.querySelectorAll('.table');
+        let $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
+        let $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
+
+        Array.prototype.forEach.call($tableActive, function (table) {
+            let $button = table.querySelectorAll('[data-action="inactivate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
+                    objWfModal.buildContentConfirmationAction('objWbAdminBlog.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+                }
+            });
+        });
+
+        Array.prototype.forEach.call($tableInactive, function (table) {
+            let $button = table.querySelectorAll('[data-action="activate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    self.modify(item.getAttribute('data-id'), 'activate');
+                }
+            });
+        });
+
+        Array.prototype.forEach.call($table, function (table) {
+            let $buttonEdit = table.querySelectorAll('[data-action="edit"]');
+            let $buttonDelete = table.querySelectorAll('[data-action="delete"]');
+
+            Array.prototype.forEach.call($buttonEdit, function (item) {
+                item.onclick = function () {
+                    self.editId = item.getAttribute('data-id');
+                    self.editLoadData(self.editId);
+                }
+            });
+
+            Array.prototype.forEach.call($buttonDelete, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
+                    objWfModal.buildContentConfirmationAction('objWbAdminBlog.delete(' + item.getAttribute('data-id') + ')');
+                }
+            });
+        });
+    }
+
+    editSave() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbAdminBlog' +
+            '&m=doUpdate' +
+            '&id=' + self.editId +
+            this.buildParameter();
+
+        if (!this.validateForm()) {
+            return;
+        }
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    editLoadData(id) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbAdminBlog' +
+            '&m=editLoadData' +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                let obj = JSON.parse(ajax.responseText);
+
+                document.documentElement.scrollTop = 0;
+                self.isEdit = true;
+                self.editFillField(obj);
+                self.thumbnail = obj['thumbnail'];
+                self.modifyThumbnail();
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    editFillField(obj) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$formFieldTitlePt.value = obj['title_pt'];
+        this.$formFieldTitleEn.value = obj['title_en'];
+        this.$formFieldUrlPt.value = obj['url_pt'];
+        this.$formFieldUrlEn.value = obj['url_en'];
+        this.$formFieldTagPt.value = obj['tag_pt'];
+        this.$formFieldTagEn.value = obj['tag_en'];
+        this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
+        this.$formFieldDatePostEn.value = obj['date_post_en'].substring(0, 10);
+        this.$formFieldDateEditPt.value = obj['date_edit_pt'].substring(0, 10);
+        this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
+        this.editId = obj['id'];
+        this.$formFieldTagEn.value = obj['tag_en'];
+
+        this.$ckEditorPt.setData(obj['content_pt'], function () {
+            this.checkDirty();
+        });
+
+        this.$ckEditorEn.setData(obj['content_en'], function () {
+            this.checkDirty();
+        });
+    }
+
+    modify(id, status) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbAdminBlog' +
+            '&m=doModify' +
+            '&status=' + status +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    delete(id) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbAdminBlog' +
+            '&m=doDelete' +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    validateForm() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let arrField = [
+            this.$formFieldTitlePt,
+            this.$formFieldTitleEn,
+            this.$formFieldUrlPt,
+            this.$formFieldUrlEn
+        ];
+
+        return objWfForm.validateEmpty(arrField);
+    }
+
+    buildParameter() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return '' +
+            '&titlePt=' + this.$formFieldTitlePt.value +
+            '&titleEn=' + this.$formFieldTitleEn.value +
+            '&urlPt=' + this.$formFieldUrlPt.value +
+            '&urlEn=' + this.$formFieldUrlEn.value +
+            '&contentPt=' + this.$ckEditorPt.getData() +
+            '&contentEn=' + this.$ckEditorEn.getData() +
+            '&datePostPt=' + this.$formFieldDatePostPt.value +
+            '&datePostEn=' + this.$formFieldDatePostEn.value +
+            '&dateEditPt=' + this.$formFieldDateEditPt.value +
+            '&dateEditEn=' + this.$formFieldDateEditEn.value +
+            '&thumbnail=' + this.thumbnail +
+            '&tagPt=' + this.$formFieldTagPt.value +
+            '&tagEn=' + this.$formFieldTagEn.value;
+    }
+
+    saveContent() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+
+        if (!this.validateForm()) {
+            return;
+        }
+
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbAdminBlog' +
+            '&m=doSave' +
+            this.buildParameter();
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    showResponse(data) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let color = '';
+        let response = '';
+
+        switch (data) {
+            case '1':
+                location.reload();
+                break;
+            default:
+                color = 'red';
+                response = 'Acorreu um erro. Contate o administrador.';
+                break;
+        }
+
+        objWfNotification.add(response, color);
+    }
+
+    watchTitle() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+
+        this.$formFieldTitlePt.addEventListener('focusout', function () {
+            let url = objWbUrl.buildSEO(self.$formFieldTitlePt.value);
+
+            self.$formFieldUrlPt.value = url;
+        });
+
+        this.$formFieldTitleEn.addEventListener('focusout', function () {
+            let url = objWbUrl.buildSEO(self.$formFieldTitleEn.value);
+
+            self.$formFieldUrlEn.value = url;
+        });
+    }
+
+    selectImage(target) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let $card = target.parentNode.parentNode.parentNode.parentNode;
+        let imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
+
+        this.thumbnail = imageName;
+        objWfModal.closeModal();
+        this.modifyThumbnail();
+    }
+
+    modifyThumbnail() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
+        let $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
+
+        if (this.thumbnail === '' || this.thumbnail === null) {
+            this.thumbnail = this.thumbnailDefault;
+        }
+
+        $image.setAttribute('src', this.thumbnailPath + this.thumbnail);
+        $name.innerHTML = this.thumbnail;
+    }
+}
+class WbAdminUploadImage {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        this.deleteElement = '';
+    }
+
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin-upload-image')) {
+            return;
+        }
+
+        this.updateVariable();
+        this.buildMenu();
+    }
+
+    updateVariable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$btUploadThumbnail = document.querySelector('[data-id="btUploadThumbnail"]');
+        this.$btUploadBanner = document.querySelector('[data-id="btUploadBanner"]');
+    }
+
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        let $buttonDelete = document.querySelectorAll('[data-action="delete"]');
+
+        this.$btUploadThumbnail.addEventListener('click', function (event) {
+            self.upload(this, 'blog/thumbnail/');
+        });
+
+        this.$btUploadBanner.addEventListener('click', function (event) {
+            self.upload(this, 'blog/banner/');
+        });
+
         Array.prototype.forEach.call($buttonDelete, function (item) {
-          item.onclick = function () {
-            objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
-            objWfModal.buildContentConfirmationAction('objWbAdminBlog.delete(' + item.getAttribute('data-id') + ')');
-          };
+            item.onclick = function () {
+                self.deleteImage(item);
+            }
         });
-      });
     }
-  }, {
-    key: "editSave",
-    value: function editSave() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbAdminBlog' + '&m=doUpdate' + '&id=' + self.editId + this.buildParameter();
+    deleteImage(button) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.deleteElement = button;
 
-      if (!this.validateForm()) {
-        return;
-      }
+        objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
+        objWfModal.buildContentConfirmationAction('objWbAdminUploadImage.deleteImageAjax()');
+    }
 
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    deleteImageAjax() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const data = new FormData();
+        const ajax = new XMLHttpRequest();
+        let file = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('[data-id="fileName"]').innerText;
+        let path = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('data-path');
+        let $return = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
 
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.showResponse(ajax.responseText);
+        data.append('c', 'WbAdminUploadImage');
+        data.append('m', 'delete');
+        data.append('f', file);
+        data.append('p', path);
+
+        ajax.open('POST', objWbUrl.getController());
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.buildResponse(ajax.responseText, $return);
+                objWfModal.closeModal();
+            }
         }
-      };
 
-      ajax.send(parameter);
+        ajax.send(data);
     }
-  }, {
-    key: "editLoadData",
-    value: function editLoadData(id) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbAdminBlog' + '&m=editLoadData' + '&id=' + id;
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    upload(target, path) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+        const $form = target.parentNode.parentNode.parentNode.parentNode.parentNode;
+        const $file = $form.querySelector('[type=file]');
+        const data = new FormData();
+        const ajax = new XMLHttpRequest();
+        const file = $file.files[0];
+        const url = objWbUrl.getController();
 
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          var obj = JSON.parse(ajax.responseText);
-          document.documentElement.scrollTop = 0;
-          self.isEdit = true;
-          self.editFillField(obj);
-          self.thumbnail = obj['thumbnail'];
-          self.modifyThumbnail();
+        if ($file.files.length === 0) {
+            $file.click();
+            return;
         }
-      };
 
-      ajax.send(parameter);
-    }
-  }, {
-    key: "editFillField",
-    value: function editFillField(obj) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+        data.append('c', 'WbAdminUploadImage');
+        data.append('m', 'upload');
+        data.append('p', path);
+        data.append('f', file);
 
-      this.$formFieldTitlePt.value = obj['title_pt'];
-      this.$formFieldTitleEn.value = obj['title_en'];
-      this.$formFieldUrlPt.value = obj['url_pt'];
-      this.$formFieldUrlEn.value = obj['url_en'];
-      this.$formFieldTagPt.value = obj['tag_pt'];
-      this.$formFieldTagEn.value = obj['tag_en'];
-      this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
-      this.$formFieldDatePostEn.value = obj['date_post_en'].substring(0, 10);
-      this.$formFieldDateEditPt.value = obj['date_edit_pt'].substring(0, 10);
-      this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
-      this.editId = obj['id'];
-      this.$formFieldTagEn.value = obj['tag_en'];
-      this.$ckEditorPt.setData(obj['content_pt'], function () {
-        this.checkDirty();
-      });
-      this.$ckEditorEn.setData(obj['content_en'], function () {
-        this.checkDirty();
-      });
-    }
-  }, {
-    key: "modify",
-    value: function modify(id, status) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+        this.$btUploadThumbnail.setAttribute('disabled', 'disabled');
+        ajax.open('POST', url);
 
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbAdminBlog' + '&m=doModify' + '&status=' + status + '&id=' + id;
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.showResponse(ajax.responseText);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.$btUploadThumbnail.removeAttribute('disabled');
+                self.buildResponse(ajax.responseText, $form);
+            }
         }
-      };
 
-      ajax.send(parameter);
+        ajax.send(data);
     }
-  }, {
-    key: "delete",
-    value: function _delete(id) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbAdminBlog' + '&m=doDelete' + '&id=' + id;
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.showResponse(ajax.responseText);
+    buildResponse(response, $target) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        switch (response) {
+            case 'fileDeleted':
+            case 'uploadDone':
+                objWfNotification.add(globalTranslation[response], 'green', $target);
+                document.location.reload();
+                break;
+            default:
+                objWfNotification.add(globalTranslation[response], 'red', $target);
+                break;
         }
-      };
-
-      ajax.send(parameter);
     }
-  }, {
-    key: "validateForm",
-    value: function validateForm() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var arrField = [this.$formFieldTitlePt, this.$formFieldTitleEn, this.$formFieldUrlPt, this.$formFieldUrlEn];
-      return objWfForm.validateEmpty(arrField);
+}
+class WbBlog {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+        this.classlaodMore = 'loadMore';
     }
-  }, {
-    key: "buildParameter",
-    value: function buildParameter() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      return '' + '&titlePt=' + this.$formFieldTitlePt.value + '&titleEn=' + this.$formFieldTitleEn.value + '&urlPt=' + this.$formFieldUrlPt.value + '&urlEn=' + this.$formFieldUrlEn.value + '&contentPt=' + this.$ckEditorPt.getData() + '&contentEn=' + this.$ckEditorEn.getData() + '&datePostPt=' + this.$formFieldDatePostPt.value + '&datePostEn=' + this.$formFieldDatePostEn.value + '&dateEditPt=' + this.$formFieldDateEditPt.value + '&dateEditEn=' + this.$formFieldDateEditEn.value + '&thumbnail=' + this.thumbnail + '&tagPt=' + this.$formFieldTagPt.value + '&tagEn=' + this.$formFieldTagEn.value;
-    }
-  }, {
-    key: "saveContent",
-    value: function saveContent() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-
-      if (!this.validateForm()) {
-        return;
-      }
-
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbAdminBlog' + '&m=doSave' + this.buildParameter();
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.showResponse(ajax.responseText);
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('blog')) {
+            return;
         }
-      };
 
-      ajax.send(parameter);
+        this.update();
+        this.buildMenu();
     }
-  }, {
-    key: "showResponse",
-    value: function showResponse(data) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var color = '';
-      var response = '';
-
-      switch (data) {
-        case '1':
-          location.reload();
-          break;
-
-        default:
-          color = 'red';
-          response = 'Acorreu um erro. Contate o administrador.';
-          break;
-      }
-
-      objWfNotification.add(response, color);
+    update() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.page = 'pageBlog';
+        this.$lastPost = document.querySelector('#' + this.page + 'LastPost');
+        this.$mostViewed = document.querySelector('#' + this.page + 'MostViewed');
     }
-  }, {
-    key: "watchTitle",
-    value: function watchTitle() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
-      this.$formFieldTitlePt.addEventListener('focusout', function () {
-        var url = objWbUrl.buildSEO(self.$formFieldTitlePt.value);
-        self.$formFieldUrlPt.value = url;
-      });
-      this.$formFieldTitleEn.addEventListener('focusout', function () {
-        var url = objWbUrl.buildSEO(self.$formFieldTitleEn.value);
-        self.$formFieldUrlEn.value = url;
-      });
-    }
-  }, {
-    key: "selectImage",
-    value: function selectImage(target) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
 
-      var $card = target.parentNode.parentNode.parentNode.parentNode;
-      var imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
-      this.thumbnail = imageName;
-      objWfModal.closeModal();
-      this.modifyThumbnail();
-    }
-  }, {
-    key: "modifyThumbnail",
-    value: function modifyThumbnail() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var $image = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="thumbnail"]');
-      var $name = this.$thumbnailWrapper.querySelector('table').querySelector('[data-id="name"]');
-
-      if (this.thumbnail === '' || this.thumbnail === null) {
-        this.thumbnail = this.thumbnailDefault;
-      }
-
-      $image.setAttribute('src', this.thumbnailPath + this.thumbnail);
-      $name.innerHTML = this.thumbnail;
-    }
-  }]);
-
-  return WbAdminBlog;
-}();
-
-var WbAdminUploadImage =
-/*#__PURE__*/
-function () {
-  function WbAdminUploadImage() {
-    _classCallCheck(this, WbAdminUploadImage);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-
-    this.deleteElement = '';
-  }
-
-  _createClass(WbAdminUploadImage, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('admin-upload-image')) {
-        return;
-      }
-
-      this.updateVariable();
-      this.buildMenu();
-    }
-  }, {
-    key: "updateVariable",
-    value: function updateVariable() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.$btUploadThumbnail = document.querySelector('[data-id="btUploadThumbnail"]');
-      this.$btUploadBanner = document.querySelector('[data-id="btUploadBanner"]');
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var $buttonDelete = document.querySelectorAll('[data-action="delete"]');
-      this.$btUploadThumbnail.addEventListener('click', function (event) {
-        self.upload(this, 'blog/thumbnail/');
-      });
-      this.$btUploadBanner.addEventListener('click', function (event) {
-        self.upload(this, 'blog/banner/');
-      });
-      Array.prototype.forEach.call($buttonDelete, function (item) {
-        item.onclick = function () {
-          self.deleteImage(item);
-        };
-      });
-    }
-  }, {
-    key: "deleteImage",
-    value: function deleteImage(button) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.deleteElement = button;
-      objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
-      objWfModal.buildContentConfirmationAction('objWbAdminUploadImage.deleteImageAjax()');
-    }
-  }, {
-    key: "deleteImageAjax",
-    value: function deleteImageAjax() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var data = new FormData();
-      var ajax = new XMLHttpRequest();
-      var file = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('[data-id="fileName"]').innerText;
-      var path = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('data-path');
-      var $return = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-      data.append('c', 'WbAdminUploadImage');
-      data.append('m', 'delete');
-      data.append('f', file);
-      data.append('p', path);
-      ajax.open('POST', objWbUrl.getController());
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.buildResponse(ajax.responseText, $return);
-          objWfModal.closeModal();
+        if (!this.$lastPost) {
+            return;
         }
-      };
 
-      ajax.send(data);
-    }
-  }, {
-    key: "upload",
-    value: function upload(target, path) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var $form = target.parentNode.parentNode.parentNode.parentNode.parentNode;
-      var $file = $form.querySelector('[type=file]');
-      var data = new FormData();
-      var ajax = new XMLHttpRequest();
-      var file = $file.files[0];
-      var url = objWbUrl.getController();
-
-      if ($file.files.length === 0) {
-        $file.click();
-        return;
-      }
-
-      data.append('c', 'WbAdminUploadImage');
-      data.append('m', 'upload');
-      data.append('p', path);
-      data.append('f', file);
-      this.$btUploadThumbnail.setAttribute('disabled', 'disabled');
-      ajax.open('POST', url);
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.$btUploadThumbnail.removeAttribute('disabled');
-          self.buildResponse(ajax.responseText, $form);
+        if (document.contains(this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+            this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
+                self.loadMore(this);
+            });
         }
-      };
 
-      ajax.send(data);
+        if (document.contains(this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
+            this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
+                self.loadMore(this);
+            });
+        }
     }
-  }, {
-    key: "buildResponse",
-    value: function buildResponse(response, $target) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      switch (response) {
-        case 'fileDeleted':
-        case 'uploadDone':
-          objWfNotification.add(globalTranslation[response], 'green', $target);
-          document.location.reload();
-          break;
+    loadMore(target) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
+        let parentIdString = parentId.substring(this.page.length);
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbBlogList' +
+            '&m=buildLoadMoreButtonClick' +
+            '&target=' + parentIdString;
 
-        default:
-          objWfNotification.add(globalTranslation[response], 'red', $target);
-          break;
-      }
+        target.classList.add('disabled');
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                target.classList.remove('disabled');
+                self.loadMoreSuccess(parentId, ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
     }
-  }]);
 
-  return WbAdminUploadImage;
-}();
+    loadMoreSuccess(parentId, value) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let json = JSON.parse(value);
+        let $section = document.querySelector('#' + parentId);
+        let $sectionList = $section.querySelector('.blog-list');
+        let $bt = $section.querySelector('[data-id="' + this.classlaodMore + '"]');
 
-var WbBlog =
-/*#__PURE__*/
-function () {
-  function WbBlog() {
-    _classCallCheck(this, WbBlog);
+        if (!json[this.classlaodMore]) {
+            $bt.classList.add('disabled');
+        }
 
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-
-    this.classlaodMore = 'loadMore';
-  }
-
-  _createClass(WbBlog, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('blog')) {
-        return;
-      }
-
-      this.update();
-      this.buildMenu();
+        $sectionList.insertAdjacentHTML('beforeend', json['html']);
+        window.scrollTo(0, document.documentElement.scrollTop + 1);
+        window.scrollTo(0, document.documentElement.scrollTop - 1);
     }
-  }, {
-    key: "update",
-    value: function update() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.page = 'pageBlog';
-      this.$lastPost = document.querySelector('#' + this.page + 'LastPost');
-      this.$mostViewed = document.querySelector('#' + this.page + 'MostViewed');
+}
+class WbForm {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
     }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('form')) {
+            return;
+        }
 
-      if (!this.$lastPost) {
-        return;
-      }
+        this.update();
+        this.buildMenu();
+    }
 
-      if (document.contains(this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
-        this.$lastPost.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
-          self.loadMore(this);
+    update() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$page = document.querySelector('#pageForm');
+        this.$form = this.$page.querySelector('.form');
+        this.$btSend = this.$page.querySelector('#pageFormBtSend');
+    }
+
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+
+        this.$btSend.addEventListener('click', function (event) {
+            self.send();
         });
-      }
+    }
 
-      if (document.contains(this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]'))) {
-        this.$mostViewed.querySelector('[data-id="' + this.classlaodMore + '"]').addEventListener('click', function (event) {
-          self.loadMore(this);
+    send() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbForm' +
+            '&m=sendForm' +
+            '&d=' + JSON.stringify(self.getData());
+
+        this.$btSend.setAttribute('disabled', 'disabled');
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.$btSend.removeAttribute('disabled');
+                self.response(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    getData() {
+         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let arr = [];
+
+        arr.push(['text', 'text content']);
+        arr.push(['textarea', 'textarea content']);
+
+        return arr;
+    }
+
+    response(data) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let response = '';
+        let color = '';
+
+        switch (data) {
+            case 'ok':
+                color = 'green';
+                response = globalTranslation.formSent;
+                break;
+            default:
+                color = 'red';
+                response = globalTranslation.formProblemSend;
+                break;
+        }
+
+        objWfNotification.add(response, color, this.$form);
+    }
+}
+class WbLogin {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+
+    }
+
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin-login')) {
+            return;
+        }
+
+        this.update();
+        this.buildMenu();
+    }
+
+    update() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.isSignUp = false;
+
+        this.$page = document.querySelector('#pageAdminLogin');
+        this.$buttonLogin = document.querySelector('#pageAdminLoginBt');
+        this.$fielEmail = document.querySelector('#pageAdminLoginUser');
+        this.$fieldPassword = document.querySelector('#pageAdminLoginPassword');
+    }
+
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+
+        this.$buttonLogin.addEventListener('click', function (event) {
+            self.buildLogin();
         });
-      }
     }
-  }, {
-    key: "loadMore",
-    value: function loadMore(target) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var self = this;
-      var parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
-      var parentIdString = parentId.substring(this.page.length);
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbBlogList' + '&m=buildLoadMoreButtonClick' + '&target=' + parentIdString;
-      target.classList.add('disabled');
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          target.classList.remove('disabled');
-          self.loadMoreSuccess(parentId, ajax.responseText);
+    validate() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (this.$fielEmail.value === '') {
+            this.$fielEmail.focus();
+            this.buildLoginResponse('empty_email');
+            return;
         }
-      };
 
-      ajax.send(parameter);
-    }
-  }, {
-    key: "loadMoreSuccess",
-    value: function loadMoreSuccess(parentId, value) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var json = JSON.parse(value);
-      var $section = document.querySelector('#' + parentId);
-      var $sectionList = $section.querySelector('.blog-list');
-      var $bt = $section.querySelector('[data-id="' + this.classlaodMore + '"]');
-
-      if (!json[this.classlaodMore]) {
-        $bt.classList.add('disabled');
-      }
-
-      $sectionList.insertAdjacentHTML('beforeend', json['html']);
-      window.scrollTo(0, document.documentElement.scrollTop + 1);
-      window.scrollTo(0, document.documentElement.scrollTop - 1);
-    }
-  }]);
-
-  return WbBlog;
-}();
-
-var WbForm =
-/*#__PURE__*/
-function () {
-  function WbForm() {
-    _classCallCheck(this, WbForm);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(WbForm, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('form')) {
-        return;
-      }
-
-      this.update();
-      this.buildMenu();
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.$page = document.querySelector('#pageForm');
-      this.$form = this.$page.querySelector('.form');
-      this.$btSend = this.$page.querySelector('#pageFormBtSend');
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      this.$btSend.addEventListener('click', function (event) {
-        self.send();
-      });
-    }
-  }, {
-    key: "send",
-    value: function send() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbForm' + '&m=sendForm' + '&d=' + JSON.stringify(self.getData());
-      this.$btSend.setAttribute('disabled', 'disabled');
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.$btSend.removeAttribute('disabled');
-          self.response(ajax.responseText);
+        if (this.$fieldPassword.value === '') {
+            this.$fieldPassword.focus();
+            this.buildLoginResponse('empty_password');
+            return;
         }
-      };
 
-      ajax.send(parameter);
+        return true;
     }
-  }, {
-    key: "getData",
-    value: function getData() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      var arr = [];
-      arr.push(['text', 'text content']);
-      arr.push(['textarea', 'textarea content']);
-      return arr;
-    }
-  }, {
-    key: "response",
-    value: function response(data) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+    buildLogin() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter = 
+            '&c=WbLogin' + 
+            '&m=doLogin' + 
+            '&email=' + this.$fielEmail.value + 
+            '&password=' + this.$fieldPassword.value;
 
-      var response = '';
-      var color = '';
-
-      switch (data) {
-        case 'ok':
-          color = 'green';
-          response = globalTranslation.formSent;
-          break;
-
-        default:
-          color = 'red';
-          response = globalTranslation.formProblemSend;
-          break;
-      }
-
-      objWfNotification.add(response, color, this.$form);
-    }
-  }]);
-
-  return WbForm;
-}();
-
-var WbLogin =
-/*#__PURE__*/
-function () {
-  function WbLogin() {
-    _classCallCheck(this, WbLogin);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(WbLogin, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (!getUrlWord('admin-login')) {
-        return;
-      }
-
-      this.update();
-      this.buildMenu();
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.isSignUp = false;
-      this.$page = document.querySelector('#pageAdminLogin');
-      this.$buttonLogin = document.querySelector('#pageAdminLoginBt');
-      this.$fielEmail = document.querySelector('#pageAdminLoginUser');
-      this.$fieldPassword = document.querySelector('#pageAdminLoginPassword');
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      this.$buttonLogin.addEventListener('click', function (event) {
-        self.buildLogin();
-      });
-    }
-  }, {
-    key: "validate",
-    value: function validate() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      if (this.$fielEmail.value === '') {
-        this.$fielEmail.focus();
-        this.buildLoginResponse('empty_email');
-        return;
-      }
-
-      if (this.$fieldPassword.value === '') {
-        this.$fieldPassword.focus();
-        this.buildLoginResponse('empty_password');
-        return;
-      }
-
-      return true;
-    }
-  }, {
-    key: "buildLogin",
-    value: function buildLogin() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbLogin' + '&m=doLogin' + '&email=' + this.$fielEmail.value + '&password=' + this.$fieldPassword.value;
-
-      if (!this.validate()) {
-        return;
-      }
-
-      this.$buttonLogin.setAttribute('disabled', 'disabled');
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          self.$buttonLogin.removeAttribute('disabled');
-          self.buildLoginResponse(ajax.responseText);
+        if (!this.validate()) {
+            return;
         }
-      };
 
-      ajax.send(parameter);
-    }
-  }, {
-    key: "buildLoginResponse",
-    value: function buildLoginResponse(data) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+        this.$buttonLogin.setAttribute('disabled', 'disabled');
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-      var response = '';
-      var $responseElement = this.$page.querySelector('.form');
-
-      switch (data) {
-        case 'inactive':
-          response = globalTranslation.login_inactive;
-          break;
-
-        case 'problem':
-          response = globalTranslation.login_fail;
-          this.$fielEmail.focus();
-          break;
-
-        case 'empty_email':
-          response = globalTranslation.empty_field;
-          this.$fielEmail.focus();
-          break;
-
-        case 'empty_password':
-          response = globalTranslation.empty_field;
-          this.$fieldPassword.focus();
-          break;
-
-        default:
-          objWbUrl.build('admin');
-          break;
-      }
-
-      objWfNotification.add(response, 'red', $responseElement);
-    }
-  }]);
-
-  return WbLogin;
-}();
-
-var WbManagement =
-/*#__PURE__*/
-function () {
-  function WbManagement() {
-    _classCallCheck(this, WbManagement);
-  }
-
-  _createClass(WbManagement, [{
-    key: "verifyLoad",
-    value: function verifyLoad() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      window.addEventListener('load', self.applyClass(), {
-        once: true
-      });
-    }
-  }, {
-    key: "applyClass",
-    value: function applyClass() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      objWbTranslation.build();
-      objWbLogin.build();
-      objWbAdmin.build();
-      objWbAdminBlog.build();
-      objWbAdminUploadImage.build();
-      objWbBlog.build();
-      objWbForm.build();
-    }
-  }]);
-
-  return WbManagement;
-}();
-
-var WbTranslation =
-/*#__PURE__*/
-function () {
-  function WbTranslation() {
-    _classCallCheck(this, WbTranslation);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(WbTranslation, [{
-    key: "build",
-    value: function build() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      this.update();
-      this.defineActive();
-      this.buildMenu();
-    }
-  }, {
-    key: "buildMenu",
-    value: function buildMenu() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var self = this;
-      this.$select.addEventListener('change', function (event) {
-        self.change(this.value);
-      });
-    }
-  }, {
-    key: "change",
-    value: function change(language) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      var ajax = new XMLHttpRequest();
-      var url = objWbUrl.getController();
-      var parameter = '&c=WbTranslation' + '&m=change' + '&language=' + language;
-      ajax.open('POST', url, true);
-      ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          location.reload();
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                self.$buttonLogin.removeAttribute('disabled');
+                self.buildLoginResponse(ajax.responseText);
+            }
         }
-      };
 
-      ajax.send(parameter);
+        ajax.send(parameter);
     }
-  }, {
-    key: "defineActive",
-    value: function defineActive() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      this.$select.value = globalLanguage;
+    buildLoginResponse(data) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let response = '';
+        let $responseElement = this.$page.querySelector('.form');
+
+        switch (data) {
+            case 'inactive':
+                response = globalTranslation.login_inactive;
+                break;
+            case 'problem':
+                response = globalTranslation.login_fail;
+                this.$fielEmail.focus();
+                break;
+            case 'empty_email':
+                response = globalTranslation.empty_field;
+                this.$fielEmail.focus();
+                break;
+            case 'empty_password':
+                response = globalTranslation.empty_field;
+                this.$fieldPassword.focus();
+                break;
+            default:
+                objWbUrl.build('admin');
+                break;
+        }
+
+        objWfNotification.add(response, 'red', $responseElement);
     }
-  }, {
-    key: "update",
-    value: function update() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
+}
+class WbManagement {
+    verifyLoad() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
 
-      this.$select = document.querySelector('#translationSelect');
+        window.addEventListener('load', self.applyClass(), { once: true });
     }
-  }]);
 
-  return WbTranslation;
-}();
-
-var WbUrl =
-/*#__PURE__*/
-function () {
-  function WbUrl() {
-    _classCallCheck(this, WbUrl);
-
-    /*removeIf(production)*/
-    objWbDebug.debugMethod(this, 'constructor');
-    /*endRemoveIf(production)*/
-  }
-
-  _createClass(WbUrl, [{
-    key: "buildSEO",
-    value: function buildSEO(url) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      return url.toString() // Convert to string
-      .normalize('NFD') // Change diacritics
-      .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters
-      .replace(/\s+/g, '-') // Change whitespace to dashes
-      .toLowerCase() // Change to lowercase
-      .replace(/&/g, '-and-') // Replace ampersand
-      .replace(/[^a-z0-9\-]/g, '') // Remove anything that is not a letter, number or dash
-      .replace(/-+/g, '-') // Remove duplicate dashes
-      .replace(/^-*/, '') // Remove starting dashes
-      .replace(/-*$/, ''); // Remove trailing dashes
+    applyClass() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        objWbTranslation.build();
+        objWbLogin.build();
+        objWbAdmin.build();
+        objWbAdminBlog.build();
+        objWbAdminUploadImage.build();
+        objWbBlog.build();
+        objWbForm.build();
     }
-  }, {
-    key: "build",
-    value: function build(target) {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
-
-      return window.location = globalUrl + globalLanguage + '/' + target + '/';
+}
+class WbTranslation {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
     }
-  }, {
-    key: "getController",
-    value: function getController() {
-      /*removeIf(production)*/
-      objWbDebug.debugMethod(this, objWbDebug.getMethodName());
-      /*endRemoveIf(production)*/
 
-      return globalUrl + 'assets/php/controller.php';
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.update();
+        this.defineActive();
+        this.buildMenu();
     }
-  }]);
 
-  return WbUrl;
-}();
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+
+        this.$select.addEventListener('change', function (event) {
+            self.change(this.value);
+        });
+    }
+
+    change(language) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController();
+        let parameter =
+            '&c=WbTranslation' +
+            '&m=change' +
+            '&language=' + language;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                location.reload();
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    defineActive() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$select.value = globalLanguage;
+    }
+
+    update() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.$select = document.querySelector('#translationSelect');
+    }
+}
+class WbUrl {
+    constructor() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
+
+    }
+
+    buildSEO(url) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return url.toString()               // Convert to string
+            .normalize('NFD')               // Change diacritics
+            .replace(/[\u0300-\u036f]/g, '') // Remove illegal characters
+            .replace(/\s+/g, '-')            // Change whitespace to dashes
+            .toLowerCase()                  // Change to lowercase
+            .replace(/&/g, '-and-')          // Replace ampersand
+            .replace(/[^a-z0-9\-]/g, '')     // Remove anything that is not a letter, number or dash
+            .replace(/-+/g, '-')             // Remove duplicate dashes
+            .replace(/^-*/, '')              // Remove starting dashes
+            .replace(/-*$/, '');             // Remove trailing dashes
+    }
+
+    build(target) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return window.location = globalUrl + globalLanguage + '/' + target + '/';
+    }
+
+    getController() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return globalUrl + 'assets/php/controller.php';
+    }
+}
 /*removeIf(production)*/
-
-
 var objWbDebug = new WbDebug();
 /*endRemoveIf(production)*/
-
 var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
 var objWbAdminUploadImage = new WbAdminUploadImage();
 var objWbBlog = new WbBlog();
-var objWbForm = new WbForm();
+var objWbForm  = new WbForm();
 var objWbLogin = new WbLogin();
 var objWbManagement = new WbManagement();
 var objWbTranslation = new WbTranslation();
 var objWbUrl = new WbUrl();
+
 objWbManagement.verifyLoad();

@@ -24,7 +24,7 @@ gulp.task('default', function () {
 
 
 
-    gulp.watch(wb_js.fileJs_wb_, gulp.series('wb_js_default', 'wb_js_babel'))
+    gulp.watch(wb_js.fileJs_wb_, gulp.series('wb_js_default'))
         .on('change', function (evt) {
             console.log(evt);
         });

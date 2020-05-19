@@ -26,13 +26,13 @@ var fileJs_wb_Final = [
 
 
 
-gulp.task('wb_js_babel', function () {
-    return gulp.src(fileJs_wb_Final)
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(gulp.dest(configuration.homologation + configuration.assets + 'js/'));
-});
+// gulp.task('wb_js_babel', function () {
+//     return gulp.src(fileJs_wb_Final)
+//         .pipe(babel({
+//             presets: ['@babel/env']
+//         }))
+//         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'js/'));
+// });
 
 gulp.task('wb_js_default_concat', function () {
     return gulp.src(fileJs_wb_)
@@ -56,7 +56,7 @@ gulp.task('wb_js_default', gulp.series(
 
 
 gulp.task('wb_js_minify', function () {
-    return gulp.src(configuration.homologation + configuration.assets + 'js/*.*')
+    return gulp.src(configuration.production + configuration.assets + 'js/*.*')
         .pipe(uglify())
         .pipe(gulp.dest(configuration.production + configuration.assets + 'js/'));
 });
