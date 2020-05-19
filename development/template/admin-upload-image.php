@@ -86,6 +86,5 @@ $metaDataCustom = [
             {% endfor %}
 
     </section>
-    <link href="https://winterjeferson.github.io/winter-front/production/css/plugin.css" rel="stylesheet">
     {% include "include/template-footer.php" %}
 </main>

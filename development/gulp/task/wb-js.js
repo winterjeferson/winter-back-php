@@ -10,6 +10,7 @@ var configuration = require('./configuration-wb.js');
 
 
 var fileJs_wb_DefaultFinal = 'wb-theme.js';
+var fileJs_wb_AdminFinal = 'wb-admin.js';
 
 var fileJs_wb_ = [
     configuration.development + 'js/shared/**/*.*',
@@ -17,9 +18,18 @@ var fileJs_wb_ = [
     configuration.development + 'js/wb-main.js'
 ];
 
-var fileJs_wb_Final = [
-    configuration.homologation + configuration.assets + 'js/' + fileJs_wb_DefaultFinal
+var fileJs_wb_admin_ = [
+    configuration.development + 'js/wb-admin/**/*.*',
+    configuration.development + 'js/wb-main-admin.js'
 ];
+
+// var fileJs_wb_Final = [
+//     configuration.homologation + configuration.assets + 'js/' + fileJs_wb_DefaultFinal
+// ];
+
+// var fileJs_wb_admin_Final = [
+//     configuration.homologation + configuration.assets + 'js/' + fileJs_wb_AdminFinal
+// ];
 
 
 
@@ -40,12 +50,6 @@ gulp.task('wb_js_default_concat', function () {
         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'js/'));
 });
 
-gulp.task('wb_js_remove_code', function () {
-    return gulp.src(configuration.homologation + configuration.assets + 'js/*.js')
-        .pipe(removeCode({ production: true }))
-        .pipe(removeCode({ noDevFeatures: false, commentStart: '/*', commentEnd: '*/' }))
-        .pipe(gulp.dest(configuration.production + configuration.assets + 'js/'));
-});
 
 gulp.task('wb_js_default', gulp.series(
     'wb_js_default_concat',
@@ -53,6 +57,32 @@ gulp.task('wb_js_default', gulp.series(
 ));
 
 
+
+
+
+
+gulp.task('wb_js_admin_default_concat', function () {
+    return gulp.src(fileJs_wb_admin_)
+        .pipe(concat(fileJs_wb_AdminFinal))
+        .pipe(gulp.dest(configuration.homologation + configuration.assets + 'js/'));
+});
+
+gulp.task('wb_js_admin_default', gulp.series(
+    'wb_js_admin_default_concat',
+    'wb_beep'
+));
+
+
+
+
+
+
+gulp.task('wb_js_remove_code', function () {
+    return gulp.src(configuration.homologation + configuration.assets + 'js/*.js')
+        .pipe(removeCode({ production: true }))
+        .pipe(removeCode({ noDevFeatures: false, commentStart: '/*', commentEnd: '*/' }))
+        .pipe(gulp.dest(configuration.production + configuration.assets + 'js/'));
+});
 
 
 gulp.task('wb_js_minify', function () {
@@ -65,5 +95,6 @@ gulp.task('wb_js_minify', function () {
 
 
 module.exports = {
-    fileJs_wb_: fileJs_wb_
+    fileJs_wb_: fileJs_wb_,
+    fileJs_wb_admin_: fileJs_wb_admin_,
 };

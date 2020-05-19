@@ -75,6 +75,8 @@ $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
     if ($isAdmin) {
         echo '<meta name="robots" content="noindex">';
         echo '<link href="' . $mainUrl . 'assets/css/wb-admin.css" rel="stylesheet">';
+        echo '<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>';
+        echo '<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">';
     }
     ?>
 </head>

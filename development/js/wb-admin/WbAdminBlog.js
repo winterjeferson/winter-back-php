@@ -16,9 +16,6 @@ class WbAdminBlog {
             entities: false
         });
 
-        CKEDITOR.replace('fieldContentPt');
-        CKEDITOR.replace('fieldContentEn');
-
         this.updateVariable();
         this.buildMenu();
         this.buildMenuTable();

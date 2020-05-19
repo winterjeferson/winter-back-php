@@ -34,6 +34,8 @@ $urlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
     if ($isAdmin) {
         echo '<meta name="robots" content="noindex">';
         echo '<link href="' . $mainUrl . 'assets/css/wb-admin.css" rel="stylesheet">';
+        echo '<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>';
+        echo '<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">';
     }
     ?> </head><body class="overflow-hidden"><div id="loadingMain" class="bg-grey"><div class="col-middle"><div class="row"><div class="col-es-2 col-es-off-5"><div class="progress progress-style-red progress-es"><div class="progress-bar"></div></div></div></div></div></div><main class="grid"> <?php
 $objWbUrl = new WbUrl();

@@ -31,6 +31,13 @@ gulp.task('default', function () {
 
 
 
+    gulp.watch(wb_js.fileJs_wb_admin_, gulp.series('wb_js_admin_default'))
+        .on('change', function (evt) {
+            console.log(evt);
+        });
+
+
+
     gulp.watch(wb_other.fileOther, gulp.series('wb_other'))
         .on('change', function (evt) {
             console.log(evt);

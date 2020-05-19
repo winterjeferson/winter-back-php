@@ -179,7 +179,5 @@ $metaDataCustom = [
             </div>
         </div>
     </section>
-    <link href="https://winterjeferson.github.io/winter-front/production/css/plugin.css" rel="stylesheet">
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     {% include "include/template-footer.php" %}
 </main>
