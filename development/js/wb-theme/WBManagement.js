@@ -3,9 +3,7 @@ class WbManagement {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        window.onload = function () {
-            self.applyClass();
-        }
+        window.addEventListener('load', self.applyClass(), { once: true });
     }
 
     applyClass() {

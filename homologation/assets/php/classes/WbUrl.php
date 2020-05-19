@@ -5,7 +5,7 @@ class WbUrl
 
     function getUrlMain()
     {
-        $objWbHelp= new WbHelp();
+        $objWbHelp = new WbHelp();
         $isLocalHost = $objWbHelp->verifyLocalhost();
 
         if ($isLocalHost) {
@@ -15,7 +15,7 @@ class WbUrl
             $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
             $self = filter_input(INPUT_SERVER, 'PHP_SELF');
 
-            return (!empty($protocol) ? 'https' : 'http') . '://' . $host . dirname($self) . '/';
+            return (!empty($protocol) ? 'https' : 'http') . '://' . $host . dirname($self);
         }
     }
 

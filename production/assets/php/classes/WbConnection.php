@@ -64,6 +64,9 @@ final class WbConnection
                 case 'mssql':
                     self::$coon[$dataBase] = new PDO("mssql:host={$host},1433; dbname={$name}", $user, $pass);
                     break;
+                case 'sqlsrv':
+                    self::$coon[$dataBase] = new PDO("sqlsrv:server=$host; database = $name", $user, $pass);
+                    break;
             }
 
             self::$coon[$dataBase]->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

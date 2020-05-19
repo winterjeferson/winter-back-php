@@ -30,7 +30,7 @@ class WbBlogSearch
             ],
             'table' => [['table' => 'blog']],
             'where' => [
-                ['table' => 'blog', 'column' => 'content_' . $language, 'value' => $q, 'comparison' => ' LIKE "%', 'comparisonEnd' => '%"'],
+                ['table' => 'blog', 'column' => 'tag_' . $language, 'value' => $q, 'comparison' => ' LIKE "%', 'comparisonEnd' => '%"'],
             ]
         ]);
 

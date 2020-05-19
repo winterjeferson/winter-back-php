@@ -212,6 +212,12 @@ function () {
         return;
       }
 
+      CKEDITOR.replace('fieldContentPt', {
+        entities: false
+      });
+      CKEDITOR.replace('fieldContentEn', {
+        entities: false
+      });
       CKEDITOR.replace('fieldContentPt');
       CKEDITOR.replace('fieldContentEn');
       this.updateVariable();
@@ -1121,10 +1127,9 @@ function () {
       /*endRemoveIf(production)*/
 
       var self = this;
-
-      window.onload = function () {
-        self.applyClass();
-      };
+      window.addEventListener('load', self.applyClass(), {
+        once: true
+      });
     }
   }, {
     key: "applyClass",

@@ -9,6 +9,13 @@ class WbAdminBlog {
             return;
         }
 
+        CKEDITOR.replace('fieldContentPt', {
+            entities: false
+        });
+        CKEDITOR.replace('fieldContentEn', {
+            entities: false
+        });
+
         CKEDITOR.replace('fieldContentPt');
         CKEDITOR.replace('fieldContentEn');
 

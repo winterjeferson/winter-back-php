@@ -34,7 +34,7 @@ class WbSiteMap
         $objWbUrl = new WbUrl();
         $objWbTranslation = new WbTranslation();
         $lengthQuery = count($result);
-        $url = substr($objWbUrl->getUrlMain(), 0, -4);
+        $url = substr($objWbUrl->getUrlMain(), 0, -10);
         $urlBlog = '/blog-post/';
         $string = '';
 

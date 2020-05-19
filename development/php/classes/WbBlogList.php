@@ -147,18 +147,17 @@ class WbBlogList
     {
         $objWbSession = new WbSession();
 
-        if (!$objWbSession->get($this->prefixLoadMore . $target)) {
-            exit;
+        if ($objWbSession->get($this->prefixLoadMore . $target)) {
+            $string = '
+                <button type="button" class="bt bt-fu bt-blue" data-id="loadMore">
+                    ' . $objWbSession->getArray('translation', 'loadMore') . '
+                </button>
+            ';
+
+            return $string;
         }
-
-        $string = '
-            <button type="button" class="bt bt-fu bt-blue" data-id="loadMore">
-                ' . $objWbSession->getArray('translation', 'loadMore') . '
-            </button>
-        ';
-
-        return $string;
     }
+
 
     function buildLoadMoreButtonClick()
     {
