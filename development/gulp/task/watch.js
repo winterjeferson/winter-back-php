@@ -1,15 +1,19 @@
 var gulp = require('gulp');
 
+var wb_application = require('./wb-application.js');
 var wb_css = require('./wb-css.js');
 var wb_js = require('./wb-js.js');
 var wb_other = require('./wb-other.js');
 var wb_php = require('./wb-php.js');
-var wb_template = require('./wb-template.js');
 
 
 
 gulp.task('default', function () {
 
+    gulp.watch(wb_application.fileApplication, gulp.series('wb_application'))
+        .on('change', function (evt) {
+            console.log(evt);
+        });
 
     gulp.watch(wb_css.cssAdminConcat, gulp.series('wb_css_admin'))
         .on('change', function (evt) {
@@ -46,13 +50,6 @@ gulp.task('default', function () {
 
 
     gulp.watch(wb_php.filePHP, gulp.series('wb_php'))
-        .on('change', function (evt) {
-            console.log(evt);
-        });
-
-
-
-    gulp.watch(wb_template.fileTemplateWatch, gulp.series('wb_template'))
         .on('change', function (evt) {
             console.log(evt);
         });
