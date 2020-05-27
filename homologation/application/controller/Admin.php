@@ -14,23 +14,23 @@ class Admin
         $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $this->folder;
     }
 
-    function build($class)
+    function build()
     {
-        $obj = new $class();
-        $obj->build();
-    }
-
-    function buildAdmin()
-    {
-        $class = $this->namespace . 'Admin';
-        require $this->folderAddress . '/Admin.php';
-        $this->build($class);
+        $class = $this->namespace . 'Index';
+        require $this->folderAddress . '/Index.php';
+        $this->view($class);
     }
 
     function buildLogin()
     {
         $class = $this->namespace . 'Login';
         require $this->folderAddress . '/Login.php';
-        $this->build($class);
+        $this->view($class);
+    }
+
+    function view($class)
+    {
+        $obj = new $class();
+        $obj->build();
     }
 }

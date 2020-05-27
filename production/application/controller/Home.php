@@ -14,16 +14,16 @@ class Home
         $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $this->folder;
     }
 
-    function build($class)
+    function build()
+    {
+        $class = $this->namespace . 'Index';
+        require $this->folderAddress . '/Index.php';
+        $this->view($class);
+    }
+
+    function view($class)
     {
         $obj = new $class();
         $obj->build();
-    }
-
-    function buildHome()
-    {
-        $class = $this->namespace . 'Home';
-        require $this->folderAddress . '/Home.php';
-        $this->build($class);
     }
 }

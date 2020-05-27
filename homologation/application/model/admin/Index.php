@@ -2,7 +2,7 @@
 
 namespace Model\Admin;
 
-class Admin
+class Index
 {
     private $folderView = 'admin';
 
@@ -12,6 +12,6 @@ class Admin
 
     function build()
     {
-        return require './' . $GLOBALS['globalFolderView'] . '/' . $this->folderView . '/admin.php';
+        return require './' . $GLOBALS['globalFolderView'] . '/' . $this->folderView . '/wellcome.php';
     }
 }

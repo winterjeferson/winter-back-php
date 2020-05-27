@@ -2,7 +2,7 @@
 
 namespace Model\Home;
 
-class Home
+class Index
 {
     private $folderView = 'home';
 

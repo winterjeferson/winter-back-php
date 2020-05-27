@@ -26,6 +26,7 @@ function buildGlobalUrl()
 
 
 $globalArrLocalhost = ['127.0.0.1', '::1'];
+$globalFolderApplication = 'application';
 $globalFolderController = 'controller';
 $globalFolderModel = 'model';
 $globalFolderView = 'view';
