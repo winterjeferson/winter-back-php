@@ -2,7 +2,10 @@
 
 namespace Model\Home;
 
+// require ../Main.php;
+
 class Index
+// class Index extends Main
 {
     private $folderView = 'home';
 
@@ -12,6 +15,7 @@ class Index
 
     function build()
     {
+        // $this->loadView(['folder' => 'home', 'file' => 'home']);
         return require './' . $GLOBALS['globalFolderView'] . '/' . $this->folderView . '/home.php';
     }
 }
