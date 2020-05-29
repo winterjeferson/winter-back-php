@@ -2,20 +2,18 @@
 
 namespace Application\Model\Home;
 
-// require ../Main.php;
+require_once 'model/Main.php';
 
-// class Index extends Main
-class Index
+use Application\Model\Main;
+
+class Index extends Main
 {
-    private $folderView = 'home';
-
     public function __construct()
     {
     }
 
     function build()
     {
-        // $this->loadView(['folder' => 'home', 'file' => 'home']);
-        return require './' . $GLOBALS['globalFolderView'] . '/' . $this->folderView . '/home.php';
+        return $this->loadView(['folder' => 'home', 'file' => 'home']);
     }
 }

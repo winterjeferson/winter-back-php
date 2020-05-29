@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-require 'Main.php';
+require_once 'Main.php';
 
 class Admin extends Main
 {
