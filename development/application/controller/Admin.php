@@ -16,8 +16,18 @@ class Admin extends Main
         $this->loadModel('Index');
     }
 
+    function buildBlog()
+    {
+        $this->loadModel('Blog');
+    }
+
     function buildLogin()
     {
         $this->loadModel('Login');
+    }
+
+    function buildImage()
+    {
+        $this->loadModel('Image');
     }
 }
