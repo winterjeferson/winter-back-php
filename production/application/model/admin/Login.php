@@ -1,11 +1,11 @@
 <?php
 
-namespace Model\Admin;
+namespace Application\Model\Admin;
 
 // require __DIR__ . '../Main.php';
 
-class Login
 // class Login extends Main
+class Login
 {
     private $folderView = 'admin';
 

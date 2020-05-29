@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Application\Controller;
 
 class Main
 {
@@ -13,7 +13,7 @@ class Main
 
     public function updateAddress($folder)
     {
-        $this->namespace = ucfirst($GLOBALS['globalFolderModel']) . '\\' . ucfirst($folder) . '\\';
+        $this->namespace = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderModel']) . '\\' . ucfirst($folder) . '\\';
         $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $folder;
     }
 

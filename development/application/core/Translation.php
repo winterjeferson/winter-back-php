@@ -1,8 +1,8 @@
 <?php
 
-namespace Core;
+namespace  Application\Core;
 
-use Core\Session;
+use  Application\Core\Session;
 
 class Translation
 {

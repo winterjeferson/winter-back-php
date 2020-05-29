@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Admin;
+namespace Application\Model\Admin;
 
 // require __DIR__ . '../Main.php';
 

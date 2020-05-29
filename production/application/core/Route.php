@@ -1,23 +1,15 @@
 <?php
 
-namespace Core;
+namespace Application\Core;
 
-use Core\Session;
+use  Application\Core\Session;
 
 class Route
 {
-    private $fileExtension = '.php';
-    private $routeHome = 'home';
-    private $folderApplication = '';
-    private $folderController = '';
-    private $folderView = '';
     private $arrUrl = [];
 
     public function __construct()
     {
-        $this->folderController = $GLOBALS['globalFolderController'];
-        $this->folderApplication = $GLOBALS['globalFolderApplication'];
-        $this->folderView = $GLOBALS['globalFolderView'];
     }
 
     public function build()
@@ -51,7 +43,7 @@ class Route
         $arrUrl = [
             'main' => $GLOBALS['globalUrl'],
             'language' => isset($explodeUrl[0]) ? $explodeUrl[0] : '',
-            'controller' => isset($explodeUrl[1]) ? $explodeUrl[1] : $this->routeHome,
+            'controller' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
 
         ];
 
@@ -91,7 +83,7 @@ class Route
         $arrClean = [];
 
         foreach ($explode as $key => &$value) {
-            if ($value !== $this->folderApplication && $value !== '') {
+            if ($value !== $GLOBALS['globalFolderApplication'] && $value !== '') {
                 $arrClean[] =  $value;
             }
         }
@@ -102,7 +94,7 @@ class Route
     private function validateController()
     {
         $controller = $this->arrUrl['controller'];
-        $file = $this->folderController . '/' . $controller . $this->fileExtension;
+        $file = $GLOBALS['globalFolderController'] . '/' . $controller . '.php';
 
         if ($controller === '') {
             return false;
@@ -123,7 +115,7 @@ class Route
         $urlMethod = isset($this->arrUrl['method']) ? $this->arrUrl['method'] : '';
         require $arr['file'];
 
-        $class = ucfirst($this->folderController) . '\\' . $arr['controller'];
+        $class = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderController']) . '\\' . $arr['controller'];
         $objController = new $class();
         $method = 'build' . ucfirst($urlMethod);
 
@@ -136,6 +128,6 @@ class Route
 
     private function build404()
     {
-        return require $this->folderView . '/404' . $this->fileExtension;
+        return require $GLOBALS['globalFolderView'] . '/404.php';
     }
 }
