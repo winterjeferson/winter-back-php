@@ -14,26 +14,26 @@ class Route
 
     public function build()
     {
+        $objSession = new Session();
         $this->builArrUrl();
         $this->buildLocation();
-        $this->setSession();
+        $this->setSession($objSession);
 
-        $controller = $this->validateController();
-        if (!$controller) {
+        $controllerDefault = $this->validateControllerDefault();
+        if (!$controllerDefault) {
             $this->build404();
             return;
         }
 
-        $isMethod = $this->buildMethod($controller);
-        if ($isMethod === false) {
+        $isController = $this->buildController($objSession->get('arrUrl'));
+        if ($isController === false) {
             $this->build404();
             return;
         }
     }
 
-    private function setSession()
+    private function setSession($objSession)
     {
-        $objSession = new Session();
         $objSession->set('arrUrl', $this->arrUrl);
     }
 
@@ -43,14 +43,9 @@ class Route
         $arrUrl = [
             'main' => $GLOBALS['globalUrl'],
             'language' => isset($explodeUrl[0]) ? $explodeUrl[0] : '',
-            'controller' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
-
+            'folder' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
+            'controller' => isset($explodeUrl[2]) ? $explodeUrl[2] : '',
         ];
-
-        if (isset($explodeUrl[2])) {
-            $arrUrl['method'] = $explodeUrl[2];
-            $explodeUrl = $this->explodeUrl();
-        }
 
         $countExplode = count($explodeUrl);
         $countArrReturn = count($arrUrl);
@@ -91,39 +86,41 @@ class Route
         return $arrClean;
     }
 
-    private function validateController()
+    private function validateControllerDefault()
     {
-        $controller = $this->arrUrl['controller'];
-        $file = $GLOBALS['globalFolderController'] . '/' . $controller . '.php';
+        $folder = $this->arrUrl['folder'];
+        $controller = $this->arrUrl['controller'] === '' ? ucfirst($folder) . '.php' : ucfirst($this->arrUrl['controller']) . '.php';
+        $file = $GLOBALS['globalFolderController'] . '/' . $folder . '/' . $controller;
 
         if ($controller === '') {
             return false;
         } else {
             if (file_exists($file)) {
                 return [
+                    'folder' => $folder,
                     'file' => $file,
                     'controller' => $controller,
-                ];;
+                ];
             } else {
                 return false;
             }
         }
     }
 
-    private function buildMethod($arr)
+    private function buildController($arr)
     {
-        $urlMethod = isset($this->arrUrl['method']) ? $this->arrUrl['method'] : '';
-        require $arr['file'];
+        $controller = $arr['controller'] === '' ? ucfirst($arr['folder']) : ucfirst($arr['controller']);
 
-        $class = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderController']) . '\\' . $arr['controller'];
+        require $GLOBALS['globalFolderController'] . '/' . $arr['folder'] . '/' . $controller . '.php';
+
+        $class =
+            ucfirst($GLOBALS['globalFolderApplication']) . '\\' .
+            ucfirst($GLOBALS['globalFolderController']) . '\\' .
+            ucfirst($arr['folder']) . '\\' .
+            $controller;
+
         $objController = new $class();
-        $method = 'build' . ucfirst($urlMethod);
-
-        if (method_exists($objController, $method)) {
-            return $objController->$method();
-        } else {
-            return false;
-        }
+        return $objController->build();
     }
 
     private function build404()

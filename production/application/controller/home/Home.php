@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller;
+namespace Application\Controller\Home;
 
-require_once 'Main.php';
+require_once __DIR__ . '/../Main.php';
 
-class Home extends Main
+class Home extends \Application\Controller\Main
 {
     public function __construct()
     {

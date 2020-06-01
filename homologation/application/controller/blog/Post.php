@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller;
+namespace Application\Controller\Blog;
 
-require_once 'Main.php';
+require_once __DIR__ . '/../Main.php';
 
-class Blog extends Main
+class Post extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -12,11 +12,6 @@ class Blog extends Main
     }
 
     function build()
-    {
-        $this->loadModel('Blog');
-    }
-
-    function buildPost()
     {
         $this->loadModel('Post');
     }

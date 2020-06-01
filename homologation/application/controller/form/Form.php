@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller;
+namespace Application\Controller\Form;
 
-require_once 'Main.php';
+require_once __DIR__ . '/../Main.php';
 
-class Form extends Main
+class Form extends \Application\Controller\Main
 {
     public function __construct()
     {

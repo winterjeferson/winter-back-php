@@ -11,12 +11,6 @@ class Main
     {
     }
 
-    public function updateAddress($folder)
-    {
-        $this->namespace = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderModel']) . '\\' . ucfirst($folder) . '\\';
-        $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $folder;
-    }
-
     public function loadModel($target)
     {
         $class = $this->namespace . $target;
@@ -28,5 +22,11 @@ class Main
     {
         $obj = new $class();
         $obj->build();
+    }
+
+    public function updateAddress($folder)
+    {
+        $this->namespace = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderModel']) . '\\' . ucfirst($folder) . '\\';
+        $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $folder;
     }
 }
