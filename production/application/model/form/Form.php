@@ -2,11 +2,9 @@
 
 namespace Application\Model\Form;
 
-require_once 'model/Main.php';
+require_once $GLOBALS['globalFolderModel'] . '/Main.php';
 
-use Application\Model\Main;
-
-class Form extends Main
+class Form extends \Application\Model\Main
 {
     public function __construct()
     {

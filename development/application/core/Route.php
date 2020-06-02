@@ -78,7 +78,7 @@ class Route
         $arrClean = [];
 
         foreach ($explode as $key => &$value) {
-            if ($value !== $GLOBALS['globalFolderApplication'] && $value !== '') {
+            if ($value !== 'application' && $value !== '') {
                 $arrClean[] =  $value;
             }
         }
@@ -90,7 +90,7 @@ class Route
     {
         $folder = $this->arrUrl['folder'];
         $controller = $this->arrUrl['controller'] === '' ? ucfirst($folder) . '.php' : ucfirst($this->arrUrl['controller']) . '.php';
-        $file = $GLOBALS['globalFolderController'] . '/' . $folder . '/' . $controller;
+        $file = 'controller/' . $folder . '/' . $controller;
 
         if ($controller === '') {
             return false;
@@ -111,13 +111,9 @@ class Route
     {
         $controller = $arr['controller'] === '' ? ucfirst($arr['folder']) : ucfirst($arr['controller']);
 
-        require $GLOBALS['globalFolderController'] . '/' . $arr['folder'] . '/' . $controller . '.php';
+        require 'controller/' . $arr['folder'] . '/' . $controller . '.php';
 
-        $class =
-            ucfirst($GLOBALS['globalFolderApplication']) . '\\' .
-            ucfirst($GLOBALS['globalFolderController']) . '\\' .
-            ucfirst($arr['folder']) . '\\' .
-            $controller;
+        $class = 'Application\Controller\\' . ucfirst($arr['folder']) . '\\' . $controller;
 
         $objController = new $class();
         return $objController->build();
@@ -125,6 +121,6 @@ class Route
 
     private function build404()
     {
-        return require $GLOBALS['globalFolderView'] . '/404.php';
+        return require 'view/404.php';
     }
 }

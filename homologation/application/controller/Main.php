@@ -4,29 +4,30 @@ namespace Application\Controller;
 
 class Main
 {
-    public $namespace = '';
-    public $folderAddress = '';
-
     public function __construct()
     {
     }
 
-    public function loadModel($target)
+    public function renderModel($data)
     {
-        $class = $this->namespace . $target;
-        require $this->folderAddress . '/' . $target . '.php';
-        $this->loadClass($class);
+        $arrReturn = [];
+
+        foreach ($data as $key => &$value) {
+            $namespace = 'Application\Model\\' . ucfirst($value['folder']) . '\\';
+
+            require __DIR__ . '/../model/' . $value['folder'] . '/' . $value['file'] . '.php';
+            $class = $namespace . ucfirst($value['file']);
+            $obj = new $class();
+            $arrReturn[$value['id']] = $obj->build();
+        }
+
+        return $arrReturn;
     }
 
-    public function loadClass($class)
+    public function renderView($data)
     {
-        $obj = new $class();
-        $obj->build();
-    }
-
-    public function updateAddress($folder)
-    {
-        $this->namespace = ucfirst($GLOBALS['globalFolderApplication']) . '\\' . ucfirst($GLOBALS['globalFolderModel']) . '\\' . ucfirst($folder) . '\\';
-        $this->folderAddress = './' . $GLOBALS['globalFolderModel'] . '/' . $folder;
+        ob_start();
+        require __DIR__ . '/../view/' . $data['folder'] . '/' . $data['file'] . '.php';
+        return ob_get_clean();
     }
 }
