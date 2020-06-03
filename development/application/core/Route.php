@@ -10,14 +10,14 @@ class Route
 
     public function __construct()
     {
+        $this->objSession = new Session();
     }
 
     public function build()
     {
-        $objSession = new Session();
         $this->builArrUrl();
         $this->buildLocation();
-        $this->setSession($objSession);
+        $this->setSession();
 
         $controllerDefault = $this->validateControllerDefault();
         if (!$controllerDefault) {
@@ -25,16 +25,29 @@ class Route
             return;
         }
 
-        $isController = $this->buildController($objSession->get('arrUrl'));
+        $isController = $this->buildController($this->objSession->get('arrUrl'));
         if ($isController === false) {
             $this->build404();
             return;
         }
     }
 
-    private function setSession($objSession)
+    public function verifyInUrl($target)
     {
-        $objSession->set('arrUrl', $this->arrUrl);
+        $explodeUrl = $this->explodeUrl();
+
+        foreach ($explodeUrl as $key => &$value) {
+            if ($value === $target) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function setSession()
+    {
+        $this->objSession->set('arrUrl', $this->arrUrl);
     }
 
     private function builArrUrl()
