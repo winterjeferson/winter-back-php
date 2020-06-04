@@ -1,6 +1,8 @@
 <?php
 
-class WbTranslationPT
+namespace Application\Translation;
+
+class PT
 {
     public $translation = [
         'administrativePanel' => 'Painel administrativo',

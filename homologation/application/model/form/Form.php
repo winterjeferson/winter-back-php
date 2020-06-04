@@ -2,9 +2,7 @@
 
 namespace Application\Model\Form;
 
-require_once $GLOBALS['globalFolderModel'] . '/Main.php';
-
-class Form extends \Application\Model\Main
+class Form
 {
     public function __construct()
     {
@@ -12,6 +10,6 @@ class Form extends \Application\Model\Main
 
     function build()
     {
-        return $this->loadView(['folder' => 'form', 'file' => 'form']);
+        // return $this->loadView(['folder' => 'form', 'file' => 'form']);
     }
 }

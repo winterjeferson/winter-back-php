@@ -2,9 +2,7 @@
 
 namespace Application\Model\Admin;
 
-require_once $GLOBALS['globalFolderModel'] . '/Main.php';
-
-class Blog extends \Application\Model\Main
+class Blog
 {
     public function __construct()
     {
@@ -12,6 +10,6 @@ class Blog extends \Application\Model\Main
 
     function build()
     {
-        return $this->loadView(['folder' => 'admin', 'file' => 'blog']);
+        // return $this->loadView(['folder' => 'admin', 'file' => 'blog']);
     }
 }

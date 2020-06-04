@@ -28,3 +28,4 @@ function buildGlobalUrl()
 $globalArrLocalhost = ['127.0.0.1', '::1'];
 $globalIsLocalhost = verifyLocalhost($globalArrLocalhost);
 $globalUrl = buildGlobalUrl();
+$globalUrlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';

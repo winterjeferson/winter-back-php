@@ -40,8 +40,6 @@
     <link href="<?php echo $arrContent['head']['urlFrontEnd'] . 'assets/css/wf-theme.css' ?>" rel="stylesheet">
     <link href="<?php echo $arrContent['head']['urlMain']  . 'assets/css/wb-theme.css' ?>" rel="stylesheet">
     <?php echo $arrContent['head']['admin']; ?>
-
-    <!--PLACE YOUR GOOGLE ANALYTICS CODE HERE-->
 </head>
 
 <body class="overflow-hidden">

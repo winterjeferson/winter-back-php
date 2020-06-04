@@ -6,20 +6,20 @@ use  Application\Core\Session;
 
 class Route
 {
-    private $arrUrl = [];
-
     public function __construct()
     {
     }
-
+    
     public function build()
     {
         $objSession = new Session();
-        $this->builArrUrl();
-        $this->buildLocation();
-        $this->setSession($objSession);
 
-        $controllerDefault = $this->validateControllerDefault();
+        $arrUrl = $this->builArrUrl();
+        $this->buildLocation();
+        $objSession->set('arrUrl', $arrUrl);
+
+        
+        $controllerDefault = $this->validateControllerDefault($arrUrl);
         if (!$controllerDefault) {
             $this->build404();
             return;
@@ -32,14 +32,22 @@ class Route
         }
     }
 
-    private function setSession($objSession)
+    public function verifyInUrl($target)
     {
-        $objSession->set('arrUrl', $this->arrUrl);
-    }
+        $explodeUrl = $this->explodeUrl();
 
+        foreach ($explodeUrl as $key => &$value) {
+            if ($value === $target) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private function builArrUrl()
     {
         $explodeUrl = $this->explodeUrl();
+
         $arrUrl = [
             'main' => $GLOBALS['globalUrl'],
             'language' => isset($explodeUrl[0]) ? $explodeUrl[0] : '',
@@ -58,7 +66,7 @@ class Route
             }
         }
 
-        $this->arrUrl = $arrUrl;
+        return $arrUrl;
     }
 
     private function buildLocation()
@@ -86,10 +94,10 @@ class Route
         return $arrClean;
     }
 
-    private function validateControllerDefault()
+    private function validateControllerDefault($arrUrl)
     {
-        $folder = $this->arrUrl['folder'];
-        $controller = $this->arrUrl['controller'] === '' ? ucfirst($folder) . '.php' : ucfirst($this->arrUrl['controller']) . '.php';
+        $folder = $arrUrl['folder'];
+        $controller = $arrUrl['controller'] === '' ? ucfirst($folder) . '.php' : ucfirst($arrUrl['controller']) . '.php';
         $file = 'controller/' . $folder . '/' . $controller;
 
         if ($controller === '') {

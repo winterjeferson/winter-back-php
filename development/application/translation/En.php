@@ -1,6 +1,8 @@
 <?php
 
-class WbTranslationEN
+namespace Application\Translation;
+
+class En
 {
     public $translation = [
         'administrativePanel' => 'Administrative panel',

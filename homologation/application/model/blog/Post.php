@@ -2,9 +2,7 @@
 
 namespace Application\Model\Blog;
 
-require_once $GLOBALS['globalFolderModel'] . '/Main.php';
-
-class Post extends \Application\Model\Main
+class Post
 {
     public function __construct()
     {
@@ -12,6 +10,6 @@ class Post extends \Application\Model\Main
 
     function build()
     {
-        return $this->loadView(['folder' => 'blog', 'file' => 'post']);
+        // return $this->loadView(['folder' => 'blog', 'file' => 'post']);
     }
 }

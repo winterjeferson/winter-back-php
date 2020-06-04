@@ -1,7 +1,4 @@
 <?php
-echo '<pre>';
-print_r(get_defined_vars());
-echo '</pre>';
 include __DIR__ . '/../shared/head.php';
 include __DIR__ . '/../shared/loading.php';
 include __DIR__ . '/../shared/header.php';

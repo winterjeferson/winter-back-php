@@ -12,7 +12,26 @@ class Admin extends \Application\Controller\Main
 
     function build()
     {
-        $this->updateAddress('admin');
-        $this->loadModel('Admin');
+        $model = $this->getModel();
+        $view = $this->getView($model);
+
+        echo $view;
+    }
+
+    function getModel()
+    {
+        $data = [
+            ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+        ];
+
+        return $this->renderModel($data);
+    }
+
+    function getView($model)
+    {
+        $data = ['folder' => 'admin', 'file' => 'admin', 'model' => $model,];
+
+        return $this->renderView($data);
     }
 }

@@ -18,6 +18,7 @@ class Translation
     public function build()
     {
         $this->define();
+        $this->translate();
     }
 
     private function define()
@@ -40,7 +41,11 @@ class Translation
 
     private function translate()
     {
-        $class = 'Translation' . strtoupper($this->objSession->get('language'));
+        $language = ucfirst($this->objSession->get('language'));
+        $namespace = '\Application\Translation\\';
+        $class = $namespace . $language;
+        require __DIR__ . '/../translation/' . $language . '.php';
+        // var_dump($namespace . $class);
         $translation = new $class();
 
         $this->objSession->set('translation', $translation->translation);

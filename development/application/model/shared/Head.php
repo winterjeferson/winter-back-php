@@ -9,20 +9,20 @@ class Head
 {
     public function __construct()
     {
-        $this->objSession = new Session();
-        $this->objRoute = new Route();
     }
 
     function build()
     {
+        $objSession = new Session();
+
         $arr = [
             'urlMain' => $GLOBALS['globalUrl'],
             'urlFrontEnd' => $GLOBALS['globalUrlFrontEnd'],
-            'lang' => $this->objSession->get('language'),
-            'title' => $this->objSession->getArray('translation', 'metaTitle'),
-            'description' => $this->objSession->getArray('translation', 'metaDescription'),
-            'author' => $this->objSession->getArray('translation', 'metaAuthor'),
-            'keywords' => $this->objSession->getArray('translation', 'metaKeywords'),
+            'lang' => $objSession->get('language'),
+            'title' => $objSession->getArray('translation', 'metaTitle'),
+            'description' => $objSession->getArray('translation', 'metaDescription'),
+            'author' => $objSession->getArray('translation', 'metaAuthor'),
+            'keywords' => $objSession->getArray('translation', 'metaKeywords'),
             'admin' => $this->verifyAdmin(),
         ];
 
@@ -31,7 +31,8 @@ class Head
 
     function verifyAdmin()
     {
-        $isAdmin = $this->objRoute->verifyInUrl('admin');
+        $objRoute = new Route();
+        $isAdmin = $objRoute->verifyInUrl('admin');
         $return = '';
 
         if ($isAdmin) {
@@ -39,6 +40,7 @@ class Head
             $return .= '<link href="' . $GLOBALS['globalUrl'] . 'assets/css/wb-admin.css" rel="stylesheet">';
             $return .= '<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>';
             $return .= '<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">';
+            $return .= '<script src="' . $GLOBALS['globalUrl'] . 'assets/js/wb-admin.js"></script>';
         }
 
         return $return;

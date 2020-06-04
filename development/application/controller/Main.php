@@ -10,6 +10,8 @@ class Main
 
     public function renderModel($data)
     {
+        $arrReturn = [];
+
         foreach ($data as $key => &$value) {
             $namespace = 'Application\Model\\' . ucfirst($value['folder']) . '\\';
 
@@ -25,9 +27,7 @@ class Main
     public function renderView($data)
     {
         $arrDefinedVars = get_defined_vars();
-        ob_start();
         $arrContent = $arrDefinedVars['data']['model'];
         require __DIR__ . '/../view/' . $data['folder'] . '/' . $data['file'] . '.php';
-        return ob_get_clean();
     }
 }

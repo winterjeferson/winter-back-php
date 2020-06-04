@@ -26,8 +26,8 @@ class Main
 
     public function renderView($data)
     {
-        ob_start();
+        $arrDefinedVars = get_defined_vars();
+        $arrContent = $arrDefinedVars['data']['model'];
         require __DIR__ . '/../view/' . $data['folder'] . '/' . $data['file'] . '.php';
-        return ob_get_clean();
     }
 }
