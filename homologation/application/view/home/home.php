@@ -20,5 +20,6 @@ include __DIR__ . '/../shared/header.php';
     </section>
 </main>
 <?php
+include __DIR__ . '/../shared/signature.php';
 include __DIR__ . '/../shared/footer.php';
 ?>

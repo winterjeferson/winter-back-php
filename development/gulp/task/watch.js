@@ -10,7 +10,7 @@ var wb_php = require('./wb-php.js');
 
 gulp.task('default', function () {
 
-    gulp.watch(wb_application.fileApplication, gulp.series('wb_application'))
+    gulp.watch(wb_application.fileApplicationWatch, gulp.series('wb_application'))
         .on('change', function (evt) {
             console.log(evt);
         });

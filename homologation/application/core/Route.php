@@ -9,7 +9,7 @@ class Route
     public function __construct()
     {
     }
-    
+
     public function build()
     {
         $objSession = new Session();
@@ -18,7 +18,6 @@ class Route
         $this->buildLocation();
         $objSession->set('arrUrl', $arrUrl);
 
-        
         $controllerDefault = $this->validateControllerDefault($arrUrl);
         if (!$controllerDefault) {
             $this->build404();
@@ -54,6 +53,7 @@ class Route
             'folder' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
             'controller' => isset($explodeUrl[2]) ? $explodeUrl[2] : '',
         ];
+        $arrUrl['mainLanguage'] = $arrUrl['main'] . $arrUrl['language'] . '/';
 
         $countExplode = count($explodeUrl);
         $countArrReturn = count($arrUrl);
@@ -98,7 +98,7 @@ class Route
     {
         $folder = $arrUrl['folder'];
         $controller = $arrUrl['controller'] === '' ? ucfirst($folder) . '.php' : ucfirst($arrUrl['controller']) . '.php';
-        $file = 'controller/' . $folder . '/' . $controller;
+        $file = 'application/controller/' . $folder . '/' . $controller;
 
         if ($controller === '') {
             return false;
@@ -119,7 +119,7 @@ class Route
     {
         $controller = $arr['controller'] === '' ? ucfirst($arr['folder']) : ucfirst($arr['controller']);
 
-        require 'controller/' . $arr['folder'] . '/' . $controller . '.php';
+        require 'application/controller/' . $arr['folder'] . '/' . $controller . '.php';
 
         $class = 'Application\Controller\\' . ucfirst($arr['folder']) . '\\' . $controller;
 
@@ -129,6 +129,6 @@ class Route
 
     private function build404()
     {
-        return require 'view/404.php';
+        return require 'application/view/404.php';
     }
 }

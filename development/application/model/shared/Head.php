@@ -17,12 +17,12 @@ class Head
 
         $arr = [
             'urlMain' => $GLOBALS['globalUrl'],
+            'urlMainLanguage' => $objSession->getArray('arrUrl', 'mainLanguage'),
             'urlFrontEnd' => $GLOBALS['globalUrlFrontEnd'],
+            'urlBackEnd' => $GLOBALS['globalUrlBackEnd'],
             'lang' => $objSession->get('language'),
-            'title' => $objSession->getArray('translation', 'metaTitle'),
-            'description' => $objSession->getArray('translation', 'metaDescription'),
-            'author' => $objSession->getArray('translation', 'metaAuthor'),
-            'keywords' => $objSession->getArray('translation', 'metaKeywords'),
+            'translation' => $objSession->get('translation'),
+            'translationJson' => json_encode($objSession->get('translation')),
             'admin' => $this->verifyAdmin(),
         ];
 

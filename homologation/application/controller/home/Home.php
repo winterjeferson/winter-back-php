@@ -23,7 +23,6 @@ class Home extends \Application\Controller\Main
         $data = [
             ['id' => 'home', 'folder' => 'home', 'file' => 'home'],
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
-            ['id' => 'footer', 'folder' => 'shared', 'file' => 'footer'],
         ];
 
         return $this->renderModel($data);

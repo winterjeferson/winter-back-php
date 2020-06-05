@@ -30,5 +30,5 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-l
 
-    RewriteRule ^(.+)$ application/index.php?$1 [QSA,L]
+    RewriteRule ^(.+)$ index.php?$1 [QSA,L]
 </IfModule>

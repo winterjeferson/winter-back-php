@@ -14,7 +14,6 @@ class Main
 
         foreach ($data as $key => &$value) {
             $namespace = 'Application\Model\\' . ucfirst($value['folder']) . '\\';
-
             require __DIR__ . '/../model/' . $value['folder'] . '/' . $value['file'] . '.php';
             $class = $namespace . ucfirst($value['file']);
             $obj = new $class();

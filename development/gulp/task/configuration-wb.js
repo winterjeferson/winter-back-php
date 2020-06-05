@@ -1,8 +1,6 @@
-// var projectAdress = 'D:/development/project/';
-var projectAdress = 'E:/development/site/branches/';
+var projectAdress = 'D:/development/project/';
 var projectVersion = '';
-// var projectName = 'winter-back-php/';
-var projectName = 'framework/winter-back-php/';
+var projectName = 'winter-back-php/';
 
 module.exports = {
     projectAdress: projectAdress,

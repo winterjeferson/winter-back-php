@@ -1,11 +1,7 @@
-<?php
-// $objWbUrl = new WbUrl();
-?>
-
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php //echo $objWbUrl->getUrlPage(); ?>home/" class="bt bt-re bt-grey" aria-label="<?php //echo $WbTranslation['home']; ?>">
+            <a href="<?php echo $arrContent['head']['urlMainLanguage']; ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $arrContent['head']['translation']['home']; ?>">
                 <span aria-hidden="true">&#127968;</span>
             </a>
         </div>
@@ -20,16 +16,16 @@
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php //echo $WbTranslation['language']; ?>:</span>
+                            <span class="about mobile-hide"><?php echo $arrContent['head']['translation']['language'];?>:</span>
                         </li>
                         <li>
-                            <select id="translationSelect" aria-label="<?php //echo $WbTranslation['language']; ?>">
+                            <select id="translationSelect" aria-label="<?php echo $arrContent['head']['translation']['language'];?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
                         </li>
                         <li>
-                            <a href="https://github.com/winterjeferson/winter-back-php" target="_blank" rel="noopener" class="bt bt-re bt-green">
+                            <a href="<?php echo $arrContent['head']['urlBackEnd']; ?>" target="_blank" rel="noopener" class="bt bt-re bt-green">
                                 Download (Github)
                             </a>
                         </li>
