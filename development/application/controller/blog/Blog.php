@@ -21,7 +21,6 @@ class Blog extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'home', 'folder' => 'home', 'file' => 'home'],
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
         ];
 
@@ -30,7 +29,10 @@ class Blog extends \Application\Controller\Main
 
     function getView($model)
     {
-        $data = ['folder' => 'blog', 'file' => 'blog', 'model' => $model,];
+        $data = [
+            'template' => ['file' => 'template-default'],
+            'content' => ['id' => 'pageBlog', 'folder' => 'blog', 'file' => 'blog', 'model' => $model],
+        ];
 
         return $this->renderView($data);
     }

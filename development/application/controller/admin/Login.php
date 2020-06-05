@@ -12,7 +12,29 @@ class Login extends \Application\Controller\Main
 
     function build()
     {
-        $this->updateAddress('admin');
-        $this->loadModel('Login');
+        $model = $this->getModel();
+        $view = $this->getView($model);
+
+        echo $view;
+    }
+
+    function getModel()
+    {
+        $data = [
+            ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+        ];
+
+        return $this->renderModel($data);
+    }
+
+    function getView($model)
+    {
+        $data = [
+            'template' => ['file' => 'template-default'],
+            'content' => ['id' => 'pageAdminLogin', 'folder' => 'admin', 'file' => 'login', 'model' => $model],
+        ];
+
+        return $this->renderView($data);
     }
 }

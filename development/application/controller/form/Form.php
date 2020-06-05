@@ -21,7 +21,6 @@ class Form extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'home', 'folder' => 'home', 'file' => 'home'],
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
         ];
 
@@ -30,7 +29,10 @@ class Form extends \Application\Controller\Main
 
     function getView($model)
     {
-        $data = ['folder' => 'form', 'file' => 'form', 'model' => $model,];
+        $data = [
+            'template' => ['file' => 'template-default'],
+            'content' => ['id' => 'pageForm', 'folder' => 'form', 'file' => 'form', 'model' => $model],
+        ];
 
         return $this->renderView($data);
     }

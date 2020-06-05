@@ -30,7 +30,10 @@ class Admin extends \Application\Controller\Main
 
     function getView($model)
     {
-        $data = ['folder' => 'admin', 'file' => 'admin', 'model' => $model,];
+        $data = [
+            'template' => ['file' => 'template-admin'],
+            'content' => ['id' => 'pageAdmin', 'folder' => 'admin', 'file' => 'admin', 'model' => $model],
+        ];
 
         return $this->renderView($data);
     }

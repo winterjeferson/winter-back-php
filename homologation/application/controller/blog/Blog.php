@@ -12,7 +12,28 @@ class Blog extends \Application\Controller\Main
 
     function build()
     {
-        $this->updateAddress('blog');
-        $this->loadModel('Blog');
+        $model = $this->getModel();
+        $view = $this->getView($model);
+
+        echo $view;
+    }
+
+    function getModel()
+    {
+        $data = [
+            ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+        ];
+
+        return $this->renderModel($data);
+    }
+
+    function getView($model)
+    {
+        $data = [
+            'template' => ['file' => 'template-default'],
+            'content' => ['id' => 'pageBlog', 'folder' => 'blog', 'file' => 'blog', 'model' => $model],
+        ];
+
+        return $this->renderView($data);
     }
 }

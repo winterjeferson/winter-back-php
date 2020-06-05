@@ -26,7 +26,7 @@ class Main
     public function renderView($data)
     {
         $arrDefinedVars = get_defined_vars();
-        $arrContent = $arrDefinedVars['data']['model'];
-        require __DIR__ . '/../view/' . $data['folder'] . '/' . $data['file'] . '.php';
+        $arrContent = $arrDefinedVars['data']['content']['model'];
+        require __DIR__ . '/../view/shared/' . $arrDefinedVars['data']['template']['file'] . '.php';
     }
 }

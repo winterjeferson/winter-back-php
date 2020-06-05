@@ -1,30 +1,24 @@
 <?php
-include __DIR__ . '/../shared/head.php';
-include __DIR__ . '/../shared/loading.php';
+// $objWbSession = new WbSession();
+// $metaDataCustom = [
+//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'login')
+// ];
 ?>
-<main class="grid">
-    <?php
-    include __DIR__ . '/../shared/header.php';
-    ?>
-    <section id="mainMenu" class="grid-menu">
-        <?php
-        include __DIR__ . '/../shared/menu.php';
-        ?>
-    </section>
-    <section id="mainContent" class="grid-content">
-        admin login
-        <div id="pageHome" class="row">
-            <div class="col-es-12">
-                <?php
-                include __DIR__ . '/../shared/carousel.php';
-                ?>
-            </div>
+
+<div class="login-wrapper col-middle">
+    <form class="row form form-grey">
+        <div class="col-es-12 form-field">
+            <label for="pageAdminLoginUser">E-mail</label>
+            <input class="input input-email" type="text" value="email@email.com" id="pageAdminLoginUser" maxlength="40" placeholder="E-mail">
         </div>
-    </section>
-    <?php
-    include __DIR__ . '/../shared/signature.php';
-    ?>
-</main>
-<?php
-include __DIR__ . '/../shared/footer.php';
-?>
+        <div class="col-es-12 form-field">
+            <label for="pageAdminLoginPassword"><?php echo $arrContent['head']['translation']['email']; ?></label>
+            <input class="input input-password" type="password" value="123456" maxlength="20" id="pageAdminLoginPassword" placeholder="<?php echo $arrContent['head']['translation']['password']; ?>">
+        </div>
+        <div class="col-es-12 form-field text-right">
+            <button type="button" class="bt bt-re bt-blue" id="pageAdminLoginBt">
+                Login
+            </button>
+        </div>
+    </form>
+</div>

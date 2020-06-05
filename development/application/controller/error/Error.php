@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller\Blog;
+namespace Application\Controller\Error;
 
 require __DIR__ . '/../Main.php';
 
-class Post extends \Application\Controller\Main
+class Error extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -31,7 +31,7 @@ class Post extends \Application\Controller\Main
     {
         $data = [
             'template' => ['file' => 'template-default'],
-            'content' => ['id' => 'pageBlogPost', 'folder' => 'blog', 'file' => 'post', 'model' => $model],
+            'content' => ['id' => 'error', 'folder' => 'error', 'file' => '404', 'model' => $model],
         ];
 
         return $this->renderView($data);

@@ -1,30 +1,54 @@
-<?php
-include __DIR__ . '/../shared/head.php';
-include __DIR__ . '/../shared/loading.php';
-?>
-<main class="grid">
-    <?php
-    include __DIR__ . '/../shared/header.php';
-    ?>
-    <section id="mainMenu" class="grid-menu">
-        <?php
-        include __DIR__ . '/../shared/menu.php';
-        ?>
-    </section>
-    <section id="mainContent" class="grid-content">
-        blog
-        <div id="pageHome" class="row">
-            <div class="col-es-12">
+<div class="container">
+    <div class="row">
+        <section class="col-es-12 col-bi-7 col-first" id="pageBlogLastPost">
+            <h1 class="page-title">
+                <?php echo $arrContent['head']['translation']['lastPost']; ?>
+            </h1>
+            <div class="row blog-list">
                 <?php
-                include __DIR__ . '/../shared/carousel.php';
+                // $list = $objWbBlogList->getList('lastPost');
+                // $json = json_decode($list, true);
+                // echo $json['html'];
                 ?>
             </div>
-        </div>
-    </section>
-    <?php
-    include __DIR__ . '/../shared/signature.php';
-    ?>
-</main>
-<?php
-include __DIR__ . '/../shared/footer.php';
-?>
+            <div class="row">
+                <div class="col-es-12">
+                    <?php
+                    // echo $objWbBlogList->buildLoadMoreButton('lastPost');
+                    ?>
+                </div>
+            </div>
+        </section>
+        <section class="col-es-12 col-bi-5" id="pageBlogMostViewed">
+            <div id="pageBlogMostViewed">
+                <h1 class="page-title">
+                    <?php echo $arrContent['head']['translation']['mostViewed']; ?>
+                </h1>
+                <div class="row blog-list">
+                    <?php
+                    // $list = $objWbBlogList->getList('mostViewed');
+                    // $json = json_decode($list, true);
+                    // echo $json['html'];
+                    ?>
+                </div>
+                <div class="row">
+                    <div class="col-es-12">
+                        <?php
+                        // echo $objWbBlogList->buildLoadMoreButton('mostViewed');
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div id="pageBlogTag">
+                <h1 class="page-title">
+                    <?php echo $arrContent['head']['translation']['tags']; ?>
+                </h1>
+                <ul class="tag-list">
+                    <?php
+                    // echo $objWbBlogTag->getList();
+                    ?>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>

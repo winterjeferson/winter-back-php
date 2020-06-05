@@ -1,25 +1,15 @@
 <?php
-include __DIR__ . '/../shared/head.php';
-include __DIR__ . '/../shared/loading.php';
-include __DIR__ . '/../shared/header.php';
+// $objWbSession = new WbSession();
+// $metaDataCustom = [
+//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel')
+// ];
 ?>
-admin
-<main class="grid">
-    <section id="mainMenu" class="grid-menu">
-        <?php
-        include __DIR__ . '/../shared/menu.php';
-        ?>
-    </section>
-    <section id="mainContent" class="grid-content">
-        <div id="pageHome" class="row">
-            <div class="col-es-12">
-                <?php
-                include __DIR__ . '/../shared/carousel.php';
-                ?>
-            </div>
-        </div>
-    </section>
-</main>
-<?php
-include __DIR__ . '/../shared/footer.php';
-?>
+
+<!-- {% include "include/verify-login.php" %} -->
+
+<div class="col-es-12">
+    <div class="container">
+        <h1 class="page-title"><?php echo $arrContent['head']['translation']['administrativePanel'] ?></h1>
+        <p class="text-center"><?php echo $arrContent['head']['translation']['administrativePanelText'] ?></p>
+    </div>
+</div>

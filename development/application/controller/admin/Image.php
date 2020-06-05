@@ -12,7 +12,29 @@ class Image extends \Application\Controller\Main
 
     function build()
     {
-        $this->updateAddress('admin');
-        $this->loadModel('Image');
+        $model = $this->getModel();
+        $view = $this->getView($model);
+
+        echo $view;
+    }
+
+    function getModel()
+    {
+        $data = [
+            ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+        ];
+
+        return $this->renderModel($data);
+    }
+
+    function getView($model)
+    {
+        $data = [
+            'template' => ['file' => 'template-admin'],
+            'content' => ['id' => 'pageAdminImage', 'folder' => 'admin', 'file' => 'image', 'model' => $model],
+        ];
+
+        return $this->renderView($data);
     }
 }

@@ -1,30 +1,46 @@
 <?php
-include __DIR__ . '/../shared/head.php';
-include __DIR__ . '/../shared/loading.php';
+// $objWbBlogPost = new WbBlogPost();
+// $objWbSession = new WbSession();
+// $objWbHelp = new WbHelp();
+
+// $post = $objWbBlogPost->getPost();
+// $postTitle = $objWbHelp->encode($post['title_' .  $objWbTranslation->getLanguage()]);
+// $postContent = $objWbHelp->encode($post['content_' .  $objWbTranslation->getLanguage()]);
+// $postTag = $objWbBlogPost->buildTag($objWbHelp->encode($post['tag_' .  $objWbTranslation->getLanguage()]));
+
+// $metaDataCustom = [
+//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'blog') . ' - ' . $postTitle
+// ];
 ?>
-<main class="grid">
-    <?php
-    include __DIR__ . '/../shared/header.php';
-    ?>
-    <section id="mainMenu" class="grid-menu">
-        <?php
-        include __DIR__ . '/../shared/menu.php';
-        ?>
-    </section>
-    <section id="mainContent" class="grid-content">
-        post
-        <div id="pageHome" class="row">
-            <div class="col-es-12">
+
+<article class="row">
+    <div class="col-es-12">
+        <div class="container">
+            <h1 class="page-title">
+                post
                 <?php
-                include __DIR__ . '/../shared/carousel.php';
+                // echo $postTitle;
                 ?>
-            </div>
+            </h1>
         </div>
-    </section>
+    </div>
+    <div class="col-es-12">
+        <div class="container">
+            <?php
+            // echo $postContent;
+            ?>
+        </div>
+    </div>
     <?php
-    include __DIR__ . '/../shared/signature.php';
+    // if (!is_null($postTag)) {
+    //     $string = '<div class="col-es-12">';
+    //     $string .= '     <div class="container padding-bi">';
+    //     $string .= '     tags: ';
+    //     $string .= $postTag;
+    //     $string .= '     </div>';
+    //     $string .= '</div>';
+
+    //     echo $string;
+    // }
     ?>
-</main>
-<?php
-include __DIR__ . '/../shared/footer.php';
-?>
+</article>

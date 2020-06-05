@@ -129,6 +129,6 @@ class Route
 
     private function build404()
     {
-        return require 'application/view/404.php';
+        return $this->buildController(['controller' => 'error', 'folder' => 'error']);
     }
 }

@@ -30,7 +30,10 @@ class Home extends \Application\Controller\Main
 
     function getView($model)
     {
-        $data = ['folder' => 'home', 'file' => 'home', 'model' => $model,];
+        $data = [
+            'template' => ['file' => 'template-default'],
+            'content' => ['id' => 'pageHome', 'folder' => 'home', 'file' => 'home', 'model' => $model],
+        ];
 
         return $this->renderView($data);
     }
