@@ -6,15 +6,13 @@
             </h1>
             <div class="row blog-list">
                 <?php
-                // $list = $objWbBlogList->getList('lastPost');
-                // $json = json_decode($list, true);
-                // echo $json['html'];
+                echo $arrContent['blog']['listLasPost'];
                 ?>
             </div>
             <div class="row">
                 <div class="col-es-12">
                     <?php
-                    // echo $objWbBlogList->buildLoadMoreButton('lastPost');
+                    echo $arrContent['blog']['btLoadMore'];
                     ?>
                 </div>
             </div>
@@ -26,15 +24,13 @@
                 </h1>
                 <div class="row blog-list">
                     <?php
-                    // $list = $objWbBlogList->getList('mostViewed');
-                    // $json = json_decode($list, true);
-                    // echo $json['html'];
+                    echo $arrContent['blog']['listMostViewed'];
                     ?>
                 </div>
                 <div class="row">
                     <div class="col-es-12">
                         <?php
-                        // echo $objWbBlogList->buildLoadMoreButton('mostViewed');
+                        echo $arrContent['blog']['btMostViewed'];
                         ?>
                     </div>
                 </div>
@@ -45,7 +41,7 @@
                 </h1>
                 <ul class="tag-list">
                     <?php
-                    // echo $objWbBlogTag->getList();
+                    echo $arrContent['blog']['listTag'];
                     ?>
                 </ul>
             </div>

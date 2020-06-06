@@ -10,14 +10,6 @@ class Form extends \Application\Controller\Main
     {
     }
 
-    function build()
-    {
-        $model = $this->getModel();
-        $view = $this->getView($model);
-
-        echo $view;
-    }
-
     function getModel()
     {
         $data = [

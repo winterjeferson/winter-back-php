@@ -9,19 +9,12 @@ class Blog extends \Application\Controller\Main
     public function __construct()
     {
     }
-
-    function build()
-    {
-        $model = $this->getModel();
-        $view = $this->getView($model);
-
-        echo $view;
-    }
-
+    
     function getModel()
     {
         $data = [
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'blog', 'folder' => 'blog', 'file' => 'blog'],
         ];
 
         return $this->renderModel($data);

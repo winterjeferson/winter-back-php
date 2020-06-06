@@ -9,15 +9,7 @@ class Login extends \Application\Controller\Main
     public function __construct()
     {
     }
-
-    function build()
-    {
-        $model = $this->getModel();
-        $view = $this->getView($model);
-
-        echo $view;
-    }
-
+    
     function getModel()
     {
         $data = [

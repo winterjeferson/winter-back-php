@@ -1,6 +1,7 @@
 <?php
 
 require './application/configuration/helper.php';
+require './application/core/Connection.php';
 require './application/core/Route.php';
 require './application/core/Session.php';
 require './application/core/Translation.php';

@@ -124,7 +124,11 @@ class Route
         $class = 'Application\Controller\\' . ucfirst($arr['folder']) . '\\' . $controller;
 
         $objController = new $class();
-        return $objController->build();
+
+        $model = $objController->getModel();
+        $view = $objController->getView($model);
+
+        echo $view;
     }
 
     private function build404()
