@@ -29,6 +29,7 @@ class En
         'fileDeleteError' => 'Error deleting file',
         'friendlyUrl' => 'Friendly URL',
         'form' => 'Form',
+        'formContact' => 'Contact Form',
         'formSent' => 'Form successfully sent. Wait for the reply.',
         'formProblemSend' => 'There was a problem submitting the form. Please try again later.',
         'home' => 'Home',

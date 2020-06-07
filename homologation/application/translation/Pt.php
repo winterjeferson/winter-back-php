@@ -29,6 +29,7 @@ class PT
         'fileDeleteError' => 'Erro ao excluir o arquivo',
         'friendlyUrl' => 'URL Amigável',
         'form' => 'Formulário',
+        'formContact' => 'Formulário de contato',
         'formSent' => 'Formulário enviado com sucesso. Aguarde o retorno.',
         'formProblemSend' => 'Ocorreu um problema no envio do formulário. Por favor, tente novamente mais tarde.',
         'home' => 'Início',

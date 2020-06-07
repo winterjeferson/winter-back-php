@@ -181,11 +181,10 @@ class WbForm {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
         let parameter =
-            '&c=WbForm' +
-            '&m=sendForm' +
-            '&d=' + JSON.stringify(self.getData());
+            '&method=sendForm' +
+            '&data=' + JSON.stringify(self.getData());
 
         this.$btSend.setAttribute('disabled', 'disabled');
         ajax.open('POST', url, true);
@@ -205,8 +204,8 @@ class WbForm {
          /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let arr = [];
 
-        arr.push(['text', 'text content']);
-        arr.push(['textarea', 'textarea content']);
+        arr.push(this.$form.querySelector('[data-id="email"]').value);
+        arr.push(this.$form.querySelector('[data-id="message"]').value);
 
         return arr;
     }
@@ -430,9 +429,9 @@ class WbUrl {
         return window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
 
-    getController() {
+    getController(obj) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        return globalUrl + 'assets/php/controller.php';
+        return './application/controller/' + obj['folder'] + '/' + obj['file'] + '.php';
     }
 }
 /*removeIf(production)*/

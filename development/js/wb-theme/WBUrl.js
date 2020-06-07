@@ -23,8 +23,8 @@ class WbUrl {
         return window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
 
-    getController() {
+    getController(obj) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        return globalUrl + 'assets/php/controller.php';
+        return './application/controller/' + obj['folder'] + '/' + obj['file'] + '.php';
     }
 }
