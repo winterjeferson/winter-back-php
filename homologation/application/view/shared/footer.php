@@ -5,6 +5,7 @@
     </script>
     <script src='<?php echo $arrContent['head']['urlFrontEnd'] . 'assets/js/wf-plugin.js'; ?>'></script>
     <script src='<?php echo $arrContent['head']['urlMain'] . 'assets/js/wb-theme.js'; ?>'></script>
+    <?php echo $arrContent['head']['admin']; ?>
 </body>
 
 </html>

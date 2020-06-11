@@ -1,25 +1,9 @@
-<?php
-// $objWbBlogPost = new WbBlogPost();
-// $objWbSession = new WbSession();
-// $objWbHelp = new WbHelp();
-
-// $post = $objWbBlogPost->getPost();
-// $postTitle = $objWbHelp->encode($post['title_' .  $objWbTranslation->getLanguage()]);
-// $postContent = $objWbHelp->encode($post['content_' .  $objWbTranslation->getLanguage()]);
-// $postTag = $objWbBlogPost->buildTag($objWbHelp->encode($post['tag_' .  $objWbTranslation->getLanguage()]));
-
-// $metaDataCustom = [
-//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'blog') . ' - ' . $postTitle
-// ];
-?>
-
 <article class="row">
     <div class="col-es-12">
         <div class="container">
             <h1 class="page-title">
-                post
                 <?php
-                // echo $postTitle;
+                echo $arrContent['post']['postTitle'];
                 ?>
             </h1>
         </div>
@@ -27,20 +11,39 @@
     <div class="col-es-12">
         <div class="container">
             <?php
-            // echo $postContent;
+            echo $arrContent['post']['postContent'];
+            $tag = $arrContent['post']['postTag'];
+            
+            if (!is_null($tag)) {
+                $explode = explode('#', $tag);
+                $length = count($explode);
+
+                $string = '<div class="col-es-12">';
+                $string .= '     <div class="container padding-bi">';
+                $string .= '     tags: ';
+                $string = '         <ul class="tag-list">';
+
+                for ($i = 0; $i < $length; $i++) {
+                    if ($explode[$i] !== '') {
+                        $string .= '
+                        <li>
+                            <div class="tag-item tag-grey">
+                                <a href="' . $GLOBALS['globalUrl'] . 'blog-search/&q=' . $explode[$i] . '" class="link link-grey">
+                                    <span class="text">' . $explode[$i] . '</span>
+                                </a>
+                            </div>
+                        </li>
+                    ';
+                    }
+                }
+
+                $string .= '        </ul>';
+                $string .= '     </div>';
+                $string .= '</div>';
+
+                echo $string;
+            }
             ?>
         </div>
     </div>
-    <?php
-    // if (!is_null($postTag)) {
-    //     $string = '<div class="col-es-12">';
-    //     $string .= '     <div class="container padding-bi">';
-    //     $string .= '     tags: ';
-    //     $string .= $postTag;
-    //     $string .= '     </div>';
-    //     $string .= '</div>';
-
-    //     echo $string;
-    // }
-    ?>
 </article>

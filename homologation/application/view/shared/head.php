@@ -39,7 +39,6 @@
     <link href="<?php echo $arrContent['head']['urlFrontEnd'] . 'assets/css/wf-plugin.css' ?>" rel="stylesheet">
     <link href="<?php echo $arrContent['head']['urlFrontEnd'] . 'assets/css/wf-theme.css' ?>" rel="stylesheet">
     <link href="<?php echo $arrContent['head']['urlMain']  . 'assets/css/wb-theme.css' ?>" rel="stylesheet">
-    <?php echo $arrContent['head']['admin']; ?>
 </head>
 
 <body class="overflow-hidden">

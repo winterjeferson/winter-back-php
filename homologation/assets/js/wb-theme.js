@@ -237,7 +237,7 @@ class WbLogin {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('admin-login')) {
+        if (!getUrlWord('login')) {
             return;
         }
 
@@ -281,15 +281,36 @@ class WbLogin {
         return true;
     }
 
+    // let self = this;
+    // let ajax = new XMLHttpRequest();
+    // let url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
+    // let parameter =
+    //     '&method=sendForm' +
+    //     '&data=' + JSON.stringify(self.getData());
+
+    // this.$btSend.setAttribute('disabled', 'disabled');
+    // ajax.open('POST', url, true);
+    // ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    // ajax.onreadystatechange = function () {
+    //     if (ajax.readyState == 4 && ajax.status == 200) {
+    //         self.$btSend.removeAttribute('disabled');
+    //         self.response(ajax.responseText);
+    //     }
+    // }
+
+    // ajax.send(parameter);
+
+
+
     buildLogin() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
-        let parameter = 
-            '&c=WbLogin' + 
-            '&m=doLogin' + 
-            '&email=' + this.$fielEmail.value + 
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'Login' });
+        let parameter =
+            '&method=doLogin' +
+            '&email=' + this.$fielEmail.value +
             '&password=' + this.$fieldPassword.value;
 
         if (!this.validate()) {

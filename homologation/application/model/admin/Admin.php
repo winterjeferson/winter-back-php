@@ -2,17 +2,26 @@
 
 namespace Application\Model\Admin;
 
-// require_once $GLOBALS['globalFolderModel'] . '/Main.php';
+require_once __DIR__ . '/Login.php';
 
 class Admin
-// class Admin extends \Application\Model\Main
 {
     public function __construct()
     {
+        $this->objLogin = new Login();
     }
 
     function build()
     {
-        // return $this->loadView(['folder' => 'admin', 'file' => 'wellcome']);
+        $this->objLogin->verifyLogin();
+
+
+        $arr = [
+            // 'language' => $this->language,
+            // 'listActive' => $arrList['active'],
+            // 'listInactive' => $arrList['inactive'],
+        ];
+
+        return $arr;
     }
 }

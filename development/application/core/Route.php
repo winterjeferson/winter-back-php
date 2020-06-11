@@ -59,8 +59,8 @@ class Route
         $countArrReturn = count($arrUrl);
 
         if ($countExplode >= $countArrReturn) {
-            array_splice($explodeUrl, 0, $countArrReturn - 1);
-
+            array_splice($explodeUrl, 0, $countArrReturn - 2);
+            
             foreach ($explodeUrl as $key => &$value) {
                 $arrUrl['paramether' . $key] = $value;
             }

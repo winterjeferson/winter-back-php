@@ -1,9 +1,49 @@
 <?php
-// $objWbAdminBlog = new WbAdminBlog();
-// $objWbSession = new WbSession();
-// $metaDataCustom = [
-//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'blog')
-// ];
+include __DIR__ . '/admin-layout.php';
+
+function buildListHTML($value, $language)
+{
+    $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+    $explodeTag = explode('#',  encode($value['tag_' . $language]));
+    $lengthExplode = count($explodeTag);
+    $string = '';
+
+    $string .= '
+            <tr>
+                <td class="minimum">' . $value['id'] . '</td>
+                <td class="minimum"><img data-src="assets/img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
+                <td><b>' . encode($value['title_' . $language]) . '</b></td>
+                <td><div class="td-wrapper">' . encode(strip_tags($value['content_' . $language])) . '</div></td>
+                <td class="minimum">' . $value['url_' . $language] . '</td>
+                <td class="minimum">
+        ';
+
+    for ($i = 0; $i < $lengthExplode; $i++) {
+        if ($explodeTag[$i] !== '') {
+            $string .= '<small>#' . $explodeTag[$i] . '</small>';
+            $string .= '<br/>';
+        }
+    }
+
+    $string .= '
+                </td>
+                <td class="minimum"><small>' . $value['date_post_' . $language] . '</small></td>
+                <td class="minimum"><small>' . $value['date_edit_' . $language] . '</small></td>
+                <td class="minimum">
+                    <nav class="menu menu-horizontal">
+                        <ul>
+                            <li>' . buildHTMLBt('edit', $value['id']) . '</li>
+                            <li>' . buildHTMLBt('active', $value['id']) . '</li>
+                            <li>' . buildHTMLBt('delete', $value['id']) . '</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        ';
+
+    return $string;
+}
+
 ?>
 
 <!-- {% include "include/verify-login.php" %} -->
@@ -12,59 +52,12 @@
 
 <div class="col-es-12">
     <section id="pageAdminBlogEdit" class="row">
-        {% set arr = [
-                        {language: 'Pt'},
-                        {language: 'En'}
-                    ] %}
-
-        {% for i in arr %}
-        <div class="col-es-12 col-eb-6">
-            <div class="padding-bi">
-                <div class="card card-es card-grey">
-                    <header>
-                        <h4>
-                            <?php echo $arrContent['head']['translation']['pageAdminBlogTitle']; ?> ({{i.language}})
-                        </h4>
-                    </header>
-                    <div class="row card-body">
-                        <div class="col-es-12">
-                            <div class="padding-re">
-                                <form class="row form form-grey" data-id="formRegister">
-                                    <div class="col-es-12 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['title']; ?></label>
-                                        <input type="text" data-id="fieldTitle{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['title']; ?>">
-                                    </div>
-                                    <div class="col-es-12 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['friendlyUrl']; ?></label>
-                                        <input type="text" data-id="fieldUrl{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['pageAdminBlogTitle']; ?>">
-                                    </div>
-                                    <div class="col-es-12 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['content']; ?></label>
-                                        <textarea id="fieldContent{{i.language}}" data-id="fieldContent{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['content']; ?>"></textarea>
-                                    </div>
-                                    <div class="col-es-12 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['tags']; ?></label>
-                                        <input type="text" data-id="fieldTag{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['pageAdminBlogTagsSeparator']; ?>" placeholder="<?php echo $arrContent['head']['translation']['pageAdminBlogTagsSeparator']; ?>">
-                                    </div>
-                                    <div class="col-es-6 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['datePost']; ?></label>
-                                        <input type="date" data-id="fieldDatePost{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['datePost']; ?>">
-                                    </div>
-                                    <div class="col-es-6 form-field text-left">
-                                        <label><?php echo $arrContent['head']['translation']['dateEdit']; ?></label>
-                                        <input type="date" data-id="fieldDateEdit{{i.language}}" aria-label="<?php echo $arrContent['head']['translation']['dateEdit']; ?>">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <footer>
-                    </footer>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
+        <?php
+        $temp = 'Pt';
+        include __DIR__ . '/blog-form.php';
+        $temp = 'En';
+        include __DIR__ . '/blog-form.php';
+        ?>
 
         <div class="col-es-12" data-id="thumbnailWrapper">
             <div class="padding-bi">
@@ -131,41 +124,11 @@
     </section>
 
     <section id="pageAdminBlogList" class="row">
-        {% set arr = [
-                            {id: 'Active', php: 'active',translation: 'actives'},
-                            {id: 'Inactive', php: 'inactive',translation: 'inactives'}
-                        ] %}
-
-        {% for i in arr %}
-        <div class="col-es-12">
-            <h2 class="page-title">
-                <?php echo $arrContent['head']['translation']['listing']; ?>
-                (<?php echo $arrContent['head']['translation']['{{i.translation | safe}}']; ?>)
-            </h2>
-        </div>
-        <div class="col-es-12">
-            <div class="padding-bi">
-                <table class="table table-grey" data-id="table{{i.id | safe}}">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th><?php echo $arrContent['head']['translation']['thumbnail']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['title']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['content']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['friendlyUrl']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['tags']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['datePost']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['dateEdit']; ?></th>
-                            <th><?php echo $arrContent['head']['translation']['actions']; ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php //echo $objWbAdminBlog->buildReport('{{i.php | safe}}'); 
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {% endfor %}
+        <?php
+        $temp = 'active';
+        include __DIR__ . '/blog-list.php';
+        $temp = 'inactive';
+        include __DIR__ . '/blog-list.php';
+        ?>
     </section>
 </div>

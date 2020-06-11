@@ -21,6 +21,7 @@ class Blog
         $this->objSession = new Session();
         $this->objTag = new Tag();
         $this->language = $this->objSession->get('language');
+        $this->resetSession();
     }
 
     function build()

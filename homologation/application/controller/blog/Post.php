@@ -14,6 +14,7 @@ class Post extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'post', 'folder' => 'blog', 'file' => 'post'],
         ];
 
         return $this->renderModel($data);

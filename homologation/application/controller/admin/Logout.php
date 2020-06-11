@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller\Blog;
+namespace Application\Controller\Admin;
 
 require __DIR__ . '/../Main.php';
 
-class Post extends \Application\Controller\Main
+class Logout extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -14,7 +14,7 @@ class Post extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
-            ['id' => 'post', 'folder' => 'blog', 'file' => 'post'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'logout'],
         ];
 
         return $this->renderModel($data);
@@ -24,7 +24,7 @@ class Post extends \Application\Controller\Main
     {
         $data = [
             'template' => ['file' => 'template-default'],
-            'content' => ['id' => 'pageBlogPost', 'folder' => 'blog', 'file' => 'post', 'model' => $model],
+            'content' => ['id' => 'pageAdminLogin', 'folder' => 'admin', 'file' => 'login', 'model' => $model],
         ];
 
         return $this->renderView($data);
