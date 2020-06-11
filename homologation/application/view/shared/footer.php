@@ -1,6 +1,6 @@
      <script>
-        var globalLanguage = '<?php echo $arrContent['head']['urlMain'] ?>';
-        var globalUrl = '<?php echo $arrContent['head']['lang'] ?>';
+        var globalLanguage = '<?php echo $arrContent['head']['lang'] ?>';
+        var globalUrl = '<?php echo $arrContent['head']['urlMain'] ?>';
         var globalTranslation = <?php echo $arrContent['head']['translationJson']; ?>;
     </script>
     <script src='<?php echo $arrContent['head']['urlFrontEnd'] . 'assets/js/wf-plugin.js'; ?>'></script>

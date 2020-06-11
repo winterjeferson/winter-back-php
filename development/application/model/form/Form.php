@@ -10,6 +10,6 @@ class Form
 
     function build()
     {
-        // return $this->loadView(['folder' => 'form', 'file' => 'form']);
+       
     }
 }

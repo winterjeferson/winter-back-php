@@ -281,35 +281,12 @@ class WbLogin {
         return true;
     }
 
-    // let self = this;
-    // let ajax = new XMLHttpRequest();
-    // let url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
-    // let parameter =
-    //     '&method=sendForm' +
-    //     '&data=' + JSON.stringify(self.getData());
-
-    // this.$btSend.setAttribute('disabled', 'disabled');
-    // ajax.open('POST', url, true);
-    // ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    // ajax.onreadystatechange = function () {
-    //     if (ajax.readyState == 4 && ajax.status == 200) {
-    //         self.$btSend.removeAttribute('disabled');
-    //         self.response(ajax.responseText);
-    //     }
-    // }
-
-    // ajax.send(parameter);
-
-
-
     buildLogin() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'Login' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'LoginData' });
         let parameter =
-            '&method=doLogin' +
             '&email=' + this.$fielEmail.value +
             '&password=' + this.$fieldPassword.value;
 
@@ -320,7 +297,7 @@ class WbLogin {
         this.$buttonLogin.setAttribute('disabled', 'disabled');
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
+        
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 self.$buttonLogin.removeAttribute('disabled');
@@ -335,21 +312,21 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let response = '';
         let $responseElement = this.$page.querySelector('.form');
-
+        
         switch (data) {
             case 'inactive':
-                response = globalTranslation.login_inactive;
+                response = globalTranslation.loginInactive;
                 break;
             case 'problem':
-                response = globalTranslation.login_fail;
+                response = globalTranslation.loginFail;
                 this.$fielEmail.focus();
                 break;
             case 'empty_email':
-                response = globalTranslation.empty_field;
+                response = globalTranslation.emptyField;
                 this.$fielEmail.focus();
                 break;
             case 'empty_password':
-                response = globalTranslation.empty_field;
+                response = globalTranslation.emptyField;
                 this.$fieldPassword.focus();
                 break;
             default:
@@ -447,7 +424,7 @@ class WbUrl {
 
     build(target) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        return window.location = globalUrl + globalLanguage + '/' + target + '/';
+        window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
 
     getController(obj) {

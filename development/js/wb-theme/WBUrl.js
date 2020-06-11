@@ -20,7 +20,7 @@ class WbUrl {
 
     build(target) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        return window.location = globalUrl + globalLanguage + '/' + target + '/';
+        window.location = globalUrl + globalLanguage + '/' + target + '/';
     }
 
     getController(obj) {

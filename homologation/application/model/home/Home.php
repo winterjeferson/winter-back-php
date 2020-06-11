@@ -13,6 +13,7 @@ class Home
         $arr = [
             'title' => 'titulo da pagina',
         ];
+        
         return $arr;
     }
 }
