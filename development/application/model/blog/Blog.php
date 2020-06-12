@@ -9,6 +9,7 @@ require_once __DIR__ . '/Tag.php';
 
 class Blog
 {
+    private $postListLimitTag = 100000000;
     private $postListLimitLastPost = 10;
     private $postListLimitMostViewed = 3;
     private $prefixPagination = 'blogLoadMoreCurrent';
@@ -92,6 +93,16 @@ class Blog
         ';
     }
 
+    function getListQueryTag()
+    {
+        $tag = $this->objSession->getArray('arrUrl', 'paramether0');
+
+        return '
+            AND
+            tag_' . $this->language . ' LIKE "%' . $tag . '%"
+        ';
+    }
+
     function getListQueryMostViewed()
     {
         return '
@@ -161,7 +172,6 @@ class Blog
     function buildLoadMore($target, $result)
     {
         $count = count($result);
-
         if ($count >= $this->{'postListLimit' . ucfirst($target)}) {
             $this->objSession->set($this->prefixLoadMore . $target, true);
         } else {

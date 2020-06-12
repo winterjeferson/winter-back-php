@@ -8,15 +8,14 @@ class Route
 {
     public function __construct()
     {
+        $this->objSession = new Session();
     }
 
     public function build()
     {
-        $objSession = new Session();
-
         $arrUrl = $this->builArrUrl();
         $this->buildLocation();
-        $objSession->set('arrUrl', $arrUrl);
+        $this->objSession->set('arrUrl', $arrUrl);
 
         $controllerDefault = $this->validateControllerDefault($arrUrl);
         if (!$controllerDefault) {
@@ -24,7 +23,7 @@ class Route
             return;
         }
 
-        $isController = $this->buildController($objSession->get('arrUrl'));
+        $isController = $this->buildController($this->objSession->get('arrUrl'));
         if ($isController === false) {
             $this->build404();
             return;
@@ -46,21 +45,22 @@ class Route
     private function builArrUrl()
     {
         $explodeUrl = $this->explodeUrl();
+        $language = $this->objSession->get('language');
+        $arrFixedItem = ['language', 'folder', 'controller'];
+        $countExplode = count($explodeUrl);
+        $countArrReturn = count($arrFixedItem);
 
         $arrUrl = [
             'main' => $GLOBALS['globalUrl'],
-            'language' => isset($explodeUrl[0]) ? $explodeUrl[0] : '',
+            'language' => $language,
             'folder' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
             'controller' => isset($explodeUrl[2]) ? $explodeUrl[2] : '',
+            'mainLanguage' => $GLOBALS['globalUrl'] . $language . '/',
         ];
-        $arrUrl['mainLanguage'] = $arrUrl['main'] . $arrUrl['language'] . '/';
 
-        $countExplode = count($explodeUrl);
-        $countArrReturn = count($arrUrl);
+        if ($countExplode > $countArrReturn) {
+            array_splice($explodeUrl, 0, $countArrReturn);
 
-        if ($countExplode >= $countArrReturn) {
-            array_splice($explodeUrl, 0, $countArrReturn - 2);
-            
             foreach ($explodeUrl as $key => &$value) {
                 $arrUrl['paramether' . $key] = $value;
             }
