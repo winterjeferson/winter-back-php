@@ -17,15 +17,8 @@ class Image
     function build()
     {
         $this->objLogin->verifyLogin();
-        
-        // $list = $this->getList();
-        // $arrList = $this->separateList($list);
-
-        // // var_dump($arrList['inactive']);
-        // // exit;
 
         $arr = [
-            // 'language' => $this->language,
             'listThumbnail' => $this->buildList('thumbnail'),
             'listBanner' => $this->buildList('banner'),
         ];
@@ -35,7 +28,6 @@ class Image
 
     function buildList($path)
     {
-        // $this->objSession = new WbSession();
         $string = '';
         $arrFile = $this->getFile('blog/' . $path);
 

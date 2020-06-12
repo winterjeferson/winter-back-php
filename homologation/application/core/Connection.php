@@ -2,40 +2,31 @@
 
 namespace Application\Core;
 
+
 use PDO;
 
 final class Connection
 {
-
+    
     private static $coon = [];
     private static $instance = [];
-
+    
     private function __construct()
     {
     }
 
     public static function open($dataBase = '')
     {
-        getcwd();
-        $isLocalhost = filter_input(INPUT_SERVER, 'HTTP_HOST') === 'localhost' ? true : false;
-
         if (!isset(self::$instance[$dataBase])) {
             self::$instance[$dataBase] = true;
             $db = [];
-
-            if ($isLocalhost) {
-                $db['user'] = 'root';
-                $db['pass'] = '';
-                $db['name'] = 'wb';
-                $db['host'] = 'localhost';
-                $db['type'] = 'mysql';
-            } else {
-                $db['user'] = '';
-                $db['pass'] = '';
-                $db['name'] = '';
-                $db['host'] = '';
-                $db['type'] = '';
-            }
+            require_once __DIR__ . '/../configuration/dataBase.php';
+            
+            $db['user'] = $dataBaseUser;
+            $db['pass'] = $dataBaseUserPassword;
+            $db['name'] = $dataBaseName;
+            $db['host'] = $dataBaseHost;
+            $db['type'] = $dataBaseType;
 
             $user = isset($db['user']) ? $db['user'] : NULL;
             $pass = isset($db['pass']) ? $db['pass'] : NULL;

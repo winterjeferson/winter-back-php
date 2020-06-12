@@ -23,6 +23,7 @@
 .thumbnail-table {
   text-align: left; }
 
+#modalContent .table img,
 #pageAdminImage .table img,
 #pageAdminBlog .table img {
   width: auto;

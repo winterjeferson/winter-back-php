@@ -62,10 +62,10 @@ gulp.task('wb_application_production_move2', function (done) {
 });
 
 gulp.task('wb_application_minify', function (done) {
-    return gulp
-        .src(configuration.production + application + folderView + '**/*.*')
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest(configuration.production + folderView));
+    // return gulp
+    //     .src(configuration.production + application + folderView + '**/*.*')
+    //     .pipe(htmlmin({ collapseWhitespace: true }))
+    //     .pipe(gulp.dest(configuration.production + folderView));
     done();
 });
 

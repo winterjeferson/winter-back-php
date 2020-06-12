@@ -1,12 +1,13 @@
 <?php
 include __DIR__ . '/admin-layout.php';
 
-function buildListHTML($value, $language)
+function buildListHTML($value, $language, $status)
 {
     $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
     $explodeTag = explode('#',  encode($value['tag_' . $language]));
     $lengthExplode = count($explodeTag);
     $string = '';
+    $btActive = $status === 'active' ? buildHTMLBt('active', $value['id']) : buildHTMLBt('inactive', $value['id']);
 
     $string .= '
             <tr>
@@ -33,7 +34,7 @@ function buildListHTML($value, $language)
                     <nav class="menu menu-horizontal">
                         <ul>
                             <li>' . buildHTMLBt('edit', $value['id']) . '</li>
-                            <li>' . buildHTMLBt('active', $value['id']) . '</li>
+                            <li>' . $btActive . '</li>
                             <li>' . buildHTMLBt('delete', $value['id']) . '</li>
                         </ul>
                     </nav>
@@ -45,8 +46,6 @@ function buildListHTML($value, $language)
 }
 
 ?>
-
-<!-- {% include "include/verify-login.php" %} -->
 
 
 

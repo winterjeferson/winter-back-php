@@ -21,6 +21,7 @@ class En
         'developedBy' => 'Developed by',
         'edit' => 'Edit',
         'editedOn' => 'edited on',
+        'errorAdministrator' => 'An error has occurred. Contact your administrator.',
         'emptyField' => 'This field cannot be empty',
         'email' => 'E-mail',
         'emptyList' => 'Empty list',

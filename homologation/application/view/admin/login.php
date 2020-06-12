@@ -1,10 +1,3 @@
-<?php
-// $objWbSession = new WbSession();
-// $metaDataCustom = [
-//     'title' => $objWbSession->getArray('translation', 'metaTitle') . ': ' . $objWbSession->getArray('translation', 'administrativePanel') . ' - ' . $objWbSession->getArray('translation', 'login')
-// ];
-?>
-
 <div class="login-wrapper col-middle">
     <form class="row form form-grey">
         <div class="col-es-12 form-field">

@@ -152,7 +152,6 @@ class WbAdminBlog {
 
     buildMenuThumbnail() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        // const self = this;
         const $target = this.$contentEditThumbnail.querySelectorAll('.table');
 
         Array.prototype.forEach.call($target, function (table) {
@@ -160,7 +159,7 @@ class WbAdminBlog {
 
             Array.prototype.forEach.call($button, function (item) {
                 item.onclick = function () {
-                    objWfModal.buildModal('ajax', './admin-upload-image-list.php', 'eb');
+                    objWfModal.buildModal('ajax', objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogThumbnail' }), 'eb');
                 }
             });
         });
@@ -219,10 +218,9 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
-            '&c=WbAdminBlog' +
-            '&m=doUpdate' +
+            '&action=doUpdate' +
             '&id=' + self.editId +
             this.buildParameter();
 
@@ -246,10 +244,9 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
-            '&c=WbAdminBlog' +
-            '&m=editLoadData' +
+            '&action=' + 'editLoadData' +
             '&id=' + id;
 
         ajax.open('POST', url, true);
@@ -297,10 +294,9 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
-            '&c=WbAdminBlog' +
-            '&m=doModify' +
+            '&action=doModify' +
             '&status=' + status +
             '&id=' + id;
 
@@ -319,10 +315,9 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
-            '&c=WbAdminBlog' +
-            '&m=doDelete' +
+            '&action=doDelete' +
             '&id=' + id;
 
         ajax.open('POST', url, true);
@@ -375,10 +370,9 @@ class WbAdminBlog {
         }
 
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
-            '&c=WbAdminBlog' +
-            '&m=doSave' +
+            '&action=doSave' +
             this.buildParameter();
 
         ajax.open('POST', url, true);
@@ -397,13 +391,15 @@ class WbAdminBlog {
         let color = '';
         let response = '';
 
+        console.log(data);
+
         switch (data) {
-            case '1':
+            case 'done':
                 location.reload();
                 break;
             default:
                 color = 'red';
-                response = 'Acorreu um erro. Contate o administrador.';
+                response = globalTranslation.error;
                 break;
         }
 

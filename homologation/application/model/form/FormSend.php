@@ -10,15 +10,17 @@ class FormSend extends PhpMailer
 {
     public function __construct()
     {
-        $this->Port = 587;
-        $this->Host = 'smtp.site.com';
-        $this->From = 'email@site.com';
-        $this->FromName = "Site";
-        $this->Username = 'email@site.com';
-        $this->Password = '*********';
-        $this->CharSet = 'UTF-8';
-        $this->SMTPSecure = 'tls';
-        $this->SMTPAuth = true;
+        require __DIR__ . '../../../configuration/email.php';
+
+        $this->Port = $emailPort;
+        $this->Host = $emailHost;
+        $this->From = $emailFrom;
+        $this->FromName = $emailFromName;
+        $this->Username = $emailUsername;
+        $this->Password = $emailPassword;
+        $this->CharSet = $emailCharSet;
+        $this->SMTPSecure = $emailSMTPSecure;
+        $this->SMTPAuth = $emailSMTPAuth;
         $this->IsSMTP();
         $this->IsHTML(true);
     }
@@ -30,13 +32,15 @@ class FormSend extends PhpMailer
 
     private function sendForm()
     {
+        require __DIR__ . '../../../configuration/email.php';
+
         $data = filter_input(INPUT_POST, 'data', FILTER_DEFAULT);
         $json = json_decode($data);
         $this->addReplyTo($json[0]);
         // $t = filter_input(INPUT_POST, 't', FILTER_DEFAULT);
 
-        $this->Subject = 'SITE';
-        $this->AddAddress('receiver@site.com');
+        $this->Subject = $emailTitle;
+        $this->AddAddress($emailReceiver);
         $this->Body = $this->buildHTML($json);
         $this->SendEmail();
 

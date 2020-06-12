@@ -6,7 +6,7 @@
 </div>
 <div class="col-es-12">
     <div class="padding-bi">
-        <table class="table table-grey" data-id="table-<?php echo $temp?>">
+        <table class="table table-grey" data-id="table<?php echo ucfirst($temp); ?>">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -25,7 +25,7 @@
                 $string = '';
 
                 foreach ($arrContent['blog']['list' . ucfirst($temp)] as $key => &$value) {
-                    $string .= buildListHTML($value, $arrContent['blog']['language']);
+                    $string .= buildListHTML($value, $arrContent['blog']['language'], $temp);
                 }
 
                 echo $string;

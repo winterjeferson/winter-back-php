@@ -24,6 +24,7 @@ class PT
         'emptyField' => 'Este campo não pode ficar vazio',
         'email' => 'E-mail',
         'emptyList' => 'Lista vazia',
+        'errorAdministrator' => 'Ocorreu um erro. Contate o administrador.',
         'file' => 'Arquivo',
         'fileDeleted' => 'Arquivo deletado',
         'fileDeleteError' => 'Erro ao excluir o arquivo',
