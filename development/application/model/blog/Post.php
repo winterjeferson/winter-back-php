@@ -2,14 +2,15 @@
 
 namespace Application\Model\Blog;
 
-use Application\Core\Session;
-use Application\Core\Connection;
+require_once __DIR__ . '/../../core/Session.php';
+require_once __DIR__ . '/../../core/Connection.php';
 
 class Post
 {
     public function __construct()
     {
-        $this->objSession = new Session();
+        $this->objSession = new \Application\Core\Session();
+        $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
 
@@ -30,7 +31,6 @@ class Post
 
     function updatePostView($id)
     {
-        $connection = Connection::open();
         $sql = 'UPDATE 
                     blog
                 SET 
@@ -39,13 +39,12 @@ class Post
                     id = ' . $id . '
         ';
 
-        $query = $connection->prepare($sql);
+        $query = $this->connection->prepare($sql);
         $query->execute();
     }
 
     function getPostQuery($id)
     {
-        $connection = Connection::open();
         $sql = 'SELECT 
                     title_' . $this->language . '
                     , content_' . $this->language . '
@@ -58,8 +57,9 @@ class Post
                     id = ' . $id . '
         ';
 
-        $query = $connection->prepare($sql);
+        $query = $this->connection->prepare($sql);
         $query->execute();
-        return $query->fetch($connection::FETCH_ASSOC);
+        
+        return $query->fetch($this->connection::FETCH_ASSOC);
     }
 }

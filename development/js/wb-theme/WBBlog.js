@@ -48,23 +48,21 @@ class WbBlog {
         let parentId = target.parentNode.parentNode.parentNode.getAttribute('id');
         let parentIdString = parentId.substring(this.page.length);
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'blog', 'file': 'LoadMore' });
         let parameter =
-            '&c=WbBlogList' +
-            '&m=buildLoadMoreButtonClick' +
+            // '&c=WbBlogList' +
+            // '&m=buildLoadMoreButtonClick' +
             '&target=' + parentIdString;
 
         target.classList.add('disabled');
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 target.classList.remove('disabled');
                 self.loadMoreSuccess(parentId, ajax.responseText);
             }
         }
-
         ajax.send(parameter);
     }
 

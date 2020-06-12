@@ -2,8 +2,8 @@
 
 namespace Application\Model\Shared;
 
-use Application\Core\Session;
-use Application\Core\Route;
+require_once __DIR__ . '/../../core/Session.php';
+require_once __DIR__ . '/../../core/Route.php';
 
 class Head
 {
@@ -13,7 +13,7 @@ class Head
 
     function build()
     {
-        $objSession = new Session();
+        $objSession = new \Application\Core\Session();
 
         $arr = [
             'urlMain' => $GLOBALS['globalUrl'],
@@ -31,7 +31,7 @@ class Head
 
     function verifyAdmin()
     {
-        $objRoute = new Route();
+        $objRoute = new \Application\Core\Route();
         $isAdmin = $objRoute->verifyInUrl('admin');
         $return = '';
 

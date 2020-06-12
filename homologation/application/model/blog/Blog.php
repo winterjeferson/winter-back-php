@@ -2,10 +2,10 @@
 
 namespace Application\Model\Blog;
 
-use Application\Core\Session;
-use Application\Core\Connection;
-
-require __DIR__ . '/Tag.php';
+require_once __DIR__ . '/../../core/Session.php';
+require_once __DIR__ . '/../../core/Connection.php';
+require_once __DIR__ . '/../../configuration/helper.php';
+require_once __DIR__ . '/Tag.php';
 
 class Blog
 {
@@ -16,19 +16,27 @@ class Blog
     private $suffixPaginationLastPost = 'pageBlogLastPost';
     private $suffixPaginationMostViewed = 'pageBlogMostViewed';
 
-    public function __construct()
+    public function __construct($isLoadMore = false)
     {
-        $this->objSession = new Session();
+        $this->objSession = new \Application\Core\Session();
         $this->objTag = new Tag();
         $this->language = $this->objSession->get('language');
-        $this->resetSession();
+
+        if (!$isLoadMore) {
+            $this->resetSession();
+        }
     }
 
     function build()
     {
+        $listLastPost = $this->getList('LastPost');
+        $listMostViewed = $this->getList('MostViewed');
+        $listDecodeLastPost = json_decode($listLastPost, true);
+        $listDecodeMostViewed = json_decode($listMostViewed, true);
+
         $arr = [
-            'listLasPost' => $this->getList('LastPost'),
-            'listMostViewed' => $this->getList('MostViewed'),
+            'listLasPost' => $listDecodeLastPost['html'],
+            'listMostViewed' => $listDecodeMostViewed['html'],
             'listTag' => $this->objTag->getList(),
             'btLoadMore' => $this->buildLoadMoreButton('LastPost'),
             'btMostViewed' => $this->buildLoadMoreButton('MostViewed'),
@@ -44,12 +52,12 @@ class Blog
         $this->buildLoadMore($target, $query);
         $html = $this->buildHtml($query);
 
-        return $html;
+        return json_encode(['html' => $html, 'loadMore' => $this->objSession->get($this->prefixLoadMore . $target)]);
     }
 
     function getListQueryDefault($queryAdd)
     {
-        $connection = Connection::open();
+        $connection = \Application\Core\Connection::open();
         $sql = 'SELECT 
                     id
                     ,title_' . $this->language . '
@@ -99,18 +107,15 @@ class Blog
     {
         $string = '';
 
-        if (count($query) === 0) {
-            $string .= '<h2 class="color-red text-center">' . $this->objWbSession->getArray('translation', 'noResult') . '</h2>';
-        } else {
-            foreach ($query as $key => $value) {
-                $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
-                $dateEdit = $value['date_edit_' . $this->language];
-                $datePost = $value['date_post_' . $this->language];
-                $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $this->objWbSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
-                $url = $this->language . '/blog/post/' . $value['id'] . '/' . $value['url_' . $this->language] . '/';
-                $removeImage = strip_tags($value['content_' . $this->language]);
+        foreach ($query as $key => $value) {
+            $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+            $dateEdit = $value['date_edit_' . $this->language];
+            $datePost = $value['date_post_' . $this->language];
+            $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $this->objSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
+            $url = $this->language . '/blog/post/' . $value['id'] . '/' . $value['url_' . $this->language] . '/';
+            $removeImage = strip_tags($value['content_' . $this->language]);
 
-                $string .= '
+            $string .= '
                     <article>
                         <div class="blog-list-image">
                             <img class="img-responsive" data-src="assets/img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
@@ -131,7 +136,6 @@ class Blog
                         </div>
                     </article>
                 ';
-            }
         }
 
         return $string;
@@ -145,9 +149,12 @@ class Blog
 
     function setSession($target)
     {
+        $valueCurrent = $this->objSession->get($this->prefixPagination . $this->{'suffixPagination' . $target});
+        $valueNew = $this->{'postListLimit' . $target};
+
         $this->objSession->set(
             $this->prefixPagination  . $this->{'suffixPagination' . $target},
-            $this->objSession->get($this->prefixPagination . $this->{'suffixPagination' . $target}) + $this->{'postListLimit' . $target}
+            $valueCurrent + $valueNew
         );
     }
 
@@ -175,12 +182,12 @@ class Blog
         }
     }
 
-
     function buildLoadMoreButtonClick()
     {
         $target = filter_input(INPUT_POST, 'target', FILTER_SANITIZE_EMAIL);
 
         $this->setSession($target);
+
         return $this->getList(lcfirst($target));
     }
 }

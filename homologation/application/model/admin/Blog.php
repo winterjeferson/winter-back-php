@@ -2,9 +2,8 @@
 
 namespace Application\Model\Admin;
 
-use Application\Core\Session;
-use Application\Core\Connection;
-
+require_once __DIR__ . '/../../core/Session.php';
+require_once __DIR__ . '/../../core/Connection.php';
 require_once __DIR__ . '/Login.php';
 
 class Blog
@@ -14,7 +13,8 @@ class Blog
     public function __construct()
     {
         $this->objLogin = new Login();
-        $this->objWbSession = new Session();
+        $this->objWbSession = new \Application\Core\Session();
+        $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objWbSession->get('language');
     }
 
@@ -48,7 +48,6 @@ class Blog
         //     ],
         // ]);
 
-        $connection = Connection::open();
         $sql = 'SELECT 
                     *
                 FROM 
@@ -57,9 +56,9 @@ class Blog
                     -- by id DESC
         ';
 
-        $query = $connection->prepare($sql);
+        $query = $this->connection->prepare($sql);
         $query->execute();
-        $result = $query->fetchAll($connection::FETCH_ASSOC);
+        $result = $query->fetchAll($this->connection::FETCH_ASSOC);
 
         return $result;
     }
@@ -326,7 +325,7 @@ class Blog
 
 
         $query = $objWbQuery->select();
-        $queryResult = $query->fetch(PDO::FETCH_ASSOC);
+        $queryResult = $query->fetch($this->connection::FETCH_ASSOC);
 
         return $objHelp->buildJson($queryResult);
     }

@@ -17,24 +17,25 @@ class WbAdmin {
 
     updateVariable() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$page = document.querySelector('#page_admin');
+        this.$page = document.querySelector('#mainContent');
 
         if (!document.contains(this.$page)) {
             return;
         }
 
-        this.$btBlog = this.$page.querySelector('[data-id="btBlog"]');
-        this.$btLogout = this.$page.querySelector('[data-id="btLogout"]');
+        this.$btBlog = this.$page.querySelector('[data-id="btAdminBlog"]');
+        this.$btUpload = this.$page.querySelector('[data-id="btAdminImage"]');
+        this.$btLogout = this.$page.querySelector('[data-id="btAdminLogout"]');
     }
 
-    buildMenuChangePage(page) {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.buildMenuDifeneActive(page);
+    // buildMenuChangePage(page) {
+    //     /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+    //     this.buildMenuDifeneActive(page);
 
-        if (page !== 'admin-logout') {
-            window.location.href = page + '/';
-        }
-    }
+    //     if (page !== 'admin-logout') {
+    //         window.location.href = page + '/';
+    //     }
+    // }
 
     buildMenuDifeneActive() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
@@ -43,7 +44,8 @@ class WbAdmin {
         let split = href.split('/');
         let length = split.length;
         let target = split[length - 2];
-        let selector = document.querySelector('#pageAdminBlog [data-id="' + target + '"]');
+        let capitalized = target.charAt(0).toUpperCase() + target.slice(1);
+        let selector = document.querySelector('#mainContent [data-id="btAdmin' + capitalized + '"]');
 
         if (selector === null) {
             return;
@@ -52,16 +54,16 @@ class WbAdmin {
         selector.parentNode.classList.add(classActive);
     }
 
-    buildLogout() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let ajax = new XMLHttpRequest();
-        let parameter =
-            '&c=WbLogin' +
-            '&m=doLogout';
+    // buildLogout() {
+    //     /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+    //     let ajax = new XMLHttpRequest();
+    //     let parameter =
+    //         '&c=WbLogin' +
+    //         '&m=doLogout';
 
-        ajax.open('POST', objWbUrl.getController(), true);
-        ajax.send(parameter);
-    }
+    //     ajax.open('POST', objWbUrl.getController(), true);
+    //     ajax.send(parameter);
+    // }
 
     builTableTdWrapper() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/

@@ -14,14 +14,5 @@ class Admin
     function build()
     {
         $this->objLogin->verifyLogin();
-
-
-        $arr = [
-            // 'language' => $this->language,
-            // 'listActive' => $arrList['active'],
-            // 'listInactive' => $arrList['inactive'],
-        ];
-
-        return $arr;
     }
 }

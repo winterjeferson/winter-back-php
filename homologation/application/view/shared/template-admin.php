@@ -28,7 +28,7 @@ include __DIR__ . '/../shared/loading.php';
                             foreach ($arr as $key => &$value) {
                                 $string .= '
                                     <li>
-                                        <a href="' . $arrContent['head']['urlMainLanguage'] . 'admin/' . $value['id'] . '" data-id="admin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
+                                        <a href="' . $arrContent['head']['urlMainLanguage'] . 'admin/' . $value['id'] . '" data-id="btAdmin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
                                             ' . $arrContent['head']['translation'][$value['translation']] . '
                                         </a>
                                     </li>

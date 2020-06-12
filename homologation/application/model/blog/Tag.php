@@ -2,14 +2,15 @@
 
 namespace Application\Model\Blog;
 
-use Application\Core\Connection;
-use Application\Core\Session;
+require_once __DIR__ . '/../../core/Session.php';
+require_once __DIR__ . '/../../core/Connection.php';
 
 class Tag
 {
     public function __construct()
     {
-        $this->objSession = new Session();
+        $this->objSession = new \Application\Core\Session();
+        $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
 
@@ -23,7 +24,6 @@ class Tag
 
     function buildQuery()
     {
-        $connection = Connection::open();
         $sql = 'SELECT 
                     tag_' . $this->language . '
                 FROM blog
@@ -33,9 +33,9 @@ class Tag
                     tag_' . $this->language . ' != ""
         ';
 
-        $query = $connection->prepare($sql);
+        $query = $this->connection->prepare($sql);
         $query->execute();
-        $result = $query->fetchAll($connection::FETCH_ASSOC);
+        $result = $query->fetchAll($this->connection::FETCH_ASSOC);
 
         return $result;
     }
