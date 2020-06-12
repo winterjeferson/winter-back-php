@@ -2,7 +2,7 @@
 
 namespace Application\Controller\Blog;
 
-require __DIR__ . '/../Main.php';
+require_once __DIR__ . '/../Main.php';
 
 class LoadMore extends \Application\Controller\Main
 {
@@ -20,6 +20,6 @@ class LoadMore extends \Application\Controller\Main
     }
 }
 
-$objLoadMore = new LoadMore();
-$data = $objLoadMore->getModel();
+$obj = new LoadMore();
+$data = $obj->getModel();
 echo $data['loadMore'];

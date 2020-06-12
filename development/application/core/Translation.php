@@ -39,13 +39,12 @@ class Translation
         }
     }
 
-    private function translate()
+    public function translate()
     {
         $language = ucfirst($this->objSession->get('language'));
         $namespace = '\Application\Translation\\';
         $class = $namespace . $language;
-        require __DIR__ . '/../translation/' . $language . '.php';
-        // var_dump($namespace . $class);
+        require_once __DIR__ . '/../translation/' . $language . '.php';
         $translation = new $class();
 
         $this->objSession->set('translation', $translation->translation);

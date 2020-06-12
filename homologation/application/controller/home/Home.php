@@ -2,7 +2,7 @@
 
 namespace Application\Controller\Home;
 
-require __DIR__ . '/../Main.php';
+require_once __DIR__ . '/../Main.php';
 
 class Home extends \Application\Controller\Main
 {
@@ -13,7 +13,6 @@ class Home extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'home', 'folder' => 'home', 'file' => 'home'],
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
         ];
 

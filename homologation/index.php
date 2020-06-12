@@ -1,6 +1,6 @@
 <?php
 
-require './application/configuration/helper.php';
+require_once './application/configuration/helper.php';
 $arrFile = glob('./application/core/*.php');
 
 foreach ($arrFile as $file) {

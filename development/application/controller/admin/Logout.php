@@ -2,7 +2,7 @@
 
 namespace Application\Controller\Admin;
 
-require __DIR__ . '/../Main.php';
+require_once __DIR__ . '/../Main.php';
 
 class Logout extends \Application\Controller\Main
 {

@@ -119,7 +119,7 @@ class Route
     {
         $controller = $arr['controller'] === '' ? ucfirst($arr['folder']) : ucfirst($arr['controller']);
 
-        require 'application/controller/' . $arr['folder'] . '/' . $controller . '.php';
+        require_once 'application/controller/' . $arr['folder'] . '/' . $controller . '.php';
 
         $class = 'Application\Controller\\' . ucfirst($arr['folder']) . '\\' . $controller;
 

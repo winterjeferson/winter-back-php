@@ -2,7 +2,7 @@
 
 namespace Application\Controller\Blog;
 
-require __DIR__ . '/../Main.php';
+require_once __DIR__ . '/../Main.php';
 
 class Post extends \Application\Controller\Main
 {

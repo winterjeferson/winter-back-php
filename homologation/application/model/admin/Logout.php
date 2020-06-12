@@ -2,7 +2,7 @@
 
 namespace Application\Model\Admin;
 
-require __DIR__ . '/Login.php';
+require_once __DIR__ . '/Login.php';
 
 use Application\Core\Session;
 use Application\Model\Admin\Login;

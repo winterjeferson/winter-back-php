@@ -14,7 +14,7 @@ class Main
 
         foreach ($data as $key => &$value) {
             $namespace = 'Application\Model\\' . ucfirst($value['folder']) . '\\';
-            require __DIR__ . '/../model/' . $value['folder'] . '/' . $value['file'] . '.php';
+            require_once __DIR__ . '/../model/' . $value['folder'] . '/' . $value['file'] . '.php';
             $class = $namespace . ucfirst($value['file']);
             $obj = new $class();
             $arrReturn[$value['id']] = $obj->build();
@@ -27,6 +27,6 @@ class Main
     {
         $arrDefinedVars = get_defined_vars();
         $arrContent = $arrDefinedVars['data']['content']['model'];
-        require __DIR__ . '/../view/shared/' . $arrDefinedVars['data']['template']['file'] . '.php';
+        require_once __DIR__ . '/../view/shared/' . $arrDefinedVars['data']['template']['file'] . '.php';
     }
 }

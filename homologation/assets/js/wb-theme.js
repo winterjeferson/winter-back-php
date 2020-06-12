@@ -370,10 +370,8 @@ class WbTranslation {
     change(language) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController();
+        let url = objWbUrl.getController({ 'folder': 'theme', 'file': 'Translation' });
         let parameter =
-            '&c=WbTranslation' +
-            '&m=change' +
             '&language=' + language;
 
         ajax.open('POST', url, true);

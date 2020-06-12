@@ -2,7 +2,7 @@
 
 namespace Application\Controller\Error;
 
-require __DIR__ . '/../Main.php';
+require_once __DIR__ . '/../Main.php';
 
 class Error extends \Application\Controller\Main
 {
