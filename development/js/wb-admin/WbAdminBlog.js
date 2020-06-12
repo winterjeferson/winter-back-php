@@ -5,7 +5,7 @@ class WbAdminBlog {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('admin-blog')) {
+        if (!getUrlWord('blog')) {
             return;
         }
 
@@ -69,7 +69,7 @@ class WbAdminBlog {
 
     buildMenuThumbnail() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        const self = this;
+        // const self = this;
         const $target = this.$contentEditThumbnail.querySelectorAll('.table');
 
         Array.prototype.forEach.call($target, function (table) {

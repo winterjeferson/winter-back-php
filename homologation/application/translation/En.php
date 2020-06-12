@@ -57,7 +57,7 @@ class En
         'noResult' => 'No results for this search',
         'pageAdminBlogTitle' => 'Register Blog',
         'pageAdminBlogTagsSeparator' => 'Separate by: #',
-        'pageInitialLanguage' => 'PHP, MySql, Nunjucks',
+        'pageInitialLanguage' => 'PHP, MySql, MVC',
         'password' => 'Password',
         'previous' => 'Previous',
         'recommendedSize150' => 'Recommended size: 300px X 150px',

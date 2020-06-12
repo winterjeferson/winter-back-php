@@ -88,7 +88,7 @@ class WbAdminBlog {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('admin-blog')) {
+        if (!getUrlWord('blog')) {
             return;
         }
 
@@ -152,7 +152,7 @@ class WbAdminBlog {
 
     buildMenuThumbnail() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        const self = this;
+        // const self = this;
         const $target = this.$contentEditThumbnail.querySelectorAll('.table');
 
         Array.prototype.forEach.call($target, function (table) {
@@ -458,7 +458,7 @@ class WbAdminUploadImage {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('admin-upload-image')) {
+        if (!getUrlWord('image')) {
             return;
         }
 
@@ -509,12 +509,10 @@ class WbAdminUploadImage {
         let path = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('data-path');
         let $return = this.deleteElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
 
-        data.append('c', 'WbAdminUploadImage');
-        data.append('m', 'delete');
         data.append('f', file);
         data.append('p', path);
 
-        ajax.open('POST', objWbUrl.getController());
+        ajax.open('POST', objWbUrl.getController({ 'folder': 'admin', 'file': 'ImageDelete' }));
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
@@ -534,15 +532,13 @@ class WbAdminUploadImage {
         const data = new FormData();
         const ajax = new XMLHttpRequest();
         const file = $file.files[0];
-        const url = objWbUrl.getController();
+        const url = objWbUrl.getController({ 'folder': 'admin', 'file': 'ImageUpload' });
 
         if ($file.files.length === 0) {
             $file.click();
             return;
         }
 
-        data.append('c', 'WbAdminUploadImage');
-        data.append('m', 'upload');
         data.append('p', path);
         data.append('f', file);
 

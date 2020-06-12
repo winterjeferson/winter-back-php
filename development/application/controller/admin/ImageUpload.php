@@ -4,7 +4,7 @@ namespace Application\Controller\Admin;
 
 require __DIR__ . '/../Main.php';
 
-class LoginData extends \Application\Controller\Main
+class ImageUpload extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -13,13 +13,13 @@ class LoginData extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'loginData'],
+            ['id' => 'image', 'folder' => 'admin', 'file' => 'ImageUpload'],
         ];
 
         return $this->renderModel($data);
     }
 }
 
-$obj = new LoginData();
+$obj = new ImageUpload();
 $data = $obj->getModel();
-echo $data['admin'];
+echo $data['image'];

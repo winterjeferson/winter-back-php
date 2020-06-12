@@ -20,6 +20,6 @@ class LoginData extends \Application\Controller\Main
     }
 }
 
-$objLoginData = new LoginData();
-$data = $objLoginData->getModel();
+$obj = new LoginData();
+$data = $obj->getModel();
 echo $data['admin'];

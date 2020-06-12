@@ -23,6 +23,7 @@
 .thumbnail-table {
   text-align: left; }
 
+#pageAdminImage .table img,
 #pageAdminBlog .table img {
   width: auto;
   height: 50px; }

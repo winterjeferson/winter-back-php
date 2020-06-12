@@ -26,7 +26,7 @@
                                 <nav class="menu menu-horizontal text-right">
                                     <ul>
                                         <li>
-                                            <button type="button" class="bt bt-re bt-green" data-id="btUpload <?php echo ucfirst($temp); ?>">
+                                            <button type="button" class="bt bt-re bt-green" data-id="btUpload<?php echo ucfirst($temp); ?>">
                                                 <?php echo $arrContent['head']['translation']['send']; ?>
                                             </button>
                                         </li>

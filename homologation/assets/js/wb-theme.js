@@ -112,8 +112,6 @@ class WbBlog {
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'blog', 'file': 'LoadMore' });
         let parameter =
-            // '&c=WbBlogList' +
-            // '&m=buildLoadMoreButtonClick' +
             '&target=' + parentIdString;
 
         target.classList.add('disabled');

@@ -57,7 +57,7 @@ class PT
         'noResult' => 'Sem resultados para esta busca',
         'pageAdminBlogTitle' => 'Cadastrar Blog',
         'pageAdminBlogTagsSeparator' => 'Separar por: #',
-        'pageInitialLanguage' => 'PHP, MySql, Nunjucks',
+        'pageInitialLanguage' => 'PHP, MySql, MVC',
         'password' => 'Senha',
         'previous' => 'Anterior',
         'recommendedSize150' => 'Tamanho recomendado: 300px X 150px',
