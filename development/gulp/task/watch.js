@@ -1,10 +1,8 @@
 var gulp = require('gulp');
-
 var wb_application = require('./wb-application.js');
 var wb_css = require('./wb-css.js');
 var wb_js = require('./wb-js.js');
 var wb_other = require('./wb-other.js');
-var wb_php = require('./wb-php.js');
 
 
 
@@ -43,13 +41,6 @@ gulp.task('default', function () {
 
 
     gulp.watch(wb_other.fileOther, gulp.series('wb_other'))
-        .on('change', function (evt) {
-            console.log(evt);
-        });
-
-
-
-    gulp.watch(wb_php.filePHP, gulp.series('wb_php'))
         .on('change', function (evt) {
             console.log(evt);
         });

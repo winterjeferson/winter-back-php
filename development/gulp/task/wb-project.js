@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var del = require('del'); //npm install del --save-dev //https://www.npmjs.com/package/del
-
 var configuration = require('./configuration-wb.js');
 
 

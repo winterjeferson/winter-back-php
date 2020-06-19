@@ -3,36 +3,21 @@ var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https
 var uglify = require("gulp-uglifyes");//npm install gulp-uglifyes --save-dev //https://www.npmjs.com/package/gulp-uglifyes
 var removeCode = require('gulp-remove-code');//npm install gulp-remove-code --save-dev https://www.npmjs.com/package/gulp-remove-code
 var babel = require('gulp-babel'); //npm install --save-dev gulp-babel @babel/core @babel/preset-env //https://www.npmjs.com/package/gulp-babel
-
 var configuration = require('./configuration-wb.js');
-
 
 
 
 var fileJs_wb_DefaultFinal = 'wb-theme.js';
 var fileJs_wb_AdminFinal = 'wb-admin.js';
-
 var fileJs_wb_ = [
     configuration.development + 'js/shared/**/*.*',
     configuration.development + 'js/wb-theme/**/*.*',
     configuration.development + 'js/wb-main.js'
 ];
-
 var fileJs_wb_admin_ = [
     configuration.development + 'js/wb-admin/**/*.*',
     configuration.development + 'js/wb-main-admin.js'
 ];
-
-// var fileJs_wb_Final = [
-//     configuration.homologation + configuration.assets + 'js/' + fileJs_wb_DefaultFinal
-// ];
-
-// var fileJs_wb_admin_Final = [
-//     configuration.homologation + configuration.assets + 'js/' + fileJs_wb_AdminFinal
-// ];
-
-
-
 
 
 

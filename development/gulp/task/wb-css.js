@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');//npm install gulp-sass --save-dev // https://www.npmjs.com/package/gulp-sass/
 var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https://www.npmjs.com/package/gulp-concat/
 var csso = require('gulp-csso');//npm install gulp-csso --save-dev //https://www.npmjs.com/package/gulp-csso/
-
 var configuration = require('./configuration-wb.js');
 var wb_project = require('./wb-project.js');
 var wb_util = require('./wb-util.js');
@@ -17,11 +16,10 @@ var fileCssTheme = [
     configuration.development + 'css/wb-sass/*.scss',
     configuration.development + 'css/wb-theme/*.scss'
 ];
-
 var cssAdminConcat = fileCssAdmin;
 var cssThemeConcat = fileCssTheme;
 var fileAdmin = 'wb-admin';
-var fileTheme = 'wb-theme';
+var fivarheme = 'wb-theme';
 
 
 
@@ -60,13 +58,13 @@ gulp.task('wb_css_admin', gulp.series(
 gulp.task('wb_css_theme_concat', function () {
     return gulp
         .src(cssThemeConcat)
-        .pipe(concat(fileTheme + '.scss'))
+        .pipe(concat(fivarheme + '.scss'))
         .pipe(gulp.dest(configuration.development + 'css/'));
 });
 
 gulp.task('wb_css_theme_sass', function () {
     return gulp
-        .src(configuration.development + 'css/' + fileTheme + '.scss')
+        .src(configuration.development + 'css/' + fivarheme + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'css/'));
 });
