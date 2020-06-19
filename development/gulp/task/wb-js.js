@@ -3,7 +3,7 @@ var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https
 var uglify = require("gulp-uglifyes");//npm install gulp-uglifyes --save-dev //https://www.npmjs.com/package/gulp-uglifyes
 var removeCode = require('gulp-remove-code');//npm install gulp-remove-code --save-dev https://www.npmjs.com/package/gulp-remove-code
 var babel = require('gulp-babel'); //npm install --save-dev gulp-babel @babel/core @babel/preset-env //https://www.npmjs.com/package/gulp-babel
-var configuration = require('./configuration-wb.js');
+var configuration = require('./configuration.js');
 
 
 

@@ -28,15 +28,6 @@ class WbAdmin {
         this.$btLogout = this.$page.querySelector('[data-id="btAdminLogout"]');
     }
 
-    // buildMenuChangePage(page) {
-    //     /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-    //     this.buildMenuDifeneActive(page);
-
-    //     if (page !== 'admin-logout') {
-    //         window.location.href = page + '/';
-    //     }
-    // }
-
     buildMenuDifeneActive() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let classActive = 'menu-tab-active';
@@ -53,17 +44,6 @@ class WbAdmin {
 
         selector.parentNode.classList.add(classActive);
     }
-
-    // buildLogout() {
-    //     /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-    //     let ajax = new XMLHttpRequest();
-    //     let parameter =
-    //         '&c=WbLogin' +
-    //         '&m=doLogout';
-
-    //     ajax.open('POST', objWbUrl.getController(), true);
-    //     ajax.send(parameter);
-    // }
 
     builTableTdWrapper() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/

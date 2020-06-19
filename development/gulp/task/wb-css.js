@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');//npm install gulp-sass --save-dev // https://www.npmjs.com/package/gulp-sass/
 var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https://www.npmjs.com/package/gulp-concat/
 var csso = require('gulp-csso');//npm install gulp-csso --save-dev //https://www.npmjs.com/package/gulp-csso/
-var configuration = require('./configuration-wb.js');
+var configuration = require('./configuration.js');
 var wb_project = require('./wb-project.js');
 var wb_util = require('./wb-util.js');
 
