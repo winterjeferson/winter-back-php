@@ -149,7 +149,7 @@ class Blog
                 ';
         }
 
-        return $string;
+        return removeLineBreak($string);
     }
 
     function resetSession()
@@ -188,7 +188,7 @@ class Blog
                 </button>
             ';
 
-            return $string;
+            return removeLineBreak($string);
         }
     }
 

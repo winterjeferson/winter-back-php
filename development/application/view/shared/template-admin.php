@@ -35,7 +35,7 @@ include __DIR__ . '/../shared/loading.php';
                                 ';
                             }
 
-                            echo $string;
+                            echo removeLineBreak($string);
                             ?>
                         </ul>
                     </nav>

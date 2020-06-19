@@ -12,4 +12,6 @@ How to use it:
 * When it is done, run "gulp wb_deploy" to minify assets at "production" folder.
 * Upload all "production" files to your host.
 
+* Do not forget to close all php tags at "development/application/view/" folder or minify task can be broken
+
 Thats all

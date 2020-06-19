@@ -85,6 +85,6 @@ class Tag
 
         $string .= '</ul>';
 
-        return $string;
+        return removeLineBreak($string);
     }
 }

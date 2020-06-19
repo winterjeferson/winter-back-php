@@ -66,7 +66,7 @@ class BlogThumbnail
             </tr>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 
     function buildListEmpty()
@@ -79,7 +79,7 @@ class BlogThumbnail
             </tr>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 
     function getFile($path)
@@ -136,6 +136,6 @@ class BlogThumbnail
             </div>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 }

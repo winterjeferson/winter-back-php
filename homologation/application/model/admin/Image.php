@@ -68,7 +68,7 @@ class Image
             </tr>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 
     function buildListEmpty()
@@ -81,7 +81,7 @@ class Image
             </tr>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 
     function getFile($path)
@@ -138,6 +138,6 @@ class Image
             </div>
         ';
 
-        return $string;
+        return removeLineBreak($string);
     }
 }

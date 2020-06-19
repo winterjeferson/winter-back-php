@@ -34,3 +34,4 @@ function buildBt($arr, $id)
 
     return $concat;
 }
+?>

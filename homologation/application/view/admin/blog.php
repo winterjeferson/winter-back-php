@@ -42,7 +42,7 @@ function buildListHTML($value, $language, $status)
             </tr>
         ';
 
-    return $string;
+    return removeLineBreak($string);
 }
 
 ?>

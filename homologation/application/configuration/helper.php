@@ -50,6 +50,11 @@ function buildDate($date = '')
     }
 }
 
+function removeLineBreak($string)
+{
+    return preg_replace('/\r|\n/', '', $string);
+}
+
 
 
 

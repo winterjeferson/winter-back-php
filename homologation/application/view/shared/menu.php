@@ -24,7 +24,7 @@
                     ';
                 }
 
-                echo $string;
+                echo removeLineBreak($string);
                 ?>
 
             </ul>

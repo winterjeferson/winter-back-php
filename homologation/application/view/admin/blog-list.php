@@ -28,7 +28,7 @@
                     $string .= buildListHTML($value, $arrContent['blog']['language'], $temp);
                 }
 
-                echo $string;
+                echo removeLineBreak($string);
                 ?>
             </tbody>
         </table>

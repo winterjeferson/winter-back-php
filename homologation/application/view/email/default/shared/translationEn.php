@@ -5,3 +5,4 @@ $arrTranslation = [
     'email' => 'E-mail',
     'message' => 'Message',
 ];
+?>

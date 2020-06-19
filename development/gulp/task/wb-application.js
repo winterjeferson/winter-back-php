@@ -64,7 +64,7 @@ gulp.task('wb_application_minify', function (done) {
     return gulp
         .src(configuration.production + application + folderView + '**/*.*')
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest(configuration.production + folderView));
+        .pipe(gulp.dest(configuration.production + application + folderView));
     done();
 });
 

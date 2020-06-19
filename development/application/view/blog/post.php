@@ -41,7 +41,7 @@
                 $string .= '     </div>';
                 $string .= '</div>';
 
-                echo $string;
+                echo removeLineBreak($string);
             }
             ?>
         </div>
