@@ -2,7 +2,7 @@
 
 namespace Application\Translation;
 
-class PT
+class Pt
 {
     public $translation = [
         'administrativePanel' => 'Painel administrativo',
