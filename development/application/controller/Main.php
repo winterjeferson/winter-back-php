@@ -14,7 +14,7 @@ class Main
 
         foreach ($data as $key => &$value) {
             $namespace = 'Application\Model\\' . ucfirst($value['folder']) . '\\';
-            require_once __DIR__ . '/../model/' . $value['folder'] . '/' . $value['file'] . '.php';
+            require_once __DIR__ . '/../model/' . $value['folder'] . '/' . ucfirst($value['file']) . '.php';
             $class = $namespace . ucfirst($value['file']);
             $obj = new $class();
             $arrReturn[$value['id']] = $obj->build();
