@@ -13,7 +13,7 @@ require __DIR__ . '/shared/header.php';
         <tr>
             <td>
                 <p style="text-align: left;  font-family: Arial, Helvetica, sans-serif; color: #626262; font-size: 16px;">
-                    <b><?php echo $arrTranslation['email']; ?>: </b><?php echo $name; ?>
+                    <b><?php echo $arrTranslation['email']; ?>: </b><?php echo $email ?>
                 </p>
                 <p style="text-align: left;  font-family: Arial, Helvetica, sans-serif; color: #626262; font-size: 16px;">
                     <b><?php echo $arrTranslation['message']; ?>: </b><?php echo $message; ?>

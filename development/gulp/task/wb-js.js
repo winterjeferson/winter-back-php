@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');//npm install gulp-concat --save-dev //https://www.npmjs.com/package/gulp-concat/
 var uglify = require("gulp-uglifyes");//npm install gulp-uglifyes --save-dev //https://www.npmjs.com/package/gulp-uglifyes
 var removeCode = require('gulp-remove-code');//npm install gulp-remove-code --save-dev https://www.npmjs.com/package/gulp-remove-code
-var babel = require('gulp-babel'); //npm install --save-dev gulp-babel @babel/core @babel/preset-env //https://www.npmjs.com/package/gulp-babel
 var configuration = require('./configuration.js');
 
 
@@ -10,8 +9,8 @@ var configuration = require('./configuration.js');
 var fileJs_wb_DefaultFinal = 'wb-theme.js';
 var fileJs_wb_AdminFinal = 'wb-admin.js';
 var fileJs_wb_ = [
-    configuration.development + 'js/shared/**/*.*',
-    configuration.development + 'js/wb-theme/**/*.*',
+    configuration.development + 'js/wb-theme/WbDebug.js',
+    configuration.development + 'js/wb-theme/**/!(WbDebug)*.js',
     configuration.development + 'js/wb-main.js'
 ];
 var fileJs_wb_admin_ = [
@@ -21,13 +20,9 @@ var fileJs_wb_admin_ = [
 
 
 
-// gulp.task('wb_js_babel', function () {
-//     return gulp.src(fileJs_wb_Final)
-//         .pipe(babel({
-//             presets: ['@babel/env']
-//         }))
-//         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'js/'));
-// });
+
+
+
 
 gulp.task('wb_js_default_concat', function () {
     return gulp.src(fileJs_wb_)

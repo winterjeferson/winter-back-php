@@ -36,7 +36,7 @@ class FormSend extends PhpMailer
 
         $data = filter_input(INPUT_POST, 'data', FILTER_DEFAULT);
         $json = json_decode($data);
-        $this->addReplyTo($json[0]);
+        $this->addReplyTo($json[1]);
         // $t = filter_input(INPUT_POST, 't', FILTER_DEFAULT);
 
         $this->Subject = $emailTitle;
@@ -51,7 +51,8 @@ class FormSend extends PhpMailer
     {
         ob_start();
         $name = $json[0];
-        $message = $json[1];
+        $email = $json[1];
+        $message = $json[2];
         $template = require_once __DIR__ . '/../../view/email/default/form.php';
         $content = ob_get_clean();
 
