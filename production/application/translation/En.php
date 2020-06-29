@@ -23,7 +23,7 @@ class En
         'editedOn' => 'edited on',
         'errorAdministrator' => 'An error has occurred. Contact your administrator.',
         'emptyField' => 'This field cannot be empty',
-        'email' => 'E-mail',
+        'email' => 'Email',
         'emptyList' => 'Empty list',
         'file' => 'File',
         'fileDeleted' => 'File deleted',
