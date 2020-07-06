@@ -3,7 +3,7 @@ class WbBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
         this.classlaodMore = 'loadMore';
     }
-
+    
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('blog')) {

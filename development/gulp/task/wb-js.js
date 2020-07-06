@@ -9,13 +9,12 @@ var configuration = require('./configuration.js');
 var fileJs_wb_DefaultFinal = 'wb-theme.js';
 var fileJs_wb_AdminFinal = 'wb-admin.js';
 var fileJs_wb_ = [
-    configuration.development + 'js/wb-theme/WbDebug.js',
-    configuration.development + 'js/wb-theme/**/!(WbDebug)*.js',
-    configuration.development + 'js/wb-main.js'
+    configuration.development + 'js/wb-theme/_WbDebug.js',
+    configuration.development + 'js/wb-theme/**/!(_)*.js',
+    configuration.development + 'js/wb-theme/_main.js'
 ];
 var fileJs_wb_admin_ = [
-    configuration.development + 'js/wb-admin/**/*.*',
-    configuration.development + 'js/wb-main-admin.js'
+    configuration.development + 'js/wb-admin/**/*.*'
 ];
 
 
