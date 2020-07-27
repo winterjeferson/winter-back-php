@@ -3,6 +3,7 @@ var wb_application = require('./wb-application.js');
 var wb_css = require('./wb-css.js');
 var wb_js = require('./wb-js.js');
 var wb_other = require('./wb-other.js');
+var wb_image = require('./wb-image.js');
 
 
 
@@ -44,4 +45,11 @@ gulp.task('default', function () {
         .on('change', function (evt) {
             console.log(evt);
         });
+
+
+    gulp.watch(wb_image.fileImg, gulp.series('wb_image'))
+        .on('change', function (evt) {
+            console.log(evt);
+        });
+
 });

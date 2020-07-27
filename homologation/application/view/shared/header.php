@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col-es-2 text-left">
             <a href="<?php echo $arrContent['head']['urlMainLanguage']; ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $arrContent['head']['translation']['home']; ?>">
-                <span aria-hidden="true">&#127968;</span>
+                <svg class="icon icon-bi">
+                    <use xlink:href="./assets/img/icon.svg#home"></use>
+                </svg>
             </a>
         </div>
         <div class="col-es-10 text-right">
@@ -16,10 +18,10 @@
                             |
                         </li>
                         <li>
-                            <span class="about mobile-hide"><?php echo $arrContent['head']['translation']['language'];?>:</span>
+                            <span class="about mobile-hide"><?php echo $arrContent['head']['translation']['language']; ?>:</span>
                         </li>
                         <li>
-                            <select id="translationSelect" aria-label="<?php echo $arrContent['head']['translation']['language'];?>">
+                            <select id="translationSelect" aria-label="<?php echo $arrContent['head']['translation']['language']; ?>">
                                 <option value="en">English</option>
                                 <option value="pt">Português</option>
                             </select>
