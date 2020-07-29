@@ -37,7 +37,14 @@ gulp.task('wb_image_move', function (done) {
 gulp.task('wb_image_imagemin', function () {
     return gulp
         .src(configuration.homologation + configuration.assets + 'img/**')
-        .pipe(imagemin())
+        .pipe(imagemin([
+            imagemin.svgo({
+                plugins: [
+                    { removeViewBox: true },
+                    { cleanupIDs: false }
+                ]
+            })
+        ]))
         .pipe(gulp.dest(configuration.production + configuration.assets + "img/"));
 });
 

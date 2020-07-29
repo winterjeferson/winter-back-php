@@ -158,7 +158,6 @@ class Route
 
         $model = $objController->getModel();
         $view = $objController->getView($model);
-        var_dump($view);
 
         echo $view;
     }
