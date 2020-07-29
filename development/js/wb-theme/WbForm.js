@@ -1,8 +1,4 @@
 class WbForm {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-    }
-
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('form')) {

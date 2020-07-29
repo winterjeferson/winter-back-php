@@ -8,13 +8,14 @@ class Route
 {
     public function __construct()
     {
+        require_once __DIR__ . '/../configuration/helper.php';
+
         $this->objSession = new Session();
     }
 
     public function build()
     {
         $arrUrl = $this->builArrUrl();
-        $this->buildLocation();
         $this->objSession->set('arrUrl', $arrUrl);
 
         $controllerDefault = $this->validateControllerDefault($arrUrl);
@@ -42,44 +43,73 @@ class Route
 
         return false;
     }
+
     private function builArrUrl()
     {
         $explodeUrl = $this->explodeUrl();
+        $arrUrl = [];
         $language = $this->objSession->get('language');
         $arrFixedItem = ['language', 'folder', 'controller'];
         $countExplode = count($explodeUrl);
         $countArrReturn = count($arrFixedItem);
 
-        $arrUrl = [
-            'main' => $GLOBALS['globalUrl'],
-            'language' => $language,
-            'folder' => isset($explodeUrl[1]) ? $explodeUrl[1] : 'home',
-            'controller' => isset($explodeUrl[2]) ? $explodeUrl[2] : '',
-            'mainLanguage' => $GLOBALS['globalUrl'] . $language . '/',
-        ];
+        $main = $GLOBALS['globalUrl'];
+        $mainLanguage = $main . $language . '/';
+        $folder = isset($explodeUrl[1]) ? $explodeUrl[1] : 'home';
+        $folderUrl = $folder . '/';
+        $controller = isset($explodeUrl[2]) ? $explodeUrl[2] : '';
+        $controllerUrl = isset($explodeUrl[2]) ? $explodeUrl[2] . '/' : '';
+        $parametherUrl = '';
 
         if ($countExplode > $countArrReturn) {
             array_splice($explodeUrl, 0, $countArrReturn);
 
             foreach ($explodeUrl as $key => &$value) {
                 $arrUrl['paramether' . $key] = $value;
+                $parametherUrl .= $value . '/';
             }
         }
+
+        if (!isset($arrUrl['paramether1'])) {
+            foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
+                $this->objSession->unset('urlSeo' . ucfirst($value));
+                $arrUrl[$value] = $main . $value . '/' . $folderUrl . $controllerUrl;
+            }
+        } else {
+            foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
+                $arrUrl[$value] = $main . $value . '/' . $folderUrl . $controllerUrl . $arrUrl['paramether0'] . '/' . $this->objSession->get('urlSeo' . ucfirst($value));
+            }
+        }
+
+        $arrUrl['main'] = $main;
+        $arrUrl['language'] = $language;
+        $arrUrl['folder'] = $folder;
+        $arrUrl['controller'] = $controller;
+        $arrUrl['mainLanguage'] = $mainLanguage;
+        $arrUrl['full'] = $main . $language . '/' . $folderUrl . $controllerUrl . $parametherUrl;
 
         return $arrUrl;
     }
 
-    private function buildLocation()
+    public function buildLocation()
     {
-        $url = $_SERVER['REQUEST_URI'];
-        $lastCharacter = substr($url, -1);
+        $url = $this->objSession->get('arrUrl');
+        $language = $url['mainLanguage'];
+        $folder = $url['folder'] !== '' ? $url['folder'] . '/' : '';
+        $controller = $url['controller'] !== '' ? $url['controller'] . '/' : '';
+        $count =  $this->parametherTotal;
+        $location = $language .  $folder . $controller;
 
-        if ($lastCharacter !== '/') {
-            header('Location: ' . $url . '/');
+        if ($count > 0) {
+            for ($i = 0; $i < $count; $i++) {
+                $location .= $url['paramether' . $i] . '/';
+            }
         }
+
+        return $location;
     }
 
-    private function explodeUrl()
+    public function explodeUrl()
     {
         $queryString =  $_SERVER['QUERY_STRING'];
         $explode = explode('/', $queryString);
@@ -118,8 +148,9 @@ class Route
     private function buildController($arr)
     {
         $controller = $arr['controller'] === '' ? ucfirst($arr['folder']) : ucfirst($arr['controller']);
+        $file = __DIR__ . '/../controller/' . $arr['folder'] . '/' . $controller . '.php';
 
-        require_once 'application/controller/' . $arr['folder'] . '/' . $controller . '.php';
+        require_once $file;
 
         $class = 'Application\Controller\\' . ucfirst($arr['folder']) . '\\' . $controller;
 
@@ -127,6 +158,7 @@ class Route
 
         $model = $objController->getModel();
         $view = $objController->getView($model);
+        var_dump($view);
 
         echo $view;
     }

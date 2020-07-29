@@ -2,29 +2,34 @@
 
 namespace Application\Model\Shared;
 
-require_once __DIR__ . '/../../core/Session.php';
-require_once __DIR__ . '/../../core/Route.php';
-
 class Head
 {
     public function __construct()
     {
+        require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Route.php';
+        require_once __DIR__ . '/../../configuration/helper.php';
+
+        $this->objSession = new \Application\Core\Session();
     }
 
     function build()
     {
-        $objSession = new \Application\Core\Session();
 
         $arr = [
             'urlMain' => $GLOBALS['globalUrl'],
-            'urlMainLanguage' => $objSession->getArray('arrUrl', 'mainLanguage'),
+            'urlMainLanguage' => $this->objSession->getArray('arrUrl', 'mainLanguage'),
             'urlFrontEnd' => $GLOBALS['globalUrlFrontEnd'],
             'urlBackEnd' => $GLOBALS['globalUrlBackEnd'],
-            'lang' => $objSession->get('language'),
-            'translation' => $objSession->get('translation'),
-            'translationJson' => json_encode($objSession->get('translation')),
+            'lang' => $this->objSession->get('language'),
+            'translation' => $this->objSession->get('translation'),
+            'translationJson' => json_encode($this->objSession->get('translation')),
             'admin' => $this->verifyAdmin(),
         ];
+
+        foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
+            $arr['url' . ucfirst($value)] = $this->objSession->getArray('arrUrl', $value);
+        }
 
         return $arr;
     }

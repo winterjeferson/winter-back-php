@@ -2,12 +2,12 @@
 
 namespace Application\Model\Admin;
 
-require_once __DIR__ . '/Login.php';
-
 class Admin
 {
     public function __construct()
     {
+        require_once __DIR__ . '/Login.php';
+        
         $this->objLogin = new Login();
     }
 

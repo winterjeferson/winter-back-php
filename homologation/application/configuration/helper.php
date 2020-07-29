@@ -56,11 +56,6 @@ function removeLineBreak($string)
 }
 
 
-
-
-
-
-
 $timezoneBr = [
     'AC' => 'America/Rio_branco',
     'AL' => 'America/Maceio',
@@ -94,3 +89,4 @@ $globalIsLocalhost = verifyLocalhost();
 $globalUrl = buildGlobalUrl();
 $globalUrlFrontEnd = 'https://winterjeferson.github.io/winter-front/production/';
 $globalUrlBackEnd = 'https://github.com/winterjeferson/winter-back-php/';
+$globalArrLanguage = ['pt', 'en'];

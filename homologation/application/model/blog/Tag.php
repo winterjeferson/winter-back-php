@@ -2,13 +2,13 @@
 
 namespace Application\Model\Blog;
 
-require_once __DIR__ . '/../../core/Session.php';
-require_once __DIR__ . '/../../core/Connection.php';
-
 class Tag
 {
     public function __construct()
     {
+        require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Connection.php';
+        
         $this->objSession = new \Application\Core\Session();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');

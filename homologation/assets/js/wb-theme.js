@@ -143,10 +143,6 @@ class WbBlog {
     }
 }
 class WbForm {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-    }
-
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('form')) {
@@ -226,11 +222,6 @@ class WbForm {
     }
 }
 class WbLogin {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-
-    }
-
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('login')) {
@@ -293,7 +284,7 @@ class WbLogin {
         this.$buttonLogin.setAttribute('disabled', 'disabled');
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        
+
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 self.$buttonLogin.removeAttribute('disabled');
@@ -308,7 +299,7 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let response = '';
         let $responseElement = this.$page.querySelector('.form');
-        
+
         switch (data) {
             case 'inactive':
                 response = globalTranslation.loginInactive;
@@ -347,10 +338,6 @@ class WbManagement {
     }
 }
 class WbTranslation {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-    }
-
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.update();
@@ -360,30 +347,12 @@ class WbTranslation {
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
+        this.$select.addEventListener('change', function () {
+            let selected = this.selectedIndex;
+            let value = this.options[selected].getAttribute('data-url');
 
-        this.$select.addEventListener('change', function (event) {
-            self.change(this.value);
+            window.location.replace(value);
         });
-    }
-
-    change(language) {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'theme', 'file': 'Translation' });
-        let parameter =
-            '&language=' + language;
-
-        ajax.open('POST', url, true);
-        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                location.reload();
-            }
-        }
-
-        ajax.send(parameter);
     }
 
     defineActive() {
@@ -397,11 +366,6 @@ class WbTranslation {
     }
 }
 class WbUrl {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-
-    }
-
     buildSEO(url) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return url.toString()               // Convert to string

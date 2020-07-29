@@ -2,12 +2,12 @@
 
 namespace Application\Model\Blog;
 
-require_once __DIR__ . '/Blog.php';
-
 class TagSearch
 {
     public function __construct()
     {
+        require_once __DIR__ . '/Blog.php';
+
         $this->objBlog = new \Application\Model\Blog\Blog('Tag');
     }
 

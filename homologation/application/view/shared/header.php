@@ -15,15 +15,20 @@
                             <span class="about mobile-hide">v: 1.0.0</span>
                         </li>
                         <li>
-                            |
+                            <span class="mobile-hide">|</span>
                         </li>
                         <li>
                             <span class="about mobile-hide"><?php echo $arrContent['head']['translation']['language']; ?>:</span>
                         </li>
                         <li>
                             <select id="translationSelect" aria-label="<?php echo $arrContent['head']['translation']['language']; ?>">
-                                <option value="en">English</option>
-                                <option value="pt">Português</option>
+                                <?php
+                                $string = '';
+                                foreach ($GLOBALS['globalArrLanguage'] as $key => &$valeu) {
+                                    $string .= '<option value="' . $valeu . '" data-url="' . $arrContent['head']['url' . ucfirst($valeu)] . '">' . $arrContent['head']['translation'][$valeu] . '</option>';
+                                }
+                                echo $string;
+                                ?>
                             </select>
                         </li>
                         <li>

@@ -2,12 +2,12 @@
 
 namespace Application\Model\Admin;
 
-require_once __DIR__ . '/Blog.php';
-
 class BlogEdit
 {
     public function __construct()
     {
+        require_once __DIR__ . '/Blog.php';
+
         $this->objBlog = new \Application\Model\Admin\Blog();
     }
 

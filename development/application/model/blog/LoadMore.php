@@ -2,12 +2,11 @@
 
 namespace Application\Model\Blog;
 
-require_once __DIR__ . '/Blog.php';
-
 class LoadMore
 {
     public function __construct()
     {
+        require_once __DIR__ . '/Blog.php';
     }
 
     function build()

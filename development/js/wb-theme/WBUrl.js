@@ -1,9 +1,4 @@
 class WbUrl {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-
-    }
-
     buildSEO(url) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return url.toString()               // Convert to string

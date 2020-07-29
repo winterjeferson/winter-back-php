@@ -2,11 +2,6 @@
 
 namespace Application\Model\Blog;
 
-require_once __DIR__ . '/../../core/Session.php';
-require_once __DIR__ . '/../../core/Connection.php';
-require_once __DIR__ . '/../../configuration/helper.php';
-require_once __DIR__ . '/Tag.php';
-
 class Blog
 {
     private $postListLimitTag = 100000000;
@@ -16,9 +11,14 @@ class Blog
     private $prefixLoadMore = 'blogIsLoadMore';
     private $suffixPaginationLastPost = 'pageBlogLastPost';
     private $suffixPaginationMostViewed = 'pageBlogMostViewed';
-
+    
     public function __construct($isLoadMore = false)
     {
+        require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../configuration/helper.php';
+        require_once __DIR__ . '/Tag.php';
+        
         $this->objSession = new \Application\Core\Session();
         $this->objTag = new Tag();
         $this->language = $this->objSession->get('language');

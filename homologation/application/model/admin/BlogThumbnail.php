@@ -2,12 +2,12 @@
 
 namespace Application\Model\Admin;
 
-require_once __DIR__ . '/../../core/Session.php';
-
 class BlogThumbnail
 {
     public function __construct()
     {
+        require_once __DIR__ . '/../../core/Session.php';
+
         $this->objSession = new \Application\Core\Session();
     }
 

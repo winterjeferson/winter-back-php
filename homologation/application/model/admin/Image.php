@@ -4,12 +4,12 @@ namespace Application\Model\Admin;
 
 use Application\Core\Session;
 
-require_once __DIR__ .'/Login.php';
-
 class Image
 {
     public function __construct()
     {
+        require_once __DIR__ .'/Login.php';
+
         $this->objLogin = new Login();
         $this->objSession = new Session();
     }

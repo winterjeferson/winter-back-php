@@ -2,15 +2,15 @@
 
 namespace Application\Model\Admin;
 
-require_once __DIR__ . '/../../core/Session.php';
-require_once __DIR__ . '/../../core/Connection.php';
-require_once __DIR__ . '/../../configuration/helper.php';
-require_once __DIR__ . '/Login.php';
-
 class Blog
 {
     public function __construct()
     {
+        require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../configuration/helper.php';
+        require_once __DIR__ . '/Login.php';
+
         $this->objLogin = new Login();
         $this->objWbSession = new \Application\Core\Session();
         $this->connection = \Application\Core\Connection::open();

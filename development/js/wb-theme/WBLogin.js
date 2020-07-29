@@ -1,9 +1,4 @@
 class WbLogin {
-    constructor() {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
-
-    }
-
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('login')) {
@@ -66,7 +61,7 @@ class WbLogin {
         this.$buttonLogin.setAttribute('disabled', 'disabled');
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        
+
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 self.$buttonLogin.removeAttribute('disabled');
@@ -81,7 +76,7 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let response = '';
         let $responseElement = this.$page.querySelector('.form');
-        
+
         switch (data) {
             case 'inactive':
                 response = globalTranslation.loginInactive;
