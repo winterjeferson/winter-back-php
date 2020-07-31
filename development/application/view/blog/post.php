@@ -12,23 +12,26 @@
         <div class="container">
             <?php
             echo $arrContent['post']['postContent'];
+
             $tag = $arrContent['post']['postTag'];
-            
-            if (!is_null($tag)) {
+
+            if (!is_null($tag) && $tag !== '') {
                 $explode = explode('#', $tag);
                 $length = count($explode);
 
-                $string = '<div class="col-es-12">';
-                $string .= '     <div class="container padding-bi">';
-                $string .= '     tags: ';
-                $string = '         <ul class="tag-list">';
+                $string = '
+                    <div class="col-es-12">
+                        <div class="container padding-bi">
+                            tags:
+                            <ul class="tag-list">
+                        ';
 
                 for ($i = 0; $i < $length; $i++) {
                     if ($explode[$i] !== '') {
                         $string .= '
                         <li>
                             <div class="tag-item tag-grey">
-                                <a href="' . $GLOBALS['globalUrl'] . 'blog-search/&q=' . $explode[$i] . '" class="link link-grey">
+                                <a href="' . $arrContent['post']['tagLink'] . 'blog/tag/' . $explode[$i] . '" class="link link-grey">
                                     <span class="text">' . $explode[$i] . '</span>
                                 </a>
                             </div>
@@ -37,9 +40,11 @@
                     }
                 }
 
-                $string .= '        </ul>';
-                $string .= '     </div>';
-                $string .= '</div>';
+                $string .= '
+                            </ul>
+                        </div>
+                    </div>
+                ';
 
                 echo removeLineBreak($string);
             }

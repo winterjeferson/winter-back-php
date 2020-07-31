@@ -6,7 +6,6 @@ class Post
 {
     public function __construct()
     {
-        require_once __DIR__ . '/../../configuration/helper.php';
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
 
@@ -17,7 +16,8 @@ class Post
 
     function build()
     {
-        $id = $this->objSession->getArray('arrUrl', 'paramether0');
+        $arrUrl = $this->objSession->get('arrUrl');
+        $id = $arrUrl['paramether0'];
         $post = $this->getPostQuery($id);
         $this->updatePostView($id);
         $this->setUrlSeo($post);
@@ -26,6 +26,7 @@ class Post
             'postTitle' => $post['title_' . $this->language],
             'postContent' => $post['content_' . $this->language],
             'postTag' => $post['tag_' . $this->language],
+            'tagLink' => $arrUrl['main'] . $arrUrl['language'] . '/',
         ];
 
         return $arr;
@@ -33,8 +34,9 @@ class Post
 
     private function setUrlSeo($content)
     {
-        foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
-            $this->objSession->setArray('urlSeo' . ucfirst($value), $content['url_' . $value]);
+        foreach (getUrArrLanguage() as $key => $value) {
+            $lang = $value['lang'];
+            $this->objSession->setArray('urlSeo' . ucfirst($lang), $content['url_' . $lang]);
         }
     }
 
@@ -58,8 +60,9 @@ class Post
                     , content_{$this->language}
                 ";
 
-        foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
-            $sql .= ', url_' . $value;
+        foreach (getUrArrLanguage() as $key => $value) {
+            $lang = $value['lang'];
+            $sql .= ', url_' . $lang;
         }
 
         $sql .= ", tag_{$this->language}

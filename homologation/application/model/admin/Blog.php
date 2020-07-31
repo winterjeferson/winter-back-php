@@ -8,13 +8,15 @@ class Blog
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
-        require_once __DIR__ . '/../../configuration/helper.php';
+        // require_once __DIR__ . '/../../configuration/helper.php';
+        require_once __DIR__ . '/../../model/shared/SiteMap.php';
         require_once __DIR__ . '/Login.php';
 
         $this->objLogin = new Login();
-        $this->objWbSession = new \Application\Core\Session();
+        $this->objSession = new \Application\Core\Session();
+        $this->objSiteMap = new \Application\Model\Shared\SiteMap();
         $this->connection = \Application\Core\Connection::open();
-        $this->language = $this->objWbSession->get('language');
+        $this->language = $this->objSession->get('language');
     }
 
     function build()
@@ -105,40 +107,60 @@ class Blog
 
     function doUpdate()
     {
+        if ($this->doUpdateSql()) {
+            if ($this->objSiteMap->build('blog')) {
+                return 'done';
+            };
+        } else {
+            return false;
+        }
+    }
+
+    function doUpdateSql()
+    {
         $arr = $this->getValue();
-        $sql = '
-            UPDATE 
-                blog
-            SET 
-                title_pt = "' . $arr['titlePt'] . '"
-                , title_en = "' . $arr['titleEn'] . '"
-                , url_pt = "' . $arr['urlPt'] . '"
-                , url_en = "' . $arr['urlEn'] . '"
-                , content_pt = "' . $arr['contentPt'] . '"
-                , content_en = "' . $arr['contentEn'] . '"
-                , tag_pt = "' . $arr['tagPt'] . '"
-                , tag_en = "' . $arr['tagEn'] . '"
-                , date_post_pt = "' . $arr['datePostPt'] . '"
-                , date_post_en = "' . $arr['datePostEn'] . '"
-                , date_edit_pt = "' . $arr['dateEditPt'] . '"
-                , date_edit_en = "' . $arr['dateEditEn'] . '"
-                , thumbnail = "' . $arr['thumbnail'] . '"
-            WHERE
-                id = ' . $arr['id'] . '
-        ';
+        $sql = "UPDATE 
+                    blog
+                SET 
+                    title_pt = '{$arr['titlePt']}'
+                    , title_en = '{$arr['titleEn']}'
+                    , url_pt = '{$arr['urlPt']}'
+                    , url_en = '{$arr['urlEn']}'
+                    , content_pt = '{$arr['contentPt']}'
+                    , content_en = '{$arr['contentEn']}'
+                    , tag_pt = '{$arr['tagPt']}'
+                    , tag_en = '{$arr['tagEn']}'
+                    , date_post_pt = '{$arr['datePostPt']}'
+                    , date_post_en = '{$arr['datePostEn']}'
+                    , date_edit_pt = '{$arr['dateEditPt']}'
+                    , date_edit_en = '{$arr['dateEditEn']}'
+                    , thumbnail = '{$arr['thumbnail']}'
+                WHERE
+                    id = {$arr['id']}
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return 'done';
+        return true;
     }
 
     function doSave()
     {
+        if ($this->doSaveSql()) {
+            if ($this->objSiteMap->build('blog')) {
+                return 'done';
+            };
+        } else {
+            return false;
+        }
+    }
+
+    function doSaveSql()
+    {
         $arr = $this->getValue();
 
-        $sql = '
-            INSERT INTO 
+        $sql = "INSERT INTO 
                 blog (
                     title_pt
                     , title_en
@@ -155,27 +177,27 @@ class Blog
                     , thumbnail
                     , active
                 ) VALUES (
-                    "' . $arr['titlePt'] . '" 
-                    ,"' . $arr['titleEn'] . '" 
-                    ,"' . $arr['urlPt'] . '" 
-                    ,"' . $arr['urlEn'] . '" 
-                    ,"' . $arr['contentPt'] . '" 
-                    ,"' . $arr['contentEn'] . '" 
-                    ,"' . $arr['tagPt'] . '" 
-                    ,"' . $arr['tagEn'] . '" 
-                    ,"' . $arr['datePostPt'] . '" 
-                    ,"' . $arr['datePostEn'] . '" 
-                    ,"' . $arr['dateEditPt'] . '" 
-                    ,"' . $arr['dateEditEn'] . '" 
-                    ,"' . $arr['thumbnail'] . '" 
+                    '{$arr['titlePt']}' 
+                    ,'{$arr['titleEn']}' 
+                    ,'{$arr['urlPt']}' 
+                    ,'{$arr['urlEn']}' 
+                    ,'{$arr['contentPt']}'
+                    ,'{$arr['contentEn']}'
+                    ,'{$arr['tagPt']}' 
+                    ,'{$arr['tagEn']}' 
+                    ,'{$arr['datePostPt']}'
+                    ,'{$arr['datePostEn']}' 
+                    ,'{$arr['dateEditPt']}'
+                    ,'{$arr['dateEditEn']}'
+                    ,'{$arr['thumbnail']}'
                     , 1
                 )
-        ';
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return 'done';
+        return true;
     }
 
     function doModify()
@@ -183,14 +205,13 @@ class Blog
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
         $value = $status === 'inactivate' ? 0 : 1;
-        $sql = '
-            UPDATE 
-                blog
-            SET
-                active = ' . $value . '
-            WHERE 
-                id = ' . $id . '
-        ';
+        $sql = "UPDATE 
+                    blog
+                SET
+                    active = {$value}
+                WHERE 
+                    id = {$id}
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
@@ -201,12 +222,11 @@ class Blog
     function doDelete()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $sql = '
-            DELETE FROM 
-                blog
-            WHERE 
-                id = ' . $id . '
-        ';
+        $sql = "DELETE FROM 
+                    blog
+                WHERE 
+                    id = {$id}
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
@@ -217,14 +237,14 @@ class Blog
     function editLoadData()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
-        $sql = 'SELECT 
-                *
-            FROM 
-                blog
-            WHERE
-                id = ' . $id . '    
-            LIMIT 1
-        ';
+        $sql = "SELECT 
+                    *
+                FROM 
+                    blog
+                WHERE
+                    id = {$id}   
+                LIMIT 1
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();

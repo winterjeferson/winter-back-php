@@ -24,8 +24,9 @@
                             <select id="translationSelect" aria-label="<?php echo $arrContent['head']['translation']['language']; ?>">
                                 <?php
                                 $string = '';
-                                foreach ($GLOBALS['globalArrLanguage'] as $key => &$valeu) {
-                                    $string .= '<option value="' . $valeu . '" data-url="' . $arrContent['head']['url' . ucfirst($valeu)] . '">' . $arrContent['head']['translation'][$valeu] . '</option>';
+                                foreach (getUrArrLanguage() as $key => &$valeu) {
+                                    $lang = $valeu['lang'];
+                                    $string .= '<option value="' . $lang . '" data-url="' . $arrContent['head']['url' . ucfirst($lang)] . '">' . $arrContent['head']['translation'][$lang] . '</option>';
                                 }
                                 echo $string;
                                 ?>

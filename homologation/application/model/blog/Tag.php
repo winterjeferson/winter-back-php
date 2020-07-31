@@ -69,13 +69,14 @@ class Tag
 
     function buildHtml($arr)
     {
+        $url = $this->objSession->get('arrUrl');
         $string = '<ul class="tag-list">';
 
         foreach ($arr as $value => $key) {
             $string .= '
                 <li>
                     <div class="tag-item tag-grey">
-                        <a href="' . $this->objSession->getArray('arrUrl', 'mainLanguage') . 'blog/tag/' . $value . '" class="link link-grey">
+                        <a href="' . $url['main'] . $url['language'] . '/blog/tag/' . $value . '" class="link link-grey">
                             <span class="text">' . $value . '</span>
                         </a>
                     </div>

@@ -35,7 +35,7 @@ class Translation
             if (!isset($sessionLanguage)) {
                 $this->language = substr($filterLanguage, 0, 2);
 
-                if (!in_array($this->language, $GLOBALS['globalArrLanguage'])) {
+                if (!in_array($this->language, getUrArrLanguage())) {
                     $this->language = 'en';
                 }
 

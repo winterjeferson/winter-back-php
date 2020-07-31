@@ -8,8 +8,6 @@ class Route
 {
     public function __construct()
     {
-        require_once __DIR__ . '/../configuration/helper.php';
-
         $this->objSession = new Session();
     }
 
@@ -52,8 +50,9 @@ class Route
         $arrFixedItem = ['language', 'folder', 'controller'];
         $countExplode = count($explodeUrl);
         $countArrReturn = count($arrFixedItem);
+        $arrLanguage = getUrArrLanguage();
 
-        $main = $GLOBALS['globalUrl'];
+        $main = buildGlobalUrl();
         $mainLanguage = $main . $language . '/';
         $folder = isset($explodeUrl[1]) ? $explodeUrl[1] : 'home';
         $folderUrl = $folder . '/';
@@ -71,13 +70,15 @@ class Route
         }
 
         if (!isset($arrUrl['paramether1'])) {
-            foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
-                $this->objSession->unset('urlSeo' . ucfirst($value));
-                $arrUrl[$value] = $main . $value . '/' . $folderUrl . $controllerUrl;
+            foreach ($arrLanguage as $key => $value) {
+                $lang = $value['lang'];
+                $this->objSession->unset('urlSeo' . ucfirst($lang));
+                $arrUrl[$lang] = $main . $lang . '/' . $folderUrl . $controllerUrl;
             }
         } else {
-            foreach ($GLOBALS['globalArrLanguage'] as $key => $value) {
-                $arrUrl[$value] = $main . $value . '/' . $folderUrl . $controllerUrl . $arrUrl['paramether0'] . '/' . $this->objSession->get('urlSeo' . ucfirst($value));
+            foreach ($arrLanguage as $key => $value) {
+                $lang = $value['lang'];
+                $arrUrl[$lang] = $main . $lang . '/' . $folderUrl . $controllerUrl . $arrUrl['paramether0'] . '/' . $this->objSession->get('urlSeo' . ucfirst($lang));
             }
         }
 

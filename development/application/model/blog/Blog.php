@@ -16,7 +16,6 @@ class Blog
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
-        require_once __DIR__ . '/../../configuration/helper.php';
         require_once __DIR__ . '/Tag.php';
         
         $this->objSession = new \Application\Core\Session();
