@@ -3,7 +3,7 @@ class WbAdmin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
         this.pageCurrent = '';
     }
- 
+
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('admin')) {
@@ -59,5 +59,23 @@ class WbAdmin {
                 }
             }
         });
+    }
+
+    showResponse(data) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName(), data); /*endRemoveIf(production)*/
+        let color = '';
+        let response = '';
+
+        switch (data) {
+            case 'done':
+                location.reload();
+                break;
+            default:
+                color = 'red';
+                response = globalTranslation.errorAdministrator;
+                break;
+        }
+
+        objWfNotification.add(response, color);
     }
 }

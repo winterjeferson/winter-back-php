@@ -5,6 +5,7 @@ namespace Application\Translation;
 class Pt
 {
     public $translation = [
+        'administrator' => 'Administrador',
         'administrativePanel' => 'Painel administrativo',
         'administrativePanelText' => 'Bem vindo ao painel administrativo. Selecione o conteúdo desejado.',
         'actions' => 'Ações',
@@ -34,6 +35,7 @@ class Pt
         'formContact' => 'Formulário de contato',
         'formSent' => 'Formulário enviado com sucesso. Aguarde o retorno.',
         'formProblemSend' => 'Ocorreu um problema no envio do formulário. Por favor, tente novamente mais tarde.',
+        'guest' => 'Convidado',
         'home' => 'Início',
         'image' => 'Imagem',
         'inactives' => 'Inativos',
@@ -53,18 +55,22 @@ class Pt
         'metaLang' => 'pt-br',
         'metaKeywords' => 'PHP, mysql, git, backend, Jeferson, Winter, javascript, html, css, gulp',
         'metaTitle' => 'Winter Backend PHP',
+        'moderator' => 'Moderador',
         'mostViewed' => 'Mais lidas',
         'name' => 'Nome',
         'next' => 'Próximo',
         'noResult' => 'Sem resultados para esta busca',
+        'owner' => 'Dono',
         'pageAdminBlogTitle' => 'Cadastrar Blog',
         'pageAdminBlogTagsSeparator' => 'Separar por: #',
         'pageInitialLanguage' => 'PHP, MySql, MVC',
         'password' => 'Senha',
+        'permission' => 'Permissão',
         'previous' => 'Anterior',
         'pt' => 'Português',
         'recommendedSize150' => 'Tamanho recomendado: 300px X 150px',
         'recommendedSize1300' => 'Tamanho recomendado: 1300px X 300px',
+        'register' => 'Cadastrar',
         'searchResult' => 'Resultado de busca',
         'selectImage' => 'Selecione a imagem',
         'send' => 'Enviar',
@@ -78,5 +84,7 @@ class Pt
         'uploadInvalid' => 'Formato de arquivo inválido',
         'uploadSize' => 'O peso do arquivo ultrapassa o limite permitido',
         'url' => 'URL',
+        'user' => 'Usuario',
+        'users' => 'Usuários',
     ];
 }

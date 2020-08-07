@@ -5,7 +5,7 @@ class WbAdminBlog {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('blog')) {
+        if (!getUrlWord('admin/blog')) {
             return;
         }
 
@@ -51,14 +51,18 @@ class WbAdminBlog {
         this.thumbnailPath = 'assets/img/blog/thumbnail/';
         this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
         this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
+        this.$btRegister = this.$page.querySelector('[data-id="btRegister"]');
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         const self = this;
-        const $btRegister = this.$page.querySelector('[data-id="btRegister"]');
 
-        $btRegister.onclick = function () {
+        this.$btRegister.onclick = function () {
+            if (!self.validateForm()) {
+                return;
+            }
+
             if (self.isEdit) {
                 self.editSave();
             } else {
@@ -141,16 +145,12 @@ class WbAdminBlog {
             '&id=' + self.editId +
             this.buildParameter();
 
-        if (!this.validateForm()) {
-            return;
-        }
-
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -209,7 +209,6 @@ class WbAdminBlog {
 
     modify(id, status) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -221,7 +220,7 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -230,7 +229,6 @@ class WbAdminBlog {
 
     delete(id) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -241,7 +239,7 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -280,12 +278,6 @@ class WbAdminBlog {
 
     saveContent() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
-
-        if (!this.validateForm()) {
-            return;
-        }
-
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -296,31 +288,11 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
         ajax.send(parameter);
-    }
-
-    showResponse(data) {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let color = '';
-        let response = '';
-
-        console.log(data);
-
-        switch (data) {
-            case 'done':
-                location.reload();
-                break;
-            default:
-                color = 'red';
-                response = globalTranslation.error;
-                break;
-        }
-
-        objWfNotification.add(response, color);
     }
 
     watchTitle() {

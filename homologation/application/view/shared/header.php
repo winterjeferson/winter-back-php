@@ -1,7 +1,7 @@
 <header id="header" class="grid-header">
     <div class="row">
         <div class="col-es-2 text-left">
-            <a href="<?php echo $arrContent['head']['urlMainLanguage']; ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $arrContent['head']['translation']['home']; ?>">
+            <a href="<?php echo $arrContent['head']['urlMain'] . $arrContent['head']['lang'] . '/'; ?>home/" class="bt bt-re bt-grey" aria-label="<?php echo $arrContent['head']['translation']['home']; ?>">
                 <svg class="icon icon-bi">
                     <use xlink:href="./assets/img/icon.svg#home"></use>
                 </svg>

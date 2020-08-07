@@ -8,9 +8,9 @@ class Blog
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
-        // require_once __DIR__ . '/../../configuration/helper.php';
         require_once __DIR__ . '/../../model/shared/SiteMap.php';
         require_once __DIR__ . '/Login.php';
+        require_once __DIR__ . '/helper.php';
 
         $this->objLogin = new Login();
         $this->objSession = new \Application\Core\Session();
@@ -23,7 +23,7 @@ class Blog
     {
         $this->objLogin->verifyLogin();
         $list = $this->getList();
-        $arrList = $this->separateList($list);
+        $arrList = separateList($list);
 
         $arr = [
             'language' => $this->language,
@@ -49,25 +49,6 @@ class Blog
         $result = $query->fetchAll($this->connection::FETCH_ASSOC);
 
         return $result;
-    }
-
-    function separateList($arrList)
-    {
-        $arrActive = [];
-        $arrInactive = [];
-
-        foreach ($arrList as $key => &$value) {
-            if ($value['active'] === '1') {
-                $arrActive[] = $value;
-            } else {
-                $arrInactive[] = $value;
-            }
-        }
-
-        return [
-            'active' => $arrActive,
-            'inactive' => $arrInactive,
-        ];
     }
 
     function getValue()

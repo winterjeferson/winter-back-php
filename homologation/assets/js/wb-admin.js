@@ -3,7 +3,7 @@ class WbAdmin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, 'constructor'); /*endRemoveIf(production)*/
         this.pageCurrent = '';
     }
- 
+
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         if (!getUrlWord('admin')) {
@@ -60,6 +60,24 @@ class WbAdmin {
             }
         });
     }
+
+    showResponse(data) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName(), data); /*endRemoveIf(production)*/
+        let color = '';
+        let response = '';
+
+        switch (data) {
+            case 'done':
+                location.reload();
+                break;
+            default:
+                color = 'red';
+                response = globalTranslation.errorAdministrator;
+                break;
+        }
+
+        objWfNotification.add(response, color);
+    }
 }
 class WbAdminBlog {
     constructor() {
@@ -68,7 +86,7 @@ class WbAdminBlog {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('blog')) {
+        if (!getUrlWord('admin/blog')) {
             return;
         }
 
@@ -114,14 +132,18 @@ class WbAdminBlog {
         this.thumbnailPath = 'assets/img/blog/thumbnail/';
         this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
         this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
+        this.$btRegister = this.$page.querySelector('[data-id="btRegister"]');
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         const self = this;
-        const $btRegister = this.$page.querySelector('[data-id="btRegister"]');
 
-        $btRegister.onclick = function () {
+        this.$btRegister.onclick = function () {
+            if (!self.validateForm()) {
+                return;
+            }
+
             if (self.isEdit) {
                 self.editSave();
             } else {
@@ -204,16 +226,12 @@ class WbAdminBlog {
             '&id=' + self.editId +
             this.buildParameter();
 
-        if (!this.validateForm()) {
-            return;
-        }
-
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -272,7 +290,6 @@ class WbAdminBlog {
 
     modify(id, status) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -284,7 +301,7 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -293,7 +310,6 @@ class WbAdminBlog {
 
     delete(id) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -304,7 +320,7 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
@@ -343,12 +359,6 @@ class WbAdminBlog {
 
     saveContent() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
-
-        if (!this.validateForm()) {
-            return;
-        }
-
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
         let parameter =
@@ -359,31 +369,11 @@ class WbAdminBlog {
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                self.showResponse(ajax.responseText);
+                objWbAdmin.showResponse(ajax.responseText);
             }
         }
 
         ajax.send(parameter);
-    }
-
-    showResponse(data) {
-        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let color = '';
-        let response = '';
-
-        console.log(data);
-
-        switch (data) {
-            case 'done':
-                location.reload();
-                break;
-            default:
-                color = 'red';
-                response = globalTranslation.error;
-                break;
-        }
-
-        objWfNotification.add(response, color);
     }
 
     watchTitle() {
@@ -434,7 +424,7 @@ class WbAdminUploadImage {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('image')) {
+        if (!getUrlWord('admin/image')) {
             return;
         }
 
@@ -545,6 +535,224 @@ class WbAdminUploadImage {
         }
     }
 }
+class WbAdminUser {
+    build() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        if (!getUrlWord('admin/user')) {
+            return;
+        }
+
+        this.updateVariable();
+        this.buildMenu();
+        this.buildMenuTable();
+    }
+
+    updateVariable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.isEdit = false;
+        this.editId = 0;
+        this.$page = document.querySelector('#pageAdminUser');
+        this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
+        this.$formFieldEmail = this.$formRegister.querySelector('[data-id="email"]');
+        this.$formFieldPassword = this.$formRegister.querySelector('[data-id="password"]');
+        this.$formFieldPermission = this.$formRegister.querySelector('[data-id="permission"]');
+        this.$formSend = this.$formRegister.querySelector('[data-id="send"]');
+    }
+
+    buildMenu() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+
+        this.$formSend.onclick = function () {
+            if (!self.validateForm()) {
+                return;
+            }
+
+            if (self.isEdit) {
+                self.editSave();
+            } else {
+                self.saveContent();
+            }
+        }
+    }
+
+    buildMenuTable() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let $table = this.$page.querySelectorAll('.table');
+        let $tableActive = this.$page.querySelectorAll('[data-id="tableActive"]');
+        let $tableInactive = this.$page.querySelectorAll('[data-id="tableInactive"]');
+
+        Array.prototype.forEach.call($tableActive, function (table) {
+            let $button = table.querySelectorAll('[data-action="inactivate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationInactivate);
+                    objWfModal.buildContentConfirmationAction('objWbAdminUser.modify(' + item.getAttribute('data-id') + ', "inactivate")');
+                }
+            });
+        });
+
+        Array.prototype.forEach.call($tableInactive, function (table) {
+            let $button = table.querySelectorAll('[data-action="activate"]');
+
+            Array.prototype.forEach.call($button, function (item) {
+                item.onclick = function () {
+                    self.modify(item.getAttribute('data-id'), 'activate');
+                }
+            });
+        });
+
+        Array.prototype.forEach.call($table, function (table) {
+            let $buttonEdit = table.querySelectorAll('[data-action="edit"]');
+            let $buttonDelete = table.querySelectorAll('[data-action="delete"]');
+
+            Array.prototype.forEach.call($buttonEdit, function (item) {
+                item.onclick = function () {
+                    self.editId = item.getAttribute('data-id');
+                    self.editLoadData(self.editId);
+                }
+            });
+
+            Array.prototype.forEach.call($buttonDelete, function (item) {
+                item.onclick = function () {
+                    objWfModal.buildModal('confirmation', globalTranslation.confirmationDelete);
+                    objWfModal.buildContentConfirmationAction('objWbAdminUser.delete(' + item.getAttribute('data-id') + ')');
+                }
+            });
+        });
+    }
+
+    modify(id, status) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'UserEdit' });
+        let parameter =
+            '&action=doModify' +
+            '&status=' + status +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                objWbAdmin.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    delete(id) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'UserEdit' });
+        let parameter =
+            '&action=doDelete' +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                objWbAdmin.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    editLoadData(id) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'UserEdit' });
+        let parameter =
+            '&action=' + 'editLoadData' +
+            '&id=' + id;
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                let obj = JSON.parse(ajax.responseText);
+                document.documentElement.scrollTop = 0;
+                self.editFillField(obj);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    editFillField(obj) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        this.isEdit = true;
+        this.$formFieldEmail.value = obj['email'];
+        this.$formFieldPassword.value = '';
+        this.editId = obj['id'];
+        this.$formFieldPermission.selectedIndex = obj['permission'];
+    }
+
+    editSave() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let self = this;
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'UserEdit' });
+        let parameter =
+            '&action=doUpdate' +
+            '&id=' + self.editId +
+            this.buildParameter();
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                objWbAdmin.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    saveContent() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let ajax = new XMLHttpRequest();
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'UserEdit' });
+        let parameter =
+            '&action=doSave' +
+            this.buildParameter();
+
+        ajax.open('POST', url, true);
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                objWbAdmin.showResponse(ajax.responseText);
+            }
+        }
+
+        ajax.send(parameter);
+    }
+
+    validateForm() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        let arrField = [
+            this.$formFieldEmail,
+            this.$formFieldPassword
+        ];
+
+        return objWfForm.validateEmpty(arrField);
+    }
+
+    buildParameter() {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        return '' +
+            '&email=' + this.$formFieldEmail.value +
+            '&permission=' + this.$formFieldPermission.selectedIndex +
+            '&password=' + this.$formFieldPassword.value;
+    }
+}
 class WbManagementAdmin {
     verifyLoad() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
@@ -557,6 +765,7 @@ class WbManagementAdmin {
         objWbAdmin.build();
         objWbAdminBlog.build();
         objWbAdminUploadImage.build();
+        objWbAdminUser.build();
     }
 }
 /*removeIf(production)*/
@@ -566,6 +775,7 @@ var objWbDebug = new WbDebug();
 var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
 var objWbAdminUploadImage = new WbAdminUploadImage();
+var objWbAdminUser = new WbAdminUser();
 var objWbLogin = new WbLogin();
 var objWbManagementAdmin = new WbManagementAdmin();
 

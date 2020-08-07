@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . '/../shared/head.php';
 include __DIR__ . '/../shared/loading.php';
+include __DIR__ . '/../admin/admin-layout.php';
 ?>
 <main class="grid">
     <?php
@@ -19,6 +20,7 @@ include __DIR__ . '/../shared/loading.php';
                         <ul>
                             <?php
                             $arr = [
+                                ['id' => 'user', 'translation' => 'users'],
                                 ['id' => 'blog', 'translation' => 'blogAdmin'],
                                 ['id' => 'image', 'translation' => 'uploadImage'],
                                 ['id' => 'logout', 'translation' => 'logout'],
@@ -28,7 +30,7 @@ include __DIR__ . '/../shared/loading.php';
                             foreach ($arr as $key => &$value) {
                                 $string .= '
                                     <li>
-                                        <a href="' . $arrContent['head']['urlMainLanguage'] . 'admin/' . $value['id'] . '" data-id="btAdmin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
+                                        <a href="' . $arrContent['head']['urlMain'] . $arrContent['head']['lang'] . '/' . 'admin/' . $value['id'] . '/" data-id="btAdmin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
                                             ' . $arrContent['head']['translation'][$value['translation']] . '
                                         </a>
                                     </li>

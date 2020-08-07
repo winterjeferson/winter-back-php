@@ -2,13 +2,13 @@
 
 namespace Application\Model\Admin;
 
-use Application\Core\Session;
-
 class Login
 {
     public function __construct()
     {
-        $this->objWbSession = new Session();
+        require_once __DIR__ . '/../../core/Session.php';
+
+        $this->objSession = new \Application\Core\Session();
     }
 
     function build()
@@ -17,22 +17,18 @@ class Login
 
     function verifyLogin()
     {
-        $isLogin = $this->objWbSession->get('login');
+        $isLogin = $this->objSession->getArray('user', 'login');
 
         if (!$isLogin) {
-            $this->redirect();
+            $this->doLogout();
         }
     }
 
     function doLogout()
     {
-        $this->objSession->set('login', false);
-        $this->redirect();
-    }
-
-    function redirect()
-    {
-        $url = $this->objWbSession->getArray('arrUrl', 'mainLanguage');
+        $this->objSession->setArrayMultidimensionl('user', 'login', false);
+        $arr = $this->objSession->get('arrUrl');
+        $url = $arr['main'] . $arr['language'] . '/';
         header('Location: ' . $url . 'admin/login/');
         die();
     }

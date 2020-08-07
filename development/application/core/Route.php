@@ -53,7 +53,6 @@ class Route
         $arrLanguage = getUrArrLanguage();
 
         $main = buildGlobalUrl();
-        $mainLanguage = $main . $language . '/';
         $folder = isset($explodeUrl[1]) ? $explodeUrl[1] : 'home';
         $folderUrl = $folder . '/';
         $controller = isset($explodeUrl[2]) ? $explodeUrl[2] : '';
@@ -86,7 +85,6 @@ class Route
         $arrUrl['language'] = $language;
         $arrUrl['folder'] = $folder;
         $arrUrl['controller'] = $controller;
-        $arrUrl['mainLanguage'] = $mainLanguage;
         $arrUrl['full'] = $main . $language . '/' . $folderUrl . $controllerUrl . $parametherUrl;
 
         return $arrUrl;
@@ -95,7 +93,7 @@ class Route
     public function buildLocation()
     {
         $url = $this->objSession->get('arrUrl');
-        $language = $url['mainLanguage'];
+        $language = $url['main'] . $url['language'] . '/';
         $folder = $url['folder'] !== '' ? $url['folder'] . '/' : '';
         $controller = $url['controller'] !== '' ? $url['controller'] . '/' : '';
         $count =  $this->parametherTotal;

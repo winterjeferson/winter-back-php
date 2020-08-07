@@ -5,6 +5,7 @@ var objWbDebug = new WbDebug();
 var objWbAdmin = new WbAdmin();
 var objWbAdminBlog = new WbAdminBlog();
 var objWbAdminUploadImage = new WbAdminUploadImage();
+var objWbAdminUser = new WbAdminUser();
 var objWbLogin = new WbLogin();
 var objWbManagementAdmin = new WbManagementAdmin();
 

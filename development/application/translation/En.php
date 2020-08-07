@@ -5,6 +5,7 @@ namespace Application\Translation;
 class En
 {
     public $translation = [
+        'administrator' => 'Administrator',
         'administrativePanel' => 'Administrative panel',
         'administrativePanelText' => 'Welcome to the administrative panel. Select the desired content.',
         'actions' => 'Actions',
@@ -34,6 +35,7 @@ class En
         'formContact' => 'Contact Form',
         'formSent' => 'Form successfully sent. Wait for the reply.',
         'formProblemSend' => 'There was a problem submitting the form. Please try again later.',
+        'guest' => 'Guest',
         'home' => 'Home',
         'image' => 'Image',
         'inactives' => 'Inactives',
@@ -53,18 +55,22 @@ class En
         'metaLang' => 'en-us',
         'metaKeywords' => 'PHP, mysql, git, backend, Jeferson, Winter, javascript, html, css, gulp',
         'metaTitle' => 'Winter Backend PHP',
+        'moderator' => 'Moderator',
         'mostViewed' => 'Most viewed',
         'name' => 'Name',
         'next' => 'Next',
         'noResult' => 'No results for this search',
+        'owner' => 'Owner',
         'pageAdminBlogTitle' => 'Register Blog',
         'pageAdminBlogTagsSeparator' => 'Separate by: #',
         'pageInitialLanguage' => 'PHP, MySql, MVC',
         'password' => 'Password',
+        'permission' => 'Permission',
         'previous' => 'Previous',
         'pt' => 'Português',
         'recommendedSize150' => 'Recommended size: 300px X 150px',
         'recommendedSize1300' => 'Recommended size: 1300px X 300px',
+        'register' => 'Register',
         'searchResult' => 'Search Result',
         'selectImage' => 'Selecione image',
         'send' => 'Send',
@@ -78,5 +84,7 @@ class En
         'uploadInvalid' => 'This file type is not allowed',
         'uploadSize' => 'Sorry, your file is too large.',
         'url' => 'URL',
+        'user' => 'User',
+        'users' => 'Users',
     ];
 }

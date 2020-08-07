@@ -6,7 +6,7 @@ class WbAdminUploadImage {
 
     build() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        if (!getUrlWord('image')) {
+        if (!getUrlWord('admin/image')) {
             return;
         }
 

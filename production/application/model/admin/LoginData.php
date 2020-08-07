@@ -21,7 +21,7 @@ class LoginData
 
         if ($validate) {
             $this->setSession($data);
-        } 
+        }
 
         return $validate;
     }
@@ -29,15 +29,15 @@ class LoginData
     function getData()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-
         $connection = Connection::open();
         $sql = 'SELECT 
                     id
                     , email
                     , password
+                    , permission
                     , active
                 FROM 
-                    login
+                    user
                 WHERE 
                     email = "' . $email . '"
                 LIMIT 1
@@ -51,9 +51,13 @@ class LoginData
 
     function validate($row)
     {
-        $password = md5(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
+        $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
-        if (!$row || $row['password'] !== $password) {
+        if (!$row) {
+            return 'problem';
+        }
+
+        if ($row['password'] !== md5($password)) {
             return 'problem';
         }
 
@@ -67,8 +71,9 @@ class LoginData
     function setSession($data)
     {
         $objSession = new Session();
-        $objSession->set('id', $data['id']);
-        $objSession->set('email', $data['email']);
-        $objSession->set('login', true);
+        $objSession->setArrayMultidimensionl('user', 'id', $data['id']);
+        $objSession->setArrayMultidimensionl('user', 'email', $data['email']);
+        $objSession->setArrayMultidimensionl('user', 'permission', (int) $data['permission']);
+        $objSession->setArrayMultidimensionl('user', 'login', true);
     }
 }

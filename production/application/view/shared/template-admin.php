@@ -1,12 +1,14 @@
 <?php
 include __DIR__ . '/../shared/head.php';
 include __DIR__ . '/../shared/loading.php';
+include __DIR__ . '/../admin/admin-layout.php';
 ?> <main class="grid"> <?php
     include __DIR__ . '/../shared/header.php';
     ?> <section id="mainMenu" class="grid-menu"> <?php
         include __DIR__ . '/../shared/menu.php';
         ?> </section><section id="mainContent" class="grid-content"><div id="<?php echo $arrDefinedVars['data']['content']['id'] ?>" class="row"><div class="col-es-12"><div class="padding-re"><nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="pageAdminMenu"><ul> <?php
                             $arr = [
+                                ['id' => 'user', 'translation' => 'users'],
                                 ['id' => 'blog', 'translation' => 'blogAdmin'],
                                 ['id' => 'image', 'translation' => 'uploadImage'],
                                 ['id' => 'logout', 'translation' => 'logout'],
@@ -16,7 +18,7 @@ include __DIR__ . '/../shared/loading.php';
                             foreach ($arr as $key => &$value) {
                                 $string .= '
                                     <li>
-                                        <a href="' . $arrContent['head']['urlMainLanguage'] . 'admin/' . $value['id'] . '" data-id="btAdmin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
+                                        <a href="' . $arrContent['head']['urlMain'] . $arrContent['head']['lang'] . '/' . 'admin/' . $value['id'] . '/" data-id="btAdmin' . ucfirst($value['id']) . '" class="menu-tab-bt bt-re bt">
                                             ' . $arrContent['head']['translation'][$value['translation']] . '
                                         </a>
                                     </li>

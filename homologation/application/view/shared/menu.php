@@ -19,7 +19,7 @@
                 foreach ($arr as $key => &$value) {
                     $string .= '
                     <li>
-                        <a href="' . $arrContent['head']['urlMainLanguage'] . $value['id'] . '/" data-id="' . $value['id'] . '" class="bt bt-sm bt-fu bt-blue">
+                        <a href="' . $arrContent['head']['urlMain'] . $arrContent['head']['lang'] . '/' . $value['id'] . '/" data-id="' . $value['id'] . '" class="bt bt-sm bt-fu bt-blue">
                             ' . $arrContent['head']['translation'][$value['translation']] . '
                         </a>
                     </li>

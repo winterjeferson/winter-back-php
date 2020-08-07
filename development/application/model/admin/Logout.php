@@ -22,8 +22,6 @@ class Logout
 
     function doLogout()
     {
-        $this->objWbSession = new Session();
-        $this->objWbSession->set('login', false);
-        $this->objLogin->redirect();
+        $this->objLogin->doLogout();
     }
 }

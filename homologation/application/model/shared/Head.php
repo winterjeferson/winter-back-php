@@ -17,7 +17,6 @@ class Head
     {
         $arr = [
             'urlMain' => buildGlobalUrl(),
-            'urlMainLanguage' => $this->objSession->getArray('arrUrl', 'mainLanguage'),
             'urlFrontEnd' => getUrlFrontEnd(),
             'urlBackEnd' => getUrlBackEnd(),
             'lang' => $this->objSession->get('language'),

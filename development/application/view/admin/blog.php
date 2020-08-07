@@ -1,6 +1,4 @@
 <?php
-include __DIR__ . '/admin-layout.php';
-
 function buildListHTML($value, $language, $status)
 {
     $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
@@ -31,20 +29,19 @@ function buildListHTML($value, $language, $status)
                 <td class="minimum"><small>' . $value['date_post_' . $language] . '</small></td>
                 <td class="minimum"><small>' . $value['date_edit_' . $language] . '</small></td>
                 <td class="minimum">
-                    <nav class="menu menu-horizontal">
+                    <div class="menu menu-horizontal">
                         <ul>
                             <li>' . buildHTMLBt('edit', $value['id']) . '</li>
                             <li>' . $btActive . '</li>
                             <li>' . buildHTMLBt('delete', $value['id']) . '</li>
                         </ul>
-                    </nav>
+                    </div>
                 </td>
             </tr>
         ';
 
     return removeLineBreak($string);
 }
-
 ?>
 
 
