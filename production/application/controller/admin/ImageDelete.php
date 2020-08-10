@@ -14,6 +14,7 @@ class ImageDelete extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'image', 'folder' => 'admin', 'file' => 'ImageDelete'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
         ];
 
         return $this->renderModel($data);

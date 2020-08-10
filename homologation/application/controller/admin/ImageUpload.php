@@ -14,6 +14,7 @@ class ImageUpload extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'image', 'folder' => 'admin', 'file' => 'ImageUpload'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
         ];
 
         return $this->renderModel($data);

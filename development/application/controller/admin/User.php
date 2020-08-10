@@ -14,6 +14,7 @@ class User extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
             ['id' => 'user', 'folder' => 'admin', 'file' => 'user'],
         ];
 

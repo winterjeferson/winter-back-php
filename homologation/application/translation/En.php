@@ -86,5 +86,6 @@ class En
         'url' => 'URL',
         'user' => 'User',
         'users' => 'Users',
+        'wellcome' => 'Wellcome',
     ];
 }

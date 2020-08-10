@@ -14,6 +14,7 @@ class BlogEdit extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'admin', 'folder' => 'admin', 'file' => 'blogEdit'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
         ];
 
         return $this->renderModel($data);

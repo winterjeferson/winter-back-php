@@ -28,3 +28,7 @@
 #pageAdminBlog .table img {
   width: auto;
   height: 50px; }
+
+.user {
+  padding: 4px;
+  text-align: right; }

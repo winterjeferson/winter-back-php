@@ -14,6 +14,7 @@ class BlogThumbnail extends \Application\Controller\Main
     {
         $data = [
             ['id' => 'admin', 'folder' => 'admin', 'file' => 'BlogThumbnail'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
         ];
 
         return $this->renderModel($data);

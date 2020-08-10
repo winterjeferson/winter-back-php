@@ -4,14 +4,6 @@ namespace Application\Model\Admin;
 
 class User
 {
-    private $permission = [
-        '0' => 'owner',
-        '1' => 'administrator',
-        '2' => 'moderator',
-        '3' => 'user',
-        '4' => 'guest',
-    ];
-
     public function __construct()
     {
         require_once __DIR__ . '/../../core/Session.php';
@@ -30,7 +22,7 @@ class User
     function build()
     {
         $this->objLogin->verifyLogin();
-        $this->objAdmin->verifyPermission(1);
+        $this->objAdmin->verifyPermissionPage(1);
         $list = $this->getList();
         $arrList = separateList($list);
 
@@ -47,9 +39,12 @@ class User
     function buildSelectPermission()
     {
         $arrReturn = [];
+        $prmissionCurrent = (int)$this->objSession->getArray('user', 'permission');
 
-        foreach ($this->permission as $key => &$value) {
-            array_push($arrReturn, ['value' => $key, 'text' => $this->objSession->getArray('translation', $value)]);
+        foreach ($this->objAdmin->permission as $key => &$value) {
+            if ($prmissionCurrent <= $key) {
+                array_push($arrReturn, ['value' => $key, 'text' => $this->objSession->getArray('translation', $value)]);
+            }
         }
 
         return $arrReturn;
@@ -63,7 +58,7 @@ class User
         for ($i = 0; $i < $count; $i++) {
             foreach ($arr[$i] as $key => &$value) {
                 if ($key === 'permission') {
-                    $arrNew[$i][$key] = $this->permission[$value];
+                    $arrNew[$i][$key] = $this->objAdmin->permission[$value];
                 } else {
                     $arrNew[$i][$key] = $value;
                 }
@@ -189,12 +184,28 @@ class User
         $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
         $permission = filter_input(INPUT_POST, 'permission', FILTER_DEFAULT);
 
+        if (!$this->validatePermission($permission)) {
+            $this->objLogin->doLogout();
+            return;
+        }
+
         return [
             'email' => $email,
             'permission' => (int) $permission,
             'password' => md5($password),
             'id' => (int) $id,
         ];
+    }
+
+    function validatePermission($permission)
+    {
+        $prmissionCurrent = $this->objSession->getArray('user', 'permission');
+
+        if ((int)$prmissionCurrent > (int)$permission) {
+            return false;
+        }
+
+        return true;
     }
 
     function doUpdate()

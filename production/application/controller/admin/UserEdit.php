@@ -13,7 +13,8 @@ class UserEdit extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'userEdit'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+            ['id' => 'adminUserEdit', 'folder' => 'admin', 'file' => 'userEdit'],
         ];
 
         return $this->renderModel($data);
@@ -22,4 +23,4 @@ class UserEdit extends \Application\Controller\Main
 
 $obj = new UserEdit();
 $data = $obj->getModel();
-echo $data['admin'];
+echo $data['adminUserEdit'];

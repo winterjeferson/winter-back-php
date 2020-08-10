@@ -86,5 +86,6 @@ class Pt
         'url' => 'URL',
         'user' => 'Usuario',
         'users' => 'Usuários',
+        'wellcome' => 'Bem vindo',
     ];
 }

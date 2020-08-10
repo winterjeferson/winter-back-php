@@ -23,6 +23,7 @@ class Head
             'translation' => $this->objSession->get('translation'),
             'translationJson' => json_encode($this->objSession->get('translation')),
             'admin' => $this->verifyAdmin(),
+            'user' => $this->objSession->get('user'),
         ];
 
         foreach (getUrArrLanguage() as $key => $value) {

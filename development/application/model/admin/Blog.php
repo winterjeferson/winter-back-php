@@ -10,11 +10,13 @@ class Blog
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/../../model/shared/SiteMap.php';
         require_once __DIR__ . '/Login.php';
+        require_once __DIR__ . '/Admin.php';
         require_once __DIR__ . '/helper.php';
 
         $this->objLogin = new Login();
         $this->objSession = new \Application\Core\Session();
         $this->objSiteMap = new \Application\Model\Shared\SiteMap();
+        $this->objAdmin = new \Application\Model\Admin\Admin();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
@@ -24,6 +26,7 @@ class Blog
         $this->objLogin->verifyLogin();
         $list = $this->getList();
         $arrList = separateList($list);
+        $this->objAdmin->verifyPermissionPage(2);
 
         $arr = [
             'language' => $this->language,

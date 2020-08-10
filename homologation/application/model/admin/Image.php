@@ -9,14 +9,17 @@ class Image
     public function __construct()
     {
         require_once __DIR__ .'/Login.php';
+        require_once __DIR__ . '/Admin.php';
 
         $this->objLogin = new Login();
         $this->objSession = new Session();
+        $this->objAdmin = new \Application\Model\Admin\Admin();
     }
 
     function build()
     {
         $this->objLogin->verifyLogin();
+        $this->objAdmin->verifyPermissionPage(2);
 
         $arr = [
             'listThumbnail' => $this->buildList('thumbnail'),

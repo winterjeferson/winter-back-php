@@ -749,7 +749,7 @@ class WbAdminUser {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return '' +
             '&email=' + this.$formFieldEmail.value +
-            '&permission=' + this.$formFieldPermission.selectedIndex +
+            '&permission=' + this.$formFieldPermission.value +
             '&password=' + this.$formFieldPassword.value;
     }
 }

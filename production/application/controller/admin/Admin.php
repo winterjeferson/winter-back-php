@@ -15,6 +15,7 @@ class Admin extends \Application\Controller\Main
         $data = [
             ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
             ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
         ];
 
         return $this->renderModel($data);
