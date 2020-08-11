@@ -12,7 +12,13 @@
         <div class="container">
             <?php
             echo $arrContent['post']['postContent'];
-
+            ?>
+            <h4 class="author">
+                <?php
+                echo $arrContent['head']['translation']['author'] . ': ' . $arrContent['post']['postAuthor'];
+                ?>
+            </h4>
+            <?php
             $tag = $arrContent['post']['postTag'];
 
             if (!is_null($tag) && $tag !== '') {

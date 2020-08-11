@@ -10,6 +10,7 @@ class Pt
         'administrativePanelText' => 'Bem vindo ao painel administrativo. Selecione o conteúdo desejado.',
         'actions' => 'Ações',
         'actives' => 'Ativos',
+        'author' => 'Autor',
         'banner' => 'Banner',
         'blog' => 'Blog',
         'blogAdmin' => 'Administrar Blog',

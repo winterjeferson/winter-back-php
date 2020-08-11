@@ -12,6 +12,7 @@
                     <th>Id</th>
                     <th><?php echo $arrContent['head']['translation']['thumbnail']; ?></th>
                     <th><?php echo $arrContent['head']['translation']['title']; ?></th>
+                    <th><?php echo $arrContent['head']['translation']['author']; ?></th>
                     <th><?php echo $arrContent['head']['translation']['content']; ?></th>
                     <th><?php echo $arrContent['head']['translation']['friendlyUrl']; ?></th>
                     <th><?php echo $arrContent['head']['translation']['tags']; ?></th>

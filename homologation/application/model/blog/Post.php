@@ -19,6 +19,11 @@ class Post
         $arrUrl = $this->objSession->get('arrUrl');
         $id = $arrUrl['paramether0'];
         $post = $this->getPostQuery($id);
+
+        if (!$post) {
+            $this->buildNotFound();
+        }
+
         $this->updatePostView($id);
         $this->setUrlSeo($post);
 
@@ -26,10 +31,19 @@ class Post
             'postTitle' => $post['title_' . $this->language],
             'postContent' => $post['content_' . $this->language],
             'postTag' => $post['tag_' . $this->language],
+            'postAuthor' => $post['name'],
             'tagLink' => $arrUrl['main'] . $arrUrl['language'] . '/',
         ];
 
         return $arr;
+    }
+
+    private function buildNotFound()
+    {
+        require_once __DIR__ . '/../../core/Route.php';
+
+        $objRoute = new \Application\Core\Route();
+        $objRoute->build404();
     }
 
     private function setUrlSeo($content)
@@ -58,6 +72,7 @@ class Post
         $sql = "SELECT 
                     title_{$this->language}
                     , content_{$this->language}
+                    , name
                 ";
 
         foreach (getUrArrLanguage() as $key => $value) {
@@ -68,10 +83,14 @@ class Post
         $sql .= ", tag_{$this->language}
                 FROM 
                     blog
+                LEFT JOIN 
+                    user
+                ON 
+                    blog.author_id = user.id
                 WHERE
-                    active = 1
+                    blog.active = 1
                 AND 
-                    id = {$id}";
+                    blog.id = {$id}";
 
         $query = $this->connection->prepare($sql);
         $query->execute();

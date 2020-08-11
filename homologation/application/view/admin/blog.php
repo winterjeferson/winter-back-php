@@ -12,6 +12,7 @@ function buildListHTML($value, $language, $status)
                 <td class="minimum">' . $value['id'] . '</td>
                 <td class="minimum"><img data-src="assets/img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
                 <td><b>' . encode($value['title_' . $language]) . '</b></td>
+                <td class="minimum">' . $value['name'] . '</td>
                 <td><div class="td-wrapper">' . encode(strip_tags($value['content_' . $language])) . '</div></td>
                 <td class="minimum">' . $value['url_' . $language] . '</td>
                 <td class="minimum">
@@ -55,7 +56,38 @@ function buildListHTML($value, $language, $status)
         include __DIR__ . '/blog-form.php';
         ?>
 
-        <div class="col-es-12" data-id="thumbnailWrapper">
+        <div class="col-es-12 col-eb-6">
+            <div class="padding-bi">
+                <div class="card card-es card-grey">
+                    <header>
+                        <h4>
+                            <?php echo $arrContent['head']['translation']['author']; ?>
+                        </h4>
+                    </header>
+                    <div class="row card-body">
+                        <div class="col-es-12">
+                            <form class="form form-grey padding-re">
+                                <select aria-label="select" data-id="author">
+                                    <?php
+                                    $string = '';
+
+                                    foreach ($arrContent['blog']['selectAuthor'] as $key => &$valueAuthor) {
+                                        $string .= '<option value="' . $valueAuthor['id'] . '">' . $valueAuthor['name'] . '</option>';
+                                    }
+
+                                    echo $string;
+                                    ?>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <footer>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-es-12 col-eb-6" data-id="thumbnailWrapper">
             <div class="padding-bi">
                 <div class="card card-es card-grey">
                     <header>

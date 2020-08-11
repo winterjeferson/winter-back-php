@@ -8,9 +8,9 @@ include __DIR__ . '/../admin/admin-layout.php';
         include __DIR__ . '/../shared/menu.php';
         ?> </section><section id="mainContent" class="grid-content"><div id="<?php echo $arrDefinedVars['data']['content']['id'] ?>" class="row"><div class="col-es-12 user"> <?php
                 $wellcome = $arrContent['head']['translation']['wellcome'];
-                $email = $arrContent['head']['user']['email'];
+                $name = $arrContent['head']['user']['name'];
 
-                echo  $wellcome . ' <strong>' . $email . '</strong>'
+                echo  $wellcome . ' <strong>' . $name . '</strong>'
                 ?>!</div><div class="col-es-12"><div class="padding-re"><nav class="menu-tab menu-tab-orange text-center menu menu-horizontal menu-drop-down" id="pageAdminMenu"><ul> <?php
                             $string = '';
 

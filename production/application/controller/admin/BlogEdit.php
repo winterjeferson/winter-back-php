@@ -13,8 +13,8 @@ class BlogEdit extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'blogEdit'],
             ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+            ['id' => 'adminBlogEdit', 'folder' => 'admin', 'file' => 'blogEdit'],
         ];
 
         return $this->renderModel($data);
@@ -23,4 +23,4 @@ class BlogEdit extends \Application\Controller\Main
 
 $obj = new BlogEdit();
 $data = $obj->getModel();
-echo $data['admin'];
+echo $data['adminBlogEdit'];

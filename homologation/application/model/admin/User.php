@@ -72,6 +72,7 @@ class User
     {
         $sql = 'SELECT 
                    id
+                   , name
                    , email
                    , permission
                    , active
@@ -93,6 +94,7 @@ class User
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $sql = "SELECT 
                       id
+                    , name
                     , active
                     , email
                     , permission
@@ -160,11 +162,13 @@ class User
         $sql = "INSERT INTO 
                 user (
                       email
+                    , name
                     , password
                     , permission
                     , active
                 ) VALUES (
                      '{$arr['email']}' 
+                    ,'{$arr['name']}'
                     ,'{$arr['password']}'
                     ,'{$arr['permission']}'
                     , 1
@@ -181,6 +185,7 @@ class User
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
+        $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
         $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
         $permission = filter_input(INPUT_POST, 'permission', FILTER_DEFAULT);
 
@@ -191,6 +196,7 @@ class User
 
         return [
             'email' => $email,
+            'name' => $name,
             'permission' => (int) $permission,
             'password' => md5($password),
             'id' => (int) $id,
@@ -224,6 +230,7 @@ class User
                     user
                 SET 
                       email = '{$arr['email']}'
+                    , name = '{$arr['name']}'
                     , password = '{$arr['password']}'
                     , permission = '{$arr['permission']}'
                 WHERE

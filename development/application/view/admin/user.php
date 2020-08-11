@@ -10,19 +10,25 @@
                 </h2>
             </div>
             <form class="row form form-grey" data-id="formRegister">
-                <div class="col-es-4">
+                <div class="col-es-12 col-eb-3">
+                    <div class="form-field">
+                        <label><?php echo $arrContent['head']['translation']['name']; ?>:</label>
+                        <input type="text" value="" data-id="name">
+                    </div>
+                </div>
+                <div class="col-es-12 col-eb-3">
                     <div class="form-field">
                         <label><?php echo $arrContent['head']['translation']['email']; ?>:</label>
                         <input type="text" value="" data-id="email">
                     </div>
                 </div>
-                <div class="col-es-4">
+                <div class="col-es-12 col-eb-3">
                     <div class="form-field">
                         <label><?php echo $arrContent['head']['translation']['password']; ?>:</label>
                         <input type="password" value="" placeholder="" data-id="password">
                     </div>
                 </div>
-                <div class="col-es-4">
+                <div class="col-es-12 col-eb-3">
                     <div class="form-field">
                         <label><?php echo $arrContent['head']['translation']['permission']; ?>:</label>
                         <select aria-label="select" data-id="permission">

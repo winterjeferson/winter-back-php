@@ -33,6 +33,7 @@ class LoginData
         $sql = 'SELECT 
                     id
                     , email
+                    , name
                     , password
                     , permission
                     , active
@@ -73,6 +74,7 @@ class LoginData
         $objSession = new Session();
         $objSession->setArrayMultidimensionl('user', 'id', $data['id']);
         $objSession->setArrayMultidimensionl('user', 'email', $data['email']);
+        $objSession->setArrayMultidimensionl('user', 'name', $data['name']);
         $objSession->setArrayMultidimensionl('user', 'permission', (int) $data['permission']);
         $objSession->setArrayMultidimensionl('user', 'login', true);
     }

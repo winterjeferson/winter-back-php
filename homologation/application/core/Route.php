@@ -161,7 +161,7 @@ class Route
         echo $view;
     }
 
-    private function build404()
+    public function build404()
     {
         return $this->buildController(['controller' => 'error', 'folder' => 'error']);
     }

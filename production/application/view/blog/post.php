@@ -2,7 +2,9 @@
                 echo $arrContent['post']['postTitle'];
                 ?> </h1></div></div><div class="col-es-12"><div class="container"> <?php
             echo $arrContent['post']['postContent'];
-
+            ?> <h4 class="author"> <?php
+                echo $arrContent['head']['translation']['author'] . ': ' . $arrContent['post']['postAuthor'];
+                ?> </h4> <?php
             $tag = $arrContent['post']['postTag'];
 
             if (!is_null($tag) && $tag !== '') {

@@ -16,6 +16,7 @@ class WbAdminUser {
         this.editId = 0;
         this.$page = document.querySelector('#pageAdminUser');
         this.$formRegister = this.$page.querySelector('[data-id="formRegister"]');
+        this.$formFieldName = this.$formRegister.querySelector('[data-id="name"]');
         this.$formFieldEmail = this.$formRegister.querySelector('[data-id="email"]');
         this.$formFieldPassword = this.$formRegister.querySelector('[data-id="password"]');
         this.$formFieldPermission = this.$formRegister.querySelector('[data-id="permission"]');
@@ -151,10 +152,11 @@ class WbAdminUser {
     editFillField(obj) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.isEdit = true;
+        this.$formFieldName.value = obj['name'];
         this.$formFieldEmail.value = obj['email'];
         this.$formFieldPassword.value = '';
         this.editId = obj['id'];
-        this.$formFieldPermission.selectedIndex = obj['permission'];
+        this.$formFieldPermission.value = obj['permission'];
     }
 
     editSave() {
@@ -211,6 +213,7 @@ class WbAdminUser {
     buildParameter() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return '' +
+            '&name=' + this.$formFieldName.value +
             '&email=' + this.$formFieldEmail.value +
             '&permission=' + this.$formFieldPermission.value +
             '&password=' + this.$formFieldPassword.value;

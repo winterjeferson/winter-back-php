@@ -29,3 +29,8 @@
     margin: 4px 0 4px 0; }
   #pageBlog .blog-list .blog-list-text .date {
     color: grey; }
+
+.author {
+  font-style: italic;
+  font-size: 1rem;
+  padding-left: 1rem; }

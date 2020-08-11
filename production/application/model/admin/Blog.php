@@ -32,6 +32,7 @@ class Blog
             'language' => $this->language,
             'listActive' => $arrList['active'],
             'listInactive' => $arrList['inactive'],
+            'selectAuthor' => $this->buildSelectAuthor(),
         ];
 
         return $arr;
@@ -40,9 +41,14 @@ class Blog
     function getList()
     {
         $sql = 'SELECT 
-                    *
-                FROM 
+                    blog.*
+                    , user.name
+                FROM
                     blog
+                LEFT JOIN 
+                    user
+                ON 
+                    blog.author_id = user.id
                 ORDER BY 
                     id DESC 
         ';
@@ -59,6 +65,7 @@ class Blog
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
         $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
+        $authorId = filter_input(INPUT_POST, 'authorId', FILTER_DEFAULT);
         $urlPt = filter_input(INPUT_POST, 'urlPt', FILTER_DEFAULT);
         $urlEn = filter_input(INPUT_POST, 'urlEn', FILTER_DEFAULT);
         $contentPt = filter_input(INPUT_POST, 'contentPt', FILTER_DEFAULT);
@@ -73,6 +80,7 @@ class Blog
 
         return [
             'id' => $id,
+            'authorId' => (int)$authorId,
             'titlePt' => encode($titlePt),
             'titleEn' => encode($titleEn),
             'urlPt' => $urlPt,
@@ -106,8 +114,9 @@ class Blog
         $sql = "UPDATE 
                     blog
                 SET 
-                    title_pt = '{$arr['titlePt']}'
+                      title_pt = '{$arr['titlePt']}'
                     , title_en = '{$arr['titleEn']}'
+                    , author_id = '{$arr['authorId']}'
                     , url_pt = '{$arr['urlPt']}'
                     , url_en = '{$arr['urlEn']}'
                     , content_pt = '{$arr['contentPt']}'
@@ -146,8 +155,9 @@ class Blog
 
         $sql = "INSERT INTO 
                 blog (
-                    title_pt
+                      title_pt
                     , title_en
+                    , author_id
                     , url_pt
                     , url_en
                     , content_pt
@@ -163,6 +173,7 @@ class Blog
                 ) VALUES (
                     '{$arr['titlePt']}' 
                     ,'{$arr['titleEn']}' 
+                    ,'{$arr['authorId']}' 
                     ,'{$arr['urlPt']}' 
                     ,'{$arr['urlEn']}' 
                     ,'{$arr['contentPt']}'
@@ -246,5 +257,21 @@ class Blog
         }
 
         return $target;
+    }
+
+    function buildSelectAuthor()
+    {
+        $sql = "SELECT 
+                    name,
+                    id
+                FROM
+                    user
+                WHERE 
+                    active = 1
+        ";
+
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchAll($this->connection::FETCH_ASSOC);
     }
 }

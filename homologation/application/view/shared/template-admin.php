@@ -17,9 +17,9 @@ include __DIR__ . '/../admin/admin-layout.php';
             <div class="col-es-12 user">
                 <?php
                 $wellcome = $arrContent['head']['translation']['wellcome'];
-                $email = $arrContent['head']['user']['email'];
+                $name = $arrContent['head']['user']['name'];
 
-                echo  $wellcome . ' <strong>' . $email . '</strong>'
+                echo  $wellcome . ' <strong>' . $name . '</strong>'
                 ?>!
             </div>
             <div class="col-es-12">

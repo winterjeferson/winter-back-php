@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th><?php echo $arrContent['head']['translation']['name']; ?></th>
                         <th><?php echo $arrContent['head']['translation']['email']; ?></th>
                         <th><?php echo $arrContent['head']['translation']['permission']; ?></th>
                         <th><?php echo $arrContent['head']['translation']['actions']; ?></th>
@@ -25,6 +26,7 @@
                         $string .= '
                             <tr>
                                 <td>' . $value['id'] . '</td>
+                                <td>' . $value['name'] . '</td>
                                 <td>' . $value['email'] . '</td>
                                 <td>' . $arrContent['head']['translation'][$value['permission']] . '</td>
                                 <td class="minimum">

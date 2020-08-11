@@ -46,6 +46,7 @@ class WbAdminBlog {
         this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
         this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
         this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
+        this.$formFieldAuthor = document.querySelector('[data-id="author"]');
         this.thumbnail = '';
         this.thumbnailDefault = 'default.jpg';
         this.thumbnailPath = 'assets/img/blog/thumbnail/';
@@ -197,6 +198,7 @@ class WbAdminBlog {
         this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
         this.editId = obj['id'];
         this.$formFieldTagEn.value = obj['tag_en'];
+        this.$formFieldAuthor.value = obj['author_id'];
 
         this.$ckEditorPt.setData(obj['content_pt'], function () {
             this.checkDirty();
@@ -271,6 +273,7 @@ class WbAdminBlog {
             '&datePostEn=' + this.$formFieldDatePostEn.value +
             '&dateEditPt=' + this.$formFieldDateEditPt.value +
             '&dateEditEn=' + this.$formFieldDateEditEn.value +
+            '&authorId=' + this.$formFieldAuthor.value +
             '&thumbnail=' + this.thumbnail +
             '&tagPt=' + this.$formFieldTagPt.value +
             '&tagEn=' + this.$formFieldTagEn.value;

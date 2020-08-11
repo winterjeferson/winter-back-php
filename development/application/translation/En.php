@@ -10,6 +10,7 @@ class En
         'administrativePanelText' => 'Welcome to the administrative panel. Select the desired content.',
         'actions' => 'Actions',
         'actives' => 'Actives',
+        'author' => 'Author',
         'banner' => 'Banner',
         'blog' => 'Blog',
         'blogAdmin' => 'Administer Blog',
