@@ -15,6 +15,8 @@
   @media (min-width: 768px) {
     #pageBlog .blog-list .link {
       grid-template: "blog-list-image blog-list-text" / 45% auto; } }
+  #pageBlog .blog-list .link:focus .blog-list-title {
+    text-decoration: underline; }
 
 #pageBlog .blog-list .img-responsive {
   width: 100%;

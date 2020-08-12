@@ -24,6 +24,13 @@
           "blog-list-image blog-list-text"
           / 45% auto;
       }
+
+      &:focus {
+        .blog-list-title {
+          text-decoration: underline;
+        }
+
+      }
     }
 
     .img-responsive {
