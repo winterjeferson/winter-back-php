@@ -8,7 +8,9 @@ class Tag
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
-        
+        require_once __DIR__ . '/../../core/Query.php';
+
+        $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
@@ -16,13 +18,18 @@ class Tag
 
     function getList()
     {
-        $query = $this->buildQuery();
+        $query = $this->buildTag();
         $arr = $this->buildArr($query);
 
         return $arr;
     }
 
-    function buildQuery()
+    function buildTag()
+    {
+        return $this->objQuery->build($this->buildTagQuery());
+    }
+
+    function buildTagQuery()
     {
         $sql = 'SELECT 
                     tag_' . $this->language . '

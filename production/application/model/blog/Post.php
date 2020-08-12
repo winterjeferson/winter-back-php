@@ -8,7 +8,9 @@ class Post
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../core/Query.php';
 
+        $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
@@ -18,7 +20,7 @@ class Post
     {
         $arrUrl = $this->objSession->get('arrUrl');
         $id = $arrUrl['paramether0'];
-        $post = $this->getPostQuery($id);
+        $post = $this->getPost($id);
 
         if (!$post) {
             $this->buildNotFound();
@@ -56,6 +58,11 @@ class Post
 
     function updatePostView($id)
     {
+        return $this->objQuery->build($this->updatePostViewQuery($id));
+    }
+
+    function updatePostViewQuery($id)
+    {
         $sql = "UPDATE 
                     blog
                 SET 
@@ -65,6 +72,11 @@ class Post
 
         $query = $this->connection->prepare($sql);
         $query->execute();
+    }
+
+    function getPost($id)
+    {
+        return $this->objQuery->build($this->getPostQuery($id));
     }
 
     function getPostQuery($id)

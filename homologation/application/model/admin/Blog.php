@@ -7,13 +7,14 @@ class Blog
     public function __construct()
     {
         require_once __DIR__ . '/../../core/Session.php';
-        require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/../../model/shared/SiteMap.php';
         require_once __DIR__ . '/Login.php';
         require_once __DIR__ . '/Admin.php';
         require_once __DIR__ . '/helper.php';
 
-        $this->objLogin = new Login();
+        $this->objLogin = new \Application\Model\Admin\Login();
+        $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
         $this->objSiteMap = new \Application\Model\Shared\SiteMap();
         $this->objAdmin = new \Application\Model\Admin\Admin();
@@ -40,17 +41,22 @@ class Blog
 
     function getList()
     {
+        return $this->objQuery->build($this->getListQuery());
+    }
+
+    function getListQuery()
+    {
         $sql = 'SELECT 
-                    blog.*
-                    , user.name
-                FROM
-                    blog
-                LEFT JOIN 
-                    user
-                ON 
-                    blog.author_id = user.id
-                ORDER BY 
-                    id DESC 
+                blog.*
+                , user.name
+            FROM
+                blog
+            LEFT JOIN 
+                user
+            ON 
+                blog.author_id = user.id
+            ORDER BY 
+                id DESC 
         ';
 
         $query = $this->connection->prepare($sql);
@@ -99,13 +105,13 @@ class Blog
 
     function doUpdate()
     {
-        if ($this->doUpdateSql()) {
-            if ($this->objSiteMap->build('blog')) {
-                return 'done';
-            };
-        } else {
-            return false;
+        $this->objQuery->build($this->doUpdateSql());
+
+        if ($this->objSiteMap->build('blog')) {
+            return 'done';
         }
+
+        return false;
     }
 
     function doUpdateSql()
@@ -140,13 +146,13 @@ class Blog
 
     function doSave()
     {
-        if ($this->doSaveSql()) {
-            if ($this->objSiteMap->build('blog')) {
-                return 'done';
-            };
-        } else {
-            return false;
+        $this->objQuery->build($this->doSaveSql());
+
+        if ($this->objSiteMap->build('blog')) {
+            return 'done';
         }
+
+        return false;
     }
 
     function doSaveSql()
@@ -197,6 +203,11 @@ class Blog
 
     function doModify()
     {
+        return $this->objQuery->build($this->doModifySql());
+    }
+
+    function doModifySql()
+    {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
         $value = $status === 'inactivate' ? 0 : 1;
@@ -216,6 +227,11 @@ class Blog
 
     function doDelete()
     {
+        return $this->objQuery->build($this->doDeleteSql());
+    }
+
+    function doDeleteSql()
+    {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $sql = "DELETE FROM 
                     blog
@@ -228,8 +244,13 @@ class Blog
 
         return 'done';
     }
-
+    
     function editLoadData()
+    {
+        return $this->objQuery->build($this->editLoadDataSql());
+    }
+
+    function editLoadDataSql()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $sql = "SELECT 
@@ -260,6 +281,11 @@ class Blog
     }
 
     function buildSelectAuthor()
+    {
+        return $this->objQuery->build($this->buildSelectAuthorSql());
+    }
+
+    function buildSelectAuthorSql()
     {
         $sql = "SELECT 
                     name,

@@ -8,8 +8,9 @@ class SiteMap
     {
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Query.php';
 
-
+        $this->objQuery = new \Application\Core\Query();
         $this->connection = \Application\Core\Connection::open();
         $this->objSession = new \Application\Core\Session();
     }
@@ -25,6 +26,11 @@ class SiteMap
     }
 
     function buildSql()
+    {
+        return $this->objQuery->build($this->buildSqlQuery());
+    }
+
+    function buildSqlQuery()
     {
         $sql = "SELECT 
                     url_pt

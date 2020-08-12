@@ -2,17 +2,16 @@
 
 namespace Application\Model\Admin;
 
-require_once __DIR__ . '/Login.php';
-
-use Application\Core\Session;
-use Application\Model\Admin\Login;
-
 class Logout
 {
     public function __construct()
     {
-        $this->objLogin = new Login();
-        $this->objWbSession = new Session();
+        require_once __DIR__ . '/Login.php';
+        require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/Login.php';
+
+        $this->objLogin = new \Application\Model\Admin\Login();
+        $this->objSession = new \Application\Core\Session();
     }
 
     function build()

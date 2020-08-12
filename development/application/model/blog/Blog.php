@@ -15,10 +15,12 @@ class Blog
     public function __construct($isLoadMore = false)
     {
         require_once __DIR__ . '/../../core/Session.php';
+        require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/Tag.php';
         
         $this->objSession = new \Application\Core\Session();
+        $this->objQuery = new \Application\Core\Query();
         $this->objTag = new Tag();
         $this->language = $this->objSession->get('language');
 
@@ -56,6 +58,11 @@ class Blog
     }
 
     function getListQueryDefault($queryAdd)
+    {
+        return $this->objQuery->build($this->getListQueryDefaultQuery($queryAdd));
+    }
+
+    function getListQueryDefaultQuery($queryAdd)
     {
         $connection = \Application\Core\Connection::open();
         $sql = 'SELECT 

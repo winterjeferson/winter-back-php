@@ -8,6 +8,7 @@ class User
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/Login.php';
         require_once __DIR__ . '/Admin.php';
         require_once __DIR__ . '/helper.php';
@@ -15,6 +16,7 @@ class User
         $this->objLogin = new Login();
         $this->objSession = new \Application\Core\Session();
         $this->objAdmin = new \Application\Model\Admin\Admin();
+        $this->objQuery = new \Application\Core\Query();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
@@ -68,7 +70,12 @@ class User
         return $arrNew;
     }
 
-    private function getList()
+    function getList()
+    {
+        return $this->objQuery->build($this->getListQuery());
+    }
+
+    private function getListQuery()
     {
         $sql = 'SELECT 
                    id
@@ -90,6 +97,11 @@ class User
     }
 
     function editLoadData()
+    {
+        return $this->objQuery->build($this->editLoadDataQuery());
+    }
+
+    function editLoadDataQuery()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $sql = "SELECT 
@@ -114,6 +126,11 @@ class User
 
     function doModify()
     {
+        return $this->objQuery->build($this->doModifyQuery());
+    }
+
+    function doModifyQuery()
+    {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
         $value = $status === 'inactivate' ? 0 : 1;
@@ -133,6 +150,11 @@ class User
 
     function doDelete()
     {
+        return $this->objQuery->build($this->doDeleteQuery());
+    }
+
+    function doDeleteQuery()
+    {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $sql = "DELETE FROM 
                     user
@@ -148,14 +170,16 @@ class User
 
     function doSave()
     {
-        if ($this->doSaveSql()) {
+        $query = $this->objQuery->build($this->doSaveQuery());
+
+        if ($query) {
             return 'done';
-        } else {
-            return false;
         }
+
+        return false;
     }
 
-    function doSaveSql()
+    function doSaveQuery()
     {
         $arr = $this->getValue();
 
@@ -216,14 +240,16 @@ class User
 
     function doUpdate()
     {
-        if ($this->doUpdateSql()) {
+        $query = $this->objQuery->build($this->doUpdateQuery());
+
+        if ($query) {
             return 'done';
-        } else {
-            return false;
         }
+
+        return false;
     }
 
-    function doUpdateSql()
+    function doUpdateQuery()
     {
         $arr = $this->getValue();
         $sql = "UPDATE 
