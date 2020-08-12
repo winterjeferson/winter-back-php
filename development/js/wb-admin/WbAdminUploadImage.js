@@ -59,16 +59,17 @@ class WbAdminUploadImage {
 
         data.append('f', file);
         data.append('p', path);
-
+        data.append('token', globalToken);
+        
         ajax.open('POST', objWbUrl.getController({ 'folder': 'admin', 'file': 'ImageDelete' }));
-
+        
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 self.buildResponse(ajax.responseText, $return);
                 objWfModal.closeModal();
             }
         }
-
+        
         ajax.send(data);
     }
 
@@ -81,15 +82,16 @@ class WbAdminUploadImage {
         const ajax = new XMLHttpRequest();
         const file = $file.files[0];
         const url = objWbUrl.getController({ 'folder': 'admin', 'file': 'ImageUpload' });
-
+        
         if ($file.files.length === 0) {
             $file.click();
             return;
         }
-
+        
         data.append('p', path);
         data.append('f', file);
-
+        data.append('token', globalToken);
+        
         this.$btUploadThumbnail.setAttribute('disabled', 'disabled');
         ajax.open('POST', url);
 

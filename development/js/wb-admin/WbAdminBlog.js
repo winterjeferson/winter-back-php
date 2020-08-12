@@ -140,11 +140,12 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
             '&action=doUpdate' +
             '&id=' + self.editId +
-            this.buildParameter();
+            this.buildParameter() +
+            '&token=' + globalToken;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -162,10 +163,11 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
             '&action=' + 'editLoadData' +
-            '&id=' + id;
+            '&id=' + id +
+            '&token=' + globalToken;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -212,11 +214,12 @@ class WbAdminBlog {
     modify(id, status) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
             '&action=doModify' +
             '&status=' + status +
-            '&id=' + id;
+            '&id=' + id +
+            '&token=' + globalToken;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -232,10 +235,11 @@ class WbAdminBlog {
     delete(id) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
             '&action=doDelete' +
-            '&id=' + id;
+            '&id=' + id +
+            '&token=' + globalToken;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -282,10 +286,11 @@ class WbAdminBlog {
     saveContent() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogEdit' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
             '&action=doSave' +
-            this.buildParameter();
+            this.buildParameter() +
+            '&token=' + globalToken;
 
         ajax.open('POST', url, true);
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

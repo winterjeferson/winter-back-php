@@ -4,7 +4,7 @@ namespace Application\Controller\Admin;
 
 require_once __DIR__ . '/../Main.php';
 
-class LoginData extends \Application\Controller\Main
+class UserAjax extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -13,13 +13,14 @@ class LoginData extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'loginData'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+            ['id' => 'userAjax', 'folder' => 'admin', 'file' => 'userAjax'],
         ];
 
         return $this->renderModel($data);
     }
 }
 
-$obj = new LoginData();
+$obj = new UserAjax();
 $data = $obj->getModel();
-echo $data['admin'];
+echo $data['userAjax'];

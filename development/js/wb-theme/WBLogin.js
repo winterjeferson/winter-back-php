@@ -49,10 +49,11 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'LoginData' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'LoginAjax' });
         let parameter =
             '&email=' + this.$fielEmail.value +
-            '&password=' + this.$fieldPassword.value;
+            '&password=' + this.$fieldPassword.value +
+            '&token=' + globalToken;
 
         if (!this.validate()) {
             return;

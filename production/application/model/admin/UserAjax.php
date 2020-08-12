@@ -2,19 +2,19 @@
 
 namespace Application\Model\Admin;
 
-class BlogEdit
+class UserAjax
 {
     public function __construct()
     {
-        require_once __DIR__ . '/Blog.php';
+        require_once __DIR__ . '/User.php';
 
-        $this->objBlog = new \Application\Model\Admin\Blog();
+        $this->objUser = new \Application\Model\Admin\User();
     }
 
     function build()
     {
         $action = filter_input(INPUT_POST, 'action', FILTER_DEFAULT);
         
-        return $this->objBlog->{$action}();
+        return $this->objUser->{$action}();
     }
 }

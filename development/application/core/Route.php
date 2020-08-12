@@ -2,13 +2,13 @@
 
 namespace Application\Core;
 
-use  Application\Core\Session;
-
 class Route
 {
     public function __construct()
     {
-        $this->objSession = new Session();
+        require_once __DIR__ . '/Session.php';
+        
+        $this->objSession = new \Application\Core\Session();
     }
 
     public function build()

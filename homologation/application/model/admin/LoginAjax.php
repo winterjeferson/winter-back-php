@@ -2,21 +2,24 @@
 
 namespace Application\Model\Admin;
 
-class LoginData
+class LoginAjax
 {
     public function __construct()
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../core/Token.php';
 
         $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
+        $this->objToken = new \Application\Core\Token();
         $this->connection = \Application\Core\Connection::open();
     }
 
     function build()
     {
+        $this->objToken->validate();
         $data = $this->getData();
         $validate = $this->validate($data);
 

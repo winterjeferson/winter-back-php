@@ -8,9 +8,11 @@ class Head
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Route.php';
+        require_once __DIR__ . '/../../core/Token.php';
 
         $this->objSession = new \Application\Core\Session();
         $this->objRoute = new \Application\Core\Route();
+        $this->objToken = new \Application\Core\Token();
     }
 
     function build()
@@ -24,6 +26,7 @@ class Head
             'translationJson' => json_encode($this->objSession->get('translation')),
             'admin' => $this->verifyAdmin(),
             'user' => $this->objSession->get('user'),
+            'token' => $this->objToken->build(),
         ];
 
         foreach (getUrArrLanguage() as $key => $value) {

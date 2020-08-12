@@ -157,26 +157,31 @@ class WbForm {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         this.$page = document.querySelector('#pageForm');
         this.$form = this.$page.querySelector('.form');
+        this.$formFieldEmail = this.$form.querySelector('[data-id="email"]');
+        this.$formFieldMessage = this.$form.querySelector('[data-id="message"]');
         this.$btSend = this.$page.querySelector('#pageFormBtSend');
     }
 
     buildMenu() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
+        const self = this;
 
         this.$btSend.addEventListener('click', function (event) {
-            self.send();
+            if (objWfForm.validateEmpty([self.$formFieldEmail, self.$formFieldMessage])) {
+                self.send();
+            }
         });
     }
 
     send() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
-        let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
+        const self = this;
+        const ajax = new XMLHttpRequest();
+        const url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
         let parameter =
             '&method=sendForm' +
-            '&data=' + JSON.stringify(self.getData());
+            '&data=' + JSON.stringify(self.getData()) +
+            '&token=' + globalToken;
 
         this.$btSend.setAttribute('disabled', 'disabled');
         ajax.open('POST', url, true);
@@ -272,10 +277,11 @@ class WbLogin {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
         let ajax = new XMLHttpRequest();
-        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'LoginData' });
+        let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'LoginAjax' });
         let parameter =
             '&email=' + this.$fielEmail.value +
-            '&password=' + this.$fieldPassword.value;
+            '&password=' + this.$fieldPassword.value +
+            '&token=' + globalToken;
 
         if (!this.validate()) {
             return;

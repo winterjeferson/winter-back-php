@@ -10,7 +10,10 @@ class FormSend extends PhpMailer
 {
     public function __construct()
     {
-        require __DIR__ . '../../../configuration/email.php';
+        require_once __DIR__ . '../../../configuration/email.php';
+        require_once __DIR__ . '/../../core/Token.php';
+
+        $this->objToken = new \Application\Core\Token();
 
         $this->Port = $emailPort;
         $this->Host = $emailHost;
@@ -25,8 +28,9 @@ class FormSend extends PhpMailer
         $this->IsHTML(true);
     }
 
-    public function  build()
+    public function build()
     {
+        $this->objToken->validate();
         return $this->sendForm();
     }
 
@@ -37,7 +41,6 @@ class FormSend extends PhpMailer
         $data = filter_input(INPUT_POST, 'data', FILTER_DEFAULT);
         $json = json_decode($data);
         $this->addReplyTo($json[1]);
-        // $t = filter_input(INPUT_POST, 't', FILTER_DEFAULT);
 
         $this->Subject = $emailTitle;
         $this->AddAddress($emailReceiver);
@@ -50,9 +53,8 @@ class FormSend extends PhpMailer
     private function buildHTML($json)
     {
         ob_start();
-        $name = $json[0];
-        $email = $json[1];
-        $message = $json[2];
+        $email = $json[0];
+        $message = $json[1];
         $template = require_once __DIR__ . '/../../view/email/default/form.php';
         $content = ob_get_clean();
 

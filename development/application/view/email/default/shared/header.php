@@ -1,11 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
-require __DIR__ . '/../../../../core/Session.php';
+require_once __DIR__ . '/../../../../core/Session.php';
 
 $objSession = new Application\Core\Session();
 $language = $objSession->get('language');
 
-require __DIR__ . '/translation' . ucfirst($language) . '.php';
+require_once __DIR__ . '/translation' . ucfirst($language) . '.php';
 ?>
 
 <head>
