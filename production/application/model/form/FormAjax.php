@@ -6,7 +6,7 @@ require_once __DIR__ . '../../../core/PhpMailer.php';
 
 use PhpMailer;
 
-class FormSend extends PhpMailer
+class FormAjax extends PhpMailer
 {
     public function __construct()
     {

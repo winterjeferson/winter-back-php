@@ -4,7 +4,7 @@ namespace Application\Controller\Form;
 
 require_once __DIR__ . '/../Main.php';
 
-class FormSend extends \Application\Controller\Main
+class FormAjax extends \Application\Controller\Main
 {
     public function __construct()
     {
@@ -13,13 +13,13 @@ class FormSend extends \Application\Controller\Main
     function sendForm()
     {
         $data = [
-            ['id' => 'formSend', 'folder' => 'form', 'file' => 'formSend'],
+            ['id' => 'formAjax', 'folder' => 'form', 'file' => 'formAjax'],
         ];
 
         return $this->renderModel($data);
     }
 }
 
-$obj = new FormSend();
+$obj = new FormAjax();
 $data = $obj->sendForm();
-echo $data['formSend'];
+echo $data['formAjax'];

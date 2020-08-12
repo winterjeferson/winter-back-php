@@ -33,7 +33,7 @@ class WbForm {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         const self = this;
         const ajax = new XMLHttpRequest();
-        const url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormSend' });
+        const url = objWbUrl.getController({ 'folder': 'form', 'file': 'FormAjax' });
         let parameter =
             '&method=sendForm' +
             '&data=' + JSON.stringify(self.getData()) +
