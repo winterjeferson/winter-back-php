@@ -133,16 +133,14 @@ class Blog
             $removeImage = strip_tags($value['content_' . $this->language]);
 
             $string .= '
-                    <article>
+                    <a href="' . $url . '" class="link">
                         <div class="blog-list-image">
                             <img class="img-responsive" data-src="assets/img/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
                         </div>
                         <div class="blog-list-text">
-                            <a href="' . $url . '" class="link link-blue">
                                 <h2 class="blog-list-title">
                                 ' . encode($value['title_' . $this->language]) . '
                                 </h2>
-                            </a>
                             <p class="text">
                             ' . substr($removeImage, 0, 80) . '...
                             </p>
@@ -151,7 +149,7 @@ class Blog
                             ' . $ternaryDate . '
                             </small>
                         </div>
-                    </article>
+                    </a>
                 ';
         }
 
