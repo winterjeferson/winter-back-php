@@ -26,7 +26,7 @@ class Head
             'translationJson' => json_encode($this->objSession->get('translation')),
             'admin' => $this->verifyAdmin(),
             'user' => $this->objSession->get('user'),
-            'token' => $this->objToken->build(),
+            'token' => $this->objToken->get(),
         ];
 
         foreach (getUrArrLanguage() as $key => $value) {

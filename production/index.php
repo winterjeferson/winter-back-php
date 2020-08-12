@@ -8,7 +8,9 @@ foreach ($arrFile as $file) {
 }
 
 $objRoute = new Application\Core\Route();
+$objToken = new Application\Core\Token();
 $objTranslation = new Application\Core\Translation();
 
+$objToken->build();
 $objTranslation->build();
 $objRoute->build();

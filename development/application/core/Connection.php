@@ -2,7 +2,6 @@
 
 namespace Application\Core;
 
-
 use PDO;
 
 final class Connection

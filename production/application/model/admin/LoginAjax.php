@@ -23,7 +23,7 @@ class LoginAjax
         $data = $this->getData();
         $validate = $this->validate($data);
 
-        if ($validate) {
+        if ($validate === true) {
             $this->setSession($data);
         }
 

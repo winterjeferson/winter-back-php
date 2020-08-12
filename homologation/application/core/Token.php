@@ -16,14 +16,18 @@ class Token
     {
         $token = md5(time());
 
-        $this->objSession->setArrayMultidimensionl('user', 'token', $token);
-        return $token;
+        $this->objSession->set('token', $token);
+    }
+
+    function get()
+    {
+        return $this->objSession->get('token');
     }
 
     function validate()
     {
         $tokenSent = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
-        $tokenSession =  $this->objSession->getArray('user', 'token');
+        $tokenSession =  $this->get();
 
         if ($tokenSent !== $tokenSession) {
             die();
