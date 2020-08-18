@@ -2,6 +2,8 @@
 
 namespace Application\Model\Admin;
 
+use PDO;
+
 class User
 {
     public function __construct()
@@ -113,11 +115,12 @@ class User
                 FROM 
                     user
                 WHERE
-                    id = {$id}   
+                    id = :id 
                 LIMIT 1
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetch($this->connection::FETCH_ASSOC);
 
@@ -133,16 +136,18 @@ class User
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
-        $value = $status === 'inactivate' ? 0 : 1;
+        $active = $status === 'inactivate' ? 0 : 1;
         $sql = "UPDATE 
                     user
                 SET
-                    active = {$value}
+                    active = :active
                 WHERE 
-                    id = {$id}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':active', $active, PDO::PARAM_STR);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
         return 'done';
@@ -159,10 +164,11 @@ class User
         $sql = "DELETE FROM 
                     user
                 WHERE 
-                    id = {$id}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
         return 'done';
@@ -191,15 +197,19 @@ class User
                     , permission
                     , active
                 ) VALUES (
-                     '{$arr['email']}' 
-                    ,'{$arr['name']}'
-                    ,'{$arr['password']}'
-                    ,'{$arr['permission']}'
+                      :email 
+                    , :name
+                    , :password
+                    , :permission
                     , 1
                 )
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':email', $arr['email'], PDO::PARAM_STR);
+        $query->bindParam(':name', $arr['name'], PDO::PARAM_STR);
+        $query->bindParam(':password', $arr['password'], PDO::PARAM_STR);
+        $query->bindParam(':permission', $arr['permission'], PDO::PARAM_INT);
         $query->execute();
 
         return true;
@@ -255,15 +265,20 @@ class User
         $sql = "UPDATE 
                     user
                 SET 
-                      email = '{$arr['email']}'
-                    , name = '{$arr['name']}'
-                    , password = '{$arr['password']}'
-                    , permission = '{$arr['permission']}'
+                      email = :email
+                    , name = :name
+                    , password = :password
+                    , permission = :permission
                 WHERE
-                    id = {$arr['id']}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':email', $arr['email'], PDO::PARAM_STR);
+        $query->bindParam(':name', $arr['name'], PDO::PARAM_STR);
+        $query->bindParam(':password', $arr['password'], PDO::PARAM_STR);
+        $query->bindParam(':permission', $arr['permission'], PDO::PARAM_INT);
+        $query->bindParam(':id', $arr['id'], PDO::PARAM_INT);
         $query->execute();
 
         return true;

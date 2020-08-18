@@ -2,6 +2,8 @@
 
 namespace Application\Model\Admin;
 
+use PDO;
+
 class Blog
 {
     public function __construct()
@@ -85,7 +87,7 @@ class Blog
         $thumbnail = filter_input(INPUT_POST, 'thumbnail', FILTER_DEFAULT);
 
         return [
-            'id' => $id,
+            'id' => (int)$id,
             'authorId' => (int)$authorId,
             'titlePt' => encode($titlePt),
             'titleEn' => encode($titleEn),
@@ -120,25 +122,40 @@ class Blog
         $sql = "UPDATE 
                     blog
                 SET 
-                      title_pt = '{$arr['titlePt']}'
-                    , title_en = '{$arr['titleEn']}'
-                    , author_id = '{$arr['authorId']}'
-                    , url_pt = '{$arr['urlPt']}'
-                    , url_en = '{$arr['urlEn']}'
-                    , content_pt = '{$arr['contentPt']}'
-                    , content_en = '{$arr['contentEn']}'
-                    , tag_pt = '{$arr['tagPt']}'
-                    , tag_en = '{$arr['tagEn']}'
-                    , date_post_pt = '{$arr['datePostPt']}'
-                    , date_post_en = '{$arr['datePostEn']}'
-                    , date_edit_pt = '{$arr['dateEditPt']}'
-                    , date_edit_en = '{$arr['dateEditEn']}'
-                    , thumbnail = '{$arr['thumbnail']}'
+                      title_pt = :titlePt
+                    , title_en = :titleEn
+                    , author_id = :authorId
+                    , url_pt = :urlPt
+                    , url_en = :urlEn
+                    , content_pt = :contentPt
+                    , content_en = :contentEn
+                    , tag_pt = :tagPt
+                    , tag_en = :tagEn
+                    , date_post_pt = :datePostPt
+                    , date_post_en = :datePostEn
+                    , date_edit_pt = :dateEditPt
+                    , date_edit_en = :dateEditEn
+                    , thumbnail = :thumbnail
                 WHERE
-                    id = {$arr['id']}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':titlePt', $arr['titlePt'], PDO::PARAM_STR);
+        $query->bindParam(':titleEn', $arr['titleEn'], PDO::PARAM_STR);
+        $query->bindParam(':authorId', $arr['authorId'], PDO::PARAM_INT);
+        $query->bindParam(':urlPt', $arr['urlPt'], PDO::PARAM_STR);
+        $query->bindParam(':urlEn', $arr['urlEn'], PDO::PARAM_STR);
+        $query->bindParam(':contentPt', $arr['contentPt'], PDO::PARAM_STR);
+        $query->bindParam(':contentEn', $arr['contentEn'], PDO::PARAM_STR);
+        $query->bindParam(':tagPt', $arr['tagPt'], PDO::PARAM_STR);
+        $query->bindParam(':tagEn', $arr['tagEn'], PDO::PARAM_STR);
+        $query->bindParam(':datePostPt', $arr['datePostPt'], PDO::PARAM_STR);
+        $query->bindParam(':datePostEn', $arr['datePostEn'], PDO::PARAM_STR);
+        $query->bindParam(':dateEditPt', $arr['dateEditPt'], PDO::PARAM_STR);
+        $query->bindParam(':dateEditEn', $arr['dateEditEn'], PDO::PARAM_STR);
+        $query->bindParam(':thumbnail', $arr['thumbnail'], PDO::PARAM_STR);
+        $query->bindParam(':id', $arr['id'], PDO::PARAM_INT);
         $query->execute();
 
         return true;
@@ -177,25 +194,39 @@ class Blog
                     , thumbnail
                     , active
                 ) VALUES (
-                    '{$arr['titlePt']}' 
-                    ,'{$arr['titleEn']}' 
-                    ,'{$arr['authorId']}' 
-                    ,'{$arr['urlPt']}' 
-                    ,'{$arr['urlEn']}' 
-                    ,'{$arr['contentPt']}'
-                    ,'{$arr['contentEn']}'
-                    ,'{$arr['tagPt']}' 
-                    ,'{$arr['tagEn']}' 
-                    ,'{$arr['datePostPt']}'
-                    ,'{$arr['datePostEn']}' 
-                    ,'{$arr['dateEditPt']}'
-                    ,'{$arr['dateEditEn']}'
-                    ,'{$arr['thumbnail']}'
+                      :titlePt
+                    , :titleEn 
+                    , :authorId 
+                    , :urlPt
+                    , :urlEn
+                    , :contentPt
+                    , :contentEn
+                    , :tagPt
+                    , :tagEn 
+                    , :datePostPt
+                    , :datePostEn
+                    , :dateEditPt
+                    , :dateEditEn
+                    , :thumbnail
                     , 1
                 )
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':titlePt', $arr['titlePt'], PDO::PARAM_STR);
+        $query->bindParam(':titleEn', $arr['titleEn'], PDO::PARAM_STR);
+        $query->bindParam(':authorId', $arr['authorId'], PDO::PARAM_INT);
+        $query->bindParam(':urlPt', $arr['urlPt'], PDO::PARAM_STR);
+        $query->bindParam(':urlEn', $arr['urlEn'], PDO::PARAM_STR);
+        $query->bindParam(':contentPt', $arr['contentPt'], PDO::PARAM_STR);
+        $query->bindParam(':contentEn', $arr['contentEn'], PDO::PARAM_STR);
+        $query->bindParam(':tagPt', $arr['tagPt'], PDO::PARAM_STR);
+        $query->bindParam(':tagEn', $arr['tagEn'], PDO::PARAM_STR);
+        $query->bindParam(':datePostPt', $arr['datePostPt'], PDO::PARAM_STR);
+        $query->bindParam(':datePostEn', $arr['datePostEn'], PDO::PARAM_STR);
+        $query->bindParam(':dateEditPt', $arr['dateEditPt'], PDO::PARAM_STR);
+        $query->bindParam(':dateEditEn', $arr['dateEditEn'], PDO::PARAM_STR);
+        $query->bindParam(':thumbnail', $arr['thumbnail'], PDO::PARAM_STR);
         $query->execute();
 
         return true;
@@ -210,16 +241,18 @@ class Blog
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
-        $value = $status === 'inactivate' ? 0 : 1;
+        $active = $status === 'inactivate' ? 0 : 1;
         $sql = "UPDATE 
                     blog
                 SET
-                    active = {$value}
+                    active = :active
                 WHERE 
-                    id = {$id}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':active', $active, PDO::PARAM_STR);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
         return 'done';
@@ -236,15 +269,16 @@ class Blog
         $sql = "DELETE FROM 
                     blog
                 WHERE 
-                    id = {$id}
+                    id = :id
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
         return 'done';
     }
-    
+
     function editLoadData()
     {
         return $this->objQuery->build($this->editLoadDataSql());
@@ -258,11 +292,12 @@ class Blog
                 FROM 
                     blog
                 WHERE
-                    id = {$id}   
+                    id = :id 
                 LIMIT 1
         ";
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
         $result = $query->fetch($this->connection::FETCH_ASSOC);
 

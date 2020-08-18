@@ -118,7 +118,7 @@ function buildListHTML($value, $language, $status)
                                                 <nav class="menu menu-horizontal text-right">
                                                     <ul>
                                                         <li>
-                                                            <button type="button" class="bt bt-sm bt-blue" data-action="edit" data-tooltip="true" data-tooltip-color="black" title="<?php echo $arrContent['head']['translation']['edit']; ?>">
+                                                            <button type="button" class="bt bt-sm bt-blue" data-action="edit" title="<?php echo $arrContent['head']['translation']['edit']; ?>">
                                                                 <span class="fa fa-pencil" aria-hidden="true"></span>
                                                             </button>
                                                         </li>

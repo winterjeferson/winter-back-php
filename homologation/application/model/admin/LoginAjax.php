@@ -2,6 +2,8 @@
 
 namespace Application\Model\Admin;
 
+use PDO;
+
 class LoginAjax
 {
     public function __construct()
@@ -48,11 +50,12 @@ class LoginAjax
                 FROM 
                     user
                 WHERE 
-                    email = "' . $email . '"
+                    email = :email
                 LIMIT 1
         ';
 
         $query = $this->connection->prepare($sql);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetch($this->connection::FETCH_ASSOC);
         return $result;
