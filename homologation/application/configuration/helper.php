@@ -101,7 +101,8 @@ function getUrlBackEnd()
 function getUrArrLanguage()
 {
     return [
-        ['lang' =>  'pt', 'country' =>  'pt-br', 'hreflang' => 'pt-br'],
-        ['lang' =>  'en', 'country' =>  'en-us', 'hreflang' => 'x-default'],
+        ['lang' =>  'pt', 'country' =>  'pt-BR', 'hreflang' => 'pt-BR'],
+        ['lang' =>  'en', 'country' =>  'en-US', 'hreflang' => 'x-default'],
+        ['lang' =>  'es', 'country' =>  'es-MX', 'hreflang' => 'es-MX'],
     ];
 }
