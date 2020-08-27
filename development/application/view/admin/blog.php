@@ -50,93 +50,9 @@ function buildListHTML($value, $language, $status)
 <div class="col-es-12">
     <section id="pageAdminBlogEdit" class="row">
         <?php
-        $temp = 'Pt';
-        include __DIR__ . '/blog-form.php';
-        $temp = 'En';
         include __DIR__ . '/blog-form.php';
         ?>
-
-        <div class="col-es-12 col-eb-6">
-            <div class="padding-bi">
-                <div class="card card-es card-grey">
-                    <header>
-                        <h4>
-                            <?php echo $arrContent['head']['translation']['author']; ?>
-                        </h4>
-                    </header>
-                    <div class="row card-body">
-                        <div class="col-es-12">
-                            <form class="form form-grey padding-re">
-                                <select aria-label="select" data-id="author">
-                                    <?php
-                                    $string = '';
-
-                                    foreach ($arrContent['blog']['selectAuthor'] as $key => &$valueAuthor) {
-                                        $string .= '<option value="' . $valueAuthor['id'] . '">' . $valueAuthor['name'] . '</option>';
-                                    }
-
-                                    echo $string;
-                                    ?>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
-                    <footer>
-                    </footer>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-es-12 col-eb-6" data-id="thumbnailWrapper">
-            <div class="padding-bi">
-                <div class="card card-es card-grey">
-                    <header>
-                        <h4>
-                            <?php echo $arrContent['head']['translation']['thumbnail']; ?>
-                        </h4>
-                    </header>
-                    <div class="row card-body">
-                        <div class="col-es-12">
-                            <div class="padding-re">
-                                <table class="table table-grey thumbnail-table">
-                                    <thead>
-                                        <tr>
-                                            <th><?php echo $arrContent['head']['translation']['image']; ?></th>
-                                            <th><?php echo $arrContent['head']['translation']['name']; ?></th>
-                                            <th><?php echo $arrContent['head']['translation']['menu']; ?></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="minimum">
-                                                <img src="assets/img/blog/thumbnail/default.jpg" data-id="thumbnail">
-                                            </td>
-                                            <td data-id="name">
-                                                default.jpg
-                                            </td>
-                                            <td class="minimum">
-                                                <nav class="menu menu-horizontal text-right">
-                                                    <ul>
-                                                        <li>
-                                                            <button type="button" class="bt bt-sm bt-blue" data-action="edit" title="<?php echo $arrContent['head']['translation']['edit']; ?>">
-                                                                <span class="fa fa-pencil" aria-hidden="true"></span>
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <footer>
-                    </footer>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="col-es-12 form-field">
             <nav class="menu menu-horizontal text-right">
                 <ul>

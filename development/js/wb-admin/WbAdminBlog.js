@@ -9,10 +9,7 @@ class WbAdminBlog {
             return;
         }
 
-        CKEDITOR.replace('fieldContentPt', {
-            entities: false
-        });
-        CKEDITOR.replace('fieldContentEn', {
+        CKEDITOR.replace('fieldContent', {
             entities: false
         });
 
@@ -32,26 +29,18 @@ class WbAdminBlog {
         this.$contentEditThumbnail = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
         this.$contentList = document.querySelector('#pageAdminBlogList');
         this.$formRegister = this.$contentEdit.querySelector('[data-id="formRegister"]');
-        this.$formFieldTitlePt = this.$contentEdit.querySelector('[data-id="fieldTitlePt"]');
-        this.$formFieldTitleEn = this.$contentEdit.querySelector('[data-id="fieldTitleEn"]');
-        this.$formFieldUrlPt = this.$contentEdit.querySelector('[data-id="fieldUrlPt"]');
-        this.$formFieldUrlEn = this.$contentEdit.querySelector('[data-id="fieldUrlEn"]');
-        this.$formFieldContentPt = this.$contentEdit.querySelector('[data-id="fieldContentPt"]');
-        this.$formFieldContentEn = this.$contentEdit.querySelector('[data-id="fieldContentEn"]');
-        this.$formFieldTagPt = this.$contentEdit.querySelector('[data-id="fieldTagPt"]');
-        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
-        this.$formFieldDatePostPt = this.$contentEdit.querySelector('[data-id="fieldDatePostPt"]');
-        this.$formFieldDatePostEn = this.$contentEdit.querySelector('[data-id="fieldDatePostEn"]');
-        this.$formFieldDateEditPt = this.$contentEdit.querySelector('[data-id="fieldDateEditPt"]');
-        this.$formFieldDateEditEn = this.$contentEdit.querySelector('[data-id="fieldDateEditEn"]');
-        this.$formFieldTagEn = this.$contentEdit.querySelector('[data-id="fieldTagEn"]');
+        this.$formFieldTitle = this.$contentEdit.querySelector('[data-id="fieldTitle"]');
+        this.$formFieldUrl = this.$contentEdit.querySelector('[data-id="fieldUrl"]');
+        this.$formFieldContent = this.$contentEdit.querySelector('[data-id="fieldContent"]');
+        this.$formFieldTag = this.$contentEdit.querySelector('[data-id="fieldTag"]');
+        this.$formFieldDatePost = this.$contentEdit.querySelector('[data-id="fieldDatePost"]');
+        this.$formFieldDateEdit = this.$contentEdit.querySelector('[data-id="fieldDateEdit"]');
         this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
         this.$formFieldAuthor = document.querySelector('[data-id="author"]');
         this.thumbnail = '';
         this.thumbnailDefault = 'default.jpg';
         this.thumbnailPath = 'assets/img/blog/thumbnail/';
-        this.$ckEditorPt = CKEDITOR.instances.fieldContentPt;
-        this.$ckEditorEn = CKEDITOR.instances.fieldContentEn;
+        this.$ckEditor = CKEDITOR.instances.fieldContent;
         this.$btRegister = this.$page.querySelector('[data-id="btRegister"]');
     }
 
@@ -90,10 +79,10 @@ class WbAdminBlog {
 
     buildMenuTable() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
-        let $table = this.$contentList.querySelectorAll('.table');
-        let $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
-        let $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
+        const self = this;
+        const $table = this.$contentList.querySelectorAll('.table');
+        const $tableActive = this.$contentList.querySelectorAll('[data-id="tableActive"]');
+        const $tableInactive = this.$contentList.querySelectorAll('[data-id="tableInactive"]');
 
         Array.prototype.forEach.call($tableActive, function (table) {
             let $button = table.querySelectorAll('[data-action="inactivate"]');
@@ -138,7 +127,7 @@ class WbAdminBlog {
 
     editSave() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let self = this;
+        const self = this;
         let ajax = new XMLHttpRequest();
         let url = objWbUrl.getController({ 'folder': 'admin', 'file': 'BlogAjax' });
         let parameter =
@@ -178,7 +167,7 @@ class WbAdminBlog {
                 document.documentElement.scrollTop = 0;
                 self.isEdit = true;
                 self.editFillField(obj);
-                self.thumbnail = obj['thumbnail'];
+                self.thumbnail = obj['thumbnail'].trim();
                 self.modifyThumbnail();
             }
         }
@@ -188,25 +177,18 @@ class WbAdminBlog {
 
     editFillField(obj) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        this.$formFieldTitlePt.value = obj['title_pt'];
-        this.$formFieldTitleEn.value = obj['title_en'];
-        this.$formFieldUrlPt.value = obj['url_pt'];
-        this.$formFieldUrlEn.value = obj['url_en'];
-        this.$formFieldTagPt.value = obj['tag_pt'];
-        this.$formFieldTagEn.value = obj['tag_en'];
-        this.$formFieldDatePostPt.value = obj['date_post_pt'].substring(0, 10);
-        this.$formFieldDatePostEn.value = obj['date_post_en'].substring(0, 10);
-        this.$formFieldDateEditPt.value = obj['date_edit_pt'].substring(0, 10);
-        this.$formFieldDateEditEn.value = obj['date_edit_en'].substring(0, 10);
+        const datePost = obj['date_post_' + globalLanguage];
+        const dateEdit = obj['date_edit_' + globalLanguage];
+
+        this.$formFieldTitle.value = obj['title_' + globalLanguage];
+        this.$formFieldUrl.value = obj['url_' + globalLanguage];
+        this.$formFieldTag.value = obj['tag_' + globalLanguage];
+        this.$formFieldDatePost.value = datePost !== null ? datePost.substring(0, 10) : datePost;
+        this.$formFieldDateEdit.value = dateEdit !== null ? dateEdit.substring(0, 10) : dateEdit;
         this.editId = obj['id'];
-        this.$formFieldTagEn.value = obj['tag_en'];
         this.$formFieldAuthor.value = obj['author_id'];
 
-        this.$ckEditorPt.setData(obj['content_pt'], function () {
-            this.checkDirty();
-        });
-
-        this.$ckEditorEn.setData(obj['content_en'], function () {
+        this.$ckEditor.setData(obj['content_' + globalLanguage], function () {
             this.checkDirty();
         });
     }
@@ -255,10 +237,8 @@ class WbAdminBlog {
     validateForm() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let arrField = [
-            this.$formFieldTitlePt,
-            this.$formFieldTitleEn,
-            this.$formFieldUrlPt,
-            this.$formFieldUrlEn
+            this.$formFieldTitle,
+            this.$formFieldUrl
         ];
 
         return objWfForm.validateEmpty(arrField);
@@ -267,20 +247,14 @@ class WbAdminBlog {
     buildParameter() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return '' +
-            '&titlePt=' + this.$formFieldTitlePt.value +
-            '&titleEn=' + this.$formFieldTitleEn.value +
-            '&urlPt=' + this.$formFieldUrlPt.value +
-            '&urlEn=' + this.$formFieldUrlEn.value +
-            '&contentPt=' + this.$ckEditorPt.getData() +
-            '&contentEn=' + this.$ckEditorEn.getData() +
-            '&datePostPt=' + this.$formFieldDatePostPt.value +
-            '&datePostEn=' + this.$formFieldDatePostEn.value +
-            '&dateEditPt=' + this.$formFieldDateEditPt.value +
-            '&dateEditEn=' + this.$formFieldDateEditEn.value +
+            '&title=' + this.$formFieldTitle.value +
+            '&url=' + this.$formFieldUrl.value +
+            '&content=' + this.$ckEditor.getData() +
+            '&datePost=' + this.$formFieldDatePost.value +
+            '&dateEdit=' + this.$formFieldDateEdit.value +
             '&authorId=' + this.$formFieldAuthor.value +
             '&thumbnail=' + this.thumbnail +
-            '&tagPt=' + this.$formFieldTagPt.value +
-            '&tagEn=' + this.$formFieldTagEn.value;
+            '&tag=' + this.$formFieldTag.value;
     }
 
     saveContent() {
@@ -307,16 +281,10 @@ class WbAdminBlog {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         let self = this;
 
-        this.$formFieldTitlePt.addEventListener('focusout', function () {
-            let url = objWbUrl.buildSEO(self.$formFieldTitlePt.value);
+        this.$formFieldTitle.addEventListener('focusout', function () {
+            let url = objWbUrl.buildSEO(self.$formFieldTitle.value);
 
-            self.$formFieldUrlPt.value = url;
-        });
-
-        this.$formFieldTitleEn.addEventListener('focusout', function () {
-            let url = objWbUrl.buildSEO(self.$formFieldTitleEn.value);
-
-            self.$formFieldUrlEn.value = url;
+            self.$formFieldUrl.value = url;
         });
     }
 

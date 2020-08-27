@@ -71,36 +71,24 @@ class Blog
     function getValue()
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
-        $titlePt = filter_input(INPUT_POST, 'titlePt', FILTER_DEFAULT);
-        $titleEn = filter_input(INPUT_POST, 'titleEn', FILTER_DEFAULT);
+        $title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
         $authorId = filter_input(INPUT_POST, 'authorId', FILTER_DEFAULT);
-        $urlPt = filter_input(INPUT_POST, 'urlPt', FILTER_DEFAULT);
-        $urlEn = filter_input(INPUT_POST, 'urlEn', FILTER_DEFAULT);
-        $contentPt = filter_input(INPUT_POST, 'contentPt', FILTER_DEFAULT);
-        $contentEn = filter_input(INPUT_POST, 'contentEn', FILTER_DEFAULT);
-        $tagPt = $this->validateTag(filter_input(INPUT_POST, 'tagPt', FILTER_DEFAULT));
-        $tagEn = $this->validateTag(filter_input(INPUT_POST, 'tagEn', FILTER_DEFAULT));
-        $datePostPt = filter_input(INPUT_POST, 'datePostPt', FILTER_DEFAULT);
-        $datePostEn = filter_input(INPUT_POST, 'datePostEn', FILTER_DEFAULT);
-        $dateEditPt = filter_input(INPUT_POST, 'dateEditPt', FILTER_DEFAULT);
-        $dateEditEn = filter_input(INPUT_POST, 'dateEditEn', FILTER_DEFAULT);
+        $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
+        $content = filter_input(INPUT_POST, 'content', FILTER_DEFAULT);
+        $tag = $this->validateTag(filter_input(INPUT_POST, 'tag', FILTER_DEFAULT));
+        $datePost = filter_input(INPUT_POST, 'datePost', FILTER_DEFAULT);
+        $dateEdit = filter_input(INPUT_POST, 'dateEdit', FILTER_DEFAULT);
         $thumbnail = filter_input(INPUT_POST, 'thumbnail', FILTER_DEFAULT);
 
         return [
             'id' => (int)$id,
             'authorId' => (int)$authorId,
-            'titlePt' => encode($titlePt),
-            'titleEn' => encode($titleEn),
-            'urlPt' => $urlPt,
-            'urlEn' => $urlEn,
-            'contentPt' => encode($contentPt),
-            'contentEn' => encode($contentEn),
-            'tagPt' => $tagPt,
-            'tagEn' => $tagEn,
-            'datePostPt' => buildDate($datePostPt),
-            'datePostEn' => buildDate($datePostEn),
-            'dateEditPt' => buildDate($dateEditPt),
-            'dateEditEn' => buildDate($dateEditEn),
+            'title' => encode($title),
+            'url' => $url,
+            'content' => encode($content),
+            'tag' => $tag,
+            'datePost' => buildDate($datePost),
+            'dateEdit' => buildDate($dateEdit),
             'thumbnail' => $thumbnail,
         ];
     }
@@ -119,41 +107,30 @@ class Blog
     function doUpdateSql()
     {
         $arr = $this->getValue();
+
         $sql = "UPDATE 
                     blog
                 SET 
-                      title_pt = :titlePt
-                    , title_en = :titleEn
+                      title_{$this->language} = :title
                     , author_id = :authorId
-                    , url_pt = :urlPt
-                    , url_en = :urlEn
-                    , content_pt = :contentPt
-                    , content_en = :contentEn
-                    , tag_pt = :tagPt
-                    , tag_en = :tagEn
-                    , date_post_pt = :datePostPt
-                    , date_post_en = :datePostEn
-                    , date_edit_pt = :dateEditPt
-                    , date_edit_en = :dateEditEn
+                    , url_{$this->language} = :url
+                    , content_{$this->language} = :content
+                    , tag_{$this->language} = :tag
+                    , date_post_{$this->language} = :datePost
+                    , date_edit_{$this->language} = :dateEdit
                     , thumbnail = :thumbnail
                 WHERE
                     id = :id
         ";
 
         $query = $this->connection->prepare($sql);
-        $query->bindParam(':titlePt', $arr['titlePt'], PDO::PARAM_STR);
-        $query->bindParam(':titleEn', $arr['titleEn'], PDO::PARAM_STR);
+        $query->bindParam(':title', $arr['title'], PDO::PARAM_STR);
         $query->bindParam(':authorId', $arr['authorId'], PDO::PARAM_INT);
-        $query->bindParam(':urlPt', $arr['urlPt'], PDO::PARAM_STR);
-        $query->bindParam(':urlEn', $arr['urlEn'], PDO::PARAM_STR);
-        $query->bindParam(':contentPt', $arr['contentPt'], PDO::PARAM_STR);
-        $query->bindParam(':contentEn', $arr['contentEn'], PDO::PARAM_STR);
-        $query->bindParam(':tagPt', $arr['tagPt'], PDO::PARAM_STR);
-        $query->bindParam(':tagEn', $arr['tagEn'], PDO::PARAM_STR);
-        $query->bindParam(':datePostPt', $arr['datePostPt'], PDO::PARAM_STR);
-        $query->bindParam(':datePostEn', $arr['datePostEn'], PDO::PARAM_STR);
-        $query->bindParam(':dateEditPt', $arr['dateEditPt'], PDO::PARAM_STR);
-        $query->bindParam(':dateEditEn', $arr['dateEditEn'], PDO::PARAM_STR);
+        $query->bindParam(':url', $arr['url'], PDO::PARAM_STR);
+        $query->bindParam(':content', $arr['content'], PDO::PARAM_STR);
+        $query->bindParam(':tag', $arr['tag'], PDO::PARAM_STR);
+        $query->bindParam(':datePost', $arr['datePost'], PDO::PARAM_STR);
+        $query->bindParam(':dateEdit', $arr['dateEdit'], PDO::PARAM_STR);
         $query->bindParam(':thumbnail', $arr['thumbnail'], PDO::PARAM_STR);
         $query->bindParam(':id', $arr['id'], PDO::PARAM_INT);
         $query->execute();
@@ -178,54 +155,36 @@ class Blog
 
         $sql = "INSERT INTO 
                 blog (
-                      title_pt
-                    , title_en
+                      title_{$this->language}
                     , author_id
-                    , url_pt
-                    , url_en
-                    , content_pt
-                    , content_en
-                    , tag_pt
-                    , tag_en
-                    , date_post_pt
-                    , date_post_en
-                    , date_edit_pt
-                    , date_edit_en
+                    , url_{$this->language}
+                    , content_{$this->language}
+                    , tag_{$this->language}
+                    , date_post_{$this->language}
+                    , date_edit_{$this->language}
                     , thumbnail
                     , active
                 ) VALUES (
-                      :titlePt
-                    , :titleEn 
+                      :title
                     , :authorId 
-                    , :urlPt
-                    , :urlEn
-                    , :contentPt
-                    , :contentEn
-                    , :tagPt
-                    , :tagEn 
-                    , :datePostPt
-                    , :datePostEn
-                    , :dateEditPt
-                    , :dateEditEn
+                    , :url
+                    , :content
+                    , :tag
+                    , :datePost
+                    , :dateEdit
                     , :thumbnail
                     , 1
                 )
         ";
 
         $query = $this->connection->prepare($sql);
-        $query->bindParam(':titlePt', $arr['titlePt'], PDO::PARAM_STR);
-        $query->bindParam(':titleEn', $arr['titleEn'], PDO::PARAM_STR);
+        $query->bindParam(':title', $arr['title'], PDO::PARAM_STR);
         $query->bindParam(':authorId', $arr['authorId'], PDO::PARAM_INT);
-        $query->bindParam(':urlPt', $arr['urlPt'], PDO::PARAM_STR);
-        $query->bindParam(':urlEn', $arr['urlEn'], PDO::PARAM_STR);
-        $query->bindParam(':contentPt', $arr['contentPt'], PDO::PARAM_STR);
-        $query->bindParam(':contentEn', $arr['contentEn'], PDO::PARAM_STR);
-        $query->bindParam(':tagPt', $arr['tagPt'], PDO::PARAM_STR);
-        $query->bindParam(':tagEn', $arr['tagEn'], PDO::PARAM_STR);
-        $query->bindParam(':datePostPt', $arr['datePostPt'], PDO::PARAM_STR);
-        $query->bindParam(':datePostEn', $arr['datePostEn'], PDO::PARAM_STR);
-        $query->bindParam(':dateEditPt', $arr['dateEditPt'], PDO::PARAM_STR);
-        $query->bindParam(':dateEditEn', $arr['dateEditEn'], PDO::PARAM_STR);
+        $query->bindParam(':url', $arr['url'], PDO::PARAM_STR);
+        $query->bindParam(':content', $arr['content'], PDO::PARAM_STR);
+        $query->bindParam(':tag', $arr['tag'], PDO::PARAM_STR);
+        $query->bindParam(':datePost', $arr['datePost'], PDO::PARAM_STR);
+        $query->bindParam(':dateEdit', $arr['dateEdit'], PDO::PARAM_STR);
         $query->bindParam(':thumbnail', $arr['thumbnail'], PDO::PARAM_STR);
         $query->execute();
 
@@ -288,7 +247,15 @@ class Blog
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
         $sql = "SELECT 
-                    *
+                      id
+                    , title_{$this->language}
+                    , content_{$this->language}
+                    , url_{$this->language}
+                    , tag_{$this->language}
+                    , date_post_{$this->language}
+                    , date_edit_{$this->language}
+                    , author_id
+                    , thumbnail
                 FROM 
                     blog
                 WHERE

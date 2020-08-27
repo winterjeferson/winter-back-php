@@ -33,9 +33,7 @@ class SiteMap
     function buildSqlQuery()
     {
         $sql = "SELECT 
-                    url_pt
-                    , url_en
-                    , id
+                   *
                 FROM 
                     blog
                 WHERE
@@ -63,9 +61,16 @@ class SiteMap
             $string .= '<loc>' . $urlMain . $arrLanguageDefault . $urlBlog . $query[$i]['id'] . '/' . $query[$i]['url_' . $arrLanguageDefault] . '/' . '</loc>';
 
             foreach ($arrLanguage as $key => $value) {
-                $string .= '
-                    <xhtml:link rel="alternate" hreflang="' . $arrLanguage[$key]['hreflang'] . '" href="' . $urlMain . $arrLanguage[$key]['lang'] . $urlBlog . $query[$i]['id'] . '/' . $query[$i]['url_' . $arrLanguage[$key]['lang']] . '/' . '"/>
-                ';
+                $id = $query[$i]['id'];
+                $urlFriend = $query[$i]['url_' . $arrLanguage[$key]['lang']];
+                $lang = $arrLanguage[$key]['lang'];
+                $hreflang = $arrLanguage[$key]['hreflang'];
+
+                if ($urlFriend !== '') {
+                    $string .= '
+                        <xhtml:link rel="alternate" hreflang="' . $hreflang . '" href="' . $urlMain . $lang . $urlBlog . $id . '/' . $urlFriend . '/' . '"/>
+                    ';
+                }
             }
 
             $string .= '</url>';
