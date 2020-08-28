@@ -20,6 +20,7 @@ class Blog
         $this->objSession = new \Application\Core\Session();
         $this->objSiteMap = new \Application\Model\Shared\SiteMap();
         $this->objAdmin = new \Application\Model\Admin\Admin();
+
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
@@ -48,7 +49,7 @@ class Blog
 
     function getListQuery()
     {
-        $sql = 'SELECT 
+        $sql = "SELECT 
                 blog.*
                 , user.name
             FROM
@@ -59,7 +60,7 @@ class Blog
                 blog.author_id = user.id
             ORDER BY 
                 id DESC 
-        ';
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();

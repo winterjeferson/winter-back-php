@@ -42,6 +42,7 @@ class Admin
         }
 
         if ($prmissionCurrent <= 2) {
+            array_push($arrReturn, ['id' => 'page', 'translation' => 'pageAdmin']);
             array_push($arrReturn, ['id' => 'blog', 'translation' => 'blogAdmin']);
             array_push($arrReturn, ['id' => 'image', 'translation' => 'uploadImage']);
         }

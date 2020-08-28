@@ -1,7 +1,7 @@
 <div class="col-es-12">
     <h2 class="page-title">
         <?php echo $arrContent['head']['translation']['listing']; ?>
-        (<?php echo $arrContent['head']['translation']['actives']; ?>)
+        (<?php echo $arrContent['head']['translation'][$temp . 's']; ?>)
     </h2>
 </div>
 <div class="col-es-12">

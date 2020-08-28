@@ -3,7 +3,7 @@
         <div class="card card-es card-grey">
             <header>
                 <h4>
-                    <?php echo $arrContent['head']['translation']['pageAdminBlogTitle'] . ' (' . ucfirst($arrContent['head']['lang']) . ')' ?>
+                    <?php echo $arrContent['head']['translation']['pageAdminBlogTitle']; ?>
                 </h4>
             </header>
             <div class="row card-body">

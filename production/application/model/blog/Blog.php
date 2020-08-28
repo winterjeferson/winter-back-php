@@ -68,7 +68,6 @@ class Blog
         $sql = 'SELECT 
                     id
                     ,title_' . $this->language . '
-                    ,title_' . $this->language . '
                     ,url_' . $this->language . '
                     ,content_' . $this->language . '
                     ,date_post_' . $this->language . '
