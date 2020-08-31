@@ -22,4 +22,13 @@ class WbUrl {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
         return './application/controller/' + obj['folder'] + '/' + obj['file'] + '.php';
     }
+
+    watch(fieldWatch, fieldReturn) {
+        /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const self = this;
+
+        fieldWatch.addEventListener('focusout', function () {
+            fieldReturn.value = self.buildSEO(fieldWatch.value);
+        });
+    }
 }

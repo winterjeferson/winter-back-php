@@ -8,5 +8,6 @@ var objWbAdminUploadImage = new WbAdminUploadImage();
 var objWbAdminUser = new WbAdminUser();
 var objWbLogin = new WbLogin();
 var objWbManagementAdmin = new WbManagementAdmin();
+var objWbAdminPage = new WbAdminPage();
 
 objWbManagementAdmin.verifyLoad();

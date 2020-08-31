@@ -13,27 +13,17 @@
                     <div class="col-es-12">
                         <div class="padding-re">
                             <div class="row">
-                                <div class="col-es-12 form-field text-left">
-                                    <label><?php echo $arrContent['head']['translation']['selectPage']; ?></label>
-                                    <select aria-label="select" data-id="page">
-                                        <?php
-                                        $string = '';
-
-                                        foreach ($arrContent['page']['page'] as $key => &$valueOption) {
-                                            $string .= '<option value="' . $valueOption['id'] . '">' . $valueOption['name'] . '</option>';
-                                        }
-
-                                        echo $string;
-                                        ?>
-                                    </select>
+                                <div class="col-es-12 col-eb-4 form-field text-left">
+                                    <label><?php echo $arrContent['head']['translation']['menu']; ?></label>
+                                    <input class="input" type="text" value="" maxlength="100" data-id="formFieldMenu">
                                 </div>
-                                <div class="col-es-12 col-eb-6 form-field text-left">
+                                <div class="col-es-12 col-eb-4 form-field text-left">
                                     <label><?php echo $arrContent['head']['translation']['title']; ?></label>
-                                    <input class="input" type="text" value="" maxlength="20" id="pageUrl">
+                                    <input class="input" type="text" value="" maxlength="100" data-id="formFieldTitle">
                                 </div>
-                                <div class="col-es-12 col-eb-6 form-field text-left">
+                                <div class="col-es-12 col-eb-4 form-field text-left">
                                     <label><?php echo $arrContent['head']['translation']['url']; ?></label>
-                                    <input class="input" type="text" value="" maxlength="20" id="pageTitle">
+                                    <input class="input" type="text" value="" maxlength="100" data-id="formFieldUrl">
                                 </div>
                                 <div class="col-es-12 form-field text-left">
                                     <label><?php echo $arrContent['head']['translation']['content']; ?></label>
