@@ -194,7 +194,9 @@ class Blog
 
     function doModify()
     {
-        return $this->objQuery->build($this->doModifySql());
+        $this->objQuery->build($this->doModifySql());
+        $this->objSiteMap->build('blog');
+        return 'done';
     }
 
     function doModifySql()
@@ -214,8 +216,6 @@ class Blog
         $query->bindParam(':active', $active, PDO::PARAM_STR);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
-
-        return 'done';
     }
 
     function doDelete()

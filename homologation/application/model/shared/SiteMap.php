@@ -21,6 +21,54 @@ class SiteMap
         return $this->{$method}($target);
     }
 
+    function buildPage($target)
+    {
+        $sql = $this->buildBlogSql($target);
+        $string = $this->buildPageLoop($sql);
+        $this->wtriteXml($string, $target);
+
+        return true;
+    }
+
+    function buildPageSql($target)
+    {
+        return $this->objQuery->build($this->buildQuery($target));
+    }
+
+    function buildPageLoop($query)
+    {
+        $lengthQuery = count($query);
+        $urlMain = $this->objSession->getArray('arrUrl', 'main');
+        $arrLanguage = getUrArrLanguage();
+        $arrLanguageDefault = $arrLanguage[0]['lang'];
+        $urlBlog = '/page/content/';
+        $string = $this->buildXmlHead();
+
+        for ($i = 0; $i < $lengthQuery; $i++) {
+            $string .= '<url>';
+            $string .= '<loc>' . $urlMain . $arrLanguageDefault . $urlBlog . $query[$i]['id'] . '/' . $query[$i]['url_' . $arrLanguageDefault] . '/' . '</loc>';
+
+            foreach ($arrLanguage as $key => $value) {
+                $id = $query[$i]['id'];
+                $urlFriend = $query[$i]['url_' . $arrLanguage[$key]['lang']];
+                $lang = $arrLanguage[$key]['lang'];
+                $hreflang = $arrLanguage[$key]['hreflang'];
+
+                if ($urlFriend !== '') {
+                    $string .= '
+                        <xhtml:link rel="alternate" hreflang="' . $hreflang . '" href="' . $urlMain . $lang . $urlBlog . $id . '/' . $urlFriend . '/' . '"/>
+                    ';
+                }
+            }
+
+            $string .= '</url>';
+        }
+
+        $string .= $this->buildXmlFooter();
+
+        return $string;
+    }
+
     function buildBlog($target)
     {
         $sql = $this->buildBlogSql($target);

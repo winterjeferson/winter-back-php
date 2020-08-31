@@ -72,7 +72,7 @@ class Page
     {
         $this->objQuery->build($this->doSaveSql());
 
-        if ($this->objSiteMap->build('page-dynamic')) {
+        if ($this->objSiteMap->build('page')) {
             return 'done';
         }
 
@@ -194,7 +194,9 @@ class Page
 
     function doModify()
     {
-        return $this->objQuery->build($this->doModifySql());
+        $this->objQuery->build($this->doModifySql());
+        $this->objSiteMap->build('page');
+        return 'done';
     }
 
     function doModifySql()
@@ -214,8 +216,6 @@ class Page
         $query->bindParam(':active', $active, PDO::PARAM_STR);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
-
-        return 'done';
     }
 
     function doDelete()
