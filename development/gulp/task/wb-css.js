@@ -5,21 +5,23 @@ var csso = require('gulp-csso');//npm install gulp-csso --save-dev //https://www
 var configuration = require('./configuration.js');
 var wb_project = require('./wb-project.js');
 var wb_util = require('./wb-util.js');
+var folderSass = 'wb-sass';
+var pathSass = configuration.development + 'css/' + folderSass + '/*.scss';
 
 
 var fileCssAdmin = [
-    configuration.development + 'css/wb-sass/*.scss',
+    pathSass,
     configuration.development + 'css/wb-admin/*.scss'
 ];
 
 var fileCssTheme = [
-    configuration.development + 'css/wb-sass/*.scss',
+    pathSass,
     configuration.development + 'css/wb-theme/*.scss'
 ];
 var cssAdminConcat = fileCssAdmin;
 var cssThemeConcat = fileCssTheme;
 var fileAdmin = 'wb-admin';
-var fivarheme = 'wb-theme';
+var fileTheme = 'wb-theme';
 
 
 
@@ -34,12 +36,12 @@ gulp.task('wb_css_admin_concat', function () {
     return gulp
         .src(cssAdminConcat)
         .pipe(concat(fileAdmin + '.scss'))
-        .pipe(gulp.dest(configuration.development + 'css/'));
+        .pipe(gulp.dest(configuration.homologation + folderSass + '/'));
 });
 
 gulp.task('wb_css_admin_sass', function () {
     return gulp
-        .src(configuration.development + 'css/' + fileAdmin + '.scss')
+        .src(configuration.homologation + folderSass + '/' + fileAdmin + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'css/'));
 });
@@ -58,13 +60,13 @@ gulp.task('wb_css_admin', gulp.series(
 gulp.task('wb_css_theme_concat', function () {
     return gulp
         .src(cssThemeConcat)
-        .pipe(concat(fivarheme + '.scss'))
-        .pipe(gulp.dest(configuration.development + 'css/'));
+        .pipe(concat(fileTheme + '.scss'))
+        .pipe(gulp.dest(configuration.homologation + folderSass + '/'));
 });
 
 gulp.task('wb_css_theme_sass', function () {
     return gulp
-        .src(configuration.development + 'css/' + fivarheme + '.scss')
+        .src(configuration.homologation + folderSass + '/' + fileTheme + '.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest(configuration.homologation + configuration.assets + 'css/'));
 });
