@@ -1,8 +1,5 @@
 <div class="col-es-12">
     <div class="container">
-        <h1 class="page-title">
-            <?php echo $arrContent['head']['translation']['users']; ?>
-        </h1>
         <div class="row">
             <div class="col-es-12">
                 <h2 class="page-title">

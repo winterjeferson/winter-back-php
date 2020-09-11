@@ -1,3 +1,8 @@
-Sitemap: https://www.jefersonwinter.com/winterstrap/sitemap.xml
+Sitemap: https://www.jefersonwinter.com.br/sitemap.xml
 User-agent: *
-Disallow: /admin/
+Disallow: pt/admin/
+Disallow: en/admin/
+Disallow: es/admin/
+Disallow: pt/test/
+Disallow: en/test/
+Disallow: es/test/

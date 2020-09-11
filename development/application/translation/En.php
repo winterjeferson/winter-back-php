@@ -29,6 +29,8 @@ class En
         'email' => 'Email',
         'emptyList' => 'Empty list',
         'en' => 'English',
+        'error' => 'Error',
+        'error404' => 'Page not found',
         'es' => 'Spanish',
         'file' => 'File',
         'fileDeleted' => 'File deleted',
@@ -90,6 +92,7 @@ class En
         'url' => 'URL',
         'user' => 'User',
         'users' => 'Users',
+        'views' => 'Visitas',
         'wellcome' => 'Wellcome',
     ];
 }

@@ -42,7 +42,10 @@ $blue: #3297db;
         .blog-list-title {
           text-decoration: underline;
         }
+      }
 
+      &:last-child {
+        border-bottom: none;
       }
     }
 

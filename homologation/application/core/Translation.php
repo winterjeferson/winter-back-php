@@ -25,24 +25,44 @@ class Translation
 
     private function define()
     {
-        $filterLanguage = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
-        $sessionLanguage =  $this->objSession->get('language');
         $urlLanguage =  $this->objRoute->explodeUrl();
+        $findLanguage = array_search('x-default', array_column(getUrArrLanguage(), 'hreflang'));
+        $defaultLanguage = getUrArrLanguage()[$findLanguage]['lang'];
 
         if (count($urlLanguage) > 0) {
-            $this->objSession->set('language', $urlLanguage[0]);
+            $this->defineUrlTrue($urlLanguage, $defaultLanguage);
         } else {
-            if (!isset($sessionLanguage)) {
-                $this->language = substr($filterLanguage, 0, 2);
+            $this->defineUrlFalse($defaultLanguage);
+        }
+    }
 
-                if (!in_array($this->language, getUrArrLanguage())) {
-                    $this->language = 'en';
-                }
+    private function defineUrlTrue($urlLanguage, $defaultLanguage)
+    {
+        $language = $urlLanguage[0];
+        $isValidLanguage = array_search($language, array_column(getUrArrLanguage(), 'lang'));
 
-                $this->objSession->set('language', $this->language);
-            } else {
-                $this->language = $this->objSession->get('language');
+        if ($isValidLanguage === false) {
+            $this->objSession->set('language', $defaultLanguage);
+        } else {
+            $this->objSession->set('language', $language);
+        }
+    }
+
+    private function defineUrlFalse($defaultLanguage)
+    {
+        $filterLanguage = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
+        $sessionLanguage =  $this->objSession->get('language');
+
+        if (!isset($sessionLanguage)) {
+            $this->language = substr($filterLanguage, 0, 2);
+
+            if (!in_array($this->language, getUrArrLanguage())) {
+                $this->language = $defaultLanguage;
             }
+
+            $this->objSession->set('language', $this->language);
+        } else {
+            $this->language = $this->objSession->get('language');
         }
     }
 
@@ -51,7 +71,14 @@ class Translation
         $language = ucfirst($this->objSession->get('language'));
         $namespace = '\Application\Translation\\';
         $class = $namespace . $language;
-        require_once __DIR__ . '/../translation/' . $language . '.php';
+        $file = __DIR__ . '/../translation/' . $language . '.php';
+
+        if (file_exists($file)) {
+            require_once $file;
+        } else {
+            $this->objRoute->build404();
+        }
+
         $translation = new $class();
 
         $this->objSession->set('translation', $translation->translation);

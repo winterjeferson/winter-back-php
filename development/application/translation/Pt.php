@@ -28,6 +28,8 @@ class Pt
         'email' => 'E-mail',
         'emptyList' => 'Lista vazia',
         'en' => 'English',
+        'error' => 'Erro',
+        'error404' => 'Página não encontrada',
         'es' => 'Espanhol',
         'errorAdministrator' => 'Ocorreu um erro. Contate o administrador.',
         'file' => 'Arquivo',
@@ -90,6 +92,7 @@ class Pt
         'url' => 'URL',
         'user' => 'Usuario',
         'users' => 'Usuários',
+        'views' => 'Visitas',
         'wellcome' => 'Bem vindo',
     ];
 }

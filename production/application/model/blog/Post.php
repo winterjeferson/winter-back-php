@@ -9,9 +9,11 @@ class Post
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/../../core/Query.php';
+        require_once __DIR__ . '/../../core/Route.php';
 
         $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
+        $this->objRoute = new \Application\Core\Route();
         $this->connection = \Application\Core\Connection::open();
         $this->language = $this->objSession->get('language');
     }
@@ -19,15 +21,11 @@ class Post
     function build()
     {
         $arrUrl = $this->objSession->get('arrUrl');
-        $id = $arrUrl['paramether0'];
+        $id = isset($arrUrl['paramether0']) ? $arrUrl['paramether0'] : $this->objRoute->build404();
         $post = $this->getPost($id);
 
-        if (!$post) {
-            $this->buildNotFound();
-        }
-
         $this->updatePostView($id);
-        $this->setUrlSeo($post);
+        $this->objRoute->setUrlSeo($post);
 
         $arr = [
             'postTitle' => $post['title_' . $this->language],
@@ -38,22 +36,6 @@ class Post
         ];
 
         return $arr;
-    }
-
-    private function buildNotFound()
-    {
-        require_once __DIR__ . '/../../core/Route.php';
-
-        $objRoute = new \Application\Core\Route();
-        $objRoute->build404();
-    }
-
-    private function setUrlSeo($content)
-    {
-        foreach (getUrArrLanguage() as $key => $value) {
-            $lang = $value['lang'];
-            $this->objSession->setArray('urlSeo' . ucfirst($lang), $content['url_' . $lang]);
-        }
     }
 
     function updatePostView($id)

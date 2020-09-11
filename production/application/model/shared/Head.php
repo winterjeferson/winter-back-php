@@ -22,13 +22,14 @@ class Head
 
     function build()
     {
+        $translation = $this->objSession->get('translation');
         $arr = [
             'urlMain' => buildGlobalUrl(),
             'urlFrontEnd' => getUrlFrontEnd(),
             'urlBackEnd' => getUrlBackEnd(),
-            'lang' => $this->objSession->get('language'),
-            'translation' => $this->objSession->get('translation'),
-            'translationJson' => json_encode($this->objSession->get('translation')),
+            'lang' => $this->language,
+            'translation' => $translation,
+            'translationJson' => json_encode($translation),
             'admin' => $this->verifyAdmin(),
             'user' => $this->objSession->get('user'),
             'token' => $this->objToken->get(),
@@ -53,7 +54,7 @@ class Head
             $return .= '
                 <meta name="robots" content="noindex">
                 <link href="' . $globalUrl . 'assets/css/wb-admin.css" rel="stylesheet">
-                <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+                <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
                 <script src="' . $globalUrl . 'assets/js/wb-admin.js"></script>
             ';

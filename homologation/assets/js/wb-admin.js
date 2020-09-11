@@ -87,8 +87,12 @@ class WbAdminBlog {
         }
 
         CKEDITOR.replace('fieldContent', {
-            entities: false
         });
+
+        CKEDITOR.config.basicEntities = false;
+        CKEDITOR.config.entities_greek = false; 
+        CKEDITOR.config.entities_latin = false; 
+        CKEDITOR.config.entities_additional = '';
 
         this.update();
         this.buildMenu();
@@ -385,8 +389,12 @@ class WbAdminPage {
         }
 
         CKEDITOR.replace('fieldContent', {
-            entities: false
         });
+
+        CKEDITOR.config.basicEntities = false;
+        CKEDITOR.config.entities_greek = false; 
+        CKEDITOR.config.entities_latin = false; 
+        CKEDITOR.config.entities_additional = '';
 
         this.update();
         this.buildMenu();

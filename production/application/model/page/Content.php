@@ -8,53 +8,36 @@ class Content
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Connection.php';
+        require_once __DIR__ . '/../../core/Route.php';
 
         $this->objSession = new \Application\Core\Session();
         $this->connection = \Application\Core\Connection::open();
+        $this->objRoute = new \Application\Core\Route();
         $this->language = $this->objSession->get('language');
     }
 
     function build()
     {
         $arrUrl = $this->objSession->get('arrUrl');
-        $id = $arrUrl['paramether0'];
+        $id = isset($arrUrl['paramether0']) ? $arrUrl['paramether0'] : $this->objRoute->build404();
         $page = $this->getPage($id);
-
-        if (!$page) {
-            $this->buildNotFound();
-        }
         
-        $this->setUrlSeo($page);
+        $this->objRoute->setUrlSeo($page);
 
         $arr = [
-            'title' =>  $page["title_{$this->language}"],
-            'content' => $page["content_{$this->language}"],
+            'title' =>  $page["title"],
+            'content' => $page["content"],
         ];
 
         return $arr;
     }
 
-    private function setUrlSeo($content)
+    function getPage($id, $allContent = false)
     {
-        foreach (getUrArrLanguage() as $key => $value) {
-            $lang = $value['lang'];
-            $this->objSession->setArray('urlSeo' . ucfirst($lang), $content['url_' . $lang]);
-        }
-    }
-
-    private function buildNotFound()
-    {
-        require_once __DIR__ . '/../../core/Route.php';
-
-        $objRoute = new \Application\Core\Route();
-        $objRoute->build404();
-    }
-
-    function getPage($id)
-    {
+        $int = (int)$id;
         $sql = "SELECT 
-                     title_{$this->language}
-                    , content_{$this->language}
+                     title_{$this->language} as title
+                    , content_{$this->language} as content
                 ";
 
         foreach (getUrArrLanguage() as $key => $value) {
@@ -65,7 +48,15 @@ class Content
         $sql .= "
                 FROM page
                 WHERE
-                    id = {$id}";
+                    id = {$int}
+                ";
+
+        if (!$allContent) {
+            $sql .= "
+                    AND
+                        active = 1
+                    ";
+        }
 
         $query = $this->connection->prepare($sql);
         $query->execute();

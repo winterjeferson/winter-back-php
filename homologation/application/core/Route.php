@@ -7,7 +7,7 @@ class Route
     public function __construct()
     {
         require_once __DIR__ . '/Session.php';
-        
+
         $this->objSession = new \Application\Core\Session();
     }
 
@@ -58,6 +58,7 @@ class Route
         $controller = isset($explodeUrl[2]) ? $explodeUrl[2] : '';
         $controllerUrl = isset($explodeUrl[2]) ? $explodeUrl[2] . '/' : '';
         $parametherUrl = '';
+        $paramether0 = isset($arrUrl['paramether0']) ? $arrUrl['paramether0'] . '/' : '';
 
         if ($countExplode > $countArrReturn) {
             array_splice($explodeUrl, 0, $countArrReturn);
@@ -68,17 +69,11 @@ class Route
             }
         }
 
-        if (!isset($arrUrl['paramether1'])) {
-            foreach ($arrLanguage as $key => $value) {
-                $lang = $value['lang'];
-                $this->objSession->unset('urlSeo' . ucfirst($lang));
-                $arrUrl[$lang] = $main . $lang . '/' . $folderUrl . $controllerUrl;
-            }
-        } else {
-            foreach ($arrLanguage as $key => $value) {
-                $lang = $value['lang'];
-                $arrUrl[$lang] = $main . $lang . '/' . $folderUrl . $controllerUrl . $arrUrl['paramether0'] . '/' . $this->objSession->get('urlSeo' . ucfirst($lang));
-            }
+        foreach ($arrLanguage as $key => $value) {
+            $lang = $value['lang'];
+            $sessionUrl = $this->objSession->get('arrUrl');
+            $urlSeo = isset($sessionUrl['urlSeo' . ucfirst($lang)]) ? $sessionUrl['urlSeo' . ucfirst($lang)] : '';
+            $arrUrl[$lang] = $main . $lang . '/' . $folderUrl . $controllerUrl . $paramether0 . $urlSeo;
         }
 
         $arrUrl['main'] = $main;
@@ -141,6 +136,15 @@ class Route
             } else {
                 return false;
             }
+        }
+    }
+
+    public function setUrlSeo($content = '')
+    {
+        foreach (getUrArrLanguage() as $key => $value) {
+            $lang = $value['lang'];
+            $value = isset($content['url_' . $lang]) ? $content['url_' . $lang] : '';
+            $this->objSession->setArrayMultidimensionl('arrUrl', 'urlSeo' . ucfirst($lang), $value);
         }
     }
 

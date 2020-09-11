@@ -12,6 +12,7 @@ function buildListHTML($value, $language, $status)
                 <td class="minimum">' . $value['id'] . '</td>
                 <td class="minimum"><img data-src="assets/img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
                 <td><b>' . encode($value['title_' . $language]) . '</b></td>
+                <td class="minimum">' . $value['view'] . '</td>
                 <td class="minimum">' . $value['name'] . '</td>
                 <td><div class="td-wrapper">' . encode(strip_tags($value['content_' . $language])) . '</div></td>
                 <td class="minimum">' . $value['url_' . $language] . '</td>

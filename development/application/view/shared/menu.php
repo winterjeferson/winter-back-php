@@ -30,13 +30,15 @@
                 foreach ($arrContent['head']['menuMain'] as $key => &$value) {
                     $href = $arrContent['head']['urlMain'] . $arrContent['head']['lang'] . '/page/content/' . $value['id'] . '/' . $value['url'] . '/';
                     $name = $value['menu'];
-                    $string .= '
-                    <li>
-                        <a href="' . $href . '" data-id="' . $value['id'] . '" class="bt bt-sm bt-fu bt-purple">
-                            ' . $name . '
-                        </a>
-                    </li>
-                    ';
+                    if ($name != '') {
+                        $string .= '
+                        <li>
+                            <a href="' . $href . '" data-id="' . $value['id'] . '" class="bt bt-sm bt-fu bt-purple">
+                                ' . $name . '
+                            </a>
+                        </li>
+                        ';
+                    }
                 }
 
                 echo removeLineBreak($string);

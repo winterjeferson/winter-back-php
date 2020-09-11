@@ -56,7 +56,7 @@ class BlogThumbnail
                     <nav class="menu menu-horizontal text-right">           
                         <ul>           
                             <li>
-                                <button type="button" class="bt bt-red bt-sm has-tooltip" data-action="delete" data-tooltip="true" data-tooltip-color="black" title="' . $this->objSession->getArray('translation', 'delete') . '">   
+                                <button type="button" class="bt bt-red bt-sm" data-action="delete" title="' . $this->objSession->getArray('translation', 'delete') . '">   
                                     <span class="fa fa-close" aria-hidden="true"></span>
                                 </button>
                             </li>           

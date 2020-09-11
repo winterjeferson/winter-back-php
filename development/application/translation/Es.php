@@ -28,6 +28,8 @@ class Es
         'email' => 'Email',
         'emptyList' => 'Lista vacía',
         'en' => 'Inglés',
+        'error' => 'Error',
+        'error404' => 'Página no encontrada',
         'es' => 'Español',
         'errorAdministrator' => 'Ocurrio un error. Póngase en contacto con su administrador.',
         'file' => 'Archivo',
@@ -90,6 +92,7 @@ class Es
         'url' => 'URL',
         'user' => 'Usuario',
         'users' => 'Usuarios',
+        'views' => 'Views',
         'wellcome' => 'Bienvenido',
     ];
 }
