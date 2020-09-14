@@ -19,7 +19,7 @@ class ImageUpload
         $fileName = $_FILES['f']['name'];
         $fileTmpName = $_FILES['f']['tmp_name'];
         $fileSize = $_FILES['f']['size'];
-        $url = '../../../assets/img/' . $path;
+        $url = '../../../assets/img/dynamic/' . $path;
         $targetFile = $url . basename($fileName);
         $extension  = pathinfo($fileName, PATHINFO_EXTENSION);
         $randomName  = uniqid() . time();

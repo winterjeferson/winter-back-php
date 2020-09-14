@@ -20,11 +20,6 @@ var fileImgPublic = [
     configuration.homologation + 'img/**/*.*'
 ];
 
-
-function clean(path) {
-    return del(path, { force: true }); // returns a promise
-}
-
 gulp.task('wb_image_move', function (done) {
     return gulp
         .src(configuration.development + 'img/**/*.*')

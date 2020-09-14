@@ -17,7 +17,7 @@ class ImageDelete
     {
         $file = filter_input(INPUT_POST, 'f', FILTER_DEFAULT);
         $path = filter_input(INPUT_POST, 'p', FILTER_DEFAULT);
-        $url = '../../../assets/img/' . $path . '/';
+        $url = '../../../assets/img/dynamic/' . $path . '/';
 
         if (unlink($url . $file)) {
             return 'fileDeleted';

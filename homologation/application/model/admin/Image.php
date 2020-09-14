@@ -52,7 +52,7 @@ class Image
         $string = '
             <tr>
                 <td class="minimum">
-                    <img data-src="assets/img/blog/' . $path . '/' . $value . '" data-lazy-load="true">
+                    <img data-src="assets/img/dynamic/blog/' . $path . '/' . $value . '" data-lazy-load="true">
                 </td>
                 <td data-id="fileName">
                     ' . $value . '
@@ -89,7 +89,7 @@ class Image
 
     function getFile($path)
     {
-        $directory = 'assets/img/' . $path;
+        $directory = 'assets/img/dynamic/' . $path;
         $isDir = is_dir($directory);
 
         if ($isDir) {
@@ -130,7 +130,7 @@ class Image
                         <div class="col-es-12">
                             <div class="padding-re">
                                 <button type="button" onclick="objWbAdminBlog.selectImage(this)" >
-                                    <img src="assets/img/' . $path . '/' . $value . '" class="img-responsive">
+                                    <img src="assets/img/dynamic/' . $path . '/' . $value . '" class="img-responsive">
                                 </button>
                             </div>
                         </div>
