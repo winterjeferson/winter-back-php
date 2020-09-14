@@ -30,7 +30,8 @@ class Head
             'lang' => $this->language,
             'translation' => $translation,
             'translationJson' => json_encode($translation),
-            'admin' => $this->verifyAdmin(),
+            'isAdmin' => $this->objRoute->verifyInUrl('admin'),
+            'isNoIdex' => $this->verifyNoIdex(),
             'user' => $this->objSession->get('user'),
             'token' => $this->objToken->get(),
             'menuMain' => $this->getMenu(),
@@ -42,25 +43,6 @@ class Head
         }
 
         return $arr;
-    }
-
-    function verifyAdmin()
-    {
-        $isAdmin = $this->objRoute->verifyInUrl('admin');
-        $return = '';
-        $globalUrl = buildGlobalUrl();
-
-        if ($isAdmin) {
-            $return .= '
-                <meta name="robots" content="noindex">
-                <link href="' . $globalUrl . 'assets/css/wb-admin.css" rel="stylesheet">
-                <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-                <script src="' . $globalUrl . 'assets/js/wb-admin.js"></script>
-            ';
-        }
-
-        return $return;
     }
 
     function getMenu()
@@ -84,5 +66,17 @@ class Head
         $query->execute();
 
         return $query->fetchAll($this->connection::FETCH_ASSOC);
+    }
+
+    function verifyNoIdex()
+    {
+        $isAdmin = $this->objRoute->verifyInUrl('admin');
+        $isError = $this->objRoute->verifyError();
+
+        if ($isAdmin || $isError) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

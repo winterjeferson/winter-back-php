@@ -169,4 +169,17 @@ class Route
     {
         return $this->buildController(['controller' => 'error', 'folder' => 'error']);
     }
+
+    public function verifyError()
+    {
+        $isError = false;
+        $arrUrl = $this->builArrUrl();
+        $controllerDefault = $this->validateControllerDefault($arrUrl);
+
+        if (!$controllerDefault) {
+            $isError = true;
+        }
+
+        return $isError;
+    }
 }
