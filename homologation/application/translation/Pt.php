@@ -16,6 +16,7 @@ class Pt
         'blogAdmin' => 'Administrar Blog',
         'confirmationDelete' => 'Deseja realmente deletar este item?',
         'confirmationInactivate' => 'Deseja realmente inativar este item?',
+        'contactForm' => 'Formulário de contato',
         'content' => 'Conteúdo',
         'dateEdit' => 'Data de edição',
         'datePost' => 'Data de postagem',

@@ -16,6 +16,7 @@ class En
         'blogAdmin' => 'Administer Blog',
         'confirmationDelete' => 'Do you really want to delete this item?',
         'confirmationInactivate' => 'Do you really want to inactivate this item?',
+        'contactForm' => 'Contact Form',
         'content' => 'Content',
         'dateEdit' => 'Edit date',
         'datePost' => 'Post date',

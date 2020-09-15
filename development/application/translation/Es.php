@@ -16,6 +16,7 @@ class Es
         'blogAdmin' => 'Administrar Blog',
         'confirmationDelete' => '¿Realmente desea eliminar este elemento?',
         'confirmationInactivate' => '¿Realmente quieres desactivar este elemento?',
+        'contactForm' => 'Formulario de contacto',
         'content' => 'Contenido',
         'dateEdit' => 'Fecha de edición',
         'datePost' => 'Fecha de publicación',

@@ -5,7 +5,11 @@ require_once __DIR__ . '/../../../../core/Session.php';
 $objSession = new Application\Core\Session();
 $language = $objSession->get('language');
 
-require_once __DIR__ . '/translation' . ucfirst($language) . '.php';
+require_once __DIR__ . '/../../../../translation/' . ucfirst($language) . '.php';
+
+$class = '\\Application\Translation\\' . ucfirst($language);
+$obj = new $class();
+$arrTranslation = $obj->translation;
 ?>
 
 <head>
