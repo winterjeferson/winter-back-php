@@ -4,6 +4,10 @@
     #pageBlog .col-first {
       padding-right: 16px; } }
 
+#pageBlog .empty-list {
+  text-align: center;
+  width: 100%; }
+
 #pageBlog .blog-list .link {
   display: grid;
   width: 100%;

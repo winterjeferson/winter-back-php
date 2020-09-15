@@ -6,7 +6,11 @@
             </h1>
             <div class="row blog-list">
                 <?php
-                echo $arrContent['blog']['listLasPost'];
+                if ($arrContent['blog']['listLasPost'] === '') {
+                    echo '<p class="empty-list">' . $arrContent['head']['translation']['emptyList'] . '</p>';
+                } else {
+                    echo $arrContent['blog']['listLasPost'];
+                }
                 ?>
             </div>
             <div class="row">
@@ -24,7 +28,11 @@
                 </h1>
                 <div class="row blog-list">
                     <?php
-                    echo $arrContent['blog']['listMostViewed'];
+                    if ($arrContent['blog']['listLasPost'] === '') {
+                        echo '<p class="empty-list">' . $arrContent['head']['translation']['emptyList'] . '</p>';
+                    } else {
+                        echo $arrContent['blog']['listLasPost'];
+                    }
                     ?>
                 </div>
                 <div class="row">
