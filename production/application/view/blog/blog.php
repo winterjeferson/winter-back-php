@@ -6,6 +6,4 @@
                     echo $arrContent['blog']['listMostViewed'];
                     ?> </div><div class="row"><div class="col-es-12"> <?php
                         echo $arrContent['blog']['btMostViewed'];
-                        ?> </div></div></div><div id="pageBlogTag"><h1 class="page-title"> <?php echo $arrContent['head']['translation']['tags']; ?> </h1><ul class="tag-list"> <?php
-                    echo $arrContent['blog']['listTag'];
-                    ?> </ul></div></section></div></div>
+                        ?> </div></div></div> <?php include __DIR__ . '/tag-list.php'; ?> </section></div></div>

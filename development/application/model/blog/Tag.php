@@ -70,29 +70,7 @@ class Tag
 
         $key = array_column($arr, 'sum');
         array_multisort($key, SORT_DESC, $arr);
-
-        return $this->buildHtml($arr);
-    }
-
-    function buildHtml($arr)
-    {
-        $url = $this->objSession->get('arrUrl');
-        $string = '<ul class="tag-list">';
-
-        foreach ($arr as $value => $key) {
-            $string .= '
-                <li>
-                    <div class="tag-item tag-grey">
-                        <a href="' . $url['main'] . $url['language'] . '/blog/tag/' . $value . '" class="link link-grey">
-                            <span class="text">' . $value . '</span>
-                        </a>
-                    </div>
-                </li>
-            ';
-        }
-
-        $string .= '</ul>';
-
-        return removeLineBreak($string);
+        
+        return $arr;
     }
 }

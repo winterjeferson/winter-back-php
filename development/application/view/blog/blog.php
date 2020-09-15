@@ -35,16 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div id="pageBlogTag">
-                <h1 class="page-title">
-                    <?php echo $arrContent['head']['translation']['tags']; ?>
-                </h1>
-                <ul class="tag-list">
-                    <?php
-                    echo $arrContent['blog']['listTag'];
-                    ?>
-                </ul>
-            </div>
+            <?php include __DIR__ . '/tag-list.php'; ?>
         </section>
     </div>
 </div>

@@ -49,7 +49,9 @@ class Session
     function getArray($array, $target)
     {
         if ($this->verify($array, $target)) {
-            return $_SESSION[$this->prefix . $array][$target];
+            if (isset($_SESSION[$this->prefix . $array][$target])) {
+                return $_SESSION[$this->prefix . $array][$target];
+            }
         }
     }
 

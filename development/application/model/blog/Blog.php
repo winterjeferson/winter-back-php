@@ -11,14 +11,14 @@ class Blog
     private $prefixLoadMore = 'blogIsLoadMore';
     private $suffixPaginationLastPost = 'pageBlogLastPost';
     private $suffixPaginationMostViewed = 'pageBlogMostViewed';
-    
+
     public function __construct($isLoadMore = false)
     {
         require_once __DIR__ . '/../../core/Session.php';
         require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/Tag.php';
-        
+
         $this->objSession = new \Application\Core\Session();
         $this->objQuery = new \Application\Core\Query();
         $this->objTag = new Tag();
@@ -65,19 +65,21 @@ class Blog
     function getListQueryDefaultQuery($queryAdd)
     {
         $connection = \Application\Core\Connection::open();
-        $sql = 'SELECT 
-                    id
-                    ,title_' . $this->language . '
-                    ,url_' . $this->language . '
-                    ,content_' . $this->language . '
-                    ,date_post_' . $this->language . '
-                    ,date_edit_' . $this->language . '
-                    ,thumbnail
+        $sql = "SELECT 
+                      id
+                    , title_{$this->language}
+                    , url_{$this->language}
+                    , content_{$this->language}
+                    , date_post_{$this->language}
+                    , date_edit_{$this->language}
+                    , thumbnail
                 FROM blog
                 WHERE
                     active = 1
-                    ' . $queryAdd . '
-        ';
+                AND 
+                    content_{$this->language} != ''
+                {$queryAdd}
+        ";
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -88,35 +90,38 @@ class Blog
 
     function getListQueryLastPost()
     {
-        return '
+        return "
             ORDER BY
-                date_post_' . $this->language . '
+                date_post_{$this->language}
                 DESC
             LIMIT
-                ' . $this->objSession->get($this->prefixPagination . $this->suffixPaginationLastPost) . '
-                , ' . $this->postListLimitLastPost . '
-        ';
+                  {$this->objSession->get($this->prefixPagination .$this->suffixPaginationLastPost)}
+                , {$this->postListLimitLastPost}
+        ";
     }
 
     function getListQueryTag()
     {
         $tag = $this->objSession->getArray('arrUrl', 'paramether0');
 
-        return '
-            AND
-            tag_' . $this->language . ' LIKE "%' . $tag . '%"
-        ';
+        if (is_null($tag)) {
+            return;
+        }
+
+        return "AND
+                    tag_{$this->language} LIKE '%{$tag}%'
+        ";
     }
 
     function getListQueryMostViewed()
     {
-        return '
+        return "
             ORDER BY
                 view DESC
             LIMIT
-                ' . $this->objSession->get($this->prefixPagination . $this->suffixPaginationMostViewed) . '
-                , ' . $this->postListLimitMostViewed . '
-        ';
+                  {$this->objSession->get($this->prefixPagination .$this->suffixPaginationMostViewed)}
+                , {$this->postListLimitMostViewed}
+            ";
     }
 
     function buildHtml($query)
