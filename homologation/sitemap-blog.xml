@@ -59,10 +59,6 @@
                         <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/16/titulo-do-blog-16/"/>
                     
                         <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost/d/development/project/winter-back-php/homologation/en/blog/post/16/blog-title-16/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/17/titulo-do-blog-17/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/17/titulo-do-blog-17/"/>
-                    
-                        <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost/d/development/project/winter-back-php/homologation/en/blog/post/17/blog-title-17/"/>
                     </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/18/titulo-do-blog-18/</loc>
                         <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/18/titulo-do-blog-18/"/>
                     
@@ -91,6 +87,10 @@
                         <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/25/titulo-do-blog-25/"/>
                     
                         <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost/d/development/project/winter-back-php/homologation/en/blog/post/25/blog-title-25/"/>
+                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/26/titulo-do-blog-26/</loc>
+                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/26/titulo-do-blog-26/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost/d/development/project/winter-back-php/homologation/en/blog/post/26/blog-title-26/"/>
                     </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/27/titulo-do-blog-27/</loc>
                         <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/27/titulo-do-blog-27/"/>
                     
@@ -99,18 +99,4 @@
                         <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/28/titulo-do-blog-26/"/>
                     
                         <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost/d/development/project/winter-back-php/homologation/en/blog/post/28/blog-title-26/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/29/titulo-do-blog-28/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/29/titulo-do-blog-28/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/30/titulo-do-blog-29/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/30/titulo-do-blog-29/"/>
-                    
-                        <xhtml:link rel="alternate" hreflang="es-MX" href="http://localhost/d/development/project/winter-back-php/homologation/es/blog/post/30/titulo-del-blog-29/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/38/titulo-do-blog-31/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/38/titulo-do-blog-31/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/39/titulo-do-blog-32/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/39/titulo-do-blog-32/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/40/titulo-do-blog-33/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/40/titulo-do-blog-33/"/>
-                    </url><url><loc>http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/37/titulo-do-blog-30/</loc>
-                        <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost/d/development/project/winter-back-php/homologation/pt/blog/post/37/titulo-do-blog-30/"/>
                     </url></urlset>

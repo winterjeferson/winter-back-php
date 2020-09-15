@@ -1,3 +1,9 @@
+<?php
+$table = 'table' . ucfirst($action);
+$list = 'list' . ucfirst($action);
+$listSize = count($arrContent['user'][$list]);
+$classDisplay = $listSize === 0 ? 'display-none' : '';
+?>
 <section class="content-padding <?php echo $classDisplay ?>">
     <div class="row">
         <div class="col-es-12">

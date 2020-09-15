@@ -60,17 +60,8 @@
 </div>
 <div class="col-es-12">
     <?php
-    $table = 'tableActive';
-    $list = 'listActive';
-    $listSize = count($arrContent['user'][$list]);
-    $classDisplay = $listSize === 0 ? 'display-none' : '';
     $action = 'active';
     include __DIR__ . '/user-list.php';
-
-    $table = 'tableInactive';
-    $list = 'listInactive';
-    $listSize = count($arrContent['user'][$list]);
-    $classDisplay = $listSize === 0 ? 'display-none' : '';
     $action = 'inactive';
     include __DIR__ . '/user-list.php';
     ?>

@@ -1,10 +1,12 @@
-<div class="col-es-12">
+<?php
+$listSize = count($arrContent['blog']['list' . ucfirst($temp)]);
+$classDisplay = $listSize === 0 ? 'display-none' : '';
+?>
+<div class="col-es-12 <?php echo $classDisplay ?>">
     <h2 class="page-title">
         <?php echo $arrContent['head']['translation']['listing']; ?>
         (<?php echo $arrContent['head']['translation'][$temp . 's']; ?>)
     </h2>
-</div>
-<div class="col-es-12">
     <div class="padding-bi">
         <table class="table table-grey" data-id="table<?php echo ucfirst($temp); ?>">
             <thead>

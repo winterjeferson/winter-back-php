@@ -10,7 +10,7 @@ function buildListHTML($value, $language, $status)
     $string .= '
             <tr>
                 <td class="minimum">' . $value['id'] . '</td>
-                <td class="minimum"><img data-src="assets/img/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
+                <td class="minimum"><img data-src="assets/img/dynamic/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
                 <td><b>' . encode($value['title_' . $language]) . '</b></td>
                 <td class="minimum">' . $value['view'] . '</td>
                 <td class="minimum">' . $value['name'] . '</td>

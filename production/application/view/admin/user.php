@@ -7,17 +7,8 @@
 
                             echo $string;
                             ?> </select></div></div><div class="col-es-12"><div class="form-field text-right"><div class="menu menu-horizontal"><ul><li><button type="button" class="bt bt-re bt-blue" data-id="send"> <?php echo $arrContent['head']['translation']['register']; ?> </button></li></ul></div></div></div></form></div></div></div><div class="col-es-12"> <?php
-    $table = 'tableActive';
-    $list = 'listActive';
-    $listSize = count($arrContent['user'][$list]);
-    $classDisplay = $listSize === 0 ? 'display-none' : '';
     $action = 'active';
     include __DIR__ . '/user-list.php';
-
-    $table = 'tableInactive';
-    $list = 'listInactive';
-    $listSize = count($arrContent['user'][$list]);
-    $classDisplay = $listSize === 0 ? 'display-none' : '';
     $action = 'inactive';
     include __DIR__ . '/user-list.php';
     ?> </div>
