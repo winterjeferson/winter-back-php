@@ -1,7 +1,7 @@
 <?php
 function buildListHTML($value, $language, $status)
 {
-    $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+    $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? 'dynamic/blog/thumbnail/' . $value['thumbnail'] : 'blog-thumbnail.jpg';
     $explodeTag = explode('#',  encode($value['tag_' . $language]));
     $lengthExplode = count($explodeTag);
     $string = '';
@@ -10,7 +10,7 @@ function buildListHTML($value, $language, $status)
     $string .= '
             <tr>
                 <td class="minimum">' . $value['id'] . '</td>
-                <td class="minimum"><img data-src="assets/img/dynamic/blog/thumbnail/' . $thumbnail . '" data-lazy-load="true"></td>
+                <td class="minimum"><img data-src="assets/img/' . $thumbnail . '" data-lazy-load="true"></td>
                 <td><b>' . encode($value['title_' . $language]) . '</b></td>
                 <td class="minimum">' . $value['view'] . '</td>
                 <td class="minimum">' . $value['name'] . '</td>
@@ -53,7 +53,7 @@ function buildListHTML($value, $language, $status)
         <?php
         include __DIR__ . '/blog-form.php';
         ?>
-        
+
         <div class="col-es-12 form-field">
             <nav class="menu menu-horizontal text-right">
                 <ul>

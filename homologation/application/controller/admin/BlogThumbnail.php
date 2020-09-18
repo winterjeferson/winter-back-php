@@ -13,8 +13,8 @@ class BlogThumbnail extends \Application\Controller\Main
     function getModel()
     {
         $data = [
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'BlogThumbnail'],
-            ['id' => 'admin', 'folder' => 'admin', 'file' => 'admin'],
+            ['id' => 'head', 'folder' => 'shared', 'file' => 'head'],
+            ['id' => 'admin', 'folder' => 'admin', 'file' => 'Image'],
         ];
 
         return $this->renderModel($data);

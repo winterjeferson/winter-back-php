@@ -2,7 +2,6 @@
 $listThumbnail = $arrContent['image']['listThumbnail'];
 $listBanner = $arrContent['image']['listBanner'];
 ?>
-
 <div class="row">
     <?php
     $temp = 'thumbnail';

@@ -90,8 +90,8 @@ class WbAdminBlog {
         });
 
         CKEDITOR.config.basicEntities = false;
-        CKEDITOR.config.entities_greek = false; 
-        CKEDITOR.config.entities_latin = false; 
+        CKEDITOR.config.entities_greek = false;
+        CKEDITOR.config.entities_latin = false;
         CKEDITOR.config.entities_additional = '';
 
         this.update();
@@ -119,8 +119,9 @@ class WbAdminBlog {
         this.$thumbnailWrapper = this.$contentEdit.querySelector('[data-id="thumbnailWrapper"]');
         this.$formFieldAuthor = document.querySelector('[data-id="author"]');
         this.thumbnail = '';
-        this.thumbnailDefault = 'default.jpg';
-        this.thumbnailPath = 'assets/img/blog/thumbnail/';
+        this.thumbnailDefault = 'blog-thumbnail.jpg';
+        this.pathImage = '';
+        this.pathThumbnail = 'dynamic/blog/thumbnail/';
         this.$ckEditor = CKEDITOR.instances.fieldContent;
         this.$btRegister = this.$page.querySelector('[data-id="btRegister"]');
     }
@@ -155,7 +156,6 @@ class WbAdminBlog {
                 }
             });
         });
-
     }
 
     buildMenuTable() {
@@ -327,6 +327,8 @@ class WbAdminBlog {
 
     buildParameter() {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
+        const thumbnail = this.thumbnail === this.thumbnailDefault ? '' : this.thumbnail;
+
         return '' +
             '&title=' + this.$formFieldTitle.value +
             '&url=' + this.$formFieldUrl.value +
@@ -334,7 +336,7 @@ class WbAdminBlog {
             '&datePost=' + this.$formFieldDatePost.value +
             '&dateEdit=' + this.$formFieldDateEdit.value +
             '&authorId=' + this.$formFieldAuthor.value +
-            '&thumbnail=' + this.thumbnail +
+            '&thumbnail=' + thumbnail +
             '&tag=' + this.$formFieldTag.value;
     }
 
@@ -360,8 +362,8 @@ class WbAdminBlog {
 
     selectImage(target) {
         /*removeIf(production)*/ objWbDebug.debugMethod(this, objWbDebug.getMethodName()); /*endRemoveIf(production)*/
-        let $card = target.parentNode.parentNode.parentNode.parentNode;
-        let imageName = $card.querySelector('header').querySelector('[data-id="imageName"]').innerText;
+        let $card = target.parentNode.parentNode;
+        let imageName = $card.querySelector('[data-id="imageName"]').innerText;
 
         this.thumbnail = imageName;
         objWfModal.closeModal();
@@ -375,9 +377,12 @@ class WbAdminBlog {
 
         if (this.thumbnail === '' || this.thumbnail === null) {
             this.thumbnail = this.thumbnailDefault;
+            this.pathImage = '';
+        } else {
+            this.pathImage = this.pathThumbnail;
         }
 
-        $image.setAttribute('src', this.thumbnailPath + this.thumbnail);
+        $image.setAttribute('src', 'assets/img/' + this.pathImage + this.thumbnail);
         $name.innerHTML = this.thumbnail;
     }
 }

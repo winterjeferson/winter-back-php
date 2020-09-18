@@ -1,3 +1,6 @@
+<?php
+$list = 'list' . ucfirst($temp);
+?>
 <div class="col-es-12 col-eb-6">
     <h2 class="page-title">
         <?php echo $arrContent['head']['translation'][$temp]; ?>
@@ -39,8 +42,45 @@
                 </thead>
                 <tbody>
                     <?php
-                    $list = 'list' . ucfirst($temp);
-                    echo $$list;
+                    if ($$list['isEmpty']) {
+                        $string =  '
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                ' . $arrContent['head']['translation']['emptyList'] . '
+                            </td>
+                        </tr>
+                        ';
+
+                        echo removeLineBreak($string);
+                    } else {
+                        $string = '';
+
+                        foreach ($$list['list'] as $key => $value) {
+                            $string .= '
+                            <tr>
+                                <td class="minimum">
+                                    <img data-src="assets/img/dynamic/blog/' . $value[0] . '/' . $value[1] . '" data-lazy-load="true">
+                                </td>
+                                <td data-id="fileName">
+                                    ' . $value[1] . '
+                                </td>
+                                <td class="minimum">
+                                    <nav class="menu menu-horizontal text-right">           
+                                        <ul>           
+                                            <li>
+                                                <button type="button" class="bt bt-red bt-sm" data-action="delete" title="' . $arrContent['head']['translation']['delete'] . '">   
+                                                    <span class="fa fa-close" aria-hidden="true"></span>
+                                                </button>
+                                            </li>           
+                                        </ul>        
+                                    </nav>
+                                </td>
+                            </tr>
+                        ';
+                        }
+
+                        echo removeLineBreak($string);
+                    }
                     ?>
                 </tbody>
             </table>

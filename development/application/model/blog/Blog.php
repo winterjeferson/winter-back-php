@@ -129,7 +129,8 @@ class Blog
         $string = '';
 
         foreach ($query as $key => $value) {
-            $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? $value['thumbnail'] : 'default.jpg';
+            // var_dump($value['thumbnail']);
+            $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? 'dynamic/blog/thumbnail/' . $value['thumbnail'] : 'blog-thumbnail.jpg';
             $dateEdit = $value['date_edit_' . $this->language];
             $datePost = $value['date_post_' . $this->language];
             $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $this->objSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
@@ -139,7 +140,7 @@ class Blog
             $string .= '
                     <a href="' . $url . '" class="link">
                         <div class="blog-list-image">
-                            <img class="img-responsive" data-src="assets/img/dynamic/blog/thumbnail/' . $thumbnail . '" alt="image" data-lazy-load="true">
+                            <img class="img-responsive" data-src="assets/img/' . $thumbnail . '" alt="image" data-lazy-load="true">
                         </div>
                         <div class="blog-list-text">
                                 <h2 class="blog-list-title">
