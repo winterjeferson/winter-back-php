@@ -129,7 +129,6 @@ class Blog
         $string = '';
 
         foreach ($query as $key => $value) {
-            // var_dump($value['thumbnail']);
             $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? 'dynamic/blog/thumbnail/' . $value['thumbnail'] : 'blog-thumbnail.jpg';
             $dateEdit = $value['date_edit_' . $this->language];
             $datePost = $value['date_post_' . $this->language];
