@@ -20,6 +20,6 @@ class LoginAjax extends \Application\Controller\Main
     }
 }
 
-$obj = new loginAjax();
+$obj = new LoginAjax();
 $data = $obj->getModel();
 echo $data['loginAjax'];

@@ -73,6 +73,7 @@ class Es
         'password' => 'Contraseña',
         'permission' => 'Permiso',
         'previous' => 'Anterior',
+        'problemPermission' => 'No tienes permiso para realizar esta acción',
         'pt' => 'Portugués',
         'recommendedSize150' => 'Tamaño recomendado: 300px X 150px',
         'recommendedSize1300' => 'Tamaño recomendado: 1300px X 300px',

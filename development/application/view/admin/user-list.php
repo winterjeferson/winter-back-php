@@ -8,7 +8,7 @@ $classDisplay = $listSize === 0 ? 'display-none' : '';
     <div class="row">
         <div class="col-es-12">
             <h2 class="page-title">
-                <?php echo $arrContent['head']['translation']['users']; ?> (<?php echo $arrContent['head']['translation']['actives']; ?>)
+                <?php echo $arrContent['head']['translation']['users']; ?> (<?php echo $arrContent['head']['translation'][$action . 's']; ?>)
             </h2>
         </div>
     </div>

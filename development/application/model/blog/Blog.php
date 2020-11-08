@@ -132,7 +132,8 @@ class Blog
             $thumbnail = !is_null($value['thumbnail']) && $value['thumbnail'] !== '' ? 'dynamic/blog/thumbnail/' . $value['thumbnail'] : 'blog-thumbnail.jpg';
             $dateEdit = $value['date_edit_' . $this->language];
             $datePost = $value['date_post_' . $this->language];
-            $ternaryDate =  $datePost !==  $dateEdit ?  '<br/>' . $this->objSession->getArray('translation', 'editedOn') . ' ' . $dateEdit : '';
+            $dateEditText = is_null($dateEdit) ? '' :  ' / ' . $this->objSession->getArray('translation', 'editedOn') . ' ' . $dateEdit;
+            $ternaryDate =  $datePost !==  $dateEdit ?  $dateEditText : '';
             $url = $this->language . '/blog/post/' . $value['id'] . '/' . $value['url_' . $this->language] . '/';
             $removeImage = strip_tags($value['content_' . $this->language]);
 

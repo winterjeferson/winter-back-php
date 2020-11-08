@@ -73,6 +73,7 @@ class Pt
         'password' => 'Senha',
         'permission' => 'Permissão',
         'previous' => 'Anterior',
+        'problemPermission' => 'Você não tem permissão para executar esta ação',
         'pt' => 'Português',
         'recommendedSize150' => 'Tamanho recomendado: 300px X 150px',
         'recommendedSize1300' => 'Tamanho recomendado: 1300px X 300px',

@@ -70,6 +70,9 @@ class WbAdmin {
             case 'done':
                 location.reload();
                 break;
+            case 'problemPermission':
+                color = 'red';
+                response = globalTranslation.problemPermission;
             default:
                 color = 'red';
                 response = globalTranslation.errorAdministrator;

@@ -28,13 +28,13 @@ class Image
             $arrFile = $this->getFile($this->pathBlog . $folder),
             'listThumbnail' => [
                 'list' => $this->buildList($folder, $arrFile),
-                'isEmpty' => count($arrFile) === 0 ? true : false,
+                'isEmpty' => is_null($arrFile) ? true : false,
             ],
             $folder = 'banner',
             $arrFile = $this->getFile($this->pathBlog . $folder),
             'listBanner' => [
                 'list' => $this->buildList($folder, $arrFile),
-                'isEmpty' => count($arrFile) === 0 ? true : false,
+                'isEmpty' => is_null($arrFile) ? true : false,
             ]
         ];
 

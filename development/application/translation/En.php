@@ -73,6 +73,7 @@ class En
         'password' => 'Password',
         'permission' => 'Permission',
         'previous' => 'Previous',
+        'problemPermission' => 'You are not allowed to perform this action',
         'pt' => 'Português',
         'recommendedSize150' => 'Recommended size: 300px X 150px',
         'recommendedSize1300' => 'Recommended size: 1300px X 300px',

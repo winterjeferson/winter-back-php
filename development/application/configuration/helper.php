@@ -17,8 +17,13 @@ function buildGlobalUrl()
     $protocol = filter_input(INPUT_SERVER, 'HTTPS');
     $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
     $self = filter_input(INPUT_SERVER, 'PHP_SELF');
+    $isLocalhost = verifyLocalhost();
 
-    return (!empty($protocol) ? 'https' : 'http') . '://' . $host . dirname($self) . '/';
+    if ($isLocalhost) {
+        return (!empty($protocol) ? 'https' : 'http') . '://' . $host . dirname($self) . '/';
+    } else {
+        return (!empty($protocol) ? 'https' : 'http') . '://' . $host . dirname($self);
+    }
 }
 
 function encode($text)
@@ -105,4 +110,23 @@ function getUrArrLanguage()
         ['lang' =>  'en', 'country' =>  'en-US', 'hreflang' => 'x-default'],
         ['lang' =>  'es', 'country' =>  'es-MX', 'hreflang' => 'es-MX'],
     ];
+}
+
+function replaceTag($data)
+{
+    $pathBanner = 'assets/img/dynamic/blog/banner/';
+    $arrSearch  = [
+        '>}}',
+        '}}',
+        '{{img=',
+        '{{href=',
+    ];
+    $arrReplace = [
+        '"/>',
+        '',
+        '<img alt="October 31" src="' . $pathBanner,
+        $pathBanner,
+    ];
+
+    return str_replace($arrSearch, $arrReplace, $data);
 }

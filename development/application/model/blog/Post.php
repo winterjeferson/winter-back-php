@@ -10,6 +10,7 @@ class Post
         require_once __DIR__ . '/../../core/Connection.php';
         require_once __DIR__ . '/../../core/Query.php';
         require_once __DIR__ . '/../../core/Route.php';
+        require_once __DIR__ . '/../../configuration/helper.php';
 
         $this->objQuery = new \Application\Core\Query();
         $this->objSession = new \Application\Core\Session();
@@ -29,7 +30,7 @@ class Post
 
         $arr = [
             'postTitle' => $post['title_' . $this->language],
-            'postContent' => $post['content_' . $this->language],
+            'postContent' => replaceTag($post['content_' . $this->language]),
             'postTag' => $post['tag_' . $this->language],
             'postAuthor' => $post['name'],
             'tagLink' => $arrUrl['main'] . $arrUrl['language'] . '/',
