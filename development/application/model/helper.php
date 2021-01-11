@@ -1,57 +1,32 @@
 <?php
 function getUrlGlobal()
 {
-    return 'https://www.october31.com.br';
+    return 'https://www.site.com';
 }
 
 function getUrlFacebook()
 {
-    return 'https://www.facebook.com/October-31-124544674422264';
+    return 'https://www.facebook.com/';
 }
 
 function getUrlInstagram()
 {
-    return 'https://instagram.com/october31thegame';
+    return 'https://instagram.com/';
 }
 
 function getUrlTwitter()
 {
-    return 'https://twitter.com/october31game';
+    return 'https://twitter.com/';
 }
 
 function getUrlYoutube()
 {
-    return 'https://www.youtube.com/channel/UChZkTxJ3IjgLMYueZoKNWsg';
+    return 'https://www.youtube.com/';
 }
 
 function getUrlJefersonWinter()
 {
     return 'https://www.jefersonwinter.com.br';
-}
-
-function getVersionGame()
-{
-    return 'alpha-1-8-0';
-}
-
-function getTableCraft()
-{
-    return 'game_alpha_1_7_0_craft';
-}
-
-function getTableBank()
-{
-    return 'game_alpha_1_7_0_bank';
-}
-
-function getTableCharacter()
-{
-    return 'game_alpha_1_7_0_character';
-}
-
-function getTableMap()
-{
-    return 'game_alpha_1_7_0_map';
 }
 
 function getTableBlog()
@@ -68,10 +43,10 @@ function getEmailSender()
 {
     return [
         'port' => 587,
-        'host' => 'smtp.hostinger.com.br',
-        'from' => 'no-reply@october31.com.br',
-        'username' => 'no-reply@october31.com.br',
-        'receiver' => 'october31game@gmail.com',
-        'password' => 'outuBRO31',
+        'host' => '',
+        'from' => '',
+        'username' => '',
+        'receiver' => '',
+        'password' => '',
     ];
 }
