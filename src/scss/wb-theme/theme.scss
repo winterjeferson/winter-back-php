@@ -1,0 +1,73 @@
+* {
+    opacity: 0.9;
+}
+
+.background--cyan {
+    background-color: $color-cyan;
+}
+
+.background--orange {
+    background-color: $color-orange;
+}
+
+.background--red {
+    background-color: $color-red;
+}
+
+.page {
+    height: 100%;
+}
+
+.carousel {
+    &__item {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__list {
+        height: 100%;
+    }
+
+    &__content {
+        color: white;
+        font-size: 24px;
+        width: calc(100% - 50px);
+
+        @include tablet-landscape {
+            font-size: 48px;
+        }
+    }
+
+    .navigation-change {
+        .icon {
+            fill: white;
+        }
+    }
+}
+
+.theme-header {
+    .text {
+        margin: 0 10px;
+    }
+
+    .form__field {
+        margin-bottom: 0;
+    }
+}
+
+.theme-version {
+    white-space: nowrap;
+
+    .button {
+        margin-left: 0;
+    }
+}
+
+.container {
+    @include tablet-landscape {
+        margin: auto;
+        max-width: 960px;
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml"><url><loc>https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/1/esta-pagina-vem-do-banco-de-dados-1/</loc>
+                        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/1/esta-pagina-vem-do-banco-de-dados-1/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="x-default" href="https://localhost/development/winter-back-php-2-0-0/dist/en/page/content/1/dynamic-page-1/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="es-MX" href="https://localhost/development/winter-back-php-2-0-0/dist/es/page/content/1/pagina-dinamica-1/"/>
+                    </url><url><loc>https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/2/pagina-dinamica-2/</loc>
+                        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/2/pagina-dinamica-2/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="x-default" href="https://localhost/development/winter-back-php-2-0-0/dist/en/page/content/2/dynamic-page-2/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="es-MX" href="https://localhost/development/winter-back-php-2-0-0/dist/es/page/content/2/pagina-dinamica-2/"/>
+                    </url><url><loc>https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/3/pagina-dinamica-3/</loc>
+                        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://localhost/development/winter-back-php-2-0-0/dist/pt/page/content/3/pagina-dinamica-3/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="x-default" href="https://localhost/development/winter-back-php-2-0-0/dist/en/page/content/3/dynamic-page-3/"/>
+                    
+                        <xhtml:link rel="alternate" hreflang="es-MX" href="https://localhost/development/winter-back-php-2-0-0/dist/es/page/content/3/pagina-dinamica-3/"/>
+                    </url></urlset>

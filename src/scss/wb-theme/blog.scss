@@ -1,0 +1,103 @@
+.blog {
+    display: flex;
+
+    @include tablet-landscape {
+
+        &__last-post,
+        &__most-viwed {
+            align-self: flex-start;
+            display: inline-flex;
+        }
+
+        &__last-post {
+            width: 60%;
+        }
+
+        &__most-viwed {
+            width: 40%;
+        }
+    }
+
+    .empty__list {
+        text-align: center;
+        width: 100%;
+    }
+
+    .blog-list {
+        .link {
+            border-bottom: 1px dotted $color-grey;
+            display: grid;
+            grid-template:
+                "blog-list-image"
+                "blog-list-text";
+            margin-bottom: $eb;
+            padding-bottom: $eb;
+            text-decoration: none;
+            width: 100%;
+
+            @media (min-width: $break-point-re) {
+                grid-template:
+                    "blog-list-image blog-list-text"
+                    / 45% auto;
+            }
+
+            &:focus {
+                .blog-list-title {
+                    text-decoration: underline;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .img-responsive {
+            margin-bottom: $bi;
+            width: 100%;
+
+            @media (min-width: $break-point-re) {
+                margin-bottom: 0;
+            }
+        }
+
+        &-image {
+            grid-area: blog-list-image;
+        }
+
+        &-title {
+            font-size: 1.6rem;
+        }
+
+        &-text {
+            grid-area: blog-list-text;
+            padding: $bi $eb;
+
+            .blog-list-title {
+                color: $color-blue;
+                margin: 0;
+            }
+
+            .text {
+                color: black;
+                margin: $re 0 $re 0;
+            }
+
+            .date {
+                color: $color-grey;
+            }
+        }
+    }
+
+    .button-load-more {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.author {
+    font-size: 1rem;
+    font-style: italic;
+    margin: initial;
+    padding-left: 1rem;
+}

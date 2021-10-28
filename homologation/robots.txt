@@ -1,8 +1,0 @@
-Sitemap: https://www.jefersonwinter.com.br/sitemap.xml
-User-agent: *
-Disallow: pt/admin/
-Disallow: en/admin/
-Disallow: es/admin/
-Disallow: pt/test/
-Disallow: en/test/
-Disallow: es/test/

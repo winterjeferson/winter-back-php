@@ -1,17 +1,17 @@
-# winter-back-php
+Dependencies (you must have it installed):
 
-How to use it:
+ * Node js: https://nodejs.org/pt-br/download/
+ * Gulp Js: https://gulpjs.com/docs/en/getting-started/quick-start
 
-* Download the projetc.
-* Go to "development/gulp/" folder .
-* Open a CMD prompt and run "npm install".
-* Run "gulp" command.
-* Build/edit your project at "development" folder.
-* Gulp will compile it at "homologation" folder.
-* Use "homologation" folder to visualize your current project.
-* When it is done, run "gulp wb_deploy" to minify assets at "production" folder.
-* Upload all "production" files to your host.
+How to start:
 
-* Do not forget to close all php tags at "development/application/view/" folder or minify task can be broken
+ * Clone the projetc.
+ * Run "npm install".
+ * Than run "gulp" command.
+ * How it works:
 
+Build/edit your project at "src" folder.
+Gulp will compile it at "dist" folder.
+When all the project is done, run the command "gulp deploy" to minify assets at "dist" folder.
+Upload all "dist" files to your host.
 Thats all

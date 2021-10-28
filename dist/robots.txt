@@ -1,0 +1,8 @@
+Sitemap: https://www.site.com/sitemap.xml
+User-agent: *
+Disallow: pt/admin/
+Disallow: en/admin/
+Disallow: es/admin/
+Disallow: pt/test/
+Disallow: en/test/
+Disallow: es/test/

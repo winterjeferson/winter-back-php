@@ -1,0 +1,51 @@
+ .table {
+     .menu {
+         white-space: nowrap;
+     }
+
+     .button-wrapper {
+         flex-flow: nowrap;
+     }
+
+     &-td-wrapper {
+         max-height: 100px;
+         overflow-y: auto;
+     }
+ }
+
+ .thumbnail-table {
+     text-align: left;
+ }
+
+ .modal-content,
+ .page-admin-image,
+ .page-admin-blog {
+     .table {
+         img {
+             height: 50px;
+             width: auto;
+         }
+     }
+ }
+
+ .user {
+     padding: $re;
+     text-align: right;
+ }
+
+ .login-wrapper {
+     height: auto;
+     margin: auto;
+     max-width: 500px;
+     padding: $bi;
+ }
+
+ .form {
+     &__label {
+         text-align: left;
+     }
+
+     .cke {
+         width: 100%;
+     }
+ }
